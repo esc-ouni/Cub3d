@@ -2,6 +2,7 @@
 
 void	draw_in_image(t_vars *vars)
 {
+	int t = 0;
 	int i = 0;
 	int k = 0;
 	int x = 0;
@@ -34,8 +35,13 @@ void	draw_in_image(t_vars *vars)
 		y += k;
 		i += k;
 		k++;
-		if (k == 800)
+		if (k == 799)
+		{
+			t = l;
+			l = lr;
+			lr = t;
 			k = 0;
+		}
 	}
 }
 
