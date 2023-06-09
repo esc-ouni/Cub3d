@@ -55,7 +55,7 @@ void	ft_collectorclear(t_collector **collector)
 	*collector = NULL;
 }
 
-void	new_image(t_vars *vars)
+void	*new_image(t_vars *vars)
 {
 	void			*p;
 	t_img_collector	*tmp;
@@ -86,7 +86,7 @@ void	new_image(t_vars *vars)
 		tmp->next = new_node;
 		new_node->next = NULL;
 	}
-
+	return (p);
 }
 
 void	ft_destroy_all_images(t_vars *vars)

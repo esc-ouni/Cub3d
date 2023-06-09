@@ -1,5 +1,44 @@
 #include "Cub.h"
 
+void	draw_in_image(t_vars *vars)
+{
+	int i = 0;
+	int k = 0;
+	int x = 0;
+	int p = 0;
+	int y = 0;
+	int lr = 0xFF0000;
+	int l = 0x0300FF;
+
+	mlx_clear_window(vars->mlx, vars->win);
+	while(x < WIDTH)
+	{
+		while(y < HEIGHT)
+		{
+			while (i)
+			{
+				mlx_pixel_put(vars->mlx, vars->win, x, p , lr);
+				i--;
+				p++;
+			}
+			while(y < HEIGHT)
+			{
+				mlx_pixel_put(vars->mlx, vars->win, x, y, l);
+				y++;
+			}
+			y++;
+		}
+		x++;
+		p = 0;
+		y = 0;
+		y += k;
+		i += k;
+		k++;
+		if (k == 800)
+			k = 0;
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 	(void)argc;
@@ -24,6 +63,7 @@ int main(int argc, char const *argv[])
 		ft_collectorclear(vars->collector);
 		exit (1);
 	}
+	draw_in_image(vars);
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
 	mlx_key_hook(vars->win, handler, vars);
 	mlx_loop(vars->mlx);
