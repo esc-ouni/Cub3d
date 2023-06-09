@@ -63,7 +63,6 @@ void	draw_in_image(t_vars *vars, int r)
 				mlx_pixel_put(vars->mlx, vars->win, x, y, l);
 				y++;
 			}
-			y++;
 		}
 		x++;
 		p = 0;
@@ -71,7 +70,7 @@ void	draw_in_image(t_vars *vars, int r)
 		y += k;
 		i += k;
 		k++;
-		if (k == 799)
+		if (k == 800)
 		{
 			t = l;
 			l = lr;
