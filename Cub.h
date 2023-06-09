@@ -16,6 +16,15 @@
 # define K_R         124
 # define K_L         123
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}		t_data;
+
 typedef struct s_collector
 {
 	void				*addr;
@@ -42,6 +51,7 @@ int		handler(int key, t_vars *vars);
 void	draw_in_image(t_vars *vars, int i);
 void	ft_collectorclear(t_collector **collector);
 void	*h_malloc(t_collector **collector, size_t s, void *p);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_destroy_all_images(t_vars *vars);
 
 #endif

@@ -1,5 +1,5 @@
 all:
-	gcc -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit *.c -o Cub
+	gcc -Wall -Wextra -Werror -Oz -ffast-math -lmlx -framework OpenGL -framework AppKit *.c -o Cub
 	clear
 	./Cub
 

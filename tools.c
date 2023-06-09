@@ -31,6 +31,7 @@ int	handler(int key, t_vars *vars)
 	return(0);
 }
 
+
 void	draw_in_image(t_vars *vars, int r)
 {
 	int t = 0;
@@ -41,26 +42,33 @@ void	draw_in_image(t_vars *vars, int r)
 	int y = 0;
 	int lr = 0xFF0000;
 	int l = 0x0300FF;
+	t_data		*img;
 
+	img = NULL;
+	img = h_malloc(vars->collector, sizeof(t_data), img);
 	if(r)
 	{
 		l = 0xFF0000;
 		lr = 0x0300FF;
 	}
 	mlx_clear_window(vars->mlx, vars->win);
+	img->img = new_image(vars);
+	img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
 	while(x < WIDTH)
 	{
 		while(y < HEIGHT)
 		{
 			while (i)
 			{
-				mlx_pixel_put(vars->mlx, vars->win, x, p , lr);
+				my_mlx_pixel_put(img, x, y, lr);
+				// mlx_pixel_put(vars->mlx, vars->win, x, p , lr);
 				i--;
 				p++;
 			}
 			while(y < HEIGHT)
 			{
-				mlx_pixel_put(vars->mlx, vars->win, x, y, l);
+				my_mlx_pixel_put(img, x, y, l);
+				// mlx_pixel_put(vars->mlx, vars->win, x, y, l);
 				y++;
 			}
 		}
@@ -78,4 +86,62 @@ void	draw_in_image(t_vars *vars, int r)
 			k = 0;
 		}
 	}
+	mlx_put_image_to_window(vars->mlx, vars->win, img->img, 0, 0);
+}
+
+// void	draw_in_image(t_vars *vars, int r)
+// {
+// 	int t = 0;
+// 	int i = 0;
+// 	int k = 0;
+// 	int x = 0;
+// 	int p = 0;
+// 	int y = 0;
+// 	int lr = 0xFF0000;
+// 	int l = 0x0300FF;
+
+// 	if(r)
+// 	{
+// 		l = 0xFF0000;
+// 		lr = 0x0300FF;
+// 	}
+// 	mlx_clear_window(vars->mlx, vars->win);
+// 	while(x < WIDTH)
+// 	{
+// 		while(y < HEIGHT)
+// 		{
+// 			while (i)
+// 			{
+// 				mlx_pixel_put(vars->mlx, vars->win, x, p , lr);
+// 				i--;
+// 				p++;
+// 			}
+// 			while(y < HEIGHT)
+// 			{
+// 				mlx_pixel_put(vars->mlx, vars->win, x, y, l);
+// 				y++;
+// 			}
+// 		}
+// 		x++;
+// 		p = 0;
+// 		y = 0;
+// 		y += k;
+// 		i += k;
+// 		k++;
+// 		if (k == 800)
+// 		{
+// 			t = l;
+// 			l = lr;
+// 			lr = t;
+// 			k = 0;
+// 		}
+// 	}
+// }
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

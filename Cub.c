@@ -11,6 +11,7 @@ int main(int argc, char const *argv[])
 	collector = NULL;
 	img_collector = NULL;
 
+	atexit(foo);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars);
 	vars->img_collector = &img_collector;
