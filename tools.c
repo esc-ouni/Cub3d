@@ -60,15 +60,13 @@ void	draw_in_image(t_vars *vars, int r)
 		{
 			while (i)
 			{
-				my_mlx_pixel_put(img, x, y, lr);
-				// mlx_pixel_put(vars->mlx, vars->win, x, p , lr);
+				my_mlx_pixel_put(img, x, p, lr);
 				i--;
 				p++;
 			}
 			while(y < HEIGHT)
 			{
 				my_mlx_pixel_put(img, x, y, l);
-				// mlx_pixel_put(vars->mlx, vars->win, x, y, l);
 				y++;
 			}
 		}
