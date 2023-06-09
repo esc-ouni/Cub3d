@@ -94,6 +94,7 @@ void	ft_destroy_all_images(t_vars *vars)
 	t_img_collector	**collector;
 	t_img_collector	*node;
 
+	mlx_destroy_window(vars->mlx, vars->win);
 	collector = vars->img_collector;
 	if (!(*collector) || !collector)
 		return ;
