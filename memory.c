@@ -61,8 +61,8 @@ void	new_image(t_vars *vars)
 	t_img_collector	*tmp;
 	t_img_collector	*new_node;
 
-	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	new_node = NULL;
+	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	new_node = h_malloc(vars->collector, sizeof(t_img_collector), new_node);
 	if (!p)
 	{
@@ -94,7 +94,8 @@ void	ft_destroy_all_images(t_vars *vars)
 	t_img_collector	**collector;
 	t_img_collector	*node;
 
-	mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->win && vars->mlx)
+		mlx_destroy_window(vars->mlx, vars->win);
 	collector = vars->img_collector;
 	if (!(*collector) || !collector)
 		return ;
