@@ -4,6 +4,9 @@
 #include <libc.h>
 #include <mlx.h>
 
+#define WIDTH 1080
+#define HEIGHT 720
+
 typedef struct s_collector
 {
 	void				*addr;
@@ -25,6 +28,7 @@ typedef struct s_vars
 }	t_vars;
 
 int		ft_ext(t_vars *vars);
+void	new_image(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	ft_collectorclear(t_collector **collector);
 void	*h_malloc(t_collector **collector, size_t s, void *p);

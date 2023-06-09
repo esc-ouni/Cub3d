@@ -14,7 +14,7 @@ void	*h_malloc(t_collector **collector, size_t s, void *p)
 		exit (1);
 	}
 	new_node->addr = p;
-	printf("alloc : %p\n", p);
+	printf("alloc     : %p\n", p);
 	if (!(*collector))
 	{
 		*collector = new_node;
@@ -31,29 +31,6 @@ void	*h_malloc(t_collector **collector, size_t s, void *p)
 	return (p);
 }
 
-void	ft_destroy_all_images(t_vars *vars)
-{
-	t_img_collector	**collector;
-	t_img_collector	*node;
-	t_img_collector	*n_node;
-
-	collector = vars->img_collector;
-	if (!(*collector) || !collector)
-		return ;
-	node = *collector;
-	while (node)
-	{
-		n_node = node->next;
-		if (node->img_addr)
-		{
-			printf("image : %p\n", node->img_addr);
-			mlx_destroy_image(vars->mlx, node->img_addr);
-		}
-		free(node);
-		node = n_node;
-	}
-	*collector = NULL;
-}
 
 void	ft_collectorclear(t_collector **collector)
 {
@@ -68,7 +45,7 @@ void	ft_collectorclear(t_collector **collector)
 		n_node = node->next;
 		if (node->addr)
 		{
-			printf("free  : %p\n", node->addr);
+			printf("free      : %p\n", node->addr);
 			free(node->addr);
 		}
 		free(node);
@@ -78,6 +55,60 @@ void	ft_collectorclear(t_collector **collector)
 	*collector = NULL;
 }
 
+void	new_image(t_vars *vars)
+{
+	void			*p;
+	t_img_collector	*tmp;
+	t_img_collector	*new_node;
+
+	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
+	new_node = NULL;
+	new_node = h_malloc(vars->collector, sizeof(t_img_collector), new_node);
+	if (!p)
+	{
+		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 29);
+		ft_destroy_all_images(vars);
+		ft_collectorclear(vars->collector);
+		exit (1);
+	}
+	new_node->img_addr = p;
+	printf("new image : %p\n", new_node->img_addr);
+	if (!(*(vars->img_collector)))
+	{
+		*(vars->img_collector) = new_node;
+		new_node->next = NULL;
+	}
+	else
+	{
+		tmp = *(vars->img_collector);
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_node;
+		new_node->next = NULL;
+	}
+
+}
+
+void	ft_destroy_all_images(t_vars *vars)
+{
+	t_img_collector	**collector;
+	t_img_collector	*node;
+
+	collector = vars->img_collector;
+	if (!(*collector) || !collector)
+		return ;
+	node = *collector;
+	while (node)
+	{
+		if (node->img_addr)
+		{
+			printf("des image : %p\n", node->img_addr);
+			mlx_destroy_image(vars->mlx, node->img_addr);
+		}
+		node = node->next;
+	}
+	*collector = NULL;
+}
 void	debug(void)
 {
 	printf("\x1B[32m");
