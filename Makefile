@@ -1,5 +1,9 @@
+FLAGS = -Wall -Wextra -Werror
+MATH = -Oz -ffast-math
+MLX = -lmlx -framework OpenGL -framework AppKit
+
 all:
-	gcc -Wall -Wextra -Werror -Oz -ffast-math -lmlx -framework OpenGL -framework AppKit *.c -o Cub
+	gcc $(FLAGS) $(MATH) $(MLX) *.c -o Cub
 	clear
 	./Cub
 
