@@ -18,10 +18,10 @@
 
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	void	*img_ptr;
+	char	*img_addr;
+	int		byte_pixel;
+	int		size_line;
 	int		endian;
 }		t_data;
 
