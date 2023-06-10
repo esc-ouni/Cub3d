@@ -1,0 +1,2 @@
+#get map
+#create player and make it move
