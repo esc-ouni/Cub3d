@@ -55,12 +55,15 @@ void	ft_collectorclear(t_collector **collector)
 	*collector = NULL;
 }
 
-void	*new_image(t_vars *vars)
+t_data		*new_image(t_vars *vars)
 {
 	void			*p;
 	t_img_collector	*tmp;
 	t_img_collector	*new_node;
+	t_data		*img;
 
+	img = NULL;
+	img = h_malloc(vars->collector, sizeof(t_data), img);
 	new_node = NULL;
 	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	new_node = h_malloc(vars->collector, sizeof(t_img_collector), new_node);
@@ -86,7 +89,10 @@ void	*new_image(t_vars *vars)
 		tmp->next = new_node;
 		new_node->next = NULL;
 	}
-	return (p);
+	img->img_ptr = p;
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
+	img->byte_pixel /= 8;
+	return (img);
 }
 
 void	ft_destroy_all_images(t_vars *vars)

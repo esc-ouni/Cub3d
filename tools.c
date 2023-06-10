@@ -44,17 +44,12 @@ void	draw_in_image(t_vars *vars, int r)
 	int l = 0x0300FF;
 	t_data		*img;
 
-	img = NULL;
-	img = h_malloc(vars->collector, sizeof(t_data), img);
+	img = new_image(vars);
 	if(r)
 	{
 		l = 0xFF0000;
 		lr = 0x0300FF;
 	}
-	mlx_clear_window(vars->mlx, vars->win);
-	img->img_ptr = new_image(vars);
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
-	img->byte_pixel /= 8;
 	while(x < WIDTH)
 	{
 		while(y < HEIGHT)
@@ -85,6 +80,7 @@ void	draw_in_image(t_vars *vars, int r)
 			k = 0;
 		}
 	}
+	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win, img->img_ptr, 0, 0);
 }
 

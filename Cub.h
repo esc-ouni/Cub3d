@@ -46,7 +46,7 @@ typedef struct s_vars
 }	t_vars;
 
 int		ft_ext(t_vars *vars);
-void	*new_image(t_vars *vars);
+t_data	*new_image(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	draw_in_image(t_vars *vars, int i);
 void	ft_collectorclear(t_collector **collector);
