@@ -21,6 +21,15 @@
 # define K_R         124
 # define K_L         123
 
+typedef struct s_player
+{
+	void	*img_ptr;
+	char	*img_addr;
+	int		byte_pixel;
+	int		size_line;
+	int		endian;
+}		t_player;
+
 typedef struct s_data
 {
 	void	*img_ptr;
@@ -46,6 +55,7 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
+	t_player		*player;
 	t_collector 	**collector;
 	t_img_collector	**img_collector;
 }	t_vars;
