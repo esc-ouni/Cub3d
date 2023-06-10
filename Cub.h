@@ -46,7 +46,12 @@ typedef struct s_vars
 }	t_vars;
 
 int		ft_ext(t_vars *vars);
+void	move_up(t_vars *vars);
+void	move_dn(t_vars *vars);
+void	move_lf(t_vars *vars);
+void	move_rg(t_vars *vars);
 t_data	*new_image(t_vars *vars);
+void	draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	draw_in_image(t_vars *vars, int i);
 void	ft_collectorclear(t_collector **collector);

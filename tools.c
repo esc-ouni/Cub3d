@@ -17,75 +17,41 @@ int	handler(int key, t_vars *vars)
 		exit(0);
 	}
 	else if (key == K_UP)
-		draw_in_image(vars, q);
+		move_up(vars);
 	else if (key == K_DN)
-		draw_in_image(vars, q);
+		move_dn(vars);
 	else if (key == K_R)
-		draw_in_image(vars, q);
+		move_rg(vars);
 	else if (key == K_L)
-		draw_in_image(vars, q);
-	if(!q)
-		q = 1;
-	else
-		q = 0;
+		move_lf(vars);
 	return(0);
 }
 
-
-void	draw_in_image(t_vars *vars, int r)
+void	move_up(t_vars *vars)
 {
-	int t = 0;
-	int i = 0;
-	int k = 0;
-	int x = 0;
-	int p = 0;
-	int y = 0;
-	int lr = 0xFF0000;
-	int l = 0x0300FF;
-	t_data		*img;
+}
+void	move_dn(t_vars *vars)
+{
+}
+void	move_rg(t_vars *vars)
+{
+}
 
-	img = new_image(vars);
-	if(r)
-	{
-		l = 0xFF0000;
-		lr = 0x0300FF;
-	}
-	while(x < WIDTH)
-	{
-		while(y < HEIGHT)
-		{
-			while (i)
-			{
-				my_mlx_pixel_put(img, x, p, lr);
-				i--;
-				p++;
-			}
-			while(y < HEIGHT)
-			{
-				my_mlx_pixel_put(img, x, y, l);
-				y++;
-			}
-		}
-		x++;
-		p = 0;
-		y = 0;
-		y += k;
-		i += k;
-		k++;
-		if (k == 800)
-		{
-			t = l;
-			l = lr;
-			lr = t;
-			k = 0;
-		}
-	}
+void	move_lf(t_vars *vars)
+{
+}
+
+void	draw_2d_map(t_vars *vars)
+{
+	t_data	*map;
+	map = new_image(vars);
 	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, img->img_ptr, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, map->img_ptr, 0, 0);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
+	(void)color;
 	char *tmp;
 
 	tmp = data->img_addr;
@@ -93,5 +59,5 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		exit(EXIT_FAILURE);
 	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
 	*(int *)tmp = color;
-
 }
+
