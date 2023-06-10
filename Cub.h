@@ -7,10 +7,15 @@
 #define WIDTH 2000
 #define HEIGHT 800
 
-# define M_UP        4
-# define M_DN        5
-# define M_MD        3
 # define ESC         53
+
+# define SP        49
+
+# define M_UP        13
+# define M_DN        1
+# define M_LF        0
+# define M_RG        2
+
 # define K_UP        126
 # define K_DN        125
 # define K_R         124
