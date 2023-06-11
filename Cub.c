@@ -15,7 +15,6 @@ int	count_alloc_size(fd)
 		free(s);
 		s = NULL;
 		size++;
-
 	}
 	if (close(fd) == -1)
 		exit(EXIT_FAILURE);
@@ -24,7 +23,7 @@ int	count_alloc_size(fd)
 }
 
 
-void parse_file(t_collector **collector, int argc, char const *argv[])
+char **parse_file(t_collector **collector, int argc, char const *argv[])
 {
 	int	fd;
 	char **map;
@@ -49,9 +48,9 @@ void parse_file(t_collector **collector, int argc, char const *argv[])
 		}
 		map[i] = NULL;
 		i = 0;
-		while(*map)
-			printf("%s\n", *(map)++);
-		return ;
+		// while(*map)
+		// 	printf("%s\n", *(map)++);
+		return (map);
 	}
 	exit(EXIT_FAILURE);
 }
@@ -66,13 +65,13 @@ int main(int argc, char const *argv[])
 	collector = NULL;
 	img_collector = NULL;
 
-    parse_file(&collector, argc, argv);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars);
 	vars->img_collector = &img_collector;
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
+    vars->map = parse_file(&collector, argc, argv);
 	if(!vars->mlx || !vars->win)
 	{
 		write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
@@ -80,8 +79,8 @@ int main(int argc, char const *argv[])
 		ft_collectorclear(vars->collector);
 		exit (1);
 	}
-	draw_in_image(vars, 1);
-	// draw_2d_map(vars);
+	draw_2d_map(vars);
+	// draw_in_image(vars, 1);
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
 	mlx_key_hook(vars->win, handler, vars);
 	mlx_loop(vars->mlx);

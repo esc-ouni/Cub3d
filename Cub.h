@@ -57,6 +57,7 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
+	char			**map;
 	t_player		*player;
 	t_collector 	**collector;
 	t_img_collector	**img_collector;
