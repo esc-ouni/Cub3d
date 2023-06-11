@@ -1,9 +1,14 @@
 #include "Cub.h"
 
+void parse_file(int argc, char const *argv[])
+{
+	if ()
+	exit(EXIT_FAILURE);
+}
+
+
 int main(int argc, char const *argv[])
 {
-	(void)argc;
-	(void)argv;
 	t_collector *collector;
 	t_img_collector *img_collector;
 	t_vars 		*vars;
@@ -11,6 +16,7 @@ int main(int argc, char const *argv[])
 	collector = NULL;
 	img_collector = NULL;
 
+    parse_file(argc, argv);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars);
 	vars->img_collector = &img_collector;

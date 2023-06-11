@@ -3,6 +3,7 @@
 
 #include <libc.h>
 #include <mlx.h>
+#include "Get_next_line/get_next_line.h"
 
 #define WIDTH 2000
 #define HEIGHT 800
