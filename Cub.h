@@ -11,6 +11,7 @@
 
 #define BLACK 0x00000000
 #define WHITE 0x00FFFFFF
+#define BLUE 0x00030DFF
 
 # define ESC         53
 
@@ -28,11 +29,8 @@
 
 typedef struct s_player
 {
-	void	*img_ptr;
-	char	*img_addr;
-	int		byte_pixel;
-	int		size_line;
-	int		endian;
+	int		p_x;
+	int		p_y;
 }		t_player;
 
 typedef struct s_data

@@ -55,6 +55,32 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 	exit(EXIT_FAILURE);
 }
 
+void 	draw_player(t_vars *vars, int x, int y)
+{
+	t_player	*player;
+	t_data 		*mapp;
+	mapp = new_image(vars);
+
+	player = NULL;
+	player = h_malloc(vars->collector, sizeof(player), player);
+	player->p_x = x;
+	player->p_x = y;
+
+	int i, j;
+	i = x - 2;
+	j = y - 2;
+	while(i < 4)
+	{
+		while(j < 4)
+		{
+			my_mlx_pixel_put(mapp, x + i, y + j, BLUE);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+}
+
 
 int main(int argc, char const *argv[])
 {
@@ -80,6 +106,8 @@ int main(int argc, char const *argv[])
 		exit (1);
 	}
 	draw_2d_map(vars);
+	draw_player(vars);
+
 	// draw_in_image(vars, 1);
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
 	mlx_key_hook(vars->win, handler, vars);
