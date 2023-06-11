@@ -49,18 +49,6 @@ int	handler(int key, t_vars *vars)
 // {
 // }
 
-void	draw_2d_map(t_vars *vars)
-{
-	t_data	*map;
-	map = new_image(vars);
-	mlx_clear_window(vars->mlx, vars->win);
-	
-	//draw
-
-
-	mlx_put_image_to_window(vars->mlx, vars->win, map->img_ptr, 0, 0);
-}
-
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	(void)color;
@@ -71,4 +59,76 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		exit(EXIT_FAILURE);
 	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
 	*(int *)tmp = color;
+}
+
+char	*ft_mstrdup(t_collector **collector, char *s1)
+{
+	size_t	i;
+	char	*s;
+
+	i = 0;
+	s = NULL;
+	if (!s1)
+		return (NULL);
+	s = (char *)h_malloc(collector, sizeof(char) * \
+	(ft_strlen(s1) + 1), s);
+	while (s1[i] != '\0')
+	{
+		s[i] = s1[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
+
+void	draw_in_image(t_vars *vars, int r)
+{
+	int t = 0;
+	int i = 0;
+	int k = 0;
+	int x = 0;
+	int p = 0;
+	int y = 0;
+	int l = 0x60BADD;
+	int lr = 598642;
+	t_data		*img;
+
+	img = new_image(vars);
+	if(r)
+	{
+		l = 598642;
+		lr = 0x60BADD;
+	}
+	while(x < WIDTH)
+	{
+		while(y < HEIGHT)
+		{
+			while (i)
+			{
+				my_mlx_pixel_put(img, x, p, lr);
+				i--;
+				p++;
+			}
+			while(y < HEIGHT)
+			{
+				my_mlx_pixel_put(img, x, y, l);
+				y++;
+			}
+		}
+		x++;
+		p = 0;
+		y = 0;
+		y += k;
+		i += k;
+		k++;
+		if (k == 800)
+		{
+			t = l;
+			l = lr;
+			lr = t;
+			k = 0;
+		}
+	}
+	mlx_clear_window(vars->mlx, vars->win);
+	mlx_put_image_to_window(vars->mlx, vars->win, img->img_ptr, 0, 0);
 }
