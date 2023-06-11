@@ -53,6 +53,7 @@ void	ft_collectorclear(t_collector **collector)
 		node = n_node;
 	}
 	*collector = NULL;
+	system(" leaks Cub | grep \"leaks\" | awk '{print $4\" \"$3}' | grep \"leaks \" ");
 }
 
 t_data		*new_image(t_vars *vars)

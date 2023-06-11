@@ -1,9 +1,9 @@
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 MATH = -Oz -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all:
-	gcc $(FLAGS) $(MATH) $(MLX) *.c Get_next_line/*.c -o Cub
+	gcc $(FLAGS) $(MATH) $(MLX)  Get_next_line/*.c ./*.c -o Cub
 	clear
 	./Cub
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:13:26 by idouni            #+#    #+#             */
-/*   Updated: 2022/11/28 14:42:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 17:14:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
+	if(!s)
+		return (i);
 	while (s[i])
 		i++;
 	return (i);

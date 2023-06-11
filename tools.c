@@ -15,39 +15,39 @@ int	handler(int key, t_vars *vars)
 		ft_collectorclear(vars->collector);
 		exit(0);
 	}
-	else if (key == K_UP)
-		move_up(vars);
-	else if (key == K_DN)
-		move_dn(vars);
-	else if (key == K_R)
-		move_rg(vars);
-	else if (key == K_L)
-		move_lf(vars);
-	else if (key == M_UP)
-		printf("%d\n", key);
-	else if (key == M_DN)
-		printf("%d\n", key);
-	else if (key == M_LF)
-		printf("%d\n", key);
-	else if (key == M_RG)
-		printf("%d\n", key);
-	printf("%d\n", key);
+	// else if (key == K_UP)
+	// 	move_up(vars);
+	// else if (key == K_DN)
+	// 	move_dn(vars);
+	// else if (key == K_R)
+	// 	move_rg(vars);
+	// else if (key == K_L)
+	// 	move_lf(vars);
+	// else if (key == M_UP)
+	// 	printf("%d\n", key);
+	// else if (key == M_DN)
+	// 	printf("%d\n", key);
+	// else if (key == M_LF)
+	// 	printf("%d\n", key);
+	// else if (key == M_RG)
+	// 	printf("%d\n", key);
+	// printf("%d\n", key);
 	return(0);
 }
 
-void	move_up(t_vars *vars)
-{
-}
-void	move_dn(t_vars *vars)
-{
-}
-void	move_rg(t_vars *vars)
-{
-}
+// void	move_up(t_vars *vars)
+// {
+// }
+// void	move_dn(t_vars *vars)
+// {
+// }
+// void	move_rg(t_vars *vars)
+// {
+// }
 
-void	move_lf(t_vars *vars)
-{
-}
+// void	move_lf(t_vars *vars)
+// {
+// }
 
 void	draw_2d_map(t_vars *vars)
 {
@@ -68,4 +68,3 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
 	*(int *)tmp = color;
 }
-
