@@ -6,8 +6,11 @@
 #include <fcntl.h>
 #include "Get_next_line/get_next_line.h"
 
-#define WIDTH 2000
-#define HEIGHT 800
+#define WIDTH 1800
+#define HEIGHT 700
+
+#define BLACK 0x00000000
+#define WHITE 0x00FFFFFF
 
 # define ESC         53
 
@@ -62,6 +65,7 @@ typedef struct s_vars
 	t_collector 	**collector;
 	t_img_collector	**img_collector;
 }	t_vars;
+
 
 int		ft_ext(t_vars *vars);
 void	move_up(t_vars *vars);

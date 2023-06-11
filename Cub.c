@@ -47,7 +47,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 			i++;
 		}
 		map[i] = NULL;
-		i = 0;
+		// i = 0;
 		// while(*map)
 		// 	printf("%s\n", *(map)++);
 		return (map);
