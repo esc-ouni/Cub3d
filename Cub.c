@@ -107,9 +107,8 @@ int main(int argc, char const *argv[])
 	draw_2d_map(vars);
 	draw_player(vars, 0, 0);
 
-	// draw_in_image(vars, 1);
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
-	mlx_key_hook(vars->win, handler, vars);
+	mlx_hook(vars->win, 2, 1L << 0, handler, vars);
 	mlx_loop(vars->mlx);
 	return 0;
 }

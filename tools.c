@@ -39,20 +39,6 @@ int	handler(int key, t_vars *vars)
 	return(0);
 }
 
-// void	move_up(t_vars *vars)
-// {
-// }
-// void	move_dn(t_vars *vars)
-// {
-// }
-// void	move_rg(t_vars *vars)
-// {
-// }
-
-// void	move_lf(t_vars *vars)
-// {
-// }
-
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	(void)color;
