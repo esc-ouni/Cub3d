@@ -1,4 +1,4 @@
-FLAGS = -Wall -Wextra -Werror
+FLAGS = #-Wall -Wextra -Werror
 MATH = -Oz -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 

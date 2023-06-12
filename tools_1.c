@@ -40,12 +40,12 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	}
 }
 
-void	draw_2d_map(t_vars *vars)
+t_data	*draw_2d_map(t_vars *vars)
 {
 	int		ix;
 	int		iy;
-	t_data	*mapp;
 	char	**map;
+	t_data	*mapp;
 
 	map = vars->map;
 	ix = 0;
@@ -64,7 +64,6 @@ void	draw_2d_map(t_vars *vars)
 		iy++;
 		ix = 0;
 	}
-	vars->map_ptr = mapp;
-	// mlx_clear_window(vars->mlx, vars->win);
-	// mlx_put_image_to_window(vars->mlx, vars->win, mapp->img_ptr, 0, 0);
+	// vars->map_ptr = mapp;
+	return (mapp);
 }
