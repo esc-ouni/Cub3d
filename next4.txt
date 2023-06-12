@@ -1,2 +1,2 @@
-#get map
-#create player and make it move
+#create player's fov
+#walls collisions
