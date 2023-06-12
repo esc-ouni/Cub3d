@@ -55,30 +55,29 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 	exit(EXIT_FAILURE);
 }
 
-void 	draw_player(t_vars *vars, int x, int y)
+void 	draw_player(t_vars *vars, int px, int py)
 {
-	t_player	*player;
-	t_data 		*mapp;
-	mapp = new_image(vars);
-
-	player = NULL;
-	player = h_malloc(vars->collector, sizeof(player), player);
-	player->p_x = x;
-	player->p_x = y;
-
 	int i, j;
-	i = x - 2;
-	j = y - 2;
-	while(i < 4)
+	t_data 		*p_img;
+	
+	p_img = new_image(vars);
+	int x = 895 + px;
+	int y = 345 + py;
+	
+	i = 0;
+	j = 0;
+	while(i < 10)
 	{
-		while(j < 4)
+		while(j < 10)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, BLUE);
+			my_mlx_pixel_put(vars->map_ptr, x + i, y + j, BLUE);
 			j++;
 		}
 		i++;
 		j = 0;
 	}
+	mlx_clear_window(vars->mlx, vars->win);
+	mlx_put_image_to_window(vars->mlx, vars->win,vars->map_ptr->img_ptr, 0, 0);
 }
 
 
@@ -106,7 +105,7 @@ int main(int argc, char const *argv[])
 		exit (1);
 	}
 	draw_2d_map(vars);
-	draw_player(vars);
+	draw_player(vars, 0, 0);
 
 	// draw_in_image(vars, 1);
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);

@@ -59,6 +59,7 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
+	t_data			*map_ptr;
 	t_player		*player;
 	t_collector 	**collector;
 	t_img_collector	**img_collector;
@@ -74,6 +75,7 @@ t_data	*new_image(t_vars *vars);
 void	draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	draw_in_image(t_vars *vars, int i);
+void 	draw_player(t_vars *vars, int px, int py);
 void	ft_collectorclear(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	*h_malloc(t_collector **collector, size_t s, void *p);

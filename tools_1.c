@@ -64,6 +64,7 @@ void	draw_2d_map(t_vars *vars)
 		iy++;
 		ix = 0;
 	}
+	vars->map_ptr = mapp;
 	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, mapp->img_ptr, 0, 0);
+	// mlx_put_image_to_window(vars->mlx, vars->win, mapp->img_ptr, 0, 0);
 }

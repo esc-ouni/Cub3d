@@ -9,6 +9,10 @@ int ft_ext(t_vars *vars)
 
 int	handler(int key, t_vars *vars)
 {
+	static int px;
+	static int py;
+	static int r = 10;
+
 	if (key == 53 || key == 17)
 	{
 		ft_destroy_all_images(vars);
@@ -23,15 +27,15 @@ int	handler(int key, t_vars *vars)
 	// 	move_rg(vars);
 	// else if (key == K_L)
 	// 	move_lf(vars);
-	// else if (key == M_UP)
-	// 	printf("%d\n", key);
-	// else if (key == M_DN)
-	// 	printf("%d\n", key);
-	// else if (key == M_LF)
-	// 	printf("%d\n", key);
-	// else if (key == M_RG)
-	// 	printf("%d\n", key);
-	// printf("%d\n", key);
+	else if (key == M_UP)
+		draw_player(vars, px, (py -= r));
+	else if (key == M_DN)
+		draw_player(vars, px, (py += r));
+	else if (key == M_LF)
+		draw_player(vars, (px -= r), py);
+	else if (key == M_RG)
+		draw_player(vars, (px += r), py);
+	
 	return(0);
 }
 
