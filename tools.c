@@ -48,7 +48,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	if(!tmp)
 		exit(EXIT_FAILURE);
 	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
-	*(int *)tmp = color;
+	*(unsigned int *)tmp = color;
 }
 
 char	*ft_mstrdup(t_collector **collector, char *s1)

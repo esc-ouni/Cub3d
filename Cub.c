@@ -57,14 +57,15 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 void 	draw_player(t_vars *vars, int px, int py)
 {
 	int i, j;
-	t_data 		*p_img;
+	// t_data 		*p_img;
 	
-	p_img = new_image(vars);
+	// p_img = new_image(vars);
 	int x = 895 + px;
 	int y = 345 + py;
 	
 	i = 0;
-	j = 0;
+	j = 0; 
+
 	while(i < 10)
 	{
 		while(j < 10)

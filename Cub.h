@@ -71,11 +71,13 @@ t_data	*new_image(t_vars *vars);
 void	draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	draw_in_image(t_vars *vars, int i);
+t_data	*pnew_image(t_vars *vars, t_data *map);
 void 	draw_player(t_vars *vars, int px, int py);
 void	ft_collectorclear(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 void	ft_destroy_all_images(t_vars *vars);
 
 #endif
