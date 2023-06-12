@@ -27,7 +27,8 @@ int	handler(int key, t_vars *vars)
 	// 	move_rg(vars);
 	// else if (key == K_L)
 	// 	move_lf(vars);
-	else if (key == M_UP)
+
+	if (key == M_UP)
 		draw_player(vars, px, (py -= r));
 	else if (key == M_DN)
 		draw_player(vars, px, (py += r));
@@ -71,54 +72,56 @@ char	*ft_mstrdup(t_collector **collector, char *s1)
 	return (s);
 }
 
-void	draw_in_image(t_vars *vars, int r)
+int	count_alloc_size(fd)
 {
-	int t = 0;
-	int i = 0;
-	int k = 0;
-	int x = 0;
-	int p = 0;
-	int y = 0;
-	int l = 0x60BADD;
-	int lr = 598642;
-	t_data		*img;
+	int size;
+	char *s;
 
-	img = new_image(vars);
-	if(r)
+	size = 0;
+	s = NULL;
+	fd = open("/Users/idouni/Desktop/789/map.Cub", O_RDONLY);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
+	while ((s = get_next_line(fd)))
 	{
-		l = 598642;
-		lr = 0x60BADD;
+		free(s);
+		s = NULL;
+		size++;
 	}
-	while(x < WIDTH)
+	if (close(fd) == -1)
+		exit(EXIT_FAILURE);
+	return (size+=1);
+}
+
+
+char **parse_file(t_collector **collector, int argc, char const *argv[])
+{
+	int	fd;
+	char **map;
+	char *s;
+	int i;
+
+	i = 0;
+	fd = 0;
+	map = NULL;
+	if (argc && argv[0])   //to_prot
 	{
-		while(y < HEIGHT)
+		map = h_malloc(collector, (count_alloc_size(fd) * sizeof(char *)), map);
+		fd = open("/Users/idouni/Desktop/789/map.Cub", O_RDONLY);
+		if (fd == -1)
+			exit(EXIT_FAILURE);
+		while((s = get_next_line(fd)))
 		{
-			while (i)
-			{
-				my_mlx_pixel_put(img, x, p, lr);
-				i--;
-				p++;
-			}
-			while(y < HEIGHT)
-			{
-				my_mlx_pixel_put(img, x, y, l);
-				y++;
-			}
+			map[i] = ft_mstrdup(collector, s);
+			free(s);
+			s = NULL;
+			i++;
 		}
-		x++;
-		p = 0;
-		y = 0;
-		y += k;
-		i += k;
-		k++;
-		if (k == 800)
-		{
-			t = l;
-			l = lr;
-			lr = t;
-			k = 0;
-		}
+		map[i] = NULL;
+		// i = 0;
+		// while(*map)
+		// 	printf("%s\n", *(map)++);
+		return (map);
 	}
-	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, img->img_ptr, 0, 0);
+	exit(EXIT_FAILURE);
 }

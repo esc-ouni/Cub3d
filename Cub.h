@@ -66,20 +66,18 @@ typedef struct s_vars
 	t_img_collector	**img_collector;
 }	t_vars;
 
-
 void	debug(void);
 int		ft_ext(t_vars *vars);
 t_data	*new_image(t_vars *vars);
 t_data	*draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
-void	draw_in_image(t_vars *vars, int i);
 void	ft_destroy_all_images(t_vars *vars);
-t_data	*clone_image(t_vars *vars, t_data *src);
 void 	draw_player(t_vars *vars, int px, int py);
 void	ft_collectorclear(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
 
 
 #endif
