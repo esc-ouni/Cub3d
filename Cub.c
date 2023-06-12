@@ -18,7 +18,6 @@ int	count_alloc_size(fd)
 	}
 	if (close(fd) == -1)
 		exit(EXIT_FAILURE);
-	printf("%d\n", size);
 	return (size+=1);
 }
 

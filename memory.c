@@ -14,7 +14,7 @@ void	*h_malloc(t_collector **collector, size_t s, void *p)
 		exit (1);
 	}
 	new_node->addr = p;
-	printf("alloc     : %p\n", p);
+	// printf("alloc     : %p\n", p);
 	if (!(*collector))
 	{
 		*collector = new_node;
@@ -45,7 +45,7 @@ void	ft_collectorclear(t_collector **collector)
 		n_node = node->next;
 		if (node->addr)
 		{
-			printf("free      : %p\n", node->addr);
+			// printf("free      : %p\n", node->addr);
 			free(node->addr);
 		}
 		free(node);
@@ -76,7 +76,7 @@ t_data		*new_image(t_vars *vars)
 		exit (1);
 	}
 	new_node->img_addr = p;
-	printf("new image : %p\n", new_node->img_addr);
+	// printf("new image : %p\n", new_node->img_addr);
 	if (!(*(vars->img_collector)))
 	{
 		*(vars->img_collector) = new_node;
@@ -111,7 +111,7 @@ void	ft_destroy_all_images(t_vars *vars)
 	{
 		if (node->img_addr)
 		{
-			printf("des image : %p\n", node->img_addr);
+			// printf("des image : %p\n", node->img_addr);
 			mlx_destroy_image(vars->mlx, node->img_addr);
 		}
 		node = node->next;
