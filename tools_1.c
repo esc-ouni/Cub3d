@@ -5,11 +5,11 @@ void	draw_wall(t_data *mapp, int x, int y)
 	int	i = 0;
 	int	j = 0;
 
-	x *= 50;
-	y *= 50;
-	while(i + 1 < 50)
+	x *= 64;
+	y *= 64;
+	while(i + 1 < 64)
 	{
-		while(j + 1 < 50)
+		while(j + 1 < 64)
 		{
 			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			j++;
@@ -24,14 +24,14 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	int	j = 0;
 
 
-	x *= 50;
-	y *= 50;
-	while(i + 1< 50)
+	x *= 64;
+	y *= 64;
+	while(i + 1< 64)
 	{
-		while(j + 1< 50)
+		while(j + 1< 64)
 		{
 			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
-			if(j == 49)
+			if(j == 63)
 				my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			j++;
 		}
