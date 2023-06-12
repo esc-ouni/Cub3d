@@ -28,15 +28,16 @@ int	handler(int key, t_vars *vars)
 	// else if (key == K_L)
 	// 	move_lf(vars);
 
+	if (key == M_RG)
+		draw_player(vars, (px += r), py);
+	if (key == M_DN)
+		draw_player(vars, px, (py += r));
+	if (key == M_LF)
+		draw_player(vars, (px -= r), py);
 	if (key == M_UP)
 		draw_player(vars, px, (py -= r));
-	else if (key == M_DN)
-		draw_player(vars, px, (py += r));
-	else if (key == M_LF)
-		draw_player(vars, (px -= r), py);
-	else if (key == M_RG)
-		draw_player(vars, (px += r), py);
-	
+
+	printf("x : %d, y : %d\n", 900 +px, 350 + py);
 	return(0);
 }
 

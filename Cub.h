@@ -7,8 +7,8 @@
 #include <fcntl.h>
 #include "Get_next_line/get_next_line.h"
 
-#define WIDTH 2305
-#define HEIGHT 896
+#define WIDTH 1800
+#define HEIGHT 700
 
 #define BLACK 0x00000000
 #define WHITE 0x00FFFFFF
