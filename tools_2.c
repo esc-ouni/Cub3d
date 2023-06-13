@@ -43,7 +43,7 @@ void 	draw_player(t_vars *vars, int px, int py)
 	// 	i++;
 	// }
 	// draw_ray(vars, p_img, ray);
+	mlx_clear_window(vars->mlx, vars->win);
+	mlx_put_image_to_window(vars->mlx, vars->win,p_img->img_ptr, 0, 0);
 	draw_ray(vars->mlx, vars->win, origin, direction, 50, BLUE);
-	// mlx_clear_window(vars->mlx, vars->win);
-	// mlx_put_image_to_window(vars->mlx, vars->win,p_img->img_ptr, 0, 0);
 }
