@@ -29,15 +29,27 @@ int	handler(int key, t_vars *vars)
 	// 	move_lf(vars);
 
 	if (key == M_RG)
-		draw_player(vars, (px += r), py);
+	{
+		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px + r)/50)] == '0')
+			draw_player(vars, (px += r), py);
+	}
 	if (key == M_DN)
-		draw_player(vars, px, (py += r));
+	{
+		if (vars->map[(((HEIGHT/2) + py + r)/50)][(((WIDTH/2) + px)/50)] == '0')
+			draw_player(vars, px, (py += r));
+	}
 	if (key == M_LF)
-		draw_player(vars, (px -= r), py);
+	{
+		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px - r)/50)] == '0')
+			draw_player(vars, (px -= r), py);
+	}
 	if (key == M_UP)
-		draw_player(vars, px, (py -= r));
+	{
+		if (vars->map[(((HEIGHT/2) + py - r)/50)][(((WIDTH/2) + px)/50)] == '0')
+			draw_player(vars, px, (py -= r));
+	}
 
-	printf("x : %d, y : %d\n", 900 +px, 350 + py);
+	// printf("x : %d, y : %d\n", ((((WIDTH/2) + px + r)/50)), (((HEIGHT/2) + py + r)/50));
 	return(0);
 }
 

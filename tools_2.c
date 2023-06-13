@@ -7,8 +7,8 @@ void 	draw_player(t_vars *vars, int px, int py)
 	
 	p_img = draw_2d_map(vars)
 ;
-	int x = 895 + px;
-	int y = 345 + py;
+	int x = (WIDTH/2 - 5) + px;
+	int y = (HEIGHT/2 - 5)+ py;
 	
 	i = 0;
 	j = 0; 
