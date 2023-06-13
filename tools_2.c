@@ -1,17 +1,14 @@
 #include "Cub.h"
 
-void 	draw_player(t_vars *vars, int px, int py)
+void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
 {
 	int i, j;
 	t_data 		*p_img;
 	t_vector 	origin;
-	t_vector 	direction;
 	
 
 	origin.x = (WIDTH/2) + px;
 	origin.y = (HEIGHT/2) + py;
-	direction.x = (WIDTH/2) + px;
-	direction.y = (HEIGHT/2) + py;
 	// ray = NULL;
 	// ray = h_malloc(vars->collector, sizeof(t_ray), ray);
 	// ray->origin->x = (WIDTH/2) + px;
@@ -45,5 +42,5 @@ void 	draw_player(t_vars *vars, int px, int py)
 	// draw_ray(vars, p_img, ray);
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win,p_img->img_ptr, 0, 0);
-	draw_ray(vars->mlx, vars->win, origin, direction, 50, BLUE);
+	draw_ray(vars, origin, *direction, 800);
 }

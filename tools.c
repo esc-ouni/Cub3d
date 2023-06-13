@@ -6,9 +6,22 @@ int ft_ext(t_vars *vars)
 	ft_collectorclear(vars->collector);
 	exit(0);
 }
+void rotate_vector(t_vector *direction, float angle)
+{
+    float rad_angle = angle * M_PI / 180.0;
+    float cos_angle = cos(rad_angle);
+    float sin_angle = sin(rad_angle);
+
+    float new_x = direction->x * cos_angle - direction->y * sin_angle;
+    float new_y = direction->x * sin_angle + direction->y * cos_angle;
+
+    direction->x = new_x;
+    direction->y = new_y;
+}
 
 int	handler(int key, t_vars *vars)
 {
+	
 	static int px;
 	static int py;
 	static int r = 10;
@@ -23,33 +36,39 @@ int	handler(int key, t_vars *vars)
 	// 	move_up(vars);
 	// else if (key == K_DN)
 	// 	move_dn(vars);
-	// else if (key == K_R)
-	// 	move_rg(vars);
-	// else if (key == K_L)
-	// 	move_lf(vars);
+
+	if (key == K_R)
+	{
+		rotate_vector(vars->direction, 5);
+		draw_player(vars, px, py, vars->direction);
+	}
+	else if (key == K_L)
+	{
+		rotate_vector(vars->direction, -5);
+		draw_player(vars, px, py, vars->direction);
+	}
 
 	if (key == M_RG)
 	{
 		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px + r)/50)] == '0')
-			draw_player(vars, (px += r), py);
+			draw_player(vars, (px += r), py, vars->direction);
 	}
 	if (key == M_DN)
 	{
 		if (vars->map[(((HEIGHT/2) + py + r)/50)][(((WIDTH/2) + px)/50)] == '0')
-			draw_player(vars, px, (py += r));
+			draw_player(vars, px, (py += r), vars->direction);
 	}
 	if (key == M_LF)
 	{
 		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px - r)/50)] == '0')
-			draw_player(vars, (px -= r), py);
+			draw_player(vars, (px -= r), py, vars->direction);
 	}
 	if (key == M_UP)
 	{
 		if (vars->map[(((HEIGHT/2) + py - r)/50)][(((WIDTH/2) + px)/50)] == '0')
-			draw_player(vars, px, (py -= r));
+			draw_player(vars, px, (py -= r), vars->direction);
 	}
 
-	// printf("x : %d, y : %d\n", ((((WIDTH/2) + px + r)/50)), (((HEIGHT/2) + py + r)/50));
 	return(0);
 }
 
