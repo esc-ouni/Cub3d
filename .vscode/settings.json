@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"cub.h": "c",
+		"libc.h": "c",
+		"string.h": "c"
+	}
+}

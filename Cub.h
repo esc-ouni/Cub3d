@@ -3,6 +3,7 @@
 
 #include <libc.h>
 #include <string.h>
+#include <math.h>
 #include <mlx.h>
 #include <fcntl.h>
 #include "Get_next_line/get_next_line.h"
@@ -27,6 +28,12 @@
 # define K_DN        125
 # define K_R         124
 # define K_L         123
+
+typedef struct  s_vector
+{
+    float x;
+    float y;
+}               t_vector;
 
 typedef struct s_player
 {
@@ -75,6 +82,7 @@ void	ft_destroy_all_images(t_vars *vars);
 void 	draw_player(t_vars *vars, int px, int py);
 void	ft_collectorclear(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
+void 	draw_ray(void *mlx_ptr, void *win_ptr, t_vector origin, t_vector direction, int length, int color);
 void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
