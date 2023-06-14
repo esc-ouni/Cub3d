@@ -1,6 +1,6 @@
 #include "Cub.h"
 
-void draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length)
+void draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length)
 {
 	// int k = -25;
 
@@ -34,9 +34,10 @@ void draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length)
 
 		x = x1;
 		y = y1;
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < 500; i++)
 		{
-			mlx_pixel_put(vars->mlx, vars->win, (int)x, (int)y, BLUE);
+			// mlx_pixel_put(vars->mlx, vars->win, (int)x, (int)y, BLUE);
+			my_mlx_pixel_put(p_img, (int)x, (int)y,BLUE);
 			if (vars->map[((((int)fabs(y)+(int)y_inc))/50)][(((int)fabs(x) + (int)x_inc)/50)] == '0')
 			{
 				x += x_inc;

@@ -95,7 +95,8 @@ void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void 	draw_player(t_vars *vars, int px, int py, t_vector *direction);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
-void 	draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length);
+// void 	draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length);
+void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
 
 
 #endif
