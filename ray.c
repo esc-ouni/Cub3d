@@ -2,7 +2,8 @@
 
 void draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length)
 {
-	int k = 0;
+	// int k = -25;
+
 
 	int x1;
 	int y1;
@@ -18,12 +19,12 @@ void draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length)
 	float x;
 	float y;
 
-	// while(k < 70)
+	// while(k < 25)
 	// {
 		x1 = (int)origin.x;
 		y1 = (int)origin.y;
-		x2 = (int)(origin.x + (direction.x += 50)* length);
-		y2 = (int)(origin.y + (direction.y += 50)* length);
+		x2 = (int)(origin.x + (direction.x)* length);
+		y2 = (int)(origin.y + (direction.y)* length);
 
 		dx = x2 - x1;
 		dy = y2 - y1;
@@ -35,17 +36,16 @@ void draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length)
 		y = y1;
 		for (int i = 0; i < length; i++)
 		{
-			// printf("x : %d, y : %d\n",((int)origin.x + (int)x), ((int)origin.y + (int)y));
 			mlx_pixel_put(vars->mlx, vars->win, (int)x, (int)y, BLUE);
-			// if (vars->map[(((int)origin.x + (int)x)/50)][(((int)origin.y + (int)y)/50)] == '0')
-			// {
-			x += x_inc;
-			y += y_inc;
-			// }
-			// else
-			// 	return ;
+			if (vars->map[((((int)fabs(y)+(int)y_inc))/50)][(((int)fabs(x) + (int)x_inc)/50)] == '0')
+			{
+				x += x_inc;
+				y += y_inc;
+			}
+			else
+				return ;
 		}
-// 		k++;
+	// 	k++;
 
-// 	}
+	// }
 }

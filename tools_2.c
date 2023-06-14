@@ -2,11 +2,13 @@
 
 void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
 {
-	int i, j;
+	int i, j, k;
 	t_data 		*p_img;
 	t_vector 	origin;
+	t_vector 	direct;
+	float       angle = -0.6;
 	
-
+	direct = *direction;
 	origin.x = (WIDTH/2) + px;
 	origin.y = (HEIGHT/2) + py;
 	// ray = NULL;
@@ -22,6 +24,7 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
 	
 	i = 0;
 	j = 0; 
+	k = 0; 
 	while(i < 10)
 	{
 		while(j < 10)
@@ -42,5 +45,10 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
 	// draw_ray(vars, p_img, ray);
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win,p_img->img_ptr, 0, 0);
-	draw_ray(vars, origin, *direction, 800);
+	while (k<90)
+	{
+		rotate_vector(&direct, angle+=0.02);
+		draw_ray(vars, origin, direct, 700);
+		k++;
+	}
 }

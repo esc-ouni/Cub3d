@@ -74,12 +74,14 @@ typedef struct s_vars
 	t_img_collector	**img_collector;
 }	t_vars;
 
+
 void	debug(void);
 int		ft_ext(t_vars *vars);
 t_data	*new_image(t_vars *vars);
 t_data	*draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	ft_destroy_all_images(t_vars *vars);
+void	rotate_vector(t_vector *direction, float angle);
 // void 	draw_player(t_vars *vars, int px, int py);
 void 	draw_player(t_vars *vars, int px, int py, t_vector *direction);
 void	ft_collectorclear(t_collector **collector);
