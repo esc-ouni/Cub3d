@@ -30,7 +30,7 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
 		j = -5;
 	}
 	mlx_clear_window(vars->mlx, vars->win);
-	while (k<600)
+	while (k<500)
 	{
 		rotate_vector(&direct, angle+=0.0003);
 		draw_ray(p_img, vars, origin, direct, 400);
