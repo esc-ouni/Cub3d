@@ -1,2 +1,2 @@
-#create player's fov
-#walls collisions
+#creating ray's using dda
+#vald mshel
