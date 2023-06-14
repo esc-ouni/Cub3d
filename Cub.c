@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 	img_collector = NULL;
 
 	vars = NULL;
-	vars = h_malloc(&collector, sizeof(t_vars), vars);
+	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
 	vars->img_collector = &img_collector;
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
@@ -20,15 +20,15 @@ int main(int argc, char const *argv[])
 	{
 		write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
 		ft_destroy_all_images(vars);
-		ft_collectorclear(vars->collector);
+		ft_collectorclear(vars->collector, ALL);
 		exit (1);
 	}
 	vars->pos = NULL;
-	vars->pos = h_malloc(vars->collector, sizeof(t_vectorr), vars->pos);
+	vars->pos = h_malloc(vars->collector, sizeof(t_vectorr), vars->pos, NTMP);
 	vars->pos->x = 0;
 	vars->pos->y = 0;
 	vars->direction = NULL;
-	vars->direction = h_malloc(vars->collector, sizeof(t_vector), vars->direction);
+	vars->direction = h_malloc(vars->collector, sizeof(t_vector), vars->direction, NTMP);
 	vars->direction->x = 900;
 	vars->direction->y = 350;
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);

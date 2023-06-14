@@ -3,7 +3,7 @@
 int ft_ext(t_vars *vars)
 {
 	ft_destroy_all_images(vars);
-	ft_collectorclear(vars->collector);
+	ft_collectorclear(vars->collector, ALL);
 	exit(0);
 }
 void rotate_vector(t_vector *direction, float angle)
@@ -53,7 +53,7 @@ int	handler(int key, t_vars *vars)
 	if (key == 53 || key == 17)
 	{
 		ft_destroy_all_images(vars);
-		ft_collectorclear(vars->collector);
+		ft_collectorclear(vars->collector, ALL);
 		exit(0);
 	}
 	if (key == K_R)
@@ -133,7 +133,7 @@ char	*ft_mstrdup(t_collector **collector, char *s1)
 	if (!s1)
 		return (NULL);
 	s = (char *)h_malloc(collector, sizeof(char) * \
-	(ft_strlen(s1) + 1), s);
+	(ft_strlen(s1) + 1), s, NTMP);
 	while (s1[i] != '\0')
 	{
 		s[i] = s1[i];
@@ -177,7 +177,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 	map = NULL;
 	if (argc && argv[0])   //to_prot
 	{
-		map = h_malloc(collector, (count_alloc_size(fd) * sizeof(char *)), map);
+		map = h_malloc(collector, (count_alloc_size(fd) * sizeof(char *)), map, NTMP);
 		fd = open("/Users/idouni/Desktop/789/map.Cub", O_RDONLY);
 		if (fd == -1)
 			exit(EXIT_FAILURE);

@@ -29,6 +29,31 @@
 # define K_R         124
 # define K_L         123
 
+typedef enum e_flag
+{
+	TMP,
+	NTMP,
+	ALL
+}	t_flag;
+
+typedef struct s_ntmp
+{
+	void			*ntmp_addr;
+	struct s_ntmp	*next;
+}	t_ntmp;
+
+typedef struct s_tmp
+{
+	void			*tmp_addr;
+	struct s_tmp	*next;
+}	t_tmp;
+
+typedef struct s_collector
+{
+	t_tmp				*tmp_cltr;
+	t_ntmp				*ntmp_cltr;
+}	t_collector;
+
 typedef struct  s_vectorr
 {
     int x;
@@ -56,11 +81,11 @@ typedef struct s_data
 	int		endian;
 }		t_data;
 
-typedef struct s_collector
-{
-	void				*addr;
-	struct s_collector	*next;
-}	t_collector;
+// typedef struct s_collector
+// {
+// 	void				*addr;
+// 	struct s_collector	*next;
+// }	t_collector;
 
 typedef struct s_img_collector
 {
@@ -88,14 +113,20 @@ t_data	*draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	ft_destroy_all_images(t_vars *vars);
 int 	mouse_movement(int x, int y, t_vars *vars);
-void	ft_collectorclear(t_collector **collector);
+void	free_tmp(t_collector **collector);
+void	free_ntmp(t_collector **collector);
+void	head_alloc(t_collector **collector);
+void	tmp_alloc(t_collector **collector, size_t s, void **p);
+void	ntmp_alloc(t_collector **collector, size_t s, void **p);
+void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
+void	ft_collectorclear(t_collector **collector, t_flag flag);
+// void	ft_collectorclear(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	rotate_vector(t_vector *direction, float angle);
-void	*h_malloc(t_collector **collector, size_t s, void *p);
+// void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void 	draw_player(t_vars *vars, int px, int py, t_vector *direction);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
-// void 	draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length);
 void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
 
 
