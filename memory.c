@@ -65,10 +65,10 @@ t_data		*new_image(t_vars *vars)
 	t_data		*img;
 
 	img = NULL;
-	img = h_malloc(vars->collector, sizeof(t_data), img, NTMP);
+	img = h_malloc(vars->collector, sizeof(t_data), img, TMP);
 	new_node = NULL;
 	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-	new_node = h_malloc(vars->collector, sizeof(t_img_collector), new_node, NTMP);
+	new_node = h_malloc(vars->collector, sizeof(t_img_collector), new_node, TMP);
 	if (!p)
 	{
 		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 29);

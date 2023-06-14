@@ -40,6 +40,7 @@ int mouse_movement(int x, int y, t_vars *vars)
 			last_pos = x;
 		}
 	}
+	// ft_collectorclear(vars->collector, TMP);
 	return(0);
 }
 
@@ -107,7 +108,7 @@ int	handler(int key, t_vars *vars)
 			draw_player(vars, px, (py -= r), vars->direction);
 		}
 	}
-
+	// ft_collectorclear(vars->collector, TMP);
 	return(0);
 }
 

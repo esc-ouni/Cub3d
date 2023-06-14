@@ -37,4 +37,6 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
 		k++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win,p_img->img_ptr, 0, 0);
+	// ft_destroy_all_images(vars);
+	// ft_collectorclear(vars->collector, TMP);
 }
