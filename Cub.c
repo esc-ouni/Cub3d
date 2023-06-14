@@ -23,13 +23,17 @@ int main(int argc, char const *argv[])
 		ft_collectorclear(vars->collector);
 		exit (1);
 	}
+	vars->pos = NULL;
+	vars->pos = h_malloc(vars->collector, sizeof(t_vectorr), vars->pos);
+	vars->pos->x = 0;
+	vars->pos->y = 0;
 	vars->direction = NULL;
 	vars->direction = h_malloc(vars->collector, sizeof(t_vector), vars->direction);
 	vars->direction->x = 900;
 	vars->direction->y = 350;
-	// draw_player(vars, 0, 0, NULL);
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
 	mlx_hook(vars->win, 2, 1L << 0, handler, vars);
+	mlx_hook(vars->win, 6, 0, mouse_movement, vars);
 	mlx_loop(vars->mlx);
 	return 0;
 }

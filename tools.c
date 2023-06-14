@@ -19,6 +19,30 @@ void rotate_vector(t_vector *direction, float angle)
     direction->y = new_y;
 }
 
+int mouse_movement(int x, int y, t_vars *vars)
+{
+	static int last_pos;
+
+	if (x <= 1800 && x >= 0)
+	{
+		if (x >= last_pos)
+		{
+			rotate_vector(vars->direction, 4.5);
+			draw_player(vars, 0, 0, vars->direction);
+			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
+			last_pos = x;
+		}
+		else if (x < last_pos)
+		{
+			rotate_vector(vars->direction, -4.5);
+			draw_player(vars, 0, 0, vars->direction);
+			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
+			last_pos = x;
+		}
+	}
+	return(0);
+}
+
 int	handler(int key, t_vars *vars)
 {
 	
@@ -32,41 +56,56 @@ int	handler(int key, t_vars *vars)
 		ft_collectorclear(vars->collector);
 		exit(0);
 	}
-	// else if (key == K_UP)
-	// 	move_up(vars);
-	// else if (key == K_DN)
-	// 	move_dn(vars);
-
 	if (key == K_R)
 	{
-		rotate_vector(vars->direction, 5);
+		rotate_vector(vars->direction, 4.5);
 		draw_player(vars, px, py, vars->direction);
+		// vars->pos->x = px;
+		// vars->pos->y = py;
 	}
 	else if (key == K_L)
 	{
-		rotate_vector(vars->direction, -5);
+		rotate_vector(vars->direction, -4.5);
 		draw_player(vars, px, py, vars->direction);
+		// vars->pos->x = px;
+		// vars->pos->y = py;
 	}
 
 	if (key == M_RG)
 	{
 		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px + r)/50)] == '0')
+		{
+			vars->pos->x = px + r;
+			vars->pos->y = py;
 			draw_player(vars, (px += r), py, vars->direction);
+		}
 	}
 	if (key == M_DN)
 	{
 		if (vars->map[(((HEIGHT/2) + py + r)/50)][(((WIDTH/2) + px)/50)] == '0')
+		{
+			vars->pos->x = px;
+			vars->pos->y = py + r;
 			draw_player(vars, px, (py += r), vars->direction);
+		}
 	}
 	if (key == M_LF)
 	{
 		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px - r)/50)] == '0')
+		{
+			vars->pos->x = px - r;
+			vars->pos->y = py;
 			draw_player(vars, (px -= r), py, vars->direction);
+		}
 	}
 	if (key == M_UP)
 	{
 		if (vars->map[(((HEIGHT/2) + py - r)/50)][(((WIDTH/2) + px)/50)] == '0')
+		{
+			vars->pos->x = px;
+			vars->pos->y = py - r;
 			draw_player(vars, px, (py -= r), vars->direction);
+		}
 	}
 
 	return(0);
@@ -150,9 +189,6 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 			i++;
 		}
 		map[i] = NULL;
-		// i = 0;
-		// while(*map)
-		// 	printf("%s\n", *(map)++);
 		return (map);
 	}
 	exit(EXIT_FAILURE);

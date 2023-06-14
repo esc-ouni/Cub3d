@@ -29,6 +29,12 @@
 # define K_R         124
 # define K_L         123
 
+typedef struct  s_vectorr
+{
+    int x;
+    int y;
+}               t_vectorr;
+
 typedef struct  s_vector
 {
     float x;
@@ -67,7 +73,7 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
-	// t_data			*map_ptr;
+	t_vectorr 		*pos;
 	t_vector 		*direction;
 	t_player		*player;
 	t_collector 	**collector;
@@ -81,17 +87,15 @@ t_data	*new_image(t_vars *vars);
 t_data	*draw_2d_map(t_vars *vars);
 int		handler(int key, t_vars *vars);
 void	ft_destroy_all_images(t_vars *vars);
-void	rotate_vector(t_vector *direction, float angle);
-// void 	draw_player(t_vars *vars, int px, int py);
-void 	draw_player(t_vars *vars, int px, int py, t_vector *direction);
+int 	mouse_movement(int x, int y, t_vars *vars);
 void	ft_collectorclear(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
-// void 	draw_ray(void *mlx_ptr, void *win_ptr, t_vector origin, t_vector direction, int length, int color);
-// void draw_ray(t_data *p_img,void *mlx_ptr, void *win_ptr, t_vector origin, t_vector direction, int length, int color);
-void 	draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length);
+void	rotate_vector(t_vector *direction, float angle);
 void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void 	draw_player(t_vars *vars, int px, int py, t_vector *direction);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
+void 	draw_ray(t_vars *vars, t_vector origin, t_vector direction, int length);
 
 
 #endif
