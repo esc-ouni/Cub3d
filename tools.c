@@ -27,14 +27,14 @@ int mouse_movement(int x, int y, t_vars *vars)
 	{
 		if (x >= last_pos)
 		{
-			rotate_vector(vars->direction, 4.5);
+			rotate_vector(vars->direction, ((x - last_pos)/3));
 			draw_player(vars, 0, 0, vars->direction);
 			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
 			last_pos = x;
 		}
 		else if (x < last_pos)
 		{
-			rotate_vector(vars->direction, -4.5);
+			rotate_vector(vars->direction, ((x - last_pos)/3));
 			draw_player(vars, 0, 0, vars->direction);
 			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
 			last_pos = x;
