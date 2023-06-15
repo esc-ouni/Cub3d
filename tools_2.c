@@ -16,6 +16,8 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle
 	int x = (WIDTH/2) + px;
 	int y = (HEIGHT/2) + py;
 	
+
+	
 	i = -5;
 	j = -5; 
 	k = 0; 
