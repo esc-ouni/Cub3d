@@ -8,7 +8,7 @@ int ft_ext(t_vars *vars)
 }
 void rotate_vector(t_vector *direction, float angle)
 {
-    float rad_angle = angle * M_PI / 180.0;
+    float rad_angle = ((angle * PI) / 180);
     float cos_angle = cos(rad_angle);
     float sin_angle = sin(rad_angle);
 
@@ -28,16 +28,16 @@ int mouse_movement(int x, int y, t_vars *vars)
 		if (x >= last_pos)
 		{
 			rotate_vector(vars->direction, ((x - last_pos)/3));
-			draw_player(vars, 0, 0, vars->direction);
-			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
+			draw_player(vars, 0, 0, vars->direction, vars->angle);
+			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction, vars->angle);
 			last_pos = x;
 			vars->angle += ((x - last_pos)/3);  
 		}
 		else if (x < last_pos)
 		{
 			rotate_vector(vars->direction, ((x - last_pos)/3));
-			draw_player(vars, 0, 0, vars->direction);
-			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
+			draw_player(vars, 0, 0, vars->direction, vars->angle);
+			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction, vars->angle);
 			last_pos = x;
 			vars->angle += ((x - last_pos)/3);  
 		}
@@ -61,17 +61,17 @@ int	handler(int key, t_vars *vars)
 	}
 	if (key == K_R)
 	{
-		rotate_vector(vars->direction, 4.5);
-		draw_player(vars, px, py, vars->direction);
+		// rotate_vector(vars->direction, 4.5);
+		draw_player(vars, px, py, vars->direction, vars->angle);
 		vars->angle += 4.5;  
 		// vars->pos->x = px;
 		// vars->pos->y = py;
 	}
 	else if (key == K_L)
 	{
-		rotate_vector(vars->direction, -4.5);
-		draw_player(vars, px, py, vars->direction);
-		vars->angle -= 4.5;  
+		// rotate_vector(vars->direction, -4.5);
+		draw_player(vars, px, py, vars->direction, vars->angle);
+		vars->angle -= 4.5;
 		// vars->pos->x = px;
 		// vars->pos->y = py;
 	}
@@ -82,7 +82,7 @@ int	handler(int key, t_vars *vars)
 		{
 			vars->pos->x = px + r;
 			vars->pos->y = py;
-			draw_player(vars, (px += r), py, vars->direction);
+			draw_player(vars, (px += r), py, vars->direction, vars->angle);
 		}
 	}
 	if (key == M_DN)
@@ -91,7 +91,7 @@ int	handler(int key, t_vars *vars)
 		{
 			vars->pos->x = px;
 			vars->pos->y = py + r;
-			draw_player(vars, px, (py += r), vars->direction);
+			draw_player(vars, px, (py += r), vars->direction, vars->angle);
 		}
 	}
 	if (key == M_LF)
@@ -100,7 +100,7 @@ int	handler(int key, t_vars *vars)
 		{
 			vars->pos->x = px - r;
 			vars->pos->y = py;
-			draw_player(vars, (px -= r), py, vars->direction);
+			draw_player(vars, (px -= r), py, vars->direction, vars->angle);
 		}
 	}
 	if (key == M_UP)
@@ -109,7 +109,7 @@ int	handler(int key, t_vars *vars)
 		{
 			vars->pos->x = px;
 			vars->pos->y = py - r;
-			draw_player(vars, px, (py -= r), vars->direction);
+			draw_player(vars, px, (py -= r), vars->direction, vars->angle);
 		}
 	}
 	// ft_collectorclear(vars->collector, TMP);

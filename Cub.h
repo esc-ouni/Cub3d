@@ -8,9 +8,15 @@
 #include <fcntl.h>
 #include "Get_next_line/get_next_line.h"
 
+#define NORTH 90
+#define EAST  0
+#define SOUTH 270
+#define WEST  180
+
 #define WIDTH 1800
 #define HEIGHT 700
 #define BLOCK 50
+#define PI 3.14159265
 
 #define BLACK 0x00000000
 #define WHITE 0x00FFFFFF
@@ -127,7 +133,7 @@ char	*ft_mstrdup(t_collector **collector, char *s1);
 void	rotate_vector(t_vector *direction, float angle);
 // void	*h_malloc(t_collector **collector, size_t s, void *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void 	draw_player(t_vars *vars, int px, int py, t_vector *direction);
+void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
 void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
 

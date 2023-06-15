@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
 	vars->angle = 0;
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
 	mlx_hook(vars->win, 2, 1L << 0, handler, vars);
-	mlx_hook(vars->win, 6, 0, mouse_movement, vars);
+	// mlx_hook(vars->win, 6, 0, mouse_movement, vars);
 	mlx_loop(vars->mlx);
 	return 0;
 }
