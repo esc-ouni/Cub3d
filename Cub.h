@@ -98,6 +98,7 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
+	float	 		angle;
 	t_vectorr 		*pos;
 	t_vector 		*direction;
 	t_player		*player;

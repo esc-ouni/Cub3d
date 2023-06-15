@@ -1,12 +1,12 @@
 #include "Cub.h"
 
-void 	draw_player(t_vars *vars, int px, int py, t_vector *direction)
+void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle)
 {
 	int i, j, k;
 	t_data 		*p_img;
 	t_vector 	origin;
 	t_vector 	direct;
-	float       angle = 0;
+	float       angle -= 0.75;
 	
 	direct = *direction;
 	origin.x = (WIDTH/2) + px;

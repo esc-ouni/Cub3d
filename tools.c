@@ -31,6 +31,7 @@ int mouse_movement(int x, int y, t_vars *vars)
 			draw_player(vars, 0, 0, vars->direction);
 			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
 			last_pos = x;
+			vars->angle += ((x - last_pos)/3);  
 		}
 		else if (x < last_pos)
 		{
@@ -38,6 +39,7 @@ int mouse_movement(int x, int y, t_vars *vars)
 			draw_player(vars, 0, 0, vars->direction);
 			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction);
 			last_pos = x;
+			vars->angle += ((x - last_pos)/3);  
 		}
 	}
 	// ft_collectorclear(vars->collector, TMP);
@@ -61,6 +63,7 @@ int	handler(int key, t_vars *vars)
 	{
 		rotate_vector(vars->direction, 4.5);
 		draw_player(vars, px, py, vars->direction);
+		vars->angle += 4.5;  
 		// vars->pos->x = px;
 		// vars->pos->y = py;
 	}
@@ -68,6 +71,7 @@ int	handler(int key, t_vars *vars)
 	{
 		rotate_vector(vars->direction, -4.5);
 		draw_player(vars, px, py, vars->direction);
+		vars->angle -= 4.5;  
 		// vars->pos->x = px;
 		// vars->pos->y = py;
 	}
