@@ -7,7 +7,6 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle
 	t_vector 	origin;
 	t_vector 	direct;
 	
-	// angle += 30;
 	direct = *direction;
 	origin.x = (WIDTH/2) + px;
 	origin.y = (HEIGHT/2) + py;

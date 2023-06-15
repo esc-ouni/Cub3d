@@ -1,6 +1,7 @@
-#recreate all math claculus(rotate ray, dda algo)
+#fov
 #get vert horizontal intersct
 #learn how texture works
+#mange memory peak
 #mange memory peak
 
 #vald mshel

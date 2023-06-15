@@ -8,12 +8,14 @@ int ft_ext(t_vars *vars)
 }
 void rotate_vector(t_vector *direction, float angle)
 {
+	if (angle < 0)
+		angle += 360;
     float rad_angle = ((angle * PI) / 180);
     float cos_angle = cos(rad_angle);
     float sin_angle = sin(rad_angle);
 
-    float new_x = direction->x * cos_angle - direction->y * sin_angle;
-    float new_y = direction->x * sin_angle + direction->y * cos_angle;
+    float new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
+    float new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
 
     direction->x = new_x;
     direction->y = new_y;
@@ -62,16 +64,18 @@ int	handler(int key, t_vars *vars)
 	if (key == K_R)
 	{
 		// rotate_vector(vars->direction, 4.5);
+		rotate_vector(vars->direction, 4.5);
 		draw_player(vars, px, py, vars->direction, vars->angle);
-		vars->angle += 4.5;  
+		// vars->angle += 4.5;  
 		// vars->pos->x = px;
 		// vars->pos->y = py;
 	}
 	else if (key == K_L)
 	{
 		// rotate_vector(vars->direction, -4.5);
+		rotate_vector(vars->direction, -4.5);
 		draw_player(vars, px, py, vars->direction, vars->angle);
-		vars->angle -= 4.5;
+		// vars->angle -= 4.5;
 		// vars->pos->x = px;
 		// vars->pos->y = py;
 	}

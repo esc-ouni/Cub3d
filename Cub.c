@@ -29,12 +29,12 @@ int main(int argc, char const *argv[])
 	vars->pos->y = 0;
 	vars->direction = NULL;
 	vars->direction = h_malloc(vars->collector, sizeof(t_vector), vars->direction, NTMP);
-	vars->direction->x = 900;
-	vars->direction->y = 350;
+	vars->direction->x = 1200;
+	vars->direction->y = 450;
 	vars->angle = 0;
 	mlx_hook(vars->win, 17, 0, ft_ext, vars);
 	mlx_hook(vars->win, 2, 1L << 0, handler, vars);
-	// mlx_hook(vars->win, 6, 0, mouse_movement, vars);
+	mlx_hook(vars->win, 6, 0, mouse_movement, vars);
 	mlx_loop(vars->mlx);
 	return 0;
 }
