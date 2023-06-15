@@ -6,7 +6,7 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle
 	t_data 		*p_img;
 	t_vector 	origin;
 	t_vector 	direct;
-	float       angle -= 0.75;
+	float       angle -= 3.6;
 	
 	direct = *direction;
 	origin.x = (WIDTH/2) + px;
@@ -32,7 +32,7 @@ void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle
 	mlx_clear_window(vars->mlx, vars->win);
 	while (k<500)
 	{
-		rotate_vector(&direct, angle+=0.0003);
+		rotate_vector(&direct, angle+=0.12);
 		draw_ray(p_img, vars, origin, direct, 400);
 		k++;
 	}
