@@ -78,7 +78,7 @@ int	handler(int key, t_vars *vars)
 
 	if (key == M_RG)
 	{
-		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px + r)/50)] == '0')
+		if (vars->map[(((HEIGHT/2) + py)/BLOCK)][(((WIDTH/2) + px + r)/BLOCK)] == '0')
 		{
 			vars->pos->x = px + r;
 			vars->pos->y = py;
@@ -87,7 +87,7 @@ int	handler(int key, t_vars *vars)
 	}
 	if (key == M_DN)
 	{
-		if (vars->map[(((HEIGHT/2) + py + r)/50)][(((WIDTH/2) + px)/50)] == '0')
+		if (vars->map[(((HEIGHT/2) + py + r)/BLOCK)][(((WIDTH/2) + px)/BLOCK)] == '0')
 		{
 			vars->pos->x = px;
 			vars->pos->y = py + r;
@@ -96,7 +96,7 @@ int	handler(int key, t_vars *vars)
 	}
 	if (key == M_LF)
 	{
-		if (vars->map[(((HEIGHT/2) + py)/50)][(((WIDTH/2) + px - r)/50)] == '0')
+		if (vars->map[(((HEIGHT/2) + py)/BLOCK)][(((WIDTH/2) + px - r)/BLOCK)] == '0')
 		{
 			vars->pos->x = px - r;
 			vars->pos->y = py;
@@ -105,7 +105,7 @@ int	handler(int key, t_vars *vars)
 	}
 	if (key == M_UP)
 	{
-		if (vars->map[(((HEIGHT/2) + py - r)/50)][(((WIDTH/2) + px)/50)] == '0')
+		if (vars->map[(((HEIGHT/2) + py - r)/BLOCK)][(((WIDTH/2) + px)/BLOCK)] == '0')
 		{
 			vars->pos->x = px;
 			vars->pos->y = py - r;

@@ -38,7 +38,7 @@ void draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, 
 		{
 			// mlx_pixel_put(vars->mlx, vars->win, (int)x, (int)y, BLUE);
 			my_mlx_pixel_put(p_img, (int)x, (int)y,BLUE);
-			if (vars->map[((((int)fabs(y)+(int)y_inc))/50)][(((int)fabs(x) + (int)x_inc)/50)] == '0')
+			if (vars->map[((((int)fabs(y)+(int)y_inc))/BLOCK)][(((int)fabs(x) + (int)x_inc)/BLOCK)] == '0')
 			{
 				x += x_inc;
 				y += y_inc;

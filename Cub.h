@@ -10,6 +10,7 @@
 
 #define WIDTH 1800
 #define HEIGHT 700
+#define BLOCK 50
 
 #define BLACK 0x00000000
 #define WHITE 0x00FFFFFF
