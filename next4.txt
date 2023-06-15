@@ -1,2 +1,6 @@
-#creating ray's using dda
+#recreate all math claculus(rotate ray, dda algo)
+#get vert horizontal intersct
+#learn how texture works
+#mange memory peak
+
 #vald mshel
