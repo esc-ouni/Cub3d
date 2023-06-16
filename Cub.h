@@ -112,6 +112,7 @@ void hooks(t_player *player);
 int		handler(int key, t_player *player);
 void 	update_scene(t_player *player);
 t_data	*draw_2d_map(t_player *player);
+t_data 	*cast_rays(t_player *player, t_data *p_img);
 
 void	debug(void);
 int		ft_ext(t_vars *vars);

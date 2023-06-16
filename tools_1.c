@@ -6,35 +6,39 @@ void update_scene(t_player *player)
 
 	p_img = draw_2d_map(player);
 	p_img = draw_player(player, p_img);
+	p_img = cast_rays(player, p_img);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 }
 
 void move_right(t_player *player)
 {
-		update_scene(player);
+	player->p_x += 10;
+	update_scene(player);
 }
 void move_left(t_player *player)
 {
-		update_scene(player);
+	player->p_x -= 10;
+	update_scene(player);
 }
-
 
 void rotate_right(t_player *player)
 {
-		update_scene(player);
+	update_scene(player);
 }
 void rotate_left(t_player *player)
 {
-		update_scene(player);
+	update_scene(player);
 }
 void move_up(t_player *player)
 {
-		update_scene(player);
+	player->p_y -= 10;
+	update_scene(player);
 }
 void move_down(t_player *player)
 {
-		update_scene(player);
+	player->p_y += 10;
+	update_scene(player);
 }
 
 int	handler(int key, t_player *player)
