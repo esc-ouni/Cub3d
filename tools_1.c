@@ -11,15 +11,48 @@ void update_scene(t_player *player)
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 }
 
+int check_collision(t_player *player, int x, int y)
+{
+	int m_y = ((player->p_y + y)/BLOCK);
+	int m_x = ((player->p_x + x)/BLOCK);
+
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
+
 void move_right(t_player *player)
 {
-	player->p_x += 10;
-	update_scene(player);
+	if (check_collision(player, 10, 0))
+	{
+		player->p_x += 10;
+		update_scene(player);
+	}
 }
 void move_left(t_player *player)
 {
-	player->p_x -= 10;
-	update_scene(player);
+	if (check_collision(player, -10, 0))
+	{
+		player->p_x -= 10;
+		update_scene(player);
+	}
+}
+void move_up(t_player *player)
+{
+	if (check_collision(player, 0, -10))
+	{
+		player->p_y -= 10;
+		update_scene(player);
+	}
+}
+void move_down(t_player *player)
+{
+	if (check_collision(player, 0, 10))
+	{
+		player->p_y += 10;
+		update_scene(player);
+	}
 }
 
 void rotate_right(t_player *player)
@@ -30,16 +63,6 @@ void rotate_right(t_player *player)
 void rotate_left(t_player *player)
 {
 	rotate_vector(player->direction, -5.0);
-	update_scene(player);
-}
-void move_up(t_player *player)
-{
-	player->p_y -= 10;
-	update_scene(player);
-}
-void move_down(t_player *player)
-{
-	player->p_y += 10;
 	update_scene(player);
 }
 
