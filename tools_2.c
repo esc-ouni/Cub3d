@@ -39,9 +39,9 @@ t_data 	*cast_rays(t_player *player, t_data *p_img)
 
     draw_ray(player, p_img, RED);
     rotate_vector(player->direction, -30);
-    while (k < 500)
+    while (k < 600)
     {
-        rotate_vector(player->direction, 0.12);
+        rotate_vector(player->direction, 0.1);
         draw_ray(player, p_img, BLUE);
         k++;
     }
