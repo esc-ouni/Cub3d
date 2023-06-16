@@ -23,8 +23,6 @@ void rotate_vector(t_vector *direction, float angle)
     direction->y = new_y;
 }
 
-// int mouse_movement(int x, int y, t_vars *vars)
-
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	(void)color;
