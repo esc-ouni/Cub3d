@@ -10,7 +10,9 @@ void rotate_vector(t_vector *direction, float angle)
 {
 	if (angle < 0)
 		angle += 360;
-    float rad_angle = ((angle * PI) / 180);
+	else if (angle >= 360)
+		angle -= 360;
+    float rad_angle = (angle * PI / 180);
     float cos_angle = cos(rad_angle);
     float sin_angle = sin(rad_angle);
 
@@ -133,9 +135,13 @@ t_player *init(int argc, char const *argv[])
 		ft_collectorclear(vars->collector, ALL);
 		exit (1);
 	}
+	player->direction = NULL;
 	player->vars = vars;
+	player->direction = h_malloc(&collector, sizeof(t_vector), player->direction, NTMP);
 	player->p_x = (WIDTH/2);
 	player->p_y = (HEIGHT/2);
+	player->direction->x = 1;
+	player->direction->y = 0;
 	return (player);
 }
 
@@ -149,7 +155,6 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 
 	x = (int)player->p_x;
 	y = (int)player->p_y;
-	printf("x : %d, y : %d\n", x, y);
 	while(i < 5)
 	{
 		while(j < 5)

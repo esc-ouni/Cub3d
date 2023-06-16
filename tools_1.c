@@ -24,10 +24,12 @@ void move_left(t_player *player)
 
 void rotate_right(t_player *player)
 {
+	rotate_vector(player->direction, 5.0);
 	update_scene(player);
 }
 void rotate_left(t_player *player)
 {
+	rotate_vector(player->direction, -5.0);
 	update_scene(player);
 }
 void move_up(t_player *player)
@@ -64,37 +66,6 @@ int	handler(int key, t_player *player)
 	if (key == M_UP)
 		move_up(player);
 	return(0);
-}
-
-void draw_ray(t_data *p_img, t_player *player, t_vector direction)
-{
-	if ((direction.y == player->p_y) && (direction.x == player->p_x))
-		return;
-	float i = 0;
-	float steps;
-	float x_inc;
-	float y_inc;
-	int	 x = player->p_x;
-	int	 y = player->p_y;
-	float dy = (direction.y - player->p_y);
-	float dx = (direction.x - player->p_x);
-
-
-	if (fabs(dx) >= fabs(dy))
-		steps = fabs(dx);
-	else
-		steps = fabs(dy);
-
-	x_inc = dx / steps;
-	y_inc = dy / steps;
-
-	while (i < 200)
-	{
-		my_mlx_pixel_put(p_img, (int)x, (int)y, BLUE);
-		x += x_inc;
-		y += y_inc;
-		i ++;
-	}
 }
 
 void	draw_wall(t_data *mapp, int x, int y)

@@ -21,6 +21,7 @@
 #define BLACK 0x00000000
 #define WHITE 0x00FFFFFF
 #define BLUE 0x00030DFF
+#define RED 0x00FF0D03
 
 # define ESC         53
 
@@ -103,7 +104,8 @@ typedef struct s_player
 {
 	float		p_x;
 	float		p_y;
-	float	angle;
+	float		angle;
+	t_vector 	*direction;
 	t_vars	*vars;
 }		t_player;
 
@@ -113,6 +115,8 @@ int		handler(int key, t_player *player);
 void 	update_scene(t_player *player);
 t_data	*draw_2d_map(t_player *player);
 t_data 	*cast_rays(t_player *player, t_data *p_img);
+void 	draw_ray(t_player *player, t_data *p_img, int color);
+void 	rotate_vector(t_vector *direction, float angle);
 
 void	debug(void);
 int		ft_ext(t_vars *vars);
@@ -122,7 +126,6 @@ void	free_ntmp(t_collector **collector);
 void	ft_destroy_all_images(t_vars *vars);
 void	head_alloc(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
-void	rotate_vector(t_vector *direction, float angle);
 void	tmp_alloc(t_collector **collector, size_t s, void **p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
@@ -131,7 +134,7 @@ void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
 t_data	*draw_player(t_player *player, t_data *p_img);
 // void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
-void draw_ray(t_data *p_img, t_player *player, t_vector direction);
+// void draw_ray(t_data *p_img, t_player *player, t_vector direction);
 
 
 #endif
