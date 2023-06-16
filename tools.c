@@ -21,104 +21,7 @@ void rotate_vector(t_vector *direction, float angle)
     direction->y = new_y;
 }
 
-int mouse_movement(int x, int y, t_vars *vars)
-{
-	static int last_pos;
-
-	if (x <= 1800 && x >= 0)
-	{
-		if (x >= last_pos)
-		{
-			rotate_vector(vars->direction, ((x - last_pos)/3));
-			draw_player(vars, 0, 0, vars->direction, vars->angle);
-			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction, vars->angle);
-			last_pos = x;
-			vars->angle += ((x - last_pos)/3);  
-		}
-		else if (x < last_pos)
-		{
-			rotate_vector(vars->direction, ((x - last_pos)/3));
-			draw_player(vars, 0, 0, vars->direction, vars->angle);
-			draw_player(vars, vars->pos->x, vars->pos->y, vars->direction, vars->angle);
-			last_pos = x;
-			vars->angle += ((x - last_pos)/3);  
-		}
-	}
-	// ft_collectorclear(vars->collector, TMP);
-	return(0);
-}
-
-int	handler(int key, t_vars *vars)
-{
-	
-	static int px;
-	static int py;
-	static int r = 10;
-
-	if (key == 53 || key == 17)
-	{
-		ft_destroy_all_images(vars);
-		ft_collectorclear(vars->collector, ALL);
-		exit(0);
-	}
-	if (key == K_R)
-	{
-		// rotate_vector(vars->direction, 4.5);
-		rotate_vector(vars->direction, 4.5);
-		draw_player(vars, px, py, vars->direction, vars->angle);
-		// vars->angle += 4.5;  
-		// vars->pos->x = px;
-		// vars->pos->y = py;
-	}
-	else if (key == K_L)
-	{
-		// rotate_vector(vars->direction, -4.5);
-		rotate_vector(vars->direction, -4.5);
-		draw_player(vars, px, py, vars->direction, vars->angle);
-		// vars->angle -= 4.5;
-		// vars->pos->x = px;
-		// vars->pos->y = py;
-	}
-
-	if (key == M_RG)
-	{
-		if (vars->map[(((HEIGHT/2) + py)/BLOCK)][(((WIDTH/2) + px + r)/BLOCK)] == '0')
-		{
-			vars->pos->x = px + r;
-			vars->pos->y = py;
-			draw_player(vars, (px += r), py, vars->direction, vars->angle);
-		}
-	}
-	if (key == M_DN)
-	{
-		if (vars->map[(((HEIGHT/2) + py + r)/BLOCK)][(((WIDTH/2) + px)/BLOCK)] == '0')
-		{
-			vars->pos->x = px;
-			vars->pos->y = py + r;
-			draw_player(vars, px, (py += r), vars->direction, vars->angle);
-		}
-	}
-	if (key == M_LF)
-	{
-		if (vars->map[(((HEIGHT/2) + py)/BLOCK)][(((WIDTH/2) + px - r)/BLOCK)] == '0')
-		{
-			vars->pos->x = px - r;
-			vars->pos->y = py;
-			draw_player(vars, (px -= r), py, vars->direction, vars->angle);
-		}
-	}
-	if (key == M_UP)
-	{
-		if (vars->map[(((HEIGHT/2) + py - r)/BLOCK)][(((WIDTH/2) + px)/BLOCK)] == '0')
-		{
-			vars->pos->x = px;
-			vars->pos->y = py - r;
-			draw_player(vars, px, (py -= r), vars->direction, vars->angle);
-		}
-	}
-	// ft_collectorclear(vars->collector, TMP);
-	return(0);
-}
+// int mouse_movement(int x, int y, t_vars *vars)
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -201,4 +104,45 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 		return (map);
 	}
 	exit(EXIT_FAILURE);
+}
+
+t_player *init(int argc, char const *argv[])
+{
+	static t_collector *collector;
+	static t_img_collector *img_collector;
+	t_vars 		*vars;
+	t_player 	*player;
+
+	
+	collector = NULL;
+	img_collector = NULL;
+
+	player = NULL;
+	player = h_malloc(&collector, sizeof(t_player), vars, NTMP);
+	vars = NULL;
+	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
+	vars->img_collector = &img_collector;
+	vars->collector = &collector;
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
+    vars->map = parse_file(&collector, argc, argv);
+	if(!vars->mlx || !vars->win)
+	{
+		write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
+		ft_destroy_all_images(vars);
+		ft_collectorclear(vars->collector, ALL);
+		exit (1);
+	}
+	player->vars = vars;
+	player->p_x = (WIDTH/2);
+	player->p_x = (HEIGHT/2);
+	return (player);
+}
+
+void hooks(t_player *player)
+{
+	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
+	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
+	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	mlx_loop(player->vars->mlx);
 }

@@ -73,11 +73,7 @@ typedef struct  s_vector
     float y;
 }               t_vector;
 
-typedef struct s_player
-{
-	int		p_x;
-	int		p_y;
-}		t_player;
+
 
 typedef struct s_data
 {
@@ -87,12 +83,6 @@ typedef struct s_data
 	int		size_line;
 	int		endian;
 }		t_data;
-
-// typedef struct s_collector
-// {
-// 	void				*addr;
-// 	struct s_collector	*next;
-// }	t_collector;
 
 typedef struct s_img_collector
 {
@@ -105,13 +95,20 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
-	float	 		angle;
-	t_vectorr 		*pos;
-	t_vector 		*direction;
-	t_player		*player;
 	t_collector 	**collector;
 	t_img_collector	**img_collector;
 }	t_vars;
+
+typedef struct s_player
+{
+	float		p_x;
+	float		p_y;
+	float	angle;
+	t_vars	*vars;
+}		t_player;
+
+t_player *init(int argc, char const *argv[]);
+void hooks(t_player *player);
 
 
 void	debug(void);
