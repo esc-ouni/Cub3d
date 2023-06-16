@@ -135,14 +135,38 @@ t_player *init(int argc, char const *argv[])
 	}
 	player->vars = vars;
 	player->p_x = (WIDTH/2);
-	player->p_x = (HEIGHT/2);
+	player->p_y = (HEIGHT/2);
 	return (player);
+}
+
+t_data 	*draw_player(t_player *player, t_data *p_img)
+{
+	int i, j, k, x, y;
+
+	i = -5;
+	j = -5; 
+	k = 0; 
+
+	x = (int)player->p_x;
+	y = (int)player->p_y;
+	printf("x : %d, y : %d\n", x, y);
+	while(i < 5)
+	{
+		while(j < 5)
+		{
+			my_mlx_pixel_put(p_img, x + i, y + j, BLUE);
+			j++;
+		}
+		i++;
+		j = -5;
+	}
+	return (p_img);
 }
 
 void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }

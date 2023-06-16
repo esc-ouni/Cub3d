@@ -1,30 +1,64 @@
 #include "Cub.h"
 
-int	handler(int key, t_vars *vars)
+void update_scene(t_player *player)
 {
-	
-	static int px;
-	static int py;
+	t_data *p_img;
+
+	p_img = draw_2d_map(player);
+	p_img = draw_player(player, p_img);
+	mlx_clear_window(player->vars->mlx, player->vars->win);
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
+}
+
+void move_right(t_player *player)
+{
+		update_scene(player);
+}
+void move_left(t_player *player)
+{
+		update_scene(player);
+}
+
+
+void rotate_right(t_player *player)
+{
+		update_scene(player);
+}
+void rotate_left(t_player *player)
+{
+		update_scene(player);
+}
+void move_up(t_player *player)
+{
+		update_scene(player);
+}
+void move_down(t_player *player)
+{
+		update_scene(player);
+}
+
+int	handler(int key, t_player *player)
+{
 	static int r = 10;
 
 	if (key == 53 || key == 17)
 	{
-		ft_destroy_all_images(vars);
-		ft_collectorclear(vars->collector, ALL);
+		ft_destroy_all_images(player->vars);
+		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
 	if (key == K_R)
-		update_scene(player);
+		rotate_right(player);
 	if (key == K_L)
-		update_scene(player);
+		rotate_left(player);
 	if (key == M_RG)
-		update_scene(player);
+		move_right(player);
 	if (key == M_DN)
-		update_scene(player);
+		move_down(player);
 	if (key == M_LF)
-		update_scene(player);
+		move_left(player);
 	if (key == M_UP)
-		update_scene(player);
+		move_up(player);
 	return(0);
 }
 
@@ -99,17 +133,17 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	}
 }
 
-t_data	*draw_2d_map(t_vars *vars)
+t_data	*draw_2d_map(t_player *player)
 {
 	int		ix;
 	int		iy;
 	char	**map;
 	t_data	*mapp;
 
-	map = vars->map;
+	map = player->vars->map;
 	ix = 0;
 	iy = 0;
-	mapp = new_image(vars);
+	mapp = new_image(player->vars);
 	while(map[iy])
 	{
 		while(map[iy][ix])
@@ -123,13 +157,5 @@ t_data	*draw_2d_map(t_vars *vars)
 		iy++;
 		ix = 0;
 	}
-	// vars->map_ptr = mapp;
 	return (mapp);
-}
-
-void update_scene(t_player *player)
-{
-	t_data *p_img;
-
-	p_img = dra
 }

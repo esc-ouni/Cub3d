@@ -109,18 +109,17 @@ typedef struct s_player
 
 t_player *init(int argc, char const *argv[]);
 void hooks(t_player *player);
-
+int		handler(int key, t_player *player);
+void 	update_scene(t_player *player);
+t_data	*draw_2d_map(t_player *player);
 
 void	debug(void);
 int		ft_ext(t_vars *vars);
 t_data	*new_image(t_vars *vars);
-t_data	*draw_2d_map(t_vars *vars);
-int		handler(int key, t_vars *vars);
 void	free_tmp(t_collector **collector);
 void	free_ntmp(t_collector **collector);
 void	ft_destroy_all_images(t_vars *vars);
 void	head_alloc(t_collector **collector);
-int 	mouse_movement(int x, int y, t_vars *vars);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	rotate_vector(t_vector *direction, float angle);
 void	tmp_alloc(t_collector **collector, size_t s, void **p);
@@ -129,7 +128,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag);
 void	ntmp_alloc(t_collector **collector, size_t s, void **p);
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
-void 	draw_player(t_vars *vars, int px, int py, t_vector *direction, float angle);
+t_data	*draw_player(t_player *player, t_data *p_img);
 void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
 
 
