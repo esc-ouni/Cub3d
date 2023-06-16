@@ -66,18 +66,18 @@ int	handler(int key, t_player *player)
 	return(0);
 }
 
-void draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length)
+void draw_ray(t_data *p_img, t_player *player, t_vector direction)
 {
-	if ((direction.y == origin.y) && (direction.x == origin.x))
+	if ((direction.y == player->p_y) && (direction.x == player->p_x))
 		return;
 	float i = 0;
 	float steps;
 	float x_inc;
 	float y_inc;
-	float x = origin.x;
-	float y = origin.y;
-	float dy = (direction.y - origin.y);
-	float dx = (direction.x - origin.x);
+	int	 x = player->p_x;
+	int	 y = player->p_y;
+	float dy = (direction.y - player->p_y);
+	float dx = (direction.x - player->p_x);
 
 
 	if (fabs(dx) >= fabs(dy))

@@ -130,7 +130,8 @@ void	ntmp_alloc(t_collector **collector, size_t s, void **p);
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char 	**parse_file(t_collector **collector, int argc, char const *argv[]);
 t_data	*draw_player(t_player *player, t_data *p_img);
-void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
+// void 	draw_ray(t_data *p_img, t_vars *vars, t_vector origin, t_vector direction, int length);
+void draw_ray(t_data *p_img, t_player *player, t_vector direction);
 
 
 #endif
