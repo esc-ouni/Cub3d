@@ -1,6 +1,5 @@
 #include "Cub.h"
 
-
 void draw_ray(t_player *player, t_data *p_img, int color)
 {
     int x1 = (int)player->p_x;
@@ -48,4 +47,14 @@ t_data 	*cast_rays(t_player *player, t_data *p_img)
 	player->direction->x = tmpx;
 	player->direction->y = tmpy;
 	return (p_img);
+}
+
+t_vector *find_horizontal_iterset(t_player *player)
+{
+	t_vector *vector;
+
+	vector = NULL;
+	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
+	vector->y = (int)player->p_y;
+	vector->x = (int)player->p_y;
 }

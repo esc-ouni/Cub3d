@@ -1,11 +1,31 @@
 #include "Cub.h"
 
+void 	angle_of_the_vector(t_player *player)
+{
+  	double x1 = player->p_x; // origin x-coordinate
+    double y1 = player->p_y; // origin y-coordinate
+    double x2 = player->direction->x; // direction x-coordinate
+    double y2 = player->direction->y; // direction y-coordinate
+
+    double dx = x2 - x1; // difference in x-coordinates
+    double dy = y2 - y1; // difference in y-coordinates
+
+    double angle = atan2(dy, dx);
+    double angle_degrees = angle * 180.0 / M_PI;
+
+    printf("Angle in radians: %f\n", angle);
+	printf("Angle in degrees: %f\n", angle_degrees);
+}
+
+
+
 void update_scene(t_player *player)
 {
 	t_data *p_img;
 
 	p_img = draw_2d_map(player);
 	p_img = draw_player(player, p_img);
+	angle_of_the_vector(player);
 	p_img = cast_rays(player, p_img);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
