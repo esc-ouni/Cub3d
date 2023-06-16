@@ -131,6 +131,29 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	}
 }
 
+int mouse_movement(int x, int y, t_player *player)
+{
+	static int last_pos;
+
+	if (x >= 0 && x <= WIDTH)
+	{
+		if (x >= last_pos)
+		{
+			rotate_vector(player->direction, ((x - last_pos)/5));
+			update_scene(player);
+			last_pos = x;
+		}
+		else if (x < last_pos)
+		{
+			rotate_vector(player->direction, ((x - last_pos)/5));
+			update_scene(player);
+			last_pos = x;
+		}
+	}
+	return (0);
+}
+
+
 t_data	*draw_2d_map(t_player *player)
 {
 	int		ix;
