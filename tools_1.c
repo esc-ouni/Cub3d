@@ -1,22 +1,5 @@
 #include "Cub.h"
 
-void 	angle_of_the_vector(t_player *player)
-{
-  	float x1 = player->p_x; // origin x-coordinate
-    float y1 = player->p_y; // origin y-coordinate
-    float x2 = player->direction->x; // direction x-coordinate
-    float y2 = player->direction->y; // direction y-coordinate
-
-    float dx = x2 - x1; // difference in x-coordinates
-    float dy = y2 - y1; // difference in y-coordinates
-
-    float angle = atan2(dy, dx);
-    float angle_degrees = angle * 180.0 / M_PI;
-
-    printf("Angle in radians: %f\n", angle);
-	printf("Angle in degrees: %f\n", angle_degrees);
-}
-
 void update_scene(t_player *player)
 {
 	t_data *p_img;
@@ -72,19 +55,27 @@ void move_down(t_player *player)
 	}
 }
 
+void	update_degree(t_player *player, float deg_angle)
+{
+	deg_angle = deg_to_rad(deg_angle);
+	player->angle += deg_angle;
+	if (player->angle >= (2 * M_PI))
+		player->angle -= 2 * M_PI;
+	else if (player->angle < 0)
+		player->angle += 2 * M_PI;
+}
+
+
 void rotate_right(t_player *player)
 {
-	rotate_vector(player->direction, 25);
-	// player->angle+=25;
-	// player->angle = deg_to_rad(player->angle);
-	player->angle += deg_to_rad(25);
+	rotate_vector(player->direction, 5);
+	update_degree(player, 5);
 	update_scene(player);
 }
 void rotate_left(t_player *player)
 {
-	rotate_vector(player->direction, -25);
-	// player->angle-=25;
-	player->angle -= deg_to_rad(25);
+	rotate_vector(player->direction, -5);
+	update_degree(player, -5);
 	update_scene(player);
 }
 

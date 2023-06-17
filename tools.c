@@ -9,11 +9,7 @@ int ft_ext(t_vars *vars)
 
 float 	deg_to_rad(float angle)
 {
-	// if (angle < 0)
-	// 	angle += 360;
-	// else if (angle >= 360)
-	// 	angle -= 360;
-    angle = (angle * PI / 180);
+    angle = (angle * M_PI / 180);
 	return (angle);
 }
 
@@ -177,6 +173,6 @@ void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
