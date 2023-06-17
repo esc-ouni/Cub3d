@@ -6,9 +6,9 @@ void update_scene(t_player *player)
 
 	p_img = draw_2d_map(player);
 	p_img = draw_player(player, p_img);
-	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 	p_img = cast_rays(player, p_img);
-	// mlx_clear_window(player->vars->mlx, player->vars->win);
+	mlx_clear_window(player->vars->mlx, player->vars->win);
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 }
 
 int check_collision(t_player *player, int x, int y)

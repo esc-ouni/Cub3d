@@ -2,17 +2,18 @@
 
 void draw_ray(t_player *player, t_data *p_img, int color)
 {
-    t_ray *ray;
-    ray = NULL;
+    // t_ray *ray;
+    // ray = NULL;
     
-    ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
+    // ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
 
-    ray->p_x = player->p_x;
-    ray->p_y = player->p_y;
+    // ray->p_x = player->p_x;
+    // ray->p_y = player->p_y;
 
-    ray->angle = player->angle;
+    // ray->angle = player->angle;
     // ray->direction = player->direction;
 
+    int i = 0;
 
     int x1 = (int)player->p_x;
     int y1 = (int)player->p_y;
@@ -30,21 +31,21 @@ void draw_ray(t_player *player, t_data *p_img, int color)
     float x = x1;
     float y = y1;
 
-    for (int i = 0; i < steps; i++)
+    while ( i < steps && check_collision(player, (int)x - player->p_x, (int)y - player->p_y))
     {
 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;
+        i++;
     }
-    ray->p_x = player->p_x;
-    ray->p_y = player->p_y;
+    // ray->p_x = player->p_x;
+    // ray->p_y = player->p_y;
 
-	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-    printf("player angle :%f\n",  player->angle);
-    printf("ray    angle :%f\n\n",  ray->angle);
-    find_horizontal_iterset(player, ray);
-    find_vertical_iterset(player, ray);
-    printf("\n");
+    // printf("player angle :%f\n",  player->angle);
+    // printf("ray    angle :%f\n\n",  ray->angle);
+    // find_horizontal_iterset(player, ray);
+    // find_vertical_iterset(player, ray);
+    // printf("\n");
 }
 
 t_data 	*cast_rays(t_player *player, t_data *p_img)
@@ -58,13 +59,13 @@ t_data 	*cast_rays(t_player *player, t_data *p_img)
 	tmpy = player->direction->y;
 
     draw_ray(player, p_img, RED);
-    // rotate_vector(player->direction, -30);
-    // while (k < 600)
-    // {
-    //     rotate_vector(player->direction, 0.1);
-    //     draw_ray(player, p_img, BLUE);
-    //     k++;
-    // }
+    rotate_vector(player->direction, -30);
+    while (k < 320)
+    {
+        rotate_vector(player->direction, 0.1875);
+        draw_ray(player, p_img, BLUE);
+        k++;
+    }
 	player->direction->x = tmpx;
 	player->direction->y = tmpy;
 	return (p_img);
