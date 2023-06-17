@@ -129,7 +129,8 @@ t_data 		*cast_rays(t_player *player, t_data *p_img);
 void 		draw_ray(t_player *player, t_data *p_img, int color);
 void 		rotate_vector(t_vector *direction, float angle);
 int 		mouse_movement(int x, int y, t_player *player);
-t_vector 	*find_horizontal_iterset(t_player *player, t_ray *ray);
+t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
+t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
 
 void	debug(void);

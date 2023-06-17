@@ -23,9 +23,8 @@ void update_scene(t_player *player)
 
 	p_img = draw_2d_map(player);
 	p_img = draw_player(player, p_img);
-	// angle_of_the_vector(player);
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 	p_img = cast_rays(player, p_img);
-	// mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 	// mlx_clear_window(player->vars->mlx, player->vars->win);
 }
 
@@ -76,13 +75,16 @@ void move_down(t_player *player)
 void rotate_right(t_player *player)
 {
 	rotate_vector(player->direction, 25);
-	player->angle+=25;
+	// player->angle+=25;
+	// player->angle = deg_to_rad(player->angle);
+	player->angle += deg_to_rad(25);
 	update_scene(player);
 }
 void rotate_left(t_player *player)
 {
 	rotate_vector(player->direction, -25);
-	player->angle-=25;
+	// player->angle-=25;
+	player->angle -= deg_to_rad(25);
 	update_scene(player);
 }
 

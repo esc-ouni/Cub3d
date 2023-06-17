@@ -9,23 +9,19 @@ int ft_ext(t_vars *vars)
 
 float 	deg_to_rad(float angle)
 {
-	if (angle < 0)
-		angle += 360;
-	else if (angle >= 360)
-		angle -= 360;
+	// if (angle < 0)
+	// 	angle += 360;
+	// else if (angle >= 360)
+	// 	angle -= 360;
     angle = (angle * PI / 180);
 	return (angle);
 }
 
 void rotate_vector(t_vector *direction, float angle)
 {
-	if (angle < 0)
-		angle += 360;
-	else if (angle >= 360)
-		angle -= 360;
-    float rad_angle = (angle * PI / 180);
-    float cos_angle = cos(rad_angle);
-    float sin_angle = sin(rad_angle);
+	angle = deg_to_rad(angle);
+    float cos_angle = cos(angle);
+    float sin_angle = sin(angle);
 
     float new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
     float new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));

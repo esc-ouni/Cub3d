@@ -36,8 +36,16 @@ void draw_ray(t_player *player, t_data *p_img, int color)
         x += x_inc;
         y += y_inc;
     }
+    ray->p_x = player->p_x;
+    ray->p_y = player->p_y;
+    ray->direction = player->direction;
+    ray->angle = player->angle;
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-    find_horizontal_iterset(player, ray);
+    // find_horizontal_iterset(player, ray);
+    printf("player angle :%f\n",  player->angle);
+    printf("ray    angle :%f\n\n",  ray->angle);
+    find_vertical_iterset(player, ray);
+    printf("\n");
 }
 
 t_data 	*cast_rays(t_player *player, t_data *p_img)
@@ -68,30 +76,71 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 	t_vector *vector;
     int i = 0;
     float    stepy = BLOCK;
-    float    stepx = (stepy / tan(ray->angle));
+    float    stepx = (stepy / tan(player->angle));
 
     int f, j, k, x, y;
 	vector = NULL;
 
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
 	vector->y = (int)player->p_y;
-	vector->x = player->p_x + ((player->p_y - (int)player->p_y) / tan(ray->angle));
+	vector->x = player->p_x + ((player->p_y - vector->y) / tan(player->angle));
     while (i < 5)
     {
 	    // debug();
-        printf("horizontal inersect, x : %d, y : %d\n", (int)(vector->x), (int)(vector->y));
+        printf("Horizontal inersect, x : %d, y : %d\n", (int)(vector->x), (int)(vector->y));
 
         f = -5;
         j = -5; 
         k = 0; 
 
-        x = (int)player->p_x;
-        y = (int)player->p_y;
+        x = player->p_x;
+        y = player->p_y;
         while(f < 5)
         {
             while(j < 5)
             {
-                mlx_pixel_put(player->vars->mlx, player->vars->win, (int)(vector->x) + f, (int)(vector->y) + j, BLUE);
+                mlx_pixel_put(player->vars->mlx, player->vars->win, (vector->x) + f, (vector->y) + j, BLUE);
+                j++;
+            }
+            f++;
+            j = -5;
+        }
+        vector->x += stepx;
+        vector->y += stepy;
+        i++;
+    }
+    return (vector);
+}
+
+t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
+{
+	t_vector *vector;
+    int i = 0;
+    float    stepx = BLOCK;
+    float    stepy = (stepx * tan(player->angle));
+
+    int f, j, k, x, y;
+	vector = NULL;
+
+	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
+	vector->x = (int)player->p_x + 1;
+	vector->y = fabs(player->p_y - ((vector->x - player->p_x) * tan (player->angle)));
+    while (i < 5)
+    {
+	    // debug();
+        printf("Vertical inersect, x : %d, y : %d\n", (int)(vector->x), (int)(vector->y));
+
+        f = -5;
+        j = -5; 
+        k = 0; 
+
+        x = player->p_x;
+        y = player->p_y;
+        while(f < 5)
+        {
+            while(j < 5)
+            {
+                mlx_pixel_put(player->vars->mlx, player->vars->win, (vector->x) + f, (vector->y) + j, BLUE);
                 j++;
             }
             f++;
