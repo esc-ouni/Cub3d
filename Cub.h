@@ -15,7 +15,7 @@
 
 #define WIDTH 1800
 #define HEIGHT 700
-#define BLOCK 50
+#define BLOCK 15
 #define PI 3.14159265
 
 #define BLACK 0x00000000

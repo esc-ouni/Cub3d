@@ -1,4 +1,49 @@
 #include "Cub.h"
+t_data 	*draw_3d_wall(t_player *player, t_data *p_img, int x, int heigh)
+{
+    int wall_height;
+    int start;
+    int end;
+    int color = 0xFFFFFF; // white color
+
+    wall_height = (int)(HEIGHT / heigh);
+    start = -wall_height / 2 + HEIGHT / 2;
+    if (start < 0)
+        start = 0;
+    end = wall_height / 2 + HEIGHT / 2;
+    if (end >= HEIGHT)
+        end = HEIGHT - 1;
+    while (start < end)
+    {
+        // my_mlx_pixel_put(p_img, x, start, color);
+		mlx_pixel_put(player->vars->mlx, player->vars->win, x, start, BLUE);
+        start++;
+    }
+	// return (p_img);
+}
+
+t_data 	*draw_3d_map(t_player *player, t_data *p_img)
+{
+	int i = 0;
+	float  k = 4;
+	while (i <= 400)
+	{
+    	draw_3d_wall(player, p_img, i, 3);
+		i++;
+	}
+	while (i < 1000)
+	{
+    	draw_3d_wall(player, p_img, i, 10);
+		i++;
+	}
+	while (i < 1800)
+	{
+    	draw_3d_wall(player, p_img, i, 3);
+		i++;
+	}
+	// return (p_img);
+}
+
 
 void update_scene(t_player *player)
 {
@@ -7,8 +52,10 @@ void update_scene(t_player *player)
 	p_img = draw_2d_map(player);
 	p_img = draw_player(player, p_img);
 	p_img = cast_rays(player, p_img);
-	mlx_clear_window(player->vars->mlx, player->vars->win);
-	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
+	p_img = draw_3d_map(player, p_img);
+	// draw_3d_wall(player, p_img, 500);
+	// mlx_clear_window(player->vars->mlx, player->vars->win);
+	// mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 }
 
 int check_collision(t_player *player, int x, int y)

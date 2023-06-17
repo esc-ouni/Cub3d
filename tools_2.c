@@ -17,8 +17,8 @@ void draw_ray(t_player *player, t_data *p_img, int color)
 
     int x1 = (int)player->p_x;
     int y1 = (int)player->p_y;
-    int x2 = (int)(player->p_x + player->direction->x * 200);
-    int y2 = (int)(player->p_y + player->direction->y * 200);
+    int x2 = (int)(player->p_x + player->direction->x * 100);
+    int y2 = (int)(player->p_y + player->direction->y * 100);
 
     float dx = x2 - x1;
     float dy = y2 - y1;
