@@ -6,6 +6,17 @@ int ft_ext(t_vars *vars)
 	ft_collectorclear(vars->collector, ALL);
 	exit(0);
 }
+
+float 	deg_to_rad(float angle)
+{
+	if (angle < 0)
+		angle += 360;
+	else if (angle >= 360)
+		angle -= 360;
+    angle = (angle * PI / 180);
+	return (angle);
+}
+
 void rotate_vector(t_vector *direction, float angle)
 {
 	if (angle < 0)

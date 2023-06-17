@@ -2,10 +2,22 @@
 
 void draw_ray(t_player *player, t_data *p_img, int color)
 {
+    t_ray *ray;
+    ray = NULL;
+    
+    ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
+
+    ray->p_x = player->p_x;
+    ray->p_y = player->p_y;
+
+    ray->angle = deg_to_rad(player->angle);
+    // ray->direction = player->direction;
+
+
     int x1 = (int)player->p_x;
     int y1 = (int)player->p_y;
-    int x2 = (int)(player->p_x + player->direction->x * 150);
-    int y2 = (int)(player->p_y + player->direction->y * 150);
+    int x2 = (int)(player->p_x + player->direction->x * 200);
+    int y2 = (int)(player->p_y + player->direction->y * 200);
 
     float dx = x2 - x1;
     float dy = y2 - y1;
@@ -24,6 +36,8 @@ void draw_ray(t_player *player, t_data *p_img, int color)
         x += x_inc;
         y += y_inc;
     }
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
+    find_horizontal_iterset(player, ray);
 }
 
 t_data 	*cast_rays(t_player *player, t_data *p_img)
@@ -37,24 +51,55 @@ t_data 	*cast_rays(t_player *player, t_data *p_img)
 	tmpy = player->direction->y;
 
     draw_ray(player, p_img, RED);
-    rotate_vector(player->direction, -30);
-    while (k < 600)
-    {
-        rotate_vector(player->direction, 0.1);
-        draw_ray(player, p_img, BLUE);
-        k++;
-    }
+    // rotate_vector(player->direction, -30);
+    // while (k < 600)
+    // {
+    //     rotate_vector(player->direction, 0.1);
+    //     draw_ray(player, p_img, BLUE);
+    //     k++;
+    // }
 	player->direction->x = tmpx;
 	player->direction->y = tmpy;
 	return (p_img);
 }
 
-t_vector *find_horizontal_iterset(t_player *player)
+t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
+    int i = 0;
+    float    stepy = BLOCK;
+    float    stepx = (stepy / tan(ray->angle));
 
+    int f, j, k, x, y;
 	vector = NULL;
+
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
 	vector->y = (int)player->p_y;
-	vector->x = (int)player->p_y;
+	vector->x = player->p_x + ((player->p_y - (int)player->p_y) / tan(ray->angle));
+    while (i < 5)
+    {
+	    // debug();
+        printf("horizontal inersect, x : %d, y : %d\n", (int)(vector->x), (int)(vector->y));
+
+        f = -5;
+        j = -5; 
+        k = 0; 
+
+        x = (int)player->p_x;
+        y = (int)player->p_y;
+        while(f < 5)
+        {
+            while(j < 5)
+            {
+                mlx_pixel_put(player->vars->mlx, player->vars->win, (int)(vector->x) + f, (int)(vector->y) + j, BLUE);
+                j++;
+            }
+            f++;
+            j = -5;
+        }
+        vector->x += stepx;
+        vector->y += stepy;
+        i++;
+    }
+    return (vector);
 }
