@@ -1,17 +1,17 @@
 #include "Cub.h"
 
-void draw_ray(t_player *player, t_data *p_img, int color)
+t_ray *draw_ray(t_player *player, t_data *p_img, int color)
 {
-    // t_ray *ray;
-    // ray = NULL;
+    t_ray *ray;
+    ray = NULL;
     
-    // ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
+    ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
 
-    // ray->p_x = player->p_x;
-    // ray->p_y = player->p_y;
+    ray->p_x = player->p_x;
+    ray->p_y = player->p_y;
 
-    // ray->angle = player->angle;
-    // ray->direction = player->direction;
+    ray->angle = player->angle;
+    ray->direction = player->direction;
 
     int i = 0;
 
@@ -38,7 +38,10 @@ void draw_ray(t_player *player, t_data *p_img, int color)
         y += y_inc;
         i++;
     }
-    // ray->p_x = player->p_x;
+    ray->length = i - 30;
+    if (ray->length <= 0)
+        ray->length = 1;
+    // printf ("%d\n", i);
     // ray->p_y = player->p_y;
 
     // printf("player angle :%f\n",  player->angle);
@@ -46,9 +49,10 @@ void draw_ray(t_player *player, t_data *p_img, int color)
     // find_horizontal_iterset(player, ray);
     // find_vertical_iterset(player, ray);
     // printf("\n");
+    return (ray);
 }
 
-t_data 	*cast_rays(t_player *player, t_data *p_img)
+t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray **rays)
 {
 	int k = 0;
 	float tmpx;
@@ -60,12 +64,13 @@ t_data 	*cast_rays(t_player *player, t_data *p_img)
 
     draw_ray(player, p_img, RED);
     rotate_vector(player->direction, -30);
-    while (k < 320)
+    while (k < 800)
     {
-        rotate_vector(player->direction, 0.1875);
-        draw_ray(player, p_img, BLUE);
+        rotate_vector(player->direction, 0.075);
+        rays[k] = draw_ray(player, p_img, BLUE);
         k++;
     }
+    rays[k] = NULL;
 	player->direction->x = tmpx;
 	player->direction->y = tmpy;
 	return (p_img);
