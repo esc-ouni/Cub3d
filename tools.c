@@ -173,6 +173,6 @@ void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }

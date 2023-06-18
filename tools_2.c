@@ -6,8 +6,6 @@ void draw_point(t_player *player, int x, int y)
 
     i = -2;
     j = -2; 
-    // x = player->p_x;
-    // y = player->p_y;
     while (i < 4)
     {
         while(i < 2)
@@ -33,7 +31,6 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
 
     ray->p_x = player->p_x;
     ray->p_y = player->p_y;
-
     ray->angle = player->angle;
     ray->direction = player->direction;
 
@@ -66,8 +63,10 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
     if (ray->length <= 0)
         ray->length = 1;
 
+    // printf("angle : %f, p_x : %f, p_y : %f\n", player->angle, player->p_x, player->p_y);
     find_horizontal_iterset(player, ray);
-    find_vertical_iterset(player, ray);
+    // find_vertical_iterset(player, ray);
+    printf("\n\n");
     return (ray);
 }
 
@@ -106,8 +105,9 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
     if ((ray->angle >= 0 && ray->angle <= M_PI))
     {
-        vector->y = (int)player->p_y;
-        vector->x = player->p_x + ((player->p_y - vector->y) / tan(player->angle));
+        vector->y = (floor(player->p_y / BLOCK) * BLOCK);
+        vector->x = player->p_x + (player->p_y - vector->y) / tan(player->angle);
+        printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
         while (i < 5)
         {
             draw_point(player, vector->x, vector->y);
@@ -119,8 +119,9 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
     }
     else
     {
-        vector->y = (int)player->p_y + 1;
-        vector->x = player->p_x + ((player->p_y - vector->y) / tan(player->angle));
+        vector->y = floor(player->p_y / BLOCK) * BLOCK + BLOCK;
+        vector->x = player->p_x + (player->p_y - vector->y) / tan(player->angle);   
+        printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
         while (i < 5)
         {
             draw_point(player, vector->x, vector->y);
