@@ -15,11 +15,11 @@ t_data 	*draw_3d_wall(t_player *player, t_data *p_img, int x, int heigh)
         end = HEIGHT - 1;
     while (start < end)
     {
-        // my_mlx_pixel_put(p_img, x, start, color);
-		mlx_pixel_put(player->vars->mlx, player->vars->win, x, start, BLUE);
+        my_mlx_pixel_put(p_img, x, start, color);
+		// mlx_pixel_put(player->vars->mlx, player->vars->win, x, start, BLUE);
         start++;
     }
-	// return (p_img);
+	return (p_img);
 }
 
 t_data 	*draw_3d_map(t_player *player, t_data *p_img)
@@ -28,20 +28,20 @@ t_data 	*draw_3d_map(t_player *player, t_data *p_img)
 	float  k = 4;
 	while (i <= 400)
 	{
-    	draw_3d_wall(player, p_img, i, 3);
+    	p_img = draw_3d_wall(player, p_img, i, 3);
 		i++;
 	}
 	while (i < 1000)
 	{
-    	draw_3d_wall(player, p_img, i, 10);
+    	p_img = draw_3d_wall(player, p_img, i, 10);
 		i++;
 	}
 	while (i < 1800)
 	{
-    	draw_3d_wall(player, p_img, i, 3);
+    	p_img = draw_3d_wall(player, p_img, i, 3);
 		i++;
 	}
-	// return (p_img);
+	return (p_img);
 }
 
 
@@ -53,9 +53,9 @@ void update_scene(t_player *player)
 	p_img = draw_player(player, p_img);
 	p_img = cast_rays(player, p_img);
 	p_img = draw_3d_map(player, p_img);
-	// draw_3d_wall(player, p_img, 500);
-	// mlx_clear_window(player->vars->mlx, player->vars->win);
-	// mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
+
+	mlx_clear_window(player->vars->mlx, player->vars->win);
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 }
 
 int check_collision(t_player *player, int x, int y)
@@ -115,14 +115,14 @@ void	update_degree(t_player *player, float deg_angle)
 
 void rotate_right(t_player *player)
 {
-	rotate_vector(player->direction, 5);
-	update_degree(player, 5);
+	rotate_vector(player->direction, 15);
+	update_degree(player, 15);
 	update_scene(player);
 }
 void rotate_left(t_player *player)
 {
-	rotate_vector(player->direction, -5);
-	update_degree(player, -5);
+	rotate_vector(player->direction, -15);
+	update_degree(player, -15);
 	update_scene(player);
 }
 
