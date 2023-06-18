@@ -1,10 +1,10 @@
 #include "Cub.h"
-t_data 	*draw_3d_wall(t_player *player, t_data *p_img, int x, int heigh)
+t_data 	*draw_3d_wall(t_player *player, t_data *p_img, float x, float heigh)
 {
-    int wall_height;
-    int start;
-    int end;
-    int color = 0xFFFFFF; // white color
+    float wall_height;
+    float start;
+    float end;
+    float color = 0x00FFFFFF - heigh; // white color
 
     wall_height = (int)(HEIGHT / heigh);
     start = -wall_height / 2 + HEIGHT / 2;
@@ -15,7 +15,7 @@ t_data 	*draw_3d_wall(t_player *player, t_data *p_img, int x, int heigh)
         end = HEIGHT - 1;
     while (start < end)
     {
-        my_mlx_pixel_put(p_img, x, start, color);
+        my_mlx_pixel_put(p_img, (int)x, (int)start, color);
         start++;
     }
 	return (p_img);
@@ -25,7 +25,7 @@ t_data 	*draw_3d_map(t_player *player, t_data *p_img, t_ray **ray)
 {
 	int i = 0;
 
-	while (i < 800 && ray)
+	while (i < WIDTH && ray)
 	{
     	p_img = draw_3d_wall(player, p_img, i, ray[i]->length);
 		i++;
@@ -40,7 +40,7 @@ void update_scene(t_player *player)
 	t_ray  **ray;
 
 	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray *) * 800) + 1, ray, NTMP);
+	ray = h_malloc(player->vars->collector, (sizeof(t_ray *) * WIDTH) + 1, ray, NTMP);
 	p_img = draw_2d_map(player);
 	p_img = draw_player(player, p_img);
 	p_img = cast_rays(player, p_img, ray);

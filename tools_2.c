@@ -64,9 +64,9 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray **rays)
 
     draw_ray(player, p_img, RED);
     rotate_vector(player->direction, -30);
-    while (k < 800)
+    while (k < WIDTH)
     {
-        rotate_vector(player->direction, 0.075);
+        rotate_vector(player->direction, 0.03);
         rays[k] = draw_ray(player, p_img, BLUE);
         k++;
     }

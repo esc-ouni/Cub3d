@@ -13,8 +13,8 @@
 #define SOUTH 270
 #define WEST  180
 
-#define WIDTH 800
-#define HEIGHT 400
+#define WIDTH 1800
+#define HEIGHT 900
 #define BLOCK 8
 #define PI 3.14159265
 
