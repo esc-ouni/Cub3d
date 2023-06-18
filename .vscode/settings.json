@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "cub.h": "c"
+        "cub.h": "c",
+        "iosfwd": "c",
+        "iterator": "c"
     }
 }

@@ -139,8 +139,8 @@ t_player *init(int argc, char const *argv[])
 	player->direction = NULL;
 	player->vars = vars;
 	player->direction = h_malloc(&collector, sizeof(t_vector), player->direction, NTMP);
-	player->p_x = ((10*36)/2);
-	player->p_y = ((10*14)/2);
+	player->p_x = (WIDTH/2);
+	player->p_y = (HEIGHT/2);
 	player->direction->x = 1;
 	player->direction->y = 0;
 	return (player);

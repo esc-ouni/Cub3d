@@ -14,8 +14,8 @@
 #define WEST  180
 
 #define WIDTH 1800
-#define HEIGHT 900
-#define BLOCK 8
+#define HEIGHT 700
+#define BLOCK 50
 #define PI 3.14159265
 
 #define BLACK 0x00000000
