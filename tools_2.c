@@ -38,7 +38,7 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
         y += y_inc;
         i++;
     }
-    ray->length = i - 30;
+    ray->length = sqrt((fabs(x - player->p_x) * fabs(x - player->p_x)) + fabs(y - player->p_y) * fabs(y - player->p_y)) - 14;
     if (ray->length <= 0)
         ray->length = 1;
     // printf ("%d\n", i);
