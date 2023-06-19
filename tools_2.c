@@ -64,8 +64,8 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
     //     ray->length = 1;
 
     // printf("angle : %f, p_x : %f, p_y : %f\n", player->angle, player->p_x, player->p_y);
-    find_horizontal_iterset(player, ray);
-    // find_vertical_iterset(player, ray);
+    // find_horizontal_iterset(player, ray);
+    find_vertical_iterset(player, ray);
     printf("\n\n");
     return (ray);
 }
@@ -98,13 +98,15 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
     int i = 0;
-    float    stepy = BLOCK;
-    float    stepx = (stepy / tan(ray->angle));
+    float    stepy;
+    float    stepx;
 
 	vector = NULL;
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
     if ((ray->angle > 0 && ray->angle < M_PI))
     {
+        stepy = BLOCK;
+        stepx = (stepy / tan(ray->angle));
         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
         vector->x = player->p_x + ((vector->y - player->p_y) / tan(ray->angle));
         printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);
@@ -119,7 +121,8 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
     }
     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
     {
-        stepx = (stepy / tan((2 * M_PI) - ray->angle));
+        stepy = -BLOCK;
+        stepx = (BLOCK / tan((2 * M_PI) - ray->angle));
         vector->y = floor(player->p_y / BLOCK) * BLOCK ;
         vector->x = player->p_x + (player->p_y - vector->y) / tan((2 * M_PI) - ray->angle);   
         printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
@@ -127,7 +130,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
         {
             draw_point(player, vector->x, vector->y);
             vector->x += stepx;
-            vector->y -= stepy;
+            vector->y += stepy;
             i++;
         }
         return (NULL);
@@ -139,15 +142,17 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
     int i = 0;
-    float    stepx = BLOCK;
-    float    stepy = (stepx * tan(player->angle));
+    float    stepx;
+    float    stepy;
 
 	vector = NULL;
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
-    if ((ray->angle >= 0 && ray->angle <= (M_PI / 2)) ||(ray->angle >= 4.71 && ray->angle <= 7 ))
+    if ((ray->angle >= 0 && ray->angle < (M_PI / 2)) || (ray->angle > 3 * (M_PI / 2) && ray->angle <= 2 * M_PI))
     {
-        vector->x = (int)player->p_x + 1;
-        vector->y = player->p_y - ((vector->x - player->p_x) * tan (player->angle));
+        stepx = BLOCK;
+        stepy = stepx * tan(ray->angle);
+        vector->x = (ceil(ray->p_x/ BLOCK) * BLOCK);
+        vector->y = ray->p_y + ((vector->x - ray->p_x) * tan(ray->angle));
         while (i < 5)
         {
             draw_point(player, vector->x, vector->y);
@@ -157,17 +162,19 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
         }
         return NULL;
     }
-    else
+    else if ((ray->angle > (M_PI / 2)) || (ray->angle < 3 * (M_PI / 2)))
     {
-        vector->x = (int)player->p_x;
-        vector->y = player->p_y - ((vector->x - player->p_x) * tan (player->angle));
+        stepx = ;
+        stepy = ;
+        vector->x = ;
+        vector->y = ;
         while (i < 5)
         {
             draw_point(player, vector->x, vector->y);
-            vector->x -= stepx;
-            vector->y -= stepy;
+            vector->x += stepx;
+            vector->y += stepy;
             i++;
-        }  
+        }
         return NULL;
     }
     return (vector);
