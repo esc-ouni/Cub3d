@@ -50,6 +50,21 @@ void update_scene(t_player *player)
 
 }
 
+int check_collision_v2(t_player *player, int x, int y)
+{
+	int m_y = ((y)/BLOCK);
+	int m_x = ((x)/BLOCK);
+
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);    
+	if (m_x < 0|| m_y < 0)
+		return 0;
+	if (m_x > 35|| m_y > 14)
+		return 0;
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
 int check_collision(t_player *player, int x, int y)
 {
 	int m_y = ((player->p_y + y)/BLOCK);
@@ -154,7 +169,7 @@ void	draw_wall(t_data *mapp, int x, int y)
 	{
 		while(j + 1 < BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
 			j++;
 		}
 		i++;
@@ -173,9 +188,9 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	{
 		while(j + 1< BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			if(j == (BLOCK - 1))
-				my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+				my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
 			j++;
 		}
 		i++;
