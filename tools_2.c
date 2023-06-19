@@ -117,20 +117,21 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
         }
         return (NULL);
     }
-    // else
-    // {
-    //     vector->y = floor(player->p_y / BLOCK) * BLOCK + BLOCK;
-    //     vector->x = player->p_x + (player->p_y - vector->y) / tan(player->angle);   
-    //     printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
-    //     while (i < 5)
-    //     {
-    //         draw_point(player, vector->x, vector->y);
-    //         vector->x += stepx;
-    //         vector->y -= stepy;
-    //         i++;
-    //     }
-    //     return (NULL);
-    // }
+    else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
+    {
+        stepx = (stepy / tan((2 * M_PI) - ray->angle));
+        vector->y = floor(player->p_y / BLOCK) * BLOCK ;
+        vector->x = player->p_x + (player->p_y - vector->y) / tan((2 * M_PI) - ray->angle);   
+        printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
+        while (i < 5)
+        {
+            draw_point(player, vector->x, vector->y);
+            vector->x += stepx;
+            vector->y -= stepy;
+            i++;
+        }
+        return (NULL);
+    }
     return (vector);
 }
 
