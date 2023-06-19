@@ -59,9 +59,9 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
         y += y_inc;
         i++;
     }
-    ray->length = sqrt((fabs(x - player->p_x) * fabs(x - player->p_x)) + fabs(y - player->p_y) * fabs(y - player->p_y)) - 14;
-    if (ray->length <= 0)
-        ray->length = 1;
+    // ray->length = sqrt((fabs(x - player->p_x) * fabs(x - player->p_x)) + fabs(y - player->p_y) * fabs(y - player->p_y)) - 14;
+    // if (ray->length <= 0)
+    //     ray->length = 1;
 
     // printf("angle : %f, p_x : %f, p_y : %f\n", player->angle, player->p_x, player->p_y);
     find_horizontal_iterset(player, ray);
@@ -81,7 +81,7 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray **rays)
 	tmpy = player->direction->y;
 
     draw_ray(player, p_img, RED);
-    rotate_vector(player->direction, -30);
+    // rotate_vector(player->direction, -30);
     // while (k < WIDTH)
     // {
     //     rotate_vector(player->direction, 0.03);
@@ -99,38 +99,38 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 	t_vector *vector;
     int i = 0;
     float    stepy = BLOCK;
-    float    stepx = (stepy / tan(player->angle));
+    float    stepx = (stepy / tan(ray->angle));
 
 	vector = NULL;
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
-    if ((ray->angle >= 0 && ray->angle <= M_PI))
+    if ((ray->angle > 0 && ray->angle < M_PI))
     {
-        vector->y = (floor(player->p_y / BLOCK) * BLOCK);
-        vector->x = player->p_x + (player->p_y - vector->y) / tan(player->angle);
-        printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
+        vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
+        vector->x = player->p_x + ((vector->y - player->p_y) / tan(ray->angle));
+        printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);
         while (i < 5)
         {
             draw_point(player, vector->x, vector->y);
-            vector->x += stepx;
             vector->y += stepy;
+            vector->x += stepx;
             i++;
         }
         return (NULL);
     }
-    else
-    {
-        vector->y = floor(player->p_y / BLOCK) * BLOCK + BLOCK;
-        vector->x = player->p_x + (player->p_y - vector->y) / tan(player->angle);   
-        printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
-        while (i < 5)
-        {
-            draw_point(player, vector->x, vector->y);
-            vector->x -= stepx;
-            vector->y -= stepy;
-            i++;
-        }
-        return (NULL);
-    }
+    // else
+    // {
+    //     vector->y = floor(player->p_y / BLOCK) * BLOCK + BLOCK;
+    //     vector->x = player->p_x + (player->p_y - vector->y) / tan(player->angle);   
+    //     printf("p_x : %f, p_y : %f\n", vector->x, vector->y);
+    //     while (i < 5)
+    //     {
+    //         draw_point(player, vector->x, vector->y);
+    //         vector->x += stepx;
+    //         vector->y -= stepy;
+    //         i++;
+    //     }
+    //     return (NULL);
+    // }
     return (vector);
 }
 

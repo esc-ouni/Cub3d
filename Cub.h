@@ -105,6 +105,8 @@ typedef struct s_player
 	float		p_x;
 	float		p_y;
 	float		angle;
+	float		d_y;
+	float		d_x;
 	t_vector 	*direction;
 	t_vars	*vars;
 }		t_player;
