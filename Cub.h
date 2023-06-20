@@ -136,7 +136,7 @@ t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
 int 		check_collision_v2(t_player *player, int x, int y);
 t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
-t_ray 		*draw_ray(t_player *player, t_data *p_img, int color);
+t_ray 		*draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
 void	debug(void);
 int		ft_ext(t_vars *vars);

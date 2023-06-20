@@ -41,7 +41,7 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     float x = x1;
     float y = y1;
 
-    while ( i < steps && check_collision(player, (int)x - player->p_x, (int)y - player->p_y))
+    while ( i < 200)
     {
         mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, RED);
 		// my_mlx_pixel_put(p_img, (int)x, (int)y, color);
@@ -51,20 +51,8 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     }
 }
 
-t_ray *draw_ray(t_player *player, t_data *p_img, int color)
+t_ray *draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
-    t_ray *ray;
-    t_vector *vec;
-    t_vector *vec2;
-    ray = NULL;
-    
-    ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
-
-    ray->p_x = player->p_x;
-    ray->p_y = player->p_y;
-    ray->angle = player->angle;
-    ray->direction = player->direction;
-
 
     // ray->length = sqrt((fabs(x - player->p_x) * fabs(x - player->p_x)) + fabs(y - player->p_y) * fabs(y - player->p_y)) - 14;
     // if (ray->length <= 0)
@@ -74,32 +62,35 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
     find_horizontal_iterset(player, ray);
     // find_vertical_iterset(player, ray);
 
-    printf("\n\n");
+    // printf("\n\n");
     return (ray);
 }
 
 t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray **rays)
 {
 	int k = 0;
-	float tmpx;
-	float tmpy;
+    t_ray *ray;
+
+    ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
+    ray->p_x = player->p_x; 
+    ray->p_y = player->p_y;
+    ray->angle = player->angle;
+    ray->direction = player->direction;
 
 
-	tmpx = player->direction->x;
-	tmpy = player->direction->y;
+    draw_ray(player, p_img, RED, ray);
+    // rotate_vector(ray->direction, -30);
+    while (k < 20)
+    {
+        ray->angle = player->angle + 0.12;
+        // rotate_vector(ray->direction, 20);
+        draw_ray(player, p_img, BLUE, ray);
+        printf("\n\n ray n : %d\n", k);
+        // draw_ray(player, p_img, BLUE);
+        k++;
+    }
+    rays[k] = NULL;
 
-    draw_ray(player, p_img, RED);
-    // rotate_vector(player->direction, -30);
-    // while (k < WIDTH)
-    // {
-    //     rotate_vector(player->direction, 0.03);
-    //     draw_ray(player, p_img, RED);
-    //     // draw_ray(player, p_img, BLUE);
-    //     k++;
-    // }
-    // rays[k] = NULL;
-	player->direction->x = tmpx;
-	player->direction->y = tmpy;
 	return (p_img);
 }
 

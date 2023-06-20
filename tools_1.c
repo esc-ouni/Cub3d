@@ -78,6 +78,8 @@ int check_collision(t_player *player, int x, int y)
 
 void move_right(t_player *player)
 {
+    player->p_x += 10 * cos(player->angle);
+    player->p_y += 10 * sin(player->angle);
 	if (check_collision(player, 10, 0))
 	{
 		player->p_x += 10;
@@ -86,6 +88,8 @@ void move_right(t_player *player)
 }
 void move_left(t_player *player)
 {
+    player->p_x += 10 * cos(player->angle);
+    player->p_y += 10 * sin(player->angle);
 	if (check_collision(player, -10, 0))
 	{
 		player->p_x -= 10;
@@ -173,7 +177,7 @@ void	draw_wall(t_data *mapp, int x, int y)
 	{
 		while(j + 1 < BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			j++;
 		}
 		i++;
@@ -192,9 +196,9 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	{
 		while(j + 1< BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
 			if(j == (BLOCK - 1))
-				my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+				my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			j++;
 		}
 		i++;
