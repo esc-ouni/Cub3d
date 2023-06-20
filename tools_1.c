@@ -1,21 +1,5 @@
 #include "Cub.h"
 
-void update_scene(t_player *player)
-{
-	t_data *p_img;
-	t_ray  **ray;
-
-	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray *) * WIDTH) + 1, ray, NTMP);
-	p_img = draw_2d_map(player);
-	p_img = draw_player(player, p_img);
-	mlx_clear_window(player->vars->mlx, player->vars->win);
-	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-	p_img = cast_rays(player, p_img, ray);
-	// p_img = draw_3d_map(player, p_img, ray);
-
-}
-
 void move_right(t_player *player)
 {
     player->p_x += 10 * cos(player->angle);
