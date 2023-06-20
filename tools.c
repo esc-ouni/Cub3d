@@ -176,3 +176,50 @@ void hooks(t_player *player)
 	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
+
+int check_collision_v2(t_player *player, int x, int y)
+{
+	int m_y = ((y)/BLOCK);
+	int m_x = ((x)/BLOCK);
+
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);    
+	if (m_x < 0|| m_y < 0)
+		return 0;
+	if (m_x > 35|| m_y > 14)
+		return 0;
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
+int check_collision(t_player *player, int x, int y)
+{
+	int m_y = ((player->p_y + y)/BLOCK);
+	int m_x = ((player->p_x + x)/BLOCK);
+
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
+void draw_point(t_player *player, int x, int y)
+{
+    int i, j;
+
+    i = -2;
+    j = -2; 
+    while (i < 4)
+    {
+        while(i < 2)
+        {
+            while(j < 2)
+            {
+                mlx_pixel_put(player->vars->mlx, player->vars->win, x + i, y + j, RED);
+                j++;
+            }
+            i++;
+            j = -2;
+        }
+        i++;
+    }
+}

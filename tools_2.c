@@ -1,27 +1,5 @@
 #include "Cub.h"
 
-void draw_point(t_player *player, int x, int y)
-{
-    int i, j;
-
-    i = -2;
-    j = -2; 
-    while (i < 4)
-    {
-        while(i < 2)
-        {
-            while(j < 2)
-            {
-                mlx_pixel_put(player->vars->mlx, player->vars->win, x + i, y + j, RED);
-                j++;
-            }
-            i++;
-            j = -2;
-        }
-        i++;
-    }
-}
-
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
     int i = 0;

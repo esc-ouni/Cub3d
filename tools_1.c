@@ -1,38 +1,4 @@
 #include "Cub.h"
-t_data 	*draw_3d_wall(t_player *player, t_data *p_img, float x, float heigh)
-{
-    float wall_height;
-    float start;
-    float end;
-    float color = 0x00FFFFFF - heigh; // white color
-
-    wall_height = (int)(HEIGHT / heigh);
-    start = -wall_height / 2 + HEIGHT / 2;
-    if (start < 0)
-        start = 0;
-    end = wall_height / 2 + HEIGHT / 2;
-    if (end >= HEIGHT)
-        end = HEIGHT - 1;
-    while (start < end)
-    {
-        my_mlx_pixel_put(p_img, (int)x, (int)start, color);
-        start++;
-    }
-	return (p_img);
-}
-
-t_data 	*draw_3d_map(t_player *player, t_data *p_img, t_ray **ray)
-{
-	int i = 0;
-
-	while (i < WIDTH && ray)
-	{
-    	p_img = draw_3d_wall(player, p_img, i, ray[i]->length);
-		i++;
-	}
-	return (p_img);
-}
-
 
 void update_scene(t_player *player)
 {
@@ -50,39 +16,12 @@ void update_scene(t_player *player)
 
 }
 
-int check_collision_v2(t_player *player, int x, int y)
-{
-	int m_y = ((y)/BLOCK);
-	int m_x = ((x)/BLOCK);
-
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);    
-	if (m_x < 0|| m_y < 0)
-		return 0;
-	if (m_x > 35|| m_y > 14)
-		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
-		return (1);
-	return (0);
-}
-
-int check_collision(t_player *player, int x, int y)
-{
-	int m_y = ((player->p_y + y)/BLOCK);
-	int m_x = ((player->p_x + x)/BLOCK);
-
-	if (player->vars->map[m_y][m_x] == '0')
-		return (1);
-	return (0);
-}
-
-
 void move_right(t_player *player)
 {
     player->p_x += 10 * cos(player->angle);
     player->p_y += 10 * sin(player->angle);
 	if (check_collision(player, 10, 0))
 	{
-		player->p_x += 10;
 		update_scene(player);
 	}
 }
@@ -92,27 +31,30 @@ void move_left(t_player *player)
     player->p_y += 10 * sin(player->angle);
 	if (check_collision(player, -10, 0))
 	{
-		player->p_x -= 10;
 		update_scene(player);
 	}
 }
 void move_up(t_player *player)
 {
-    player->p_x += 10 * cos(player->angle);
-    player->p_y += 10 * sin(player->angle);
-	if (check_collision(player, 0, -10))
+	int x = 10 * cos(player->angle);
+	int y = 10 * sin(player->angle);
+
+	if (check_collision(player, x, y))
 	{
-		// player->p_y -= 10;
+		player->p_x += x;
+		player->p_y += y;
 		update_scene(player);
 	}
 }
 void move_down(t_player *player)
 {
-    player->p_x -= 10 * cos(player->angle);
-    player->p_y -= 10 * sin(player->angle);
-	if (check_collision(player, 0, 10))
+	int x = 10 * cos(player->angle);
+	int y = 10 * sin(player->angle);
+
+	if (check_collision(player, -x, -y))
 	{
-		// player->p_y += 10;
+		player->p_x -= x;
+		player->p_y -= y;
 		update_scene(player);
 	}
 }
