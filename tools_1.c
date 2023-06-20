@@ -94,17 +94,21 @@ void move_left(t_player *player)
 }
 void move_up(t_player *player)
 {
+    player->p_x += 10 * cos(player->angle);
+    player->p_y += 10 * sin(player->angle);
 	if (check_collision(player, 0, -10))
 	{
-		player->p_y -= 10;
+		// player->p_y -= 10;
 		update_scene(player);
 	}
 }
 void move_down(t_player *player)
 {
+    player->p_x -= 10 * cos(player->angle);
+    player->p_y -= 10 * sin(player->angle);
 	if (check_collision(player, 0, 10))
 	{
-		player->p_y += 10;
+		// player->p_y += 10;
 		update_scene(player);
 	}
 }

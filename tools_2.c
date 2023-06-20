@@ -71,8 +71,8 @@ t_ray *draw_ray(t_player *player, t_data *p_img, int color)
     //     ray->length = 1;
 
     // printf("angle : %f, p_x : %f, p_y : %f\n", player->angle, player->p_x, player->p_y);
-    vec = find_horizontal_iterset(player, ray);
-    vec2 = (player, ray);
+    find_horizontal_iterset(player, ray);
+    // find_vertical_iterset(player, ray);
 
     printf("\n\n");
     return (ray);
@@ -93,7 +93,8 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray **rays)
     // while (k < WIDTH)
     // {
     //     rotate_vector(player->direction, 0.03);
-    //     rays[k] = draw_ray(player, p_img, BLUE);
+    //     draw_ray(player, p_img, RED);
+    //     // draw_ray(player, p_img, BLUE);
     //     k++;
     // }
     // rays[k] = NULL;
