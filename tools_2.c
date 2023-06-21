@@ -24,7 +24,6 @@ void update_scene(t_player *player)
 	draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-
 }
 
 float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
@@ -62,16 +61,15 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
-    while (i < 360)
+    while (i < 320)
     {
         ray[i].p_x = player->p_x;
         ray[i].p_y = player->p_y;
-        ray[i].angle = up_degree(angle, 0.16);
-        angle = up_degree(angle, 0.16);
+        ray[i].angle = up_degree(angle, 0.1875);
+        angle = up_degree(angle, 0.1875);
         ray[i].length = draw_ray(player, p_img, BLUE, ray[i]);
         i++;
     }
-    // ray[i] = NULL;
     return (&(ray[0]));
 }
 
