@@ -11,44 +11,6 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     }
 }
 
-
-//##############################
-
-void    drawk_line(t_player *player, t_data *p_img, int x, int height, int color)
-{
-    int start;
-    int end;
-    int i;
-
-    start = (700 - height) / 2;
-    end = start + height;
-    i = start;
-    while (i < end)
-    {
-		my_mlx_pixel_put(p_img, 1815 + x, i, RED);
-        i++;
-    }
-}
-
-void    draw_walls(t_player *player, t_data *p_img, t_ray *ray)
-{
-    int     i;
-    float   perp_distance;
-    int     line_height;
-    int     color;
-
-    i = 0;
-    while (i < 320)
-    {
-        perp_distance = ray[i].length;
-        line_height = (int)(700 / perp_distance );
-        color = (line_height > 700 / 2) ? 0xFF0000 : 0xFFFFFF;
-        drawk_line(player, p_img, i, line_height, color);
-        i++;
-    }
-}
-
-//################################################
 void update_scene(t_player *player)
 {
 	t_data *p_img;
@@ -59,8 +21,7 @@ void update_scene(t_player *player)
 	p_img = draw_2d_map(player);
 	draw_player(player, p_img);
 	ray = cast_rays(player, p_img, ray);
-    draw_walls(player, p_img, ray);
-	// draw_3d_map(player, p_img, ray);
+	draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 
@@ -80,6 +41,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     
     v_x = fabs(player->p_x - vec1->x);
     v_y = fabs(player->p_y - vec1->y);
+
     h_x = fabs(player->p_x - vec2->x);
     h_y = fabs(player->p_y - vec2->y);
     if ( v_x < h_x || v_y < h_y)
