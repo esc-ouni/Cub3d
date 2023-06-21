@@ -16,23 +16,36 @@ void update_scene(t_player *player)
 
 }
 
-t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
+float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
 {
-    t_vector *vec1;
-    t_vector *vec2;
+    t_vector    *vec1;
+    t_vector    *vec2;
+    int         v_x;
+    int         v_y;
+    int         h_x;
+    int         h_y;
 
     vec1 = find_horizontal_iterset(player, &ray, color);
     vec2 = find_vertical_iterset(player, &ray, color);
     
-    if (fabs(player->p_x - vec1->x) < fabs(player->p_x - vec2->x) || fabs(player->p_y - vec1->y) < fabs(player->p_y - vec2->y))
+    v_x = fabs(player->p_x - vec1->x);
+    v_y = fabs(player->p_y - vec1->y);
+    h_x = fabs(player->p_x - vec2->x);
+    h_y = fabs(player->p_y - vec2->y);
+    if ( v_x < h_x || v_y < h_y)
+    {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
+        return (sqrt((ft_pow(v_x) + ft_pow(v_y))));
+    }
     else
+    {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
-    // printf("\n\n");
-    return (&ray);
+        return (sqrt((ft_pow(h_x) + ft_pow(h_y))));
+    }
+    return (10000);
 }
 
-t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
+t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
@@ -43,11 +56,11 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
         ray[i].p_y = player->p_y;
         ray[i].angle = up_degree(angle, 0.16);
         angle = up_degree(angle, 0.16);
-        draw_ray(player, p_img, BLUE, ray[i]);
+        ray[i].length = draw_ray(player, p_img, BLUE, ray[i]);
         i++;
     }
-
-	return (p_img);
+    // ray[i] = NULL;
+    return (&(ray[0]));
 }
 
 int wall_hit_hup(t_player *player, int x, int y)

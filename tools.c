@@ -254,3 +254,17 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
         i++;
     }
 }
+
+float	ft_pow(float n)
+{
+	float r;
+
+	r = n * n;
+	return (r);
+}
+float	ft_abs(float n)
+{
+	if (n < 0)
+		n = -n;
+	return (n);
+}
