@@ -21,14 +21,18 @@ t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     t_vector *vec1;
     t_vector *vec2;
 
-    printf("==HORIZONTAL:\n");
-    vec1 = find_horizontal_iterset(player, &ray, color);
+    // printf("==HORIZONTAL:\n");
+    // vec1 = find_horizontal_iterset(player, &ray, color);
     printf("\n==VERTICAL  :\n");
     vec2 = find_vertical_iterset(player, &ray, color);
-    if (vec1->x < vec2->x || vec1->y < vec2->y)
-        draw_line(player, NULL, color, (int)vec1->x, (int)vec1->y);
-    else
-        draw_line(player, NULL, color, (int)vec1->x, (int)vec1->y);
+    
+    draw_line(player, NULL, color, (int)vec2->x, (int)vec2->y);
+
+    
+    // if (vec1->x < vec2->x || vec1->y < vec2->y)
+    //     draw_line(player, NULL, color, (int)vec1->x, (int)vec1->y);
+    // else
+    //     draw_line(player, NULL, color, (int)vec2->x, (int)vec2->y);
     printf("\n\n");
     return (&ray);
 }
@@ -57,6 +61,66 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 	return (p_img);
 }
 
+int wall_hit_hup(t_player *player, int x, int y)
+{
+	int m_y = ((y)/BLOCK) - 1;
+	int m_x = ((x)/BLOCK);
+
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+	if (m_x < 0|| m_y < 0)
+		return 0;
+	if (m_x > 9|| m_y > 9)
+		return 0;
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
+int wall_hit_hdn(t_player *player, int x, int y)
+{
+	int m_y = ((y)/BLOCK);
+	int m_x = ((x)/BLOCK);
+
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+	if (m_x < 0|| m_y < 0)
+		return 0;
+	if (m_x > 9|| m_y > 9)
+		return 0;
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
+int wall_hit_vrg(t_player *player, int x, int y)
+{
+	int m_y = ((y)/BLOCK);
+	int m_x = ((x)/BLOCK);
+
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+	if (m_x < 0|| m_y < 0)
+		return 0;
+	if (m_x > 9|| m_y > 9)
+		return 0;
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
+int wall_hit_vlf(t_player *player, int x, int y)
+{
+	int m_y = ((y)/BLOCK);
+	int m_x = ((x)/BLOCK) - 1;
+
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+	if (m_x < 0|| m_y < 0)
+		return 0;
+	if (m_x > 9|| m_y > 9)
+		return 0;
+	if (player->vars->map[m_y][m_x] == '0')
+		return (1);
+	return (0);
+}
+
 t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
 {
 	t_vector *vector;
@@ -75,7 +139,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
         // printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);
         while (i < 50)
         {
-            if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
+            if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
             {
                 return (vector);
             }
@@ -94,7 +158,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
         // printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);
         while (i < 50)
         {
-            if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
+            if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
             {
                 return (vector);
             }
@@ -125,7 +189,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
         // printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);    
         while (i < 50)
         {
-            if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
+            if (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
             {
                 return (vector);
             }
@@ -143,7 +207,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
         vector->y = ray->p_y - ((vector->x - ray->p_x) * tan (2 * M_PI - ray->angle));
         while (i < 50)
         {
-            if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
+            if (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
             {
                 return (vector);
             }

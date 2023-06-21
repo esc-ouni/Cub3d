@@ -47,7 +47,7 @@ float	up_degree(float angle, float add_angle)
 {
 	add_angle = deg_to_rad(add_angle);
 	angle += add_angle;
-	if (angle > (2 * M_PI))
+	if (angle >= (2 * M_PI))
 		angle -= 2 * M_PI;
 	else if (angle < 0)
 		angle += 2 * M_PI;
@@ -58,7 +58,7 @@ void	update_degree(t_player *player, float deg_angle)
 {
 	deg_angle = deg_to_rad(deg_angle);
 	player->angle += deg_angle;
-	if (player->angle > (2 * M_PI))
+	if (player->angle >= (2 * M_PI))
 		player->angle -= 2 * M_PI;
 	else if (player->angle < 0)
 		player->angle += 2 * M_PI;
@@ -96,10 +96,10 @@ int	handler(int key, t_player *player)
 		rotate_right(player);
 	if (key == K_L)
 		rotate_left(player);
-	if (key == M_RG)
-		move_right(player);
-	if (key == M_LF)
-		move_left(player);
+	// if (key == M_RG)
+	// 	move_right(player);
+	// if (key == M_LF)
+	// 	move_left(player);
 	return(0);
 }
 
