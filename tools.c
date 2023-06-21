@@ -243,7 +243,6 @@ void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x
 
     while ( i < steps)
     {
-        // mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;

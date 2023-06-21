@@ -1,9 +1,20 @@
 #include "Cub.h"
 
-void    draw_stripe(t_player *player, t_data *p_img, t_ray *ray)
-{
+//######################
 
+int darkenColor(int color, int amount) {
+    int red = (color >> 16) & 0xFF;
+    int green = (color >> 8) & 0xFF;
+    int blue = color & 0xFF;
+
+    red = (red * (100 - amount)) / 100;
+    green = (green * (100 - amount)) / 100;
+    blue = (blue * (100 - amount)) / 100;
+
+    return (red << 16) | (green << 8) | blue;
 }
+
+//######################
 
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
@@ -11,15 +22,24 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     int     start;
     int     end;
     float   w_height;
+    int color = GREEN;
 
     while (i < 320)
     {
-        w_height = ((BLOCK * tan(deg_to_rad(30)))/ray[i].length);
+        color = GREEN;
+        w_height = ((140 / (cos(deg_to_rad(30)) * ray[i].length)) * ((320/2)/tan(deg_to_rad(30))));
 
-        start = (WIDTH - w_height) - (w_height/2);
-        end = start + w_height;
-// tbc
-        drawk_line(player, p_img, GREEN, );
+        start = (HEIGHT/2) - ((w_height)/2);
+        end = (HEIGHT/2) - ((w_height)/2) + (w_height);
+        printf("sizeof line : %f, start : %d, end : %d\n", w_height, start, end);
+        if (end > 700 || start < 0)
+        {
+            start = 0;
+            end = 700;
+        }
+
+        color = darkenColor(color, 3000/w_height);
+        drawk_line(player, p_img, color, 1810 + i, (int)start, 1810 + i, (int)end);
         i++;
     }
 }
