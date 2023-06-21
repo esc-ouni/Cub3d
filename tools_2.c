@@ -27,11 +27,11 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     while (i < 320)
     {
         color = GREEN;
-        w_height = ((140 / (cos(deg_to_rad(30)) * ray[i].length)) * ((320/2)/tan(deg_to_rad(30))));
+        w_height = ((140 / (cos(ray->angle) * ray[i].length)) * ((320/2)/tan(deg_to_rad(30))));
 
         start = (HEIGHT/2) - ((w_height)/2);
         end = (HEIGHT/2) - ((w_height)/2) + (w_height);
-        printf("sizeof line : %f, start : %d, end : %d\n", w_height, start, end);
+        // printf("sizeof line : %f, start : %d, end : %d\n", w_height, start, end);
         if (end > 700 || start < 0)
         {
             start = 0;
