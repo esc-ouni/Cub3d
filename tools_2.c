@@ -6,7 +6,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 
     while (i < 320)
     {
-        // printf("lenght of ray %d : %f\n", i, ray[i].length);
+        printf("lenght of ray %d : %f\n", i, ray[i].length);
         i++;
     }
 }
@@ -41,7 +41,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     
     v_x = fabs(player->p_x - vec1->x);
     v_y = fabs(player->p_y - vec1->y);
-
+    
     h_x = fabs(player->p_x - vec2->x);
     h_y = fabs(player->p_y - vec2->y);
     if ( v_x < h_x || v_y < h_y)
