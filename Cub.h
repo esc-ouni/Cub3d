@@ -13,11 +13,13 @@
 #define SOUTH 270
 #define WEST  180
 
-#define WIDTH 2140
+#define WIDTH 2120
 #define HEIGHT 700
 #define BLOCK 50
 #define PI 3.14159265
 
+#define F_GREY 0x00808080
+#define C_GREY 0x00404040
 #define BLACK 0x00000000
 #define GREEN 0x00008000
 #define WHITE 0x00FFFFFF

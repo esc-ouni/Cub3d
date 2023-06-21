@@ -170,6 +170,7 @@ t_data	*draw_2d_map(t_player *player)
 {
 	int		ix;
 	int		iy;
+	int		color;
 	char	**map;
 	t_data	*mapp;
 
@@ -177,6 +178,19 @@ t_data	*draw_2d_map(t_player *player)
 	ix = 0;
 	iy = 0;
 	mapp = new_image(player->vars);
+	while (ix < WIDTH)
+	{
+		color = F_GREY;
+		while (iy < HEIGHT)
+		{
+			my_mlx_pixel_put(mapp, ix, iy, color);
+			if (iy == 350)
+				color = C_GREY;
+			iy++;
+		}
+		iy = 0;
+		ix++;
+	}
 	while(map[iy])
 	{
 		while(map[iy][ix])

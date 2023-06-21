@@ -37,9 +37,8 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
             start = 0;
             end = 700;
         }
-
         color = darkenColor(color, 3000/w_height);
-        drawk_line(player, p_img, color, 1810 + i, (int)start, 1810 + i, (int)end);
+        drawk_line(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end);
         i++;
     }
 }
