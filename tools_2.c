@@ -36,7 +36,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
             start = 0;
             end = 700;
         }
-        color = darkenColor(color, 3000/w_height);
+        color = darkenColor(color, 4000/w_height);
         drawk_line(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end);
         i++;
     }
@@ -72,11 +72,11 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     vec1 = find_horizontal_iterset(player, &ray, color);
     vec2 = find_vertical_iterset(player, &ray, color);
     
-    v_x = fabs(player->p_x - vec1->x);
-    v_y = fabs(player->p_y - vec1->y);
+    v_x = ft_abs(player->p_x - vec1->x);
+    v_y = ft_abs(player->p_y - vec1->y);
     
-    h_x = fabs(player->p_x - vec2->x);
-    h_y = fabs(player->p_y - vec2->y);
+    h_x = ft_abs(player->p_x - vec2->x);
+    h_y = ft_abs(player->p_y - vec2->y);
     if ( v_x < h_x || v_y < h_y)
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);

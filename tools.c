@@ -227,9 +227,9 @@ void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x
 
     float dx = x2 - x1;
     float dy = y2 - y1;
-    float steps = fabs(dy);
-	if (fabs(dx) > fabs(dy))
-		steps = fabs(dx);
+    float steps = ft_abs(dy);
+	if (ft_abs(dx) > ft_abs(dy))
+		steps = ft_abs(dx);
     float x_inc = dx / steps;
     float y_inc = dy / steps;
 
@@ -255,9 +255,9 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 
     float dx = x2 - x1;
     float dy = y2 - y1;
-    float steps = fabs(dy);
-	if (fabs(dx) > fabs(dy))
-		steps = fabs(dx);
+    float steps = ft_abs(dy);
+	if (ft_abs(dx) > ft_abs(dy))
+		steps = ft_abs(dx);
     float x_inc = dx / steps;
     float y_inc = dy / steps;
 
