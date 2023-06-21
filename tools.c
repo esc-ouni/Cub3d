@@ -183,7 +183,7 @@ int check_collision_v2(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK);
 
-    // printf("p_x : %d, p_y : %d\n",m_x , m_y);    
+    printf("p_x : %d, p_y : %d\n",m_x , m_y);   
 	if (m_x < 0|| m_y < 0)
 		return 0;
 	if (m_x > 34|| m_y > 13)
