@@ -48,13 +48,16 @@ void update_scene(t_player *player)
 	t_ray  *ray;
 
 	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
+	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
 	p_img = draw_2d_map(player);
 	draw_player(player, p_img);
 	ray = cast_rays(player, p_img, ray);
 	draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
+    if (player->vars->last_img)
+	    mlx_destroy_image(player->vars->mlx, p_img->img_ptr);
+	player->vars->last_img = NULL;
 }
 
 float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
@@ -172,7 +175,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
     float    stepx;
 
 	vector = NULL;
-	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
+	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
     if ((ray->angle > 0 && ray->angle < M_PI))
     {
         stepy = BLOCK;
@@ -222,7 +225,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
     float    stepy;
 
 	vector = NULL;
-	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, NTMP);
+	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
     if ((ray->angle > (3 * (M_PI / 2))) && (ray->angle < 2 * (M_PI)) || ((ray->angle > 0) && (ray->angle < (M_PI / 2))))
     {
         stepx = BLOCK;

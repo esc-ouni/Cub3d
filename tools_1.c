@@ -84,7 +84,6 @@ int	handler(int key, t_player *player)
 
 	if (key == 53 || key == 17)
 	{
-		ft_destroy_all_images(player->vars);
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
@@ -178,6 +177,7 @@ t_data	*draw_2d_map(t_player *player)
 	ix = 0;
 	iy = 0;
 	mapp = new_image(player->vars);
+	player->vars->last_img = mapp;
 	while (ix < WIDTH)
 	{
 		color = F_GREY;

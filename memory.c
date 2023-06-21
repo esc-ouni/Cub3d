@@ -3,36 +3,17 @@
 t_data		*new_image(t_vars *vars)
 {
 	void			*p;
-	t_img_collector	*tmp;
-	t_img_collector	*new_node;
-	t_data		*img;
+	t_data			*img;
 
-	img = NULL;
 	img = h_malloc(vars->collector, sizeof(t_data), img, TMP);
-	new_node = NULL;
 	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-	new_node = h_malloc(vars->collector, sizeof(t_img_collector), new_node, TMP);
 	if (!p)
 	{
+		if (vars->last_img)
+			mlx_destroy_image(vars->mlx, vars->last_img->img_ptr);
 		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 29);
-		ft_destroy_all_images(vars);
 		ft_collectorclear(vars->collector, ALL);
 		exit (1);
-	}
-	new_node->img_addr = p;
-	// printf("new image : %p\n", new_node->img_addr);
-	if (!(*(vars->img_collector)))
-	{
-		*(vars->img_collector) = new_node;
-		new_node->next = NULL;
-	}
-	else
-	{
-		tmp = *(vars->img_collector);
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_node;
-		new_node->next = NULL;
 	}
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
@@ -40,28 +21,6 @@ t_data		*new_image(t_vars *vars)
 	return (img);
 }
 
-void	ft_destroy_all_images(t_vars *vars)
-{
-	t_img_collector	**collector;
-	t_img_collector	*node;
-
-	if (vars->win && vars->mlx)
-		mlx_destroy_window(vars->mlx, vars->win);
-	collector = vars->img_collector;
-	if (!(*collector) || !collector)
-		return ;
-	node = *collector;
-	while (node)
-	{
-		if (node->img_addr)
-		{
-			// printf("des image : %p\n", node->img_addr);
-			mlx_destroy_image(vars->mlx, node->img_addr);
-		}
-		node = node->next;
-	}
-	*collector = NULL;
-}
 void	debug(void)
 {
 	printf("\x1B[32m");

@@ -65,19 +65,11 @@ typedef struct s_collector
 	t_ntmp				*ntmp_cltr;
 }	t_collector;
 
-typedef struct  s_vectorr
-{
-    int x;
-    int y;
-}               t_vectorr;
-
 typedef struct  s_vector
 {
     float x;
     float y;
 }               t_vector;
-
-
 
 typedef struct s_data
 {
@@ -88,19 +80,13 @@ typedef struct s_data
 	int		endian;
 }		t_data;
 
-typedef struct s_img_collector
-{
-	void					*img_addr;
-	struct s_img_collector	*next;
-}	t_img_collector;
-
 typedef struct s_vars 
 {
 	void			*mlx;
 	void			*win;
 	char			**map;
 	t_collector 	**collector;
-	t_img_collector	**img_collector;
+	t_data 			*last_img;
 }	t_vars;
 
 typedef struct s_player
@@ -108,8 +94,6 @@ typedef struct s_player
 	float		p_x;
 	float		p_y;
 	float		angle;
-	float		d_y;
-	float		d_x;
 	t_vector 	*direction;
 	t_vars	*vars;
 }		t_player;
@@ -151,7 +135,6 @@ int		ft_ext(t_vars *vars);
 t_data	*new_image(t_vars *vars);
 void	free_tmp(t_collector **collector);
 void	free_ntmp(t_collector **collector);
-void	ft_destroy_all_images(t_vars *vars);
 void	head_alloc(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	tmp_alloc(t_collector **collector, size_t s, void **p);

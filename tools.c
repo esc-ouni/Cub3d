@@ -2,7 +2,6 @@
 
 int ft_ext(t_vars *vars)
 {
-	ft_destroy_all_images(vars);
 	ft_collectorclear(vars->collector, ALL);
 	exit(0);
 }
@@ -111,20 +110,17 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 
 t_player *init(int argc, char const *argv[])
 {
-	static t_collector *collector;
-	static t_img_collector *img_collector;
-	t_vars 		*vars;
-	t_player 	*player;
+	static t_collector	*collector;
+	t_vars 				*vars;
+	t_player 			*player;
 
 	
 	collector = NULL;
-	img_collector = NULL;
 
 	player = NULL;
 	player = h_malloc(&collector, sizeof(t_player), vars, NTMP);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
-	vars->img_collector = &img_collector;
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
@@ -132,7 +128,6 @@ t_player *init(int argc, char const *argv[])
 	if(!vars->mlx || !vars->win)
 	{
 		write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
-		ft_destroy_all_images(vars);
 		ft_collectorclear(vars->collector, ALL);
 		exit (1);
 	}
