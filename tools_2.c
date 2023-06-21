@@ -1,5 +1,54 @@
 #include "Cub.h"
 
+void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
+{
+    int i;
+
+    while (i < 320)
+    {
+        printf("lenght of ray %d : %f\n", i, ray[i].length);
+        i++;
+    }
+}
+
+
+//##############################
+
+void    drawk_line(t_player *player, t_data *p_img, int x, int height, int color)
+{
+    int start;
+    int end;
+    int i;
+
+    start = (700 - height) / 2;
+    end = start + height;
+    i = start;
+    while (i < end)
+    {
+		my_mlx_pixel_put(p_img, 1815 + x, i, RED);
+        i++;
+    }
+}
+
+void    draw_walls(t_player *player, t_data *p_img, t_ray *ray)
+{
+    int     i;
+    float   perp_distance;
+    int     line_height;
+    int     color;
+
+    i = 0;
+    while (i < 320)
+    {
+        perp_distance = ray[i].length;
+        line_height = (int)(700 / perp_distance );
+        color = (line_height > 700 / 2) ? 0xFF0000 : 0xFFFFFF;
+        drawk_line(player, p_img, i, line_height, color);
+        i++;
+    }
+}
+
+//################################################
 void update_scene(t_player *player)
 {
 	t_data *p_img;
@@ -9,10 +58,11 @@ void update_scene(t_player *player)
 	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
 	p_img = draw_2d_map(player);
 	draw_player(player, p_img);
-	cast_rays(player, p_img, ray);
+	ray = cast_rays(player, p_img, ray);
+    draw_walls(player, p_img, ray);
+	// draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-	// p_img = draw_3d_map(player, p_img, ray);
 
 }
 
@@ -35,12 +85,12 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     if ( v_x < h_x || v_y < h_y)
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
-        return (sqrt((ft_pow(v_x) + ft_pow(v_y))));
+        return (sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y))));
     }
     else
     {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
-        return (sqrt((ft_pow(h_x) + ft_pow(h_y))));
+        return (sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y))));
     }
     return (10000);
 }
