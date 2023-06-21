@@ -191,6 +191,8 @@ t_data	*draw_2d_map(t_player *player)
 		iy = 0;
 		ix++;
 	}
+	ix = 0;
+	iy = 0;
 	while(map[iy])
 	{
 		while(map[iy][ix])
