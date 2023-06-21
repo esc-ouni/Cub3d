@@ -18,13 +18,15 @@ void update_scene(t_player *player)
 
 t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
 {
-    ray.p_x = player->p_x;
-    ray.p_y = player->p_y;
-    // rotate_vector(ray.direction, ray.angle);
-    // ray.angle = player->angle;
-    printf("player->angle : %f, ray->angle : %f\n",player->angle, ray.angle);
-    find_horizontal_iterset(player, &ray, color);
-    find_vertical_iterset(player, &ray, color);
+    t_vector *vec1;
+    t_vector *vec2;
+
+    vec1 = find_horizontal_iterset(player, &ray, color);
+    vec2 = find_vertical_iterset(player, &ray, color);
+    if (vec1->x < vec2->x || vec1->y < vec2->y)
+        draw_line(player, NULL, color, (int)vec1->x, (int)vec1->y);
+    else
+        draw_line(player, NULL, color, (int)vec1->x, (int)vec1->y);
     printf("\n\n");
     return (&ray);
 }
@@ -77,14 +79,13 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
-                return NULL;
+                return (vector);
             }
             vector->y += stepy;
             vector->x += stepx;
             i++;
         }
-        return (NULL);
+        return (vector);
     }
     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
     {
@@ -97,14 +98,13 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
-                return NULL;
+                return (vector);
             }
             vector->x += stepx;
             vector->y += stepy;
             i++;
         }
-        return (NULL);
+        return (vector);
     }
     return (vector);
 }
@@ -129,8 +129,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
-                return NULL;
+                return (vector);
             }
             vector->x += stepx;
             vector->y += stepy;
@@ -148,14 +147,13 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
-                return NULL;
+                return (vector);
             }
             vector->x += stepx;
             vector->y += stepy;
             i++;
         }
-        return NULL;
+        return (vector);
     }
     return (vector);
 }
