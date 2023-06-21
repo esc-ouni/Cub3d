@@ -6,7 +6,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 
     while (i < 320)
     {
-        printf("lenght of ray %d : %f\n", i, ray[i].length);
+        // printf("lenght of ray %d : %f\n", i, ray[i].length);
         i++;
     }
 }
