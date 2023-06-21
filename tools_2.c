@@ -37,19 +37,13 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
-    ray[i].p_x = player->p_x;
-    ray[i].p_y = player->p_y;
-    ray[i].angle = player->angle;
-    draw_ray(player, p_img, BLUE, ray[i]);
-    draw_ray(player, p_img, RED, ray[i]);
-    i++;
     while (i < 360)
     {
         ray[i].p_x = player->p_x;
         ray[i].p_y = player->p_y;
         ray[i].angle = up_degree(angle, 0.16);
         angle = up_degree(angle, 0.16);
-        draw_ray(player, p_img, RED, ray[i]);
+        draw_ray(player, p_img, BLUE, ray[i]);
         i++;
     }
 
