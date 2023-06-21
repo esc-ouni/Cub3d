@@ -183,7 +183,7 @@ int check_collision_v2(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK);
 
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);    
+    // printf("p_x : %d, p_y : %d\n",m_x , m_y);    
 	if (m_x < 0|| m_y < 0)
 		return 0;
 	if (m_x > 34|| m_y > 13)
@@ -244,9 +244,9 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     float x = x1;
     float y = y1;
 
-    while ( i < 100)
+    while ( i < steps)
     {
-        mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, RED);
+        mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
 		// my_mlx_pixel_put(p_img, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;

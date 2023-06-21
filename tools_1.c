@@ -20,8 +20,8 @@ void move_left(t_player *player)
 }
 void move_up(t_player *player)
 {
-	int x = 10 * cos(player->angle);
-	int y = 10 * sin(player->angle);
+	int x = 20 * cos(player->angle);
+	int y = 20 * sin(player->angle);
 
 	if (check_collision(player, x, y))
 	{
@@ -32,8 +32,8 @@ void move_up(t_player *player)
 }
 void move_down(t_player *player)
 {
-	int x = 10 * cos(player->angle);
-	int y = 10 * sin(player->angle);
+	int x = 20 * cos(player->angle);
+	int y = 20 * sin(player->angle);
 
 	if (check_collision(player, -x, -y))
 	{
@@ -43,11 +43,22 @@ void move_down(t_player *player)
 	}
 }
 
+float	up_degree(float angle, float add_angle)
+{
+	add_angle = deg_to_rad(add_angle);
+	angle += add_angle;
+	if (angle > (2 * M_PI))
+		angle -= 2 * M_PI;
+	else if (angle < 0)
+		angle += 2 * M_PI;
+	return (angle);
+}
+
 void	update_degree(t_player *player, float deg_angle)
 {
 	deg_angle = deg_to_rad(deg_angle);
 	player->angle += deg_angle;
-	if (player->angle >= (2 * M_PI))
+	if (player->angle > (2 * M_PI))
 		player->angle -= 2 * M_PI;
 	else if (player->angle < 0)
 		player->angle += 2 * M_PI;
@@ -77,18 +88,18 @@ int	handler(int key, t_player *player)
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
+	if (key == M_UP)
+		move_up(player);
+	if (key == M_DN)
+		move_down(player);
 	if (key == K_R)
 		rotate_right(player);
 	if (key == K_L)
 		rotate_left(player);
 	if (key == M_RG)
 		move_right(player);
-	if (key == M_DN)
-		move_down(player);
 	if (key == M_LF)
 		move_left(player);
-	if (key == M_UP)
-		move_up(player);
 	return(0);
 }
 
@@ -103,7 +114,7 @@ void	draw_wall(t_data *mapp, int x, int y)
 	{
 		while(j + 1 < BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
 			j++;
 		}
 		i++;
@@ -122,9 +133,9 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	{
 		while(j + 1< BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			if(j == (BLOCK - 1))
-				my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+				my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
 			j++;
 		}
 		i++;

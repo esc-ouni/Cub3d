@@ -22,41 +22,42 @@ t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     ray.p_y = player->p_y;
     // rotate_vector(ray.direction, ray.angle);
     // ray.angle = player->angle;
-    find_horizontal_iterset(player, &ray);
-    find_vertical_iterset(player, &ray);
+    printf("player->angle : %f, ray->angle : %f\n",player->angle, ray.angle);
+    find_horizontal_iterset(player, &ray, color);
+    find_vertical_iterset(player, &ray, color);
     printf("\n\n");
     return (&ray);
 }
 
 t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
-	int k = 0;
+    float angle = player->angle - deg_to_rad(30);
+    int k = 0;
 	int i = 0;
 
     ray[i].p_x = player->p_x;
     ray[i].p_y = player->p_y;
     ray[i].angle = player->angle;
-    draw_ray(player, p_img, RED, ray[i]);
+    draw_ray(player, p_img, BLUE, ray[i]);
     i++;
-    ray[i].p_x = player->p_x;
-    ray[i].p_y = player->p_y;
-    ray[i].angle = player->angle + deg_to_rad(3);
-    draw_ray(player, p_img, RED, ray[i]);
-    // rotate_vector(ray->direction, -30);
-    // while (k < 20)
-    // {
-    //     ray->angle = player->angle + 0.12;
-    //     // rotate_vector(ray->direction, 20);
-    //     draw_ray(player, p_img, BLUE, ray);
-    //     printf("\n\n ray n : %d\n", k);
-    //     // draw_ray(player, p_img, BLUE);
-    //     k++;
-    // }
+        // ray[i].p_x = player->p_x;
+        // ray[i].p_y = player->p_y;
+        // ray[i].angle = up_degree(angle, 3);
+        // draw_ray(player, p_img, RED, ray[i]);
+    while (i < 20)
+    {
+        ray[i].p_x = player->p_x;
+        ray[i].p_y = player->p_y;
+        ray[i].angle = up_degree(angle, 3);
+        angle = up_degree(angle, 3);
+        draw_ray(player, p_img, RED, ray[i]);
+        i++;
+    }
 
 	return (p_img);
 }
 
-t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
+t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
 {
 	t_vector *vector;
     int i = 0;
@@ -76,7 +77,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, BLUE, (int)vector->x, (int)vector->y);
+                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
                 return NULL;
             }
             vector->y += stepy;
@@ -96,7 +97,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, BLUE, (int)vector->x, (int)vector->y);
+                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
                 return NULL;
             }
             vector->x += stepx;
@@ -108,7 +109,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
     return (vector);
 }
 
-t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
+t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
 {
 	t_vector *vector;
     int i = 0;
@@ -128,7 +129,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, BLUE, (int)vector->x, (int)vector->y);
+                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
                 return NULL;
             }
             vector->x += stepx;
@@ -147,7 +148,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
         {
             if (!check_collision_v2(player, (int)vector->x, (int)vector->y))
             {
-                draw_line(player, NULL, BLUE, (int)vector->x, (int)vector->y);
+                draw_line(player, NULL, color, (int)vector->x, (int)vector->y);
                 return NULL;
             }
             vector->x += stepx;
