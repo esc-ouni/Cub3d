@@ -1,12 +1,25 @@
 #include "Cub.h"
 
+void    draw_stripe(t_player *player, t_data *p_img, t_ray *ray)
+{
+
+}
+
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
-    int i;
+    int     i;
+    int     start;
+    int     end;
+    float   w_height;
 
     while (i < 320)
     {
-        printf("lenght of ray %d : %f\n", i, ray[i].length);
+        w_height = ((BLOCK * tan(deg_to_rad(30)))/ray[i].length);
+
+        start = (WIDTH - w_height) - (w_height/2);
+        end = start + w_height;
+// tbc
+        drawk_line(player, p_img, GREEN, );
         i++;
     }
 }

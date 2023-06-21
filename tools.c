@@ -226,6 +226,31 @@ void draw_point(t_player *player, int x, int y)
     }
 }
 
+void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2)
+{
+    int i = 0;
+
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float steps = fabs(dy);
+	if (fabs(dx) > fabs(dy))
+		steps = fabs(dx);
+    float x_inc = dx / steps;
+    float y_inc = dy / steps;
+
+    float x = x1;
+    float y = y1;
+
+    while ( i < steps)
+    {
+        // mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
+		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
+        x += x_inc;
+        y += y_inc;
+        i++;
+    }
+}
+
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
     int i = 0;

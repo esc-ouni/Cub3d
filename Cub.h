@@ -19,6 +19,7 @@
 #define PI 3.14159265
 
 #define BLACK 0x00000000
+#define GREEN 0x00008000
 #define WHITE 0x00FFFFFF
 #define BLUE 0x00030DFF
 #define RED 0x00FF0D03
@@ -138,6 +139,10 @@ int 		check_collision(t_player *player, int x, int y);
 void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray ray);
+
+
+void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2);
+
 
 void	debug(void);
 int		ft_ext(t_vars *vars);
