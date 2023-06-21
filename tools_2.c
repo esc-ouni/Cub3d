@@ -48,7 +48,7 @@ void update_scene(t_player *player)
 	t_ray  *ray;
 
 	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
+	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * 320) + 1, ray, TMP);
 	p_img = draw_2d_map(player);
 	draw_player(player, p_img);
 	ray = cast_rays(player, p_img, ray);
