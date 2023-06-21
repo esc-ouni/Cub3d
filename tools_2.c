@@ -21,16 +21,14 @@ t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     t_vector *vec1;
     t_vector *vec2;
 
-    printf("==HORIZONTAL:\n");
     vec1 = find_horizontal_iterset(player, &ray, color);
-    printf("\n==VERTICAL  :\n");
     vec2 = find_vertical_iterset(player, &ray, color);
     
     if (fabs(player->p_x - vec1->x) < fabs(player->p_x - vec2->x) || fabs(player->p_y - vec1->y) < fabs(player->p_y - vec2->y))
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
     else
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
-    printf("\n\n");
+    // printf("\n\n");
     return (&ray);
 }
 
@@ -49,8 +47,8 @@ t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     {
         ray[i].p_x = player->p_x;
         ray[i].p_y = player->p_y;
-        ray[i].angle = up_degree(angle, 1);
-        angle = up_degree(angle, 1);
+        ray[i].angle = up_degree(angle, 0.16);
+        angle = up_degree(angle, 0.16);
         draw_ray(player, p_img, RED, ray[i]);
         i++;
     }
@@ -63,10 +61,10 @@ int wall_hit_hup(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK) - 1;
 	int m_x = ((x)/BLOCK);
 
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 9|| m_y > 9)
+	if (m_x > 35|| m_y > 13)
 		return 0;
 	if (player->vars->map[m_y][m_x] == '0')
 		return (1);
@@ -78,10 +76,10 @@ int wall_hit_hdn(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK);
 
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 9|| m_y > 9)
+	if (m_x > 35|| m_y > 13)
 		return 0;
 	if (player->vars->map[m_y][m_x] == '0')
 		return (1);
@@ -93,10 +91,10 @@ int wall_hit_vrg(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK);
 
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 9|| m_y > 9)
+	if (m_x > 35|| m_y > 13)
 		return 0;
 	if (player->vars->map[m_y][m_x] == '0')
 		return (1);
@@ -108,10 +106,10 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK) - 1;
 
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 9|| m_y > 9)
+	if (m_x > 35|| m_y > 13)
 		return 0;
 	if (player->vars->map[m_y][m_x] == '0')
 		return (1);
