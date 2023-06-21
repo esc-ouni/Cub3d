@@ -3,58 +3,55 @@
 void update_scene(t_player *player)
 {
 	t_data *p_img;
-	t_ray  **ray;
+	t_ray  *ray;
 
 	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray *) * WIDTH) + 1, ray, NTMP);
+	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
 	p_img = draw_2d_map(player);
-	p_img = draw_player(player, p_img);
+	draw_player(player, p_img);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-	p_img = cast_rays(player, p_img, ray);
+	cast_rays(player, p_img, ray);
 	// p_img = draw_3d_map(player, p_img, ray);
 
 }
 
-t_ray *draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
+t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
 {
-
-    // ray->length = sqrt((fabs(x - player->p_x) * fabs(x - player->p_x)) + fabs(y - player->p_y) * fabs(y - player->p_y)) - 14;
-    // if (ray->length <= 0)
-    //     ray->length = 1;
-
-    // printf("angle : %f, p_x : %f, p_y : %f\n", player->angle, player->p_x, player->p_y);
-    find_horizontal_iterset(player, ray);
-    // find_vertical_iterset(player, ray);
-
-    // printf("\n\n");
-    return (ray);
+    ray.p_x = player->p_x;
+    ray.p_y = player->p_y;
+    // rotate_vector(ray.direction, ray.angle);
+    // ray.angle = player->angle;
+    find_horizontal_iterset(player, &ray);
+    find_vertical_iterset(player, &ray);
+    printf("\n\n");
+    return (&ray);
 }
 
-t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray **rays)
+t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
 	int k = 0;
-    t_ray *ray;
+	int i = 0;
 
-    ray = h_malloc(player->vars->collector, sizeof(t_ray), ray,  NTMP);
-    ray->p_x = player->p_x; 
-    ray->p_y = player->p_y;
-    ray->angle = player->angle;
-    ray->direction = player->direction;
-
-
-    draw_ray(player, p_img, RED, ray);
+    ray[i].p_x = player->p_x;
+    ray[i].p_y = player->p_y;
+    ray[i].angle = player->angle;
+    draw_ray(player, p_img, RED, ray[i]);
+    i++;
+    ray[i].p_x = player->p_x;
+    ray[i].p_y = player->p_y;
+    ray[i].angle = player->angle + deg_to_rad(3);
+    draw_ray(player, p_img, RED, ray[i]);
     // rotate_vector(ray->direction, -30);
-    while (k < 20)
-    {
-        ray->angle = player->angle + 0.12;
-        // rotate_vector(ray->direction, 20);
-        draw_ray(player, p_img, BLUE, ray);
-        printf("\n\n ray n : %d\n", k);
-        // draw_ray(player, p_img, BLUE);
-        k++;
-    }
-    rays[k] = NULL;
+    // while (k < 20)
+    // {
+    //     ray->angle = player->angle + 0.12;
+    //     // rotate_vector(ray->direction, 20);
+    //     draw_ray(player, p_img, BLUE, ray);
+    //     printf("\n\n ray n : %d\n", k);
+    //     // draw_ray(player, p_img, BLUE);
+    //     k++;
+    // }
 
 	return (p_img);
 }

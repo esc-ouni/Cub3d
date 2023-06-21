@@ -113,13 +113,11 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	float		length;
 	float		p_x;
 	float		p_y;
+	float		length;
 	float		angle;
 	t_vector 	*direction;
-	t_vars	*vars;
-	struct s_ray *next;
 }		t_ray;
 
 float 		deg_to_rad(float angle);
@@ -128,16 +126,15 @@ void		hooks(t_player *player);
 int			handler(int key, t_player *player);
 void 		update_scene(t_player *player);
 t_data		*draw_2d_map(t_player *player);
-t_data 		*cast_rays(t_player *player, t_data *p_img, t_ray **ray);
-// void 		draw_ray(t_player *player, t_data *p_img, int color);
 void 		rotate_vector(t_vector *direction, float angle);
 int 		mouse_movement(int x, int y, t_player *player);
 t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
 int 		check_collision_v2(t_player *player, int x, int y);
 t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
-t_ray 		*draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
+t_data 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
+t_ray 		*draw_ray(t_player *player, t_data *p_img, int color, t_ray ray);
 
 void	debug(void);
 int		ft_ext(t_vars *vars);
