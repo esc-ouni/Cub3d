@@ -247,8 +247,8 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 
     while ( i < steps)
     {
-        mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
-		// my_mlx_pixel_put(p_img, (int)x, (int)y, color);
+        // mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
+		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;
         i++;

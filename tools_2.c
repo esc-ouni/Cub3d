@@ -9,9 +9,9 @@ void update_scene(t_player *player)
 	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
 	p_img = draw_2d_map(player);
 	draw_player(player, p_img);
+	cast_rays(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-	cast_rays(player, p_img, ray);
 	// p_img = draw_3d_map(player, p_img, ray);
 
 }
@@ -21,42 +21,39 @@ t_ray   *draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     t_vector *vec1;
     t_vector *vec2;
 
-    // printf("==HORIZONTAL:\n");
-    // vec1 = find_horizontal_iterset(player, &ray, color);
+    printf("==HORIZONTAL:\n");
+    vec1 = find_horizontal_iterset(player, &ray, color);
     printf("\n==VERTICAL  :\n");
     vec2 = find_vertical_iterset(player, &ray, color);
     
-    draw_line(player, NULL, color, (int)vec2->x, (int)vec2->y);
-
-    
-    // if (vec1->x < vec2->x || vec1->y < vec2->y)
-    //     draw_line(player, NULL, color, (int)vec1->x, (int)vec1->y);
-    // else
-    //     draw_line(player, NULL, color, (int)vec2->x, (int)vec2->y);
+    if (fabs(player->p_x - vec1->x) < fabs(player->p_x - vec2->x) || fabs(player->p_y - vec1->y) < fabs(player->p_y - vec2->y))
+        draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
+    else
+        draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
     printf("\n\n");
     return (&ray);
 }
 
 t_data 	*cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
-    // float angle = player->angle - deg_to_rad(30);
+    float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
     ray[i].p_x = player->p_x;
     ray[i].p_y = player->p_y;
     ray[i].angle = player->angle;
-    // draw_ray(player, p_img, BLUE, ray[i]);
+    draw_ray(player, p_img, BLUE, ray[i]);
     draw_ray(player, p_img, RED, ray[i]);
-    // i++;
-    // while (i < 20)
-    // {
-    //     ray[i].p_x = player->p_x;
-    //     ray[i].p_y = player->p_y;
-    //     ray[i].angle = up_degree(angle, 3);
-    //     angle = up_degree(angle, 3);
-    //     draw_ray(player, p_img, RED, ray[i]);
-    //     i++;
-    // }
+    i++;
+    while (i < 360)
+    {
+        ray[i].p_x = player->p_x;
+        ray[i].p_y = player->p_y;
+        ray[i].angle = up_degree(angle, 1);
+        angle = up_degree(angle, 1);
+        draw_ray(player, p_img, RED, ray[i]);
+        i++;
+    }
 
 	return (p_img);
 }
