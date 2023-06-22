@@ -78,7 +78,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     
     h_x = ft_abs(player->p_x - vec2->x);
     h_y = ft_abs(player->p_y - vec2->y);
-    if ( v_x < h_x || v_y < h_y)
+    if ((v_x < h_x) || (v_y < h_y))
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         return (sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y))));

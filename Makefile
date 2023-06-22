@@ -1,5 +1,5 @@
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address
-MATH = -Oz -ffast-math
+FLAGS = -Wall -Wextra -Werror #-fsanitize=undefined,address -g
+MATH = -O3 -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all:
@@ -8,7 +8,7 @@ all:
 	clear
 
 fclean:
-	rm -rf *.o
+	rm -rf *.o *.dSYM
 	rm -rf Cub
 	clear
 

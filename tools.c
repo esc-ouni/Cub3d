@@ -133,6 +133,9 @@ t_player *init(int argc, char const *argv[])
 	}
 	player->direction = NULL;
 	player->vars = vars;
+	player->vars->last_img = NULL;
+	player->vars->last_img = h_malloc(&collector, sizeof(t_data *), player->vars->last_img, NTMP);
+	player->vars->last_img = NULL;
 	player->direction = h_malloc(&collector, sizeof(t_vector), player->direction, NTMP);
 	player->p_x = 250;
 	player->p_y = 250;
@@ -193,7 +196,7 @@ int check_collision(t_player *player, int x, int y)
 	int m_y = ((player->p_y + y)/BLOCK);
 	int m_x = ((player->p_x + x)/BLOCK);
 
-    printf("p_x : %d, p_y : %d\n",m_x , m_y);
+    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (player->vars->map[m_y][m_x] == '0')
 		return (1);
 	return (0);
