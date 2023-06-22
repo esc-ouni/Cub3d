@@ -22,6 +22,7 @@
 #define C_GREY 0x00404040
 #define BLACK 0x00000000
 #define GREEN 0x00008000
+#define V_GREEN 0x009FE2BF
 #define WHITE 0x00FFFFFF
 #define BLUE 0x00030DFF
 #define RED 0x00FF0D03
@@ -104,6 +105,7 @@ typedef struct s_ray
 	float		p_y;
 	float		length;
 	float		angle;
+	int			color;
 }		t_ray;
 
 float		ft_pow(float n);
@@ -124,7 +126,8 @@ t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
 void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
-float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray ray);
+// float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray ray);
+float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
 
 void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2);

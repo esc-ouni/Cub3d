@@ -1,7 +1,2 @@
-#recode draw ray
-#get vert horizontal intersct
 #learn how texture works
 #mange memory peak
-#mange memory peak
-
-#vald mshel

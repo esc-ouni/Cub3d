@@ -22,14 +22,13 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     int     start;
     int     end;
     float   w_height;
-    int color = GREEN;
+    int     color;
 
     i = 0;
     while (i < 320)
     {
-        color = GREEN;
+        color = ray[i].color;
         w_height = ((140 / (ray[i].length * cos(ray[i].angle - player->angle))) * ((320/2)/tan(deg_to_rad(30))));
-
         start = (HEIGHT/2) - ((w_height)/2);
         end = (HEIGHT/2) - ((w_height)/2) + (w_height);
         if (end > 700 || start < 0)
@@ -61,7 +60,7 @@ void update_scene(t_player *player)
 	player->vars->last_img = NULL;
 }
 
-float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
+float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
     t_vector    *vec1;
     t_vector    *vec2;
@@ -70,8 +69,8 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     int         h_x;
     int         h_y;
 
-    vec1 = find_horizontal_iterset(player, &ray);
-    vec2 = find_vertical_iterset(player, &ray);
+    vec1 = find_horizontal_iterset(player, ray);
+    vec2 = find_vertical_iterset(player, ray);
     
     v_x = ft_abs(player->p_x - vec1->x);
     v_y = ft_abs(player->p_y - vec1->y);
@@ -81,14 +80,19 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     if ((v_x < h_x) || (v_y < h_y))
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
-        return (sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y))));
+        ray->color = WHITE;
+        ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
+        return (0);
     }
     else
     {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
-        return (sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y))));
+        ray->color = BLACK;
+        ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
+        return (0);
     }
-    return (10000);
+    ray->length = 10000;
+    return (0);
 }
 
 t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
@@ -102,7 +106,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
         ray[i].p_y = player->p_y;
         ray[i].angle = up_degree(angle, 0.1875);
         angle = up_degree(angle, 0.1875);
-        ray[i].length = draw_ray(player, p_img, BLUE, ray[i]);
+        draw_ray(player, p_img, BLUE, &ray[i]);
         i++;
     }
     return (&(ray[0]));
