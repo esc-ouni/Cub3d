@@ -91,7 +91,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }
-    ray->length = 10000;
+    ray->length = 100000;
     return (0);
 }
 
