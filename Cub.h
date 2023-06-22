@@ -8,6 +8,10 @@
 #include <fcntl.h>
 #include "Get_next_line/get_next_line.h"
 
+#define HORZ 15
+#define VERT 17
+
+
 #define NORTH 90
 #define EAST  0
 #define SOUTH 270
@@ -107,7 +111,7 @@ typedef struct s_ray
 	float		p_y;
 	float		length;
 	float		angle;
-	int			color;
+	int			side;
 }		t_ray;
 
 float		ft_pow(float n);
@@ -128,7 +132,6 @@ t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
 void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
-// float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
 

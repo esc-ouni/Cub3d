@@ -27,7 +27,10 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     i = 0;
     while (i < 320)
     {
-        color = ray[i].color;
+        if (ray[i].side == HORZ)
+            color = WHITE;
+        else
+            color = BLACK;
         w_height = ((140 / (ray[i].length * cos(ray[i].angle - player->angle))) * ((320/2)/tan(deg_to_rad(30))));
         start = (HEIGHT/2) - ((w_height)/2);
         end = (HEIGHT/2) - ((w_height)/2) + (w_height);
@@ -80,14 +83,14 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     if ((v_x < h_x) || (v_y < h_y))
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
-        ray->color = WHITE;
+        ray->side = VERT;
         ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
         return (0);
     }
     else
     {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
-        ray->color = BLACK;
+        ray->side = HORZ;
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }
