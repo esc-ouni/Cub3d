@@ -18,30 +18,32 @@ int darkenColor(int color, int amount) {
 
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
-    // (void)p_img;
     int     i;
     int     start;
     int     end;
     float   w_height;
+    float   c;
     int     color;
+    float   d_h = HEIGHT/2;
 
+    c = ((900 * 50) / tan(deg_to_rad(30)));
     i = 0;
     while (i < 320)
     {
         if (ray[i].side == HORZ)
-            color = WHITE;
-        else
             color = BLACK;
-        w_height = ((40 / (ray[i].length * cos(ray[i].angle - player->angle))) * ((320/2)/tan(deg_to_rad(30))));
-        start = (HEIGHT/2) - ((w_height)/2);
-        end = (HEIGHT/2) - ((w_height)/2) + (w_height);
+        else
+            color = WHITE;
+        w_height = c / (ray[i].length * cos(player->angle - ray[i].angle));
+        start = d_h - (w_height/2);
+        end = start + w_height;
         if (end > 700 || start < 0)
         {
             start = 0;
             end = 700;
         }
         color = darkenColor(color, 2000/w_height);
-        draw_wall_part(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end, ray[i].tex_i);
+        draw_wall_part(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end, ray[i].tex_i, 2000/w_height);
         i++;
     }
 }
@@ -73,8 +75,8 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     int         h_x;
     int         h_y;
 
-    vec1 = find_horizontal_iterset(player, ray);
-    vec2 = find_vertical_iterset(player, ray);
+    vec1 = find_vertical_iterset(player, ray);
+    vec2 = find_horizontal_iterset(player, ray);
     
     v_x = ft_abs(player->p_x - vec1->x);
     v_y = ft_abs(player->p_y - vec1->y);
@@ -85,7 +87,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         ray->side = VERT;
-        ray->tex_i = (int)vec1->x % BLOCK;
+        ray->tex_i = (int)vec1->y % BLOCK;
         ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
         return (0);
     }
@@ -93,7 +95,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
         ray->side = HORZ;
-        ray->tex_i = (int)vec2->y % BLOCK;
+        ray->tex_i = (int)vec2->x % BLOCK;
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }
