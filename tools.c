@@ -197,13 +197,21 @@ int check_collision_v2(t_player *player, int x, int y)
 
 int check_collision(t_player *player, int x, int y)
 {
-	int m_y = ((player->p_y + y)/BLOCK);
-	int m_x = ((player->p_x + x)/BLOCK);
+	int	i = 0;
+	int m_y;
+	int m_x;
 
-	if (player->vars->map[m_y][m_x] == '0')
+	x -= 9;
+	y -= 9;
+
+	if (player->vars->map[m_y][m_x] == '0' && i < 10)
 	{
-		return (1);
+		m_y = ((player->p_y + y + i)/BLOCK);
+		m_x = ((player->p_x + x + i)/BLOCK);
+		i++;
 	}
+	if (i == 10)
+		return (1);
 	return (0);
 }
 
