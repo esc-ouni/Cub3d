@@ -113,6 +113,7 @@ typedef struct s_ray
 	float		length;
 	float		angle;
 	int			side;
+	int			tex_i;
 }		t_ray;
 
 float		ft_pow(float n);
@@ -140,6 +141,7 @@ void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x
 
 t_data	*new_image_from_xpm(t_player *player, char *file_dstination);
 
+void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index);
 
 void	debug(void);
 int 	ft_ext(t_player *player);

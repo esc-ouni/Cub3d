@@ -18,6 +18,7 @@ int darkenColor(int color, int amount) {
 
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
+    // (void)p_img;
     int     i;
     int     start;
     int     end;
@@ -40,7 +41,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
             end = 700;
         }
         color = darkenColor(color, 2000/w_height);
-        drawk_line(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end);
+        draw_wall_part(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end, ray[i].tex_i);
         i++;
     }
 }
@@ -84,6 +85,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         ray->side = VERT;
+        ray->tex_i = ((int)vec1->y % BLOCK);
         ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
         return (0);
     }
@@ -91,6 +93,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
         ray->side = HORZ;
+        ray->tex_i = ((int)vec2->x % BLOCK);
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }

@@ -27,14 +27,18 @@ void rotate_vector(t_vector *direction, float angle)
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	(void)color;
+	int i;
 	char *tmp;
 
 	tmp = data->img_addr;
 	if(!tmp)
 		exit(EXIT_FAILURE);
-	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
-	*(unsigned int *)tmp = color;
+	i = (y * data->size_line) + ((data->byte_pixel) * x);
+	// *(unsigned int *)tmp = color;
+	tmp[i] = color;
+	tmp[i+1] = color >>= 8;
+	tmp[i+2] = color >>= 8;
+	tmp[i+3] = color >>= 8;
 }
 
 char	*ft_mstrdup(t_collector **collector, char *s1)
@@ -225,11 +229,12 @@ void draw_point(t_player *player, int x, int y)
     }
 }
 
-void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2)
+void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index)
 {
-	(void)player;
     int i = 0;
 
+	(void)player;
+	(void)index;
     float dx = x2 - x1;
     float dy = y2 - y1;
     float steps = ft_abs(dy);
@@ -243,11 +248,19 @@ void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x
 
     while ( i < steps)
     {
+		// if (i < 50)
+		// {
+		// 	color = (player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index)] << 24) |
+		// 			(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 1)] << 16) |
+		// 			(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 2)] << 8) |
+		// 			player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 3)];
+		// }
 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;
         i++;
     }
+
 }
 
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
