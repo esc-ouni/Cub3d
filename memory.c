@@ -5,6 +5,7 @@ t_data		*new_image(t_vars *vars)
 	void			*p;
 	t_data			*img;
 
+	img = NULL;
 	img = h_malloc(vars->collector, sizeof(t_data), img, TMP);
 	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	if (!p)
@@ -132,7 +133,8 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 		free_ntmp(collector);
 		free((*collector));
 		(*collector) = NULL;
-		exit(0);
+		system ("leaks Cub");
+		// exit(0);
 	}
 }
 

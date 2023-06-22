@@ -116,8 +116,8 @@ t_player *init(int argc, char const *argv[])
 
 	
 	collector = NULL;
-
 	player = NULL;
+	vars = NULL;
 	player = h_malloc(&collector, sizeof(t_player), vars, NTMP);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
@@ -223,6 +223,7 @@ void draw_point(t_player *player, int x, int y)
 
 void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2)
 {
+	(void)player;
     int i = 0;
 
     float dx = x2 - x1;
@@ -249,24 +250,19 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
     int i = 0;
 
-    int x1 = (int)player->p_x;
-    int y1 = (int)player->p_y;
-
-
-    float dx = x2 - x1;
-    float dy = y2 - y1;
+    float dx = x2 - (int)player->p_x;
+    float dy = y2 - (int)player->p_y;
     float steps = ft_abs(dy);
 	if (ft_abs(dx) > ft_abs(dy))
 		steps = ft_abs(dx);
     float x_inc = dx / steps;
     float y_inc = dy / steps;
 
-    float x = x1;
-    float y = y1;
+    float x = (int)player->p_x;
+    float y = (int)player->p_y;
 
     while ( i < steps)
     {
-        // mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;
@@ -276,10 +272,7 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 
 float	ft_pow(float n)
 {
-	float r;
-
-	r = n * n;
-	return (r);
+	return (n * n);
 }
 float	ft_abs(float n)
 {

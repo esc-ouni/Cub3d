@@ -24,6 +24,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     float   w_height;
     int color = GREEN;
 
+    i = 0;
     while (i < 320)
     {
         color = GREEN;
@@ -69,8 +70,8 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray ray)
     int         h_x;
     int         h_y;
 
-    vec1 = find_horizontal_iterset(player, &ray, color);
-    vec2 = find_vertical_iterset(player, &ray, color);
+    vec1 = find_horizontal_iterset(player, &ray);
+    vec2 = find_vertical_iterset(player, &ray);
     
     v_x = ft_abs(player->p_x - vec1->x);
     v_y = ft_abs(player->p_y - vec1->y);
@@ -112,7 +113,6 @@ int wall_hit_hup(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK) - 1;
 	int m_x = ((x)/BLOCK);
 
-    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
 	if (m_x > 35|| m_y > 13)
@@ -127,7 +127,6 @@ int wall_hit_hdn(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK);
 
-    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
 	if (m_x > 35|| m_y > 13)
@@ -142,7 +141,6 @@ int wall_hit_vrg(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK);
 
-    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
 	if (m_x > 35|| m_y > 13)
@@ -157,7 +155,6 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	int m_y = ((y)/BLOCK);
 	int m_x = ((x)/BLOCK) - 1;
 
-    // printf("p_x : %d, p_y : %d\n",m_x , m_y);
 	if (m_x < 0|| m_y < 0)
 		return 0;
 	if (m_x > 35|| m_y > 13)
@@ -167,7 +164,7 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	return (0);
 }
 
-t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
+t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
     int i = 0;
@@ -182,8 +179,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
         stepx = (stepy / tan(ray->angle));
         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
         vector->x = player->p_x + ((vector->y - player->p_y) / tan(ray->angle));
-        // printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);
-        while (i < 50)
+        while (i < 36)
         {
             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
             {
@@ -201,8 +197,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
         stepx = (BLOCK / tan((2 * M_PI) - ray->angle));
         vector->y = floor(player->p_y / BLOCK) * BLOCK ;
         vector->x = player->p_x + (player->p_y - vector->y) / tan((2 * M_PI) - ray->angle);   
-        // printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);
-        while (i < 50)
+        while (i < 36)
         {
             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
             {
@@ -217,7 +212,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, int color)
     return (vector);
 }
 
-t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
+t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
     int i = 0;
@@ -226,14 +221,13 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
 
 	vector = NULL;
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
-    if ((ray->angle > (3 * (M_PI / 2))) && (ray->angle < 2 * (M_PI)) || ((ray->angle > 0) && (ray->angle < (M_PI / 2))))
+    if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle < 2 * (M_PI))) || (((ray->angle > 0) && (ray->angle < (M_PI / 2)))))
     {
         stepx = BLOCK;
         stepy = stepx * tan(ray->angle);
         vector->x = (ceil(ray->p_x/ BLOCK) * BLOCK);
         vector->y = ray->p_y + ((vector->x - ray->p_x) * tan(ray->angle));
-        // printf("angle : %f, p_x : %f, p_y : %f\n",ray->angle , vector->x, vector->y);    
-        while (i < 50)
+        while (i < 36)
         {
             if (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
             {
@@ -251,7 +245,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, int color)
         stepy = BLOCK * tan (2 * PI - ray->angle);
         vector->x = (floor(ray->p_x / BLOCK) * BLOCK);
         vector->y = ray->p_y - ((vector->x - ray->p_x) * tan (2 * M_PI - ray->angle));
-        while (i < 50)
+        while (i < 36)
         {
             if (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
             {

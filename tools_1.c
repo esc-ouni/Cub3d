@@ -80,8 +80,6 @@ void rotate_left(t_player *player)
 
 int	handler(int key, t_player *player)
 {
-	static int r = 10;
-
 	if (key == 53 || key == 17)
 	{
 		ft_collectorclear(player->vars->collector, ALL);
@@ -144,6 +142,7 @@ void	draw_nwall(t_data *mapp, int x, int y)
 
 int mouse_movement(int x, int y, t_player *player)
 {
+	(void)y;
 	static int last_pos;
 
 	if (x >= 0 && x <= WIDTH)
