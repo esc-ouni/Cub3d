@@ -229,12 +229,47 @@ void draw_point(t_player *player, int x, int y)
     }
 }
 
+// void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index)
+// {
+//     int i = 0;
+
+// 	(void)player;
+// 	(void)index;
+//     float dx = x2 - x1;
+//     float dy = y2 - y1;
+//     float steps = ft_abs(dy);
+// 	if (ft_abs(dx) > ft_abs(dy))
+// 		steps = ft_abs(dx);
+//     float x_inc = dx / steps;
+//     float y_inc = dy / steps;
+
+//     float x = x1;
+//     float y = y1;
+
+//     while ( i < steps)
+//     {
+// 		if (i < 50)
+// 		{
+// 			color = (player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index)] << 24) |
+// 					(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 1)] << 16) |
+// 					(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 2)] << 8) |
+// 					player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 3)];
+// 		}
+// 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
+//         x += x_inc;
+//         y += y_inc;
+//         i++;
+//     }
+// 		printf("\n\n");
+
+// }
+
+
 void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index)
 {
     int i = 0;
 
-	(void)player;
-	(void)index;
+	int r, g, b, a;
     float dx = x2 - x1;
     float dy = y2 - y1;
     float steps = ft_abs(dy);
@@ -246,21 +281,22 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
     float x = x1;
     float y = y1;
 
-    while ( i < steps)
-    {
-		// if (i < 50)
-		// {
-		// 	color = (player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index)] << 24) |
-		// 			(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 1)] << 16) |
-		// 			(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 2)] << 8) |
-		// 			player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 3)];
-		// }
-		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-        x += x_inc;
-        y += y_inc;
-        i++;
-    }
+	while ( i < steps)
+	{
+		if (i < 50)
+		{
+			 r = player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index) ];
+			 g = player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 1) ];
+			 b = player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 2) ];
+			 a = player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 3) ];
 
+			color = (a << 24) | (r << 16) | (g << 8) | b;
+		}
+		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
+		x += x_inc;
+		y += y_inc;
+		i++;
+	}
 }
 
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
