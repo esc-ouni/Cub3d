@@ -133,8 +133,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 		free_ntmp(collector);
 		free((*collector));
 		(*collector) = NULL;
-		system ("leaks Cub");
-		// exit(0);
+		exit(0);
 	}
 }
 
