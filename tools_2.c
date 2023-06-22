@@ -36,7 +36,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
             start = 0;
             end = 700;
         }
-        color = darkenColor(color, 4000/w_height);
+        color = darkenColor(color, 2000/w_height);
         drawk_line(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end);
         i++;
     }
@@ -91,7 +91,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }
-    ray->length = 100000;
+    ray->length = 10000;
     return (0);
 }
 
