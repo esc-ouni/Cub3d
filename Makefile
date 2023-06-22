@@ -8,7 +8,7 @@ all:
 	clear
 
 fclean:
-	rm -rf *.o *.dSYM
+	rm -rf *.o *.dSYM *.vscode
 	rm -rf Cub
 	clear
 
