@@ -1,5 +1,28 @@
 #include "Cub.h"
 
+t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
+{
+	void 	*p;
+	t_data			*img;
+	int 	width,height;
+
+	img = NULL;
+	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
+	p = mlx_xpm_file_to_image(player->vars->mlx, file_dstination, &width, &height);
+	if (!p)
+	{
+		if (player->vars->last_img)
+			mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
+		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 36);
+		ft_collectorclear(player->vars->collector, ALL);
+		exit (1);
+	}
+	img->img_ptr = p;
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
+	img->byte_pixel /= 8;
+	return (img);
+}
+
 t_data		*new_image(t_vars *vars)
 {
 	void			*p;
@@ -12,7 +35,7 @@ t_data		*new_image(t_vars *vars)
 	{
 		if (vars->last_img)
 			mlx_destroy_image(vars->mlx, vars->last_img->img_ptr);
-		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 29);
+		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 36);
 		ft_collectorclear(vars->collector, ALL);
 		exit (1);
 	}

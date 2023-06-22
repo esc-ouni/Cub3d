@@ -92,6 +92,7 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
+	t_data 			*texture;
 	t_collector 	**collector;
 	t_data 			*last_img;
 }	t_vars;
@@ -137,9 +138,11 @@ float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
 void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2);
 
+t_data	*new_image_from_xpm(t_player *player, char *file_dstination);
+
 
 void	debug(void);
-int		ft_ext(t_vars *vars);
+int 	ft_ext(t_player *player);
 t_data	*new_image(t_vars *vars);
 void	free_tmp(t_collector **collector);
 void	free_ntmp(t_collector **collector);

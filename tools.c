@@ -1,8 +1,8 @@
 #include "Cub.h"
 
-int ft_ext(t_vars *vars)
+int ft_ext(t_player *player)
 {
-	ft_collectorclear(vars->collector, ALL);
+	ft_collectorclear(player->vars->collector, ALL);
 	exit(0);
 }
 
@@ -92,7 +92,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 	if (argc && argv[0])   //to_prot
 	{
 		map = h_malloc(collector, (count_alloc_size(fd) * sizeof(char *)), map, NTMP);
-		fd = open("/Users/idouni/Desktop/789/map.Cub", O_RDONLY);
+		fd = open("./map.Cub", O_RDONLY);
 		if (fd == -1)
 			exit(EXIT_FAILURE);
 		while((s = get_next_line(fd)))
@@ -142,6 +142,7 @@ t_player *init(int argc, char const *argv[])
 	player->direction->x = 1;
 	player->direction->y = 0;
 	player->angle = 0.0001;
+	player->vars->texture = new_image_from_xpm(player, "./texture.xpm");
 	return (player);
 }
 
