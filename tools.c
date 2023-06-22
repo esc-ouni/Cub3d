@@ -290,7 +290,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	{
 		// if (i < 50)
 		// {
-		// 	color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+			// color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
 		// }
         // color = darkenColor(color, amount);
 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);

@@ -25,6 +25,8 @@
 #define F_GREY 0x0087CEEB
 #define C_GREY 0x00008000
 
+#define GREY 0x00808080
+
 #define BLACK 0x00000000
 #define GREEN 0x00008000
 #define V_GREEN 0x009FE2BF

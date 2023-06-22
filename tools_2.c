@@ -31,7 +31,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     while (i < 320)
     {
         if (ray[i].side == HORZ)
-            color = BLACK;
+            color = GREY;
         else
             color = WHITE;
         w_height = c / (ray[i].length * cos(player->angle - ray[i].angle));
