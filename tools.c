@@ -204,9 +204,7 @@ int check_collision(t_player *player, int x, int y)
 	m_x = ((player->p_x + x)/BLOCK);
 
 	if (player->vars->map[m_y][m_x] == '0')
-	{
 		return (1);
-	}	
 	return (0);
 }
 

@@ -22,8 +22,8 @@
 #define BLOCK 50
 #define PI 3.14159265
 
-#define F_COLOR 0x00708090
 #define C_COLOR 0x002f4f4f
+#define F_COLOR 0x00708090
 
 #define GREY 0x00808080
 

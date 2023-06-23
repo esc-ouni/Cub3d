@@ -2,19 +2,25 @@
 
 void move_right(t_player *player)
 {
-    player->p_x += 10 * cos(player->angle);
-    player->p_y += 10 * sin(player->angle);
-	if (check_collision(player, 10, 0))
+	int x = 20 * cos(player->angle);
+	int y = 20 * sin(player->angle);
+
+	if (check_collision(player, x, y))
 	{
+		player->p_x += x;
+		player->p_y += y;
 		update_scene(player);
 	}
 }
 void move_left(t_player *player)
 {
-    player->p_x += 10 * cos(player->angle);
-    player->p_y += 10 * sin(player->angle);
-	if (check_collision(player, -10, 0))
+	int x = 20 * cos(player->angle);
+	int y = 20 * sin(player->angle);
+
+	if (check_collision(player, x, y))
 	{
+		player->p_x += x;
+		player->p_y += y;
 		update_scene(player);
 	}
 }
@@ -96,7 +102,7 @@ int	handler(int key, t_player *player)
 	// if (key == M_RG)
 	// 	move_right(player);
 	// if (key == M_LF)
-	// 	move_left(player);
+		move_left(player);
 	return(0);
 }
 
