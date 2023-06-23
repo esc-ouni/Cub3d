@@ -3,15 +3,23 @@
 //######################
 
 int darkenColor(int color, int amount) {
-    int red = (color >> 16) & 0xFF;
-    int green = (color >> 8) & 0xFF;
-    int blue = color & 0xFF;
+    (void)amount;
+    int n_clor;
+    int b = color;
+    int g = color << 8;
+    int r = color << 16;
 
-    red = (red * (100 - amount)) / 100;
-    green = (green * (100 - amount)) / 100;
-    blue = (blue * (100 - amount)) / 100;
+    r -= amount/100;
+    g -= amount/100;
+    b -= amount/100;
 
-    return (red << 16) | (green << 8) | blue;
+    n_clor = r;
+    n_clor <<= 8;
+    n_clor = g;
+    n_clor <<= 8;
+    n_clor = b;
+
+    return (n_clor);
 }
 
 //######################
@@ -30,10 +38,14 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     i = 0;
     while (i < 320)
     {
-        if (ray[i].side == HORZ)
-            color = GREY;
-        else
-            color = L_GREY;
+        if (ray[i].side == HORZ_D)
+            color = HORZ_D;
+        else if (ray[i].side == HORZ_U)
+            color = HORZ_U;
+        else if (ray[i].side == VERT_L)
+            color = VERT_L;
+        else if (ray[i].side == VERT_R)
+            color = VERT_R;
         w_height = c / (ray[i].length * cos(ft_abs(player->angle - ray[i].angle)));
         start = d_h - (w_height/2);
         end = start + w_height;
@@ -86,7 +98,10 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     if ((v_x < h_x) || (v_y < h_y))
     {
         draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
-        ray->side = VERT;
+        if (ray->angle > M_PI / 2 && ray->angle < 3 * M_PI / 2)
+            ray->side = VERT_L;
+        else
+            ray->side = VERT_R;
         ray->tex_i = (int)vec1->y % BLOCK;
         ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
         return (0);
@@ -94,7 +109,10 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     else
     {
         draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
-        ray->side = HORZ;
+        if (ray->angle > M_PI && ray->angle < 2 * M_PI)
+            ray->side = HORZ_U;
+        else
+            ray->side = HORZ_D;
         ray->tex_i = (int)vec2->x % BLOCK;
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);

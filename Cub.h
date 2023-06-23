@@ -8,8 +8,10 @@
 #include <fcntl.h>
 #include "Get_next_line/get_next_line.h"
 
-#define HORZ 15
-#define VERT 17
+#define HORZ_U 15
+#define HORZ_D 16
+#define VERT_L 17
+#define VERT_R 27
 
 
 #define NORTH 90
@@ -95,6 +97,10 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
+	t_data 			*up;
+	t_data 			*dn;
+	t_data 			*lf;
+	t_data 			*rg;
 	t_data 			*texture;
 	t_data 			*load_texture;
 	t_collector 	**collector;

@@ -148,6 +148,10 @@ t_player *init(int argc, char const *argv[])
 	player->angle = 0.0001;
 	player->vars->texture = new_image_from_xpm(player, "./texture.xpm");
 	player->vars->load_texture = new_image_from_xpm(player, "./texture2.xpm");
+	player->vars->up = new_image_from_xpm(player, "./up.xpm");
+	player->vars->dn = new_image_from_xpm(player, "./dn.xpm");
+	player->vars->lf = new_image_from_xpm(player, "./lf.xpm");
+	player->vars->rg = new_image_from_xpm(player, "./rg.xpm");
 	return (player);
 }
 
@@ -313,15 +317,23 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
     (void)player;
     (void)index;
     (void)x2;
+	char *s;
 
-    // int texHeight = 200;
-    // int texWidth = BLOCK;
+	if (color == HORZ_D)
+		s = player->vars->texture->img_addr;
+	else if (color == HORZ_U)
+		s = player->vars->texture->img_addr;
+	else if (color == VERT_L)
+		s = player->vars->load_texture->img_addr;
+	else if (color == VERT_R)
+		s = player->vars->load_texture->img_addr;
+
     int drawHeight = y2 - y1;
 
     for(int y = y1; y < y2; y++)
     {
-        int texY = ((y - y1) * 200) / drawHeight;
-        color = *(int *)(player->vars->texture->img_addr + ((texY * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+        int texY = ((y - y1) * 50) / drawHeight;
+        color = *(int *)(s + ((texY * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
         color = darkenColor(color, amount);
         my_mlx_pixel_put(p_img, x1, y, color);
     }
