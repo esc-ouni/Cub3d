@@ -49,12 +49,6 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
         w_height = c / (ray[i].length * cos(ft_abs(player->angle - ray[i].angle)));
         start = d_h - (w_height/2);
         end = start + w_height;
-        // if (end > 700 || start < 0)
-        // {
-        //     start = 0;
-        //     end = 700;
-        // }
-        // color = darkenColor(color, 2000/w_height);
         draw_wall_part(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end, ray[i].tex_i, 5000/w_height);
         i++;
     }
