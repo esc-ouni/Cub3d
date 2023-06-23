@@ -1,4 +1,4 @@
-#learn how texture works
+#getting tex x y to be recoded
 #optimize rendering
 #parse file
 #retouch
