@@ -332,10 +332,13 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 
     for(int y = y1; y < y2; y++)
     {
-        int texY = ((y - y1) * 50) / drawHeight;
-        color = *(int *)(s + ((texY * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
-        color = darkenColor(color, amount);
-        my_mlx_pixel_put(p_img, x1, y, color);
+       if (y < 700 && y > 0)
+        {
+			int texY = ((y - y1) * 50) / drawHeight;
+			color = *(int *)(s + ((texY * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+			color = darkenColor(color, amount);
+			my_mlx_pixel_put(p_img, x1, y, color);
+        }
     }
 }
 
