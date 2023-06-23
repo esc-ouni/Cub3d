@@ -1,3 +1,4 @@
 #learn how texture works
-#dmonstrate trigo fromula
 #optimize rendering
+#parse file
+#retouch

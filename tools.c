@@ -267,40 +267,66 @@ void draw_point(t_player *player, int x, int y)
 // }
 
 
+// void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index,  int amount)
+// {
+// 	(void)amount;
+// 	(void)player;
+// 	(void)index;
+//     int i = 0;
+//     int k = 0;
+
+// 	// char *tmp;
+//     float dx = x2 - x1;
+//     float dy = y2 - y1;
+//     float steps = ft_abs(dy);
+// 	if (ft_abs(dx) > ft_abs(dy))
+// 		steps = ft_abs(dx);
+//     float x_inc = dx / steps;
+//     float y_inc = dy / steps;
+
+//     float x = x1;
+//     float y = y1;
+
+
+// 	y = y1;
+// 	k = (int)(y2 - y1)/BLOCK - 1;
+// 	color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+// 	while ( y < y2)
+// 	{
+// 		if (!k)
+// 		{
+// 			i++;
+// 			color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+//         	color = darkenColor(color, amount);
+// 			k = (int)(y2 - y1)/BLOCK - 1;
+// 		}
+// 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
+// 		x += 0 * x_inc * y_inc;
+// 		y += 1;
+// 		k--;
+// 	}
+// }
+
 void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index,  int amount)
 {
-	(void)amount;
-	(void)player;
-	(void)index;
-    int i = 0;
+    (void)amount;
+    (void)player;
+    (void)index;
+    (void)x2;
 
-	// char *tmp;
-    float dx = x2 - x1;
-    float dy = y2 - y1;
-    float steps = ft_abs(dy);
-	if (ft_abs(dx) > ft_abs(dy))
-		steps = ft_abs(dx);
-    float x_inc = dx / steps;
-    float y_inc = dy / steps;
+    // int texHeight = 200;
+    // int texWidth = BLOCK;
+    int drawHeight = y2 - y1;
 
-    float x = x1;
-    float y = y1;
-
-	// tmp = player->vars->texture->img_addr;
-	// printf("%d\n", index);
-	while ( i < steps)
-	{
-		// if (i < 50)
-		// {
-		// 	color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
-		// }
-        // color = darkenColor(color, amount);
-		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-		x += 0 * x_inc * y_inc;
-		y += 1;
-		i++;
-	}
+    for(int y = y1; y < y2; y++)
+    {
+        int texY = ((y - y1) * 200) / drawHeight;
+        color = *(int *)(player->vars->texture->img_addr + ((texY * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+        color = darkenColor(color, amount);
+        my_mlx_pixel_put(p_img, x1, y, color);
+    }
 }
+
 
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
