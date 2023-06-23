@@ -147,7 +147,7 @@ t_player *init(int argc, char const *argv[])
 	player->direction->y = 0;
 	player->angle = 0.0001;
 	player->vars->texture = new_image_from_xpm(player, "./texture.xpm");
-	// player->vars->load_texture = new_image_from_xpm(player, "./load_texture.xpm");
+	player->vars->load_texture = new_image_from_xpm(player, "./texture2.xpm");
 	return (player);
 }
 
