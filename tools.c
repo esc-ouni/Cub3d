@@ -147,6 +147,7 @@ t_player *init(int argc, char const *argv[])
 	player->direction->y = 0;
 	player->angle = 0.0001;
 	player->vars->texture = new_image_from_xpm(player, "./texture.xpm");
+	// player->vars->load_texture = new_image_from_xpm(player, "./load_texture.xpm");
 	return (player);
 }
 
@@ -177,7 +178,7 @@ void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
 

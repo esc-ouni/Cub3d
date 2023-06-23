@@ -25,7 +25,8 @@
 #define C_COLOR 0x002f4f4f
 #define F_COLOR 0x00708090
 
-#define GREY 0x00808080
+#define GREY 0x005A5A5A
+#define L_GREY 0x00d3d3d3
 
 #define BLACK 0x00000000
 #define GREEN 0x00008000
@@ -95,6 +96,7 @@ typedef struct s_vars
 	void			*win;
 	char			**map;
 	t_data 			*texture;
+	t_data 			*load_texture;
 	t_collector 	**collector;
 	t_data 			*last_img;
 }	t_vars;
