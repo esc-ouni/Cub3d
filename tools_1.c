@@ -2,8 +2,10 @@
 
 void move_right(t_player *player)
 {
-	int x = 20 * cos(player->angle);
-	int y = 20 * sin(player->angle);
+	float angle = up_degree(player->angle, 90);
+
+	int x = 20 * cos(angle);
+	int y = 20 * sin(angle);
 
 	if (check_collision(player, x, y))
 	{
@@ -14,8 +16,9 @@ void move_right(t_player *player)
 }
 void move_left(t_player *player)
 {
-	int x = 20 * cos(player->angle);
-	int y = 20 * sin(player->angle);
+	float angle = up_degree(player->angle, -90);
+	int x = 20 * cos(angle);
+	int y = 20 * sin(angle);
 
 	if (check_collision(player, x, y))
 	{
@@ -99,9 +102,9 @@ int	handler(int key, t_player *player)
 		rotate_right(player);
 	if (key == K_L)
 		rotate_left(player);
-	// if (key == M_RG)
-	// 	move_right(player);
-	// if (key == M_LF)
+	if (key == M_RG)
+		move_right(player);
+	if (key == M_LF)
 		move_left(player);
 	return(0);
 }
@@ -151,21 +154,23 @@ int mouse_movement(int x, int y, t_player *player)
 	(void)y;
 	static int last_pos;
 
-	if (x >= 0 && x <= WIDTH)
-	{
-		if (x >= last_pos)
+	// if (x >= 0 && x <= WIDTH)
+	// {
+		if (x > last_pos)
 		{
-			rotate_vector(player->direction, ((x - last_pos)/5));
+			rotate_vector(player->direction, ((x - last_pos)/3));
+			update_degree(player, ((x - last_pos)/3));
 			update_scene(player);
 			last_pos = x;
 		}
 		else if (x < last_pos)
 		{
-			rotate_vector(player->direction, ((x - last_pos)/5));
+			rotate_vector(player->direction, ((x - last_pos)/3));
+			update_degree(player, ((x - last_pos)/3));
 			update_scene(player);
 			last_pos = x;
 		}
-	}
+	// }
 	return (0);
 }
 
