@@ -197,21 +197,16 @@ int check_collision_v2(t_player *player, int x, int y)
 
 int check_collision(t_player *player, int x, int y)
 {
-	int	i = 0;
 	int m_y;
 	int m_x;
 
-	x -= 9;
-	y -= 9;
+	m_y = ((player->p_y + y)/BLOCK);
+	m_x = ((player->p_x + x)/BLOCK);
 
-	if (player->vars->map[m_y][m_x] == '0' && i < 10)
+	if (player->vars->map[m_y][m_x] == '0')
 	{
-		m_y = ((player->p_y + y + i)/BLOCK);
-		m_x = ((player->p_x + x + i)/BLOCK);
-		i++;
-	}
-	if (i == 10)
 		return (1);
+	}	
 	return (0);
 }
 
@@ -298,12 +293,12 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	{
 		// if (i < 50)
 		// {
-			// color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+		// 	color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
 		// }
         // color = darkenColor(color, amount);
 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-		x += x_inc;
-		y += y_inc;
+		x += 0 * x_inc * y_inc;
+		y += 1;
 		i++;
 	}
 }

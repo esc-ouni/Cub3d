@@ -111,7 +111,7 @@ void	draw_wall(t_data *mapp, int x, int y)
 	{
 		while(j + 1 < BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			j++;
 		}
 		i++;
@@ -130,9 +130,9 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	{
 		while(j + 1< BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
 			if(j == (BLOCK - 1))
-				my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+				my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
 			j++;
 		}
 		i++;
@@ -172,7 +172,7 @@ t_data	*draw_2d_map(t_player *player)
 	char	**map;
 	t_data	*mapp;
 
-	color = WHITE;
+	color = BLACK;
 	map = player->vars->map;
 	ix = 0;
 	iy = 0;
@@ -181,12 +181,12 @@ t_data	*draw_2d_map(t_player *player)
 	while (ix < WIDTH)
 	{
 		if (ix >= 1800)
-			color = F_GREY;
+			color = C_COLOR;
 		while (iy < HEIGHT)
 		{
 			my_mlx_pixel_put(mapp, ix, iy, color);
 			if (iy == 350 && ix >= 1800)
-				color = C_GREY;
+				color = F_COLOR;
 			iy++;
 		}
 		iy = 0;
