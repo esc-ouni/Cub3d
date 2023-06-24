@@ -2,10 +2,8 @@
 
 void move_right(t_player *player)
 {
-	float angle = up_degree(player->angle, 90);
-
-	int x = 20 * cos(angle);
-	int y = 20 * sin(angle);
+	int x = 20 * cos(up_degree(player->angle, 90));
+	int y = 20 * sin(up_degree(player->angle, 90));
 
 	if (check_collision(player, x, y))
 	{
@@ -16,9 +14,8 @@ void move_right(t_player *player)
 }
 void move_left(t_player *player)
 {
-	float angle = up_degree(player->angle, -90);
-	int x = 20 * cos(angle);
-	int y = 20 * sin(angle);
+	int x = 20 * cos(up_degree(player->angle, -90));
+	int y = 20 * sin(up_degree(player->angle, -90));
 
 	if (check_collision(player, x, y))
 	{
@@ -52,7 +49,7 @@ void move_down(t_player *player)
 	}
 }
 
-float	up_degree(float angle, float add_angle)
+float 	up_degree(float  angle, float  add_angle)
 {
 	add_angle = deg_to_rad(add_angle);
 	angle += add_angle;
@@ -63,7 +60,7 @@ float	up_degree(float angle, float add_angle)
 	return (angle);
 }
 
-void	update_degree(t_player *player, float deg_angle)
+void	update_degree(t_player *player, float  deg_angle)
 {
 	deg_angle = deg_to_rad(deg_angle);
 	player->angle += deg_angle;

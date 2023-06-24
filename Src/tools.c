@@ -6,20 +6,20 @@ int ft_ext(t_player *player)
 	exit(0);
 }
 
-float 	deg_to_rad(float angle)
+float  	deg_to_rad(float  angle)
 {
     angle = (angle * M_PI / 180);
 	return (angle);
 }
 
-void rotate_vector(t_vector *direction, float angle)
+void rotate_vector(t_vector *direction, float  angle)
 {
 	angle = deg_to_rad(angle);
-    float cos_angle = cos(angle);
-    float sin_angle = sin(angle);
+    float  cos_angle = cos(angle);
+    float  sin_angle = sin(angle);
 
-    float new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
-    float new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
+    float  new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
+    float  new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
 
     direction->x = new_x;
     direction->y = new_y;
@@ -34,11 +34,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	if(!tmp)
 		exit(EXIT_FAILURE);
 	i = (y * data->size_line) + ((data->byte_pixel) * x);
-	// *(unsigned int *)tmp = color;
-	tmp[i] = color;
-	tmp[i+1] = color >>= 8;
-	tmp[i+2] = color >>= 8;
-	tmp[i+3] = color >>= 8;
+	*(unsigned int *)tmp = color;
 }
 
 char	*ft_mstrdup(t_collector **collector, char *s1)
@@ -241,16 +237,16 @@ void draw_point(t_player *player, int x, int y)
 
 // 	(void)player;
 // 	(void)index;
-//     float dx = x2 - x1;
-//     float dy = y2 - y1;
-//     float steps = ft_abs(dy);
+//     float  dx = x2 - x1;
+//     float  dy = y2 - y1;
+//     float  steps = ft_abs(dy);
 // 	if (ft_abs(dx) > ft_abs(dy))
 // 		steps = ft_abs(dx);
-//     float x_inc = dx / steps;
-//     float y_inc = dy / steps;
+//     float  x_inc = dx / steps;
+//     float  y_inc = dy / steps;
 
-//     float x = x1;
-//     float y = y1;
+//     float  x = x1;
+//     float  y = y1;
 
 //     while ( i < steps)
 //     {
@@ -280,16 +276,16 @@ void draw_point(t_player *player, int x, int y)
 //     int k = 0;
 
 // 	// char *tmp;
-//     float dx = x2 - x1;
-//     float dy = y2 - y1;
-//     float steps = ft_abs(dy);
+//     float  dx = x2 - x1;
+//     float  dy = y2 - y1;
+//     float  steps = ft_abs(dy);
 // 	if (ft_abs(dx) > ft_abs(dy))
 // 		steps = ft_abs(dx);
-//     float x_inc = dx / steps;
-//     float y_inc = dy / steps;
+//     float  x_inc = dx / steps;
+//     float  y_inc = dy / steps;
 
-//     float x = x1;
-//     float y = y1;
+//     float  x = x1;
+//     float  y = y1;
 
 
 // 	y = y1;
@@ -347,16 +343,16 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
     int i = 0;
 
-    float dx = x2 - (int)player->p_x;
-    float dy = y2 - (int)player->p_y;
-    float steps = ft_abs(dy);
+    float  dx = x2 - (int)player->p_x;
+    float  dy = y2 - (int)player->p_y;
+    float  steps = ft_abs(dy);
 	if (ft_abs(dx) > ft_abs(dy))
 		steps = ft_abs(dx);
-    float x_inc = dx / steps;
-    float y_inc = dy / steps;
+    float  x_inc = dx / steps;
+    float  y_inc = dy / steps;
 
-    float x = (int)player->p_x;
-    float y = (int)player->p_y;
+    float  x = (int)player->p_x;
+    float  y = (int)player->p_y;
 
 //     while ( i < steps)
 //     {
@@ -367,11 +363,11 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 //     }
 }
 
-float	ft_pow(float n)
+float 	ft_pow(float  n)
 {
 	return (n * n);
 }
-float	ft_abs(float n)
+float 	ft_abs(float  n)
 {
 	if (n < 0)
 		n = -n;

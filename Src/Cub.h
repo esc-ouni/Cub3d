@@ -79,8 +79,8 @@ typedef struct s_collector
 
 typedef struct  s_vector
 {
-    float x;
-    float y;
+    float  x;
+    float  y;
 }               t_vector;
 
 typedef struct s_data
@@ -109,19 +109,19 @@ typedef struct s_vars
 
 typedef struct s_player
 {
-	float		p_x;
-	float		p_y;
-	float		angle;
+	float 		p_x;
+	float 		p_y;
+	float 		angle;
 	t_vector 	*direction;
 	t_vars	*vars;
 }		t_player;
 
 typedef struct s_ray
 {
-	float		p_x;
-	float		p_y;
-	float		length;
-	float		angle;
+	float 		p_x;
+	float 		p_y;
+	float 		length;
+	float 		angle;
 	int			side;
 	int			tex_i;
 }		t_ray;
@@ -129,17 +129,17 @@ typedef struct s_ray
 int 	darkenColor(int color, int amount);
 
 
-float		ft_pow(float n);
-float		ft_abs(float n);
+float 		ft_pow(float  n);
+float 		ft_abs(float  n);
 
-float		up_degree(float angle, float add_angle);
-float 		deg_to_rad(float angle);
+float 		up_degree(float  angle, float  add_angle);
+float  		deg_to_rad(float  angle);
 t_player	*init(int argc, char const *argv[]);
 void		hooks(t_player *player);
 int			handler(int key, t_player *player);
 void 		update_scene(t_player *player);
 t_data		*draw_2d_map(t_player *player);
-void 		rotate_vector(t_vector *direction, float angle);
+void 		rotate_vector(t_vector *direction, float  angle);
 int 		mouse_movement(int x, int y, t_player *player);
 t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
 int 		check_collision_v2(t_player *player, int x, int y);
@@ -147,7 +147,7 @@ t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
 void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
-float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
+float    	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
 
 void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2);
