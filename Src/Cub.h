@@ -6,7 +6,7 @@
 #include <math.h>
 #include <mlx.h>
 #include <fcntl.h>
-#include "Get_next_line/get_next_line.h"
+#include "../Get_next_line/get_next_line.h"
 
 #define HORZ_U 15
 #define HORZ_D 16

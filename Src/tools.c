@@ -68,7 +68,7 @@ int	count_alloc_size(fd)
 
 	size = 0;
 	s = NULL;
-	fd = open("/Users/idouni/Desktop/789/map.Cub", O_RDONLY);
+	fd = open("/Users/idouni/Desktop/789/Ext/map.Cub", O_RDONLY);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
 	while ((s = get_next_line(fd)))
@@ -96,7 +96,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 	if (argc && argv[0])   //to_prot
 	{
 		map = h_malloc(collector, (count_alloc_size(fd) * sizeof(char *)), map, NTMP);
-		fd = open("./map.Cub", O_RDONLY);
+		fd = open("./Ext/map.Cub", O_RDONLY);
 		if (fd == -1)
 			exit(EXIT_FAILURE);
 		while((s = get_next_line(fd)))
@@ -146,12 +146,12 @@ t_player *init(int argc, char const *argv[])
 	player->direction->x = 1;
 	player->direction->y = 0;
 	player->angle = 0.0001;
-	player->vars->texture = new_image_from_xpm(player, "./texture.xpm");
-	player->vars->load_texture = new_image_from_xpm(player, "./texture2.xpm");
-	player->vars->up = new_image_from_xpm(player, "./up.xpm");
-	player->vars->dn = new_image_from_xpm(player, "./dn.xpm");
-	player->vars->lf = new_image_from_xpm(player, "./lf.xpm");
-	player->vars->rg = new_image_from_xpm(player, "./rg.xpm");
+	player->vars->texture = new_image_from_xpm(player, "./Ext/texture.xpm");
+	player->vars->load_texture = new_image_from_xpm(player, "./Ext/texture2.xpm");
+	player->vars->up = new_image_from_xpm(player, "./Ext/up.xpm");
+	player->vars->dn = new_image_from_xpm(player, "./Ext/dn.xpm");
+	player->vars->lf = new_image_from_xpm(player, "./Ext/lf.xpm");
+	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
 	return (player);
 }
 
