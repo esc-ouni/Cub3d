@@ -3,23 +3,15 @@
 //######################
 
 int darkenColor(int color, int amount) {
-    (void)amount;
-    int n_clor;
-    int b = color;
-    int g = color << 8;
-    int r = color << 16;
+    int red = (color >> 16) & 0xFF;
+    int green = (color >> 8) & 0xFF;
+    int blue = color & 0xFF;
 
-    r -= amount/100;
-    g -= amount/100;
-    b -= amount/100;
+    red = (red * (100 - amount)) / 100;
+    green = (green * (100 - amount)) / 100;
+    blue = (blue * (100 - amount)) / 100;
 
-    n_clor = r;
-    n_clor <<= 8;
-    n_clor = g;
-    n_clor <<= 8;
-    n_clor = b;
-
-    return (n_clor);
+    return (red << 16) | (green << 8) | blue;
 }
 
 //######################
@@ -36,7 +28,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 
     c = ((900 * 50) / tan(deg_to_rad(30)));
     i = 0;
-    while (i < 320)
+    while (i < WIDTH)
     {
         if (ray[i].side == HORZ_D)
             color = HORZ_D;
@@ -49,7 +41,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
         w_height = c / (ray[i].length * cos(ft_abs(player->angle - ray[i].angle)));
         start = d_h - (w_height/2);
         end = start + w_height;
-        draw_wall_part(player, p_img, color, 1800 + i, (int)start, 1800 + i, (int)end, ray[i].tex_i, 5000/w_height);
+        draw_wall_part(player, p_img, color, i, (int)start, i, (int)end, ray[i].tex_i, 5000/w_height);
         i++;
     }
 }
@@ -60,7 +52,7 @@ void update_scene(t_player *player)
 	t_ray  *ray;
 
 	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * 320) + 1, ray, TMP);
+	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
 	p_img = draw_2d_map(player);
 	draw_player(player, p_img);
 	ray = cast_rays(player, p_img, ray);
@@ -120,12 +112,12 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
-    while (i < 320)
+    while (i < WIDTH)
     {
         ray[i].p_x = player->p_x;
         ray[i].p_y = player->p_y;
-        ray[i].angle = up_degree(angle, 0.1875);
-        angle = up_degree(angle, 0.1875);
+        ray[i].angle = up_degree(angle, (60.0/WIDTH));
+        angle = up_degree(angle, (60.0/WIDTH));
         draw_ray(player, p_img, BLUE, &ray[i]);
         i++;
     }

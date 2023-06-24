@@ -191,32 +191,32 @@ t_data	*draw_2d_map(t_player *player)
 	player->vars->last_img = mapp;
 	while (ix < WIDTH)
 	{
-		if (ix >= 1800)
-			color = C_COLOR;
+		color = C_COLOR;
+		// if (ix >= 1800)
 		while (iy < HEIGHT)
 		{
 			my_mlx_pixel_put(mapp, ix, iy, color);
-			if (iy == 350 && ix >= 1800)
+			if (iy == HEIGHT/2)
 				color = F_COLOR;
 			iy++;
 		}
 		iy = 0;
 		ix++;
 	}
-	ix = 0;
-	iy = 0;
-	while(map[iy])
-	{
-		while(map[iy][ix])
-		{
-			if (map[iy][ix] == '1')
-				draw_wall(mapp, ix, iy);
-			else 
-				draw_nwall(mapp, ix, iy);
-			ix++;
-		}	
-		iy++;
-		ix = 0;
-	}
+	// ix = 0;
+	// iy = 0;
+	// while(map[iy])
+	// {
+	// 	while(map[iy][ix])
+	// 	{
+	// 		if (map[iy][ix] == '1')
+	// 			draw_wall(mapp, ix, iy);
+	// 		else 
+	// 			draw_nwall(mapp, ix, iy);
+	// 		ix++;
+	// 	}	
+	// 	iy++;
+	// 	ix = 0;
+	// }
 	return (mapp);
 }

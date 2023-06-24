@@ -1,5 +1,5 @@
-FLAGS = -Wall -Wextra -Werror #-fsanitize=undefined,address -g
-MATH = -O3 -ffast-math
+FLAGS = #-Wall -Wextra -Werror #-fsanitize=undefined,address -g
+MATH = -Oz -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all:

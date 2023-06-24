@@ -163,18 +163,18 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	j = -5; 
 	k = 0; 
 
-	x = (int)player->p_x;
-	y = (int)player->p_y;
-	while(i < 5)
-	{
-		while(j < 5)
-		{
-			my_mlx_pixel_put(p_img, x + i, y + j, BLUE);
-			j++;
-		}
-		i++;
-		j = -5;
-	}
+	// x = (int)player->p_x;
+	// y = (int)player->p_y;
+	// while(i < 5)
+	// {
+	// 	while(j < 5)
+	// 	{
+	// 		my_mlx_pixel_put(p_img, x + i, y + j, BLUE);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// 	j = -5;
+	// }
 	return (p_img);
 }
 
@@ -320,22 +320,22 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	char *s;
 
 	if (color == HORZ_D)
-		s = player->vars->texture->img_addr;
+		s = player->vars->lf->img_addr;
 	else if (color == HORZ_U)
-		s = player->vars->texture->img_addr;
+		s = player->vars->up->img_addr;
 	else if (color == VERT_L)
-		s = player->vars->load_texture->img_addr;
+		s = player->vars->up->img_addr;
 	else if (color == VERT_R)
-		s = player->vars->load_texture->img_addr;
+		s = player->vars->lf->img_addr;
 
     int drawHeight = y2 - y1;
 
     for(int y = y1; y < y2; y++)
     {
-       if (y < 700 && y > 0)
+       if (y < HEIGHT && y > 0)
         {
 			int texY = ((y - y1) * 50) / drawHeight;
-			color = *(int *)(s + ((texY * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
+			color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
 			color = darkenColor(color, amount);
 			my_mlx_pixel_put(p_img, x1, y, color);
         }
@@ -358,13 +358,13 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     float x = (int)player->p_x;
     float y = (int)player->p_y;
 
-    while ( i < steps)
-    {
-		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-        x += x_inc;
-        y += y_inc;
-        i++;
-    }
+//     while ( i < steps)
+//     {
+// 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
+//         x += x_inc;
+//         y += y_inc;
+//         i++;
+//     }
 }
 
 float	ft_pow(float n)
