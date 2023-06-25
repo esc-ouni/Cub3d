@@ -21,10 +21,10 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     int     i;
     int     start;
     int     end;
-    float    w_height;
-    float    c;
+    float   w_height;
+    float   c;
     int     color;
-    float    d_h = HEIGHT/2;
+    float   d_h = HEIGHT/2;
 
     c = ((900 * 50) / tan(deg_to_rad(30)));
     i = 0;
@@ -38,7 +38,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
             color = VERT_L;
         else if (ray[i].side == VERT_R)
             color = VERT_R;
-        w_height = c / (ray[i].length * cos(ft_abs(player->angle - ray[i].angle)));
+        w_height = c / (ray[i].length * cos(ft_abs(ray[i].angle) - player->angle));
         start = d_h - (w_height/2);
         end = start + w_height;
         draw_wall_part(player, p_img, color, i, (int)start, i, (int)end, ray[i].tex_i, 5000/w_height);
@@ -64,7 +64,7 @@ void update_scene(t_player *player)
 	player->vars->last_img = NULL;
 }
 
-float    draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
+float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
     t_vector    *vec1;
     t_vector    *vec2;
@@ -109,7 +109,7 @@ float    draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 
 t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
-    float  angle = player->angle - deg_to_rad(30);
+    float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
     while (i < WIDTH)
@@ -184,8 +184,8 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
     int i = 0;
-    float     stepy;
-    float     stepx;
+    float    stepy;
+    float    stepx;
 
 	vector = NULL;
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
@@ -232,8 +232,8 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
 {
 	t_vector *vector;
     int i = 0;
-    float     stepx;
-    float     stepy;
+    float    stepx;
+    float    stepy;
 
 	vector = NULL;
 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
