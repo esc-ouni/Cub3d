@@ -56,7 +56,10 @@ typedef enum e_flag
 {
 	TMP,
 	NTMP,
-	ALL
+	ALL,
+	COS,
+	SIN,
+	TAN
 }	t_flag;
 
 typedef struct s_ntmp
@@ -131,7 +134,8 @@ int 	darkenColor(int color, int amount);
 
 float		ft_pow(float n);
 float		ft_abs(float n);
-
+float   	trigo(float angle, t_flag flag);
+float 		rad_to_deg(float angle);
 float		up_degree(float angle, float add_angle);
 float 		deg_to_rad(float angle);
 t_player	*init(int argc, char const *argv[]);

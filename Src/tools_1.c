@@ -4,8 +4,8 @@ void move_right(t_player *player)
 {
 	float angle = up_degree(player->angle, 90);
 
-	int x = 40 * cos(angle);
-	int y = 40 * sin(angle);
+	int x = 40 * trigo(angle, COS);
+	int y = 40 * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
 	{
@@ -17,8 +17,8 @@ void move_right(t_player *player)
 void move_left(t_player *player)
 {
 	float angle = up_degree(player->angle, -90);
-	int x = 40 * cos(angle);
-	int y = 40 * sin(angle);
+	int x = 40 * trigo(angle, COS);
+	int y = 40 * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
 	{
@@ -29,8 +29,8 @@ void move_left(t_player *player)
 }
 void move_up(t_player *player)
 {
-	int x = 40 * cos(player->angle);
-	int y = 40 * sin(player->angle);
+	int x = 40 * trigo(player->angle, COS);
+	int y = 40 * trigo(player->angle, SIN);
 
 	if (check_collision(player, x, y))
 	{
@@ -41,8 +41,8 @@ void move_up(t_player *player)
 }
 void move_down(t_player *player)
 {
-	int x = 40 * cos(player->angle);
-	int y = 40 * sin(player->angle);
+	int x = 40 * trigo(player->angle, COS);
+	int y = 40 * trigo(player->angle, SIN);
 
 	if (check_collision(player, -x, -y))
 	{

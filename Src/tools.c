@@ -12,11 +12,17 @@ float 	deg_to_rad(float angle)
 	return (angle);
 }
 
+float 	rad_to_deg(float angle)
+{
+    angle = (angle * 180 / M_PI);
+	return (angle);
+}
+
 void rotate_vector(t_vector *direction, float angle)
 {
 	angle = deg_to_rad(angle);
-    float cos_angle = cos(angle);
-    float sin_angle = sin(angle);
+    float cos_angle = trigo(angle, COS);
+    float sin_angle = trigo(angle, SIN);
 
     float new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
     float new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
