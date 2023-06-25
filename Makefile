@@ -3,8 +3,8 @@ MATH = -Oz -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all:
-	gcc $(FLAGS) $(MATH) $(MLX)  Get_next_line/*.c ./Src/*.c -o Cub -lm
 	clear
+	gcc $(FLAGS) $(MATH) $(MLX)  Get_next_line/*.c ./Src/*.c -o Cub -lm
 	./Cub
 
 fclean:
