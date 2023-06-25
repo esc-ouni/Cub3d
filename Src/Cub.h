@@ -125,6 +125,8 @@ typedef struct s_ray
 	float		p_y;
 	float		length;
 	float		angle;
+	float		t1;
+	float		t2;
 	int			side;
 	int			tex_i;
 }		t_ray;
@@ -153,8 +155,6 @@ void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
-
-void drawk_line(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2);
 
 t_data	*new_image_from_xpm(t_player *player, char *file_dstination);
 
