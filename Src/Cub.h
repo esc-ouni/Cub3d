@@ -123,12 +123,13 @@ typedef struct s_ray
 {
 	float		p_x;
 	float		p_y;
-	float		length;
+	int			length;
 	float		angle;
 	float		t1;
 	float		t2;
 	int			side;
 	int			tex_i;
+	float 		c;
 }		t_ray;
 
 int 	darkenColor(int color, int amount);
@@ -142,6 +143,7 @@ float		up_degree(float angle, float add_angle);
 float 		deg_to_rad(float angle);
 t_player	*init(int argc, char const *argv[]);
 void		hooks(t_player *player);
+int			count_alloc_size(int fd);
 int			handler(int key, t_player *player);
 void 		update_scene(t_player *player);
 t_data		*draw_2d_map(t_player *player);

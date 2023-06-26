@@ -26,7 +26,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     int     color;
     float   d_h = HEIGHT/2;
 
-    c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
+    c = ray[i].c;
     i = 0;
     while (i < WIDTH)
     {
@@ -112,6 +112,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
+    float c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
     while (i < WIDTH)
     {
         ray[i].p_x = player->p_x;
@@ -120,6 +121,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
         angle = up_degree(angle, (60.0/WIDTH));
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
+        ray[i].c = c;
         draw_ray(player, p_img, BLUE, &ray[i]);
         i++;
     }

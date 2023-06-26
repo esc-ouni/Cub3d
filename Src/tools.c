@@ -88,36 +88,6 @@ int	count_alloc_size(fd)
 	return (size+=1);
 }
 
-
-char **parse_file(t_collector **collector, int argc, char const *argv[])
-{
-	int	fd;
-	char **map;
-	char *s;
-	int i;
-
-	i = 0;
-	fd = 0;
-	map = NULL;
-	if (argc && argv[0])   //to_prot
-	{
-		map = h_malloc(collector, (count_alloc_size(fd) * sizeof(char *)), map, NTMP);
-		fd = open("./Ext/map.Cub", O_RDONLY);
-		if (fd == -1)
-			exit(EXIT_FAILURE);
-		while((s = get_next_line(fd)))
-		{
-			map[i] = ft_mstrdup(collector, s);
-			free(s);
-			s = NULL;
-			i++;
-		}
-		map[i] = NULL;
-		return (map);
-	}
-	exit(EXIT_FAILURE);
-}
-
 t_player *init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
