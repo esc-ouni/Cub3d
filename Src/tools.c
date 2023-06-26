@@ -31,14 +31,14 @@ void rotate_vector(t_vector *direction, float angle)
     direction->y = new_y;
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
 {
 	int i;
 	char *tmp;
 
 	tmp = data->img_addr;
 	if(!tmp)
-		exit(EXIT_FAILURE);
+	    exit_with_err(player->vars->collector, MLX);
 	i = (y * data->size_line) + ((data->byte_pixel) * x);
 	// *(unsigned int *)tmp = color;
 	tmp[i] = color;
@@ -67,7 +67,7 @@ char	*ft_mstrdup(t_collector **collector, char *s1)
 	return (s);
 }
 
-int	count_alloc_size(fd)
+int	count_alloc_size(t_collector **collector, int fd)
 {
 	int size;
 	char *s;
@@ -76,7 +76,7 @@ int	count_alloc_size(fd)
 	s = NULL;
 	fd = open("/Users/idouni/Desktop/789/Ext/map.Cub", O_RDONLY);
 	if (fd == -1)
-		exit(EXIT_FAILURE);
+	    exit_with_err(collector, OPEN);
 	while ((s = get_next_line(fd)))
 	{
 		free(s);
@@ -84,7 +84,7 @@ int	count_alloc_size(fd)
 		size++;
 	}
 	if (close(fd) == -1)
-		exit(EXIT_FAILURE);
+	    exit_with_err(collector, OPEN);
 	return (size+=1);
 }
 
@@ -313,7 +313,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 			int texY = ((y - y1) * 50) / drawHeight;
 			color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
 			color = darkenColor(color, amount);
-			my_mlx_pixel_put(p_img, x1, y, color);
+			my_mlx_pixel_put(player, p_img, x1, y, color);
         }
     }
 }

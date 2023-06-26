@@ -109,7 +109,7 @@ int	handler(int key, t_player *player)
 	return(0);
 }
 
-void	draw_wall(t_data *mapp, int x, int y)
+void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 {
 	int	i = 0;
 	int	j = 0;
@@ -120,14 +120,14 @@ void	draw_wall(t_data *mapp, int x, int y)
 	{
 		while(j + 1 < BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+			my_mlx_pixel_put(player, mapp, x + i, y + j, BLACK);
 			j++;
 		}
 		i++;
 		j = 0;
 	}
 }
-void	draw_nwall(t_data *mapp, int x, int y)
+void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 {
 	int	i = 0;
 	int	j = 0;
@@ -139,9 +139,9 @@ void	draw_nwall(t_data *mapp, int x, int y)
 	{
 		while(j + 1< BLOCK)
 		{
-			my_mlx_pixel_put(mapp, x + i, y + j, WHITE);
+			my_mlx_pixel_put(player, mapp, x + i, y + j, WHITE);
 			if(j == (BLOCK - 1))
-				my_mlx_pixel_put(mapp, x + i, y + j, BLACK);
+				my_mlx_pixel_put(player, mapp, x + i, y + j, BLACK);
 			j++;
 		}
 		i++;
@@ -195,7 +195,7 @@ t_data	*draw_2d_map(t_player *player)
 		// if (ix >= 1800)
 		while (iy < HEIGHT)
 		{
-			my_mlx_pixel_put(mapp, ix, iy, color);
+			my_mlx_pixel_put(player, mapp, ix, iy, color);
 			if (iy == HEIGHT/2)
 				color = F_COLOR;
 			iy++;

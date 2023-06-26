@@ -13,9 +13,7 @@ t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
 	{
 		if (player->vars->last_img)
 			mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
-		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 36);
-		ft_collectorclear(player->vars->collector, ALL);
-		exit (1);
+		exit_with_err(player->vars->collector, MLX);
 	}
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
@@ -35,9 +33,7 @@ t_data		*new_image(t_vars *vars)
 	{
 		if (vars->last_img)
 			mlx_destroy_image(vars->mlx, vars->last_img->img_ptr);
-		write (2, "\033[0;32mMLX_NEW_IMAGE_FAILED\033[0;37m\n", 36);
-		ft_collectorclear(vars->collector, ALL);
-		exit (1);
+		exit_with_err(vars->collector, MLX);
 	}
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
@@ -60,11 +56,7 @@ void	tmp_alloc(t_collector **collector, size_t s, void **p)
 	tmp_c = malloc(sizeof(t_tmp));
 	(*p) = malloc(s);
 	if (!tmp_c || !(*p) || !(*collector))
-	{
-		write (2, "\033[0;32mMALLOC_FAILED\033[0;37m\n", 29);
-		ft_collectorclear(collector, ALL);
-		exit (1);
-	}
+		exit_with_err(collector, MALLOC);
 	tmp_c->tmp_addr = (*p);
 	if (!((*collector)->tmp_cltr))
 		((*collector)->tmp_cltr) = tmp_c;
@@ -86,11 +78,7 @@ void	ntmp_alloc(t_collector **collector, size_t s, void **p)
 	ntmp_c = malloc(sizeof(t_ntmp));
 	(*p) = malloc(s);
 	if (!ntmp_c || !(*p) || !(*collector))
-	{
-		write (2, "\033[0;32mMALLOC_FAILED\033[0;37m\n", 29);
-		ft_collectorclear(collector, ALL);
-		exit (1);
-	}
+		exit_with_err(collector, MALLOC);
 	ntmp_c->ntmp_addr = (*p);
 	if (!((*collector)->ntmp_cltr))
 		((*collector)->ntmp_cltr) = ntmp_c;

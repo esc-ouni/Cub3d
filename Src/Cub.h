@@ -3,6 +3,7 @@
 
 #include <libc.h>
 #include <string.h>
+#include <string.h>
 #include <math.h>
 #include <mlx.h>
 #include <fcntl.h>
@@ -54,9 +55,14 @@
 
 typedef enum e_flag
 {
-	TMP,
+	MALLOC,
+	PARSE,
 	NTMP,
+	ARGS,
+	OPEN,
+	TMP,
 	ALL,
+	MLX,
 	COS,
 	SIN,
 	TAN
@@ -134,7 +140,6 @@ typedef struct s_ray
 
 int 	darkenColor(int color, int amount);
 
-
 float		ft_pow(float n);
 float		ft_abs(float n);
 float   	trigo(float angle, t_flag flag);
@@ -143,12 +148,13 @@ float		up_degree(float angle, float add_angle);
 float 		deg_to_rad(float angle);
 t_player	*init(int argc, char const *argv[]);
 void		hooks(t_player *player);
-int			count_alloc_size(int fd);
+int			count_alloc_size(t_collector **collector, int fd);
 int			handler(int key, t_player *player);
 void 		update_scene(t_player *player);
 t_data		*draw_2d_map(t_player *player);
 void 		rotate_vector(t_vector *direction, float angle);
 int 		mouse_movement(int x, int y, t_player *player);
+void    	exit_with_err(t_collector **collector, t_flag cause);
 t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
 int 		check_collision_v2(t_player *player, int x, int y);
 t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
@@ -170,7 +176,8 @@ void	free_ntmp(t_collector **collector);
 void	head_alloc(t_collector **collector);
 char	*ft_mstrdup(t_collector **collector, char *s1);
 void	tmp_alloc(t_collector **collector, size_t s, void **p);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color);
+// void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 void	ntmp_alloc(t_collector **collector, size_t s, void **p);
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
