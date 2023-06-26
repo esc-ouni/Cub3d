@@ -303,6 +303,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 		s = player->vars->up->img_addr;
 	else if (color == VERT_R)
 		s = player->vars->lf->img_addr;
+	// s = player->vars->texture->img_addr;
 
     int drawHeight = y2 - y1;
 

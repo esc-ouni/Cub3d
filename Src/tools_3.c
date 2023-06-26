@@ -18,6 +18,11 @@ void    exit_with_err(t_collector **collector, t_flag cause)
 
 void    check_dups(t_collector **collector, int argc, char const *argv[])
 {
+    int fd;
+
+    fd = 0;
+    if (fd == -1)
+        exit_with_err(collector, OPEN);
 
 }
 void    check_errs(t_collector **collector, int argc, char const *argv[])
