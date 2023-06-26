@@ -2,13 +2,8 @@
 
 float   trigo(float angle, t_flag flag)
 {
-    float angle2;
     static int i;
 
-    if (!i)
-        init_table();
-    i++;
-    // angle2 = rad_to_deg(angle);
     // printf("angle : %f, index : %d\n",rad_to_deg(angle) ,i++);
     if (flag == COS)
     {
