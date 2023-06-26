@@ -77,13 +77,13 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     vec2 = find_horizontal_iterset(player, ray);
     
     v_x = ft_abs(player->p_x - vec1->x);
-    v_y = ft_abs(player->p_y - vec1->y);
+    // v_y = ft_abs(player->p_y - vec1->y);
     
     h_x = ft_abs(player->p_x - vec2->x);
-    h_y = ft_abs(player->p_y - vec2->y);
-    if ((v_x < h_x) || (v_y < h_y))
+    // h_y = ft_abs(player->p_y - vec2->y);
+    if ((v_x < h_x))
     {
-        draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
+        // draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         if (ray->angle > M_PI / 2 && ray->angle < 3 * M_PI / 2)
             ray->side = VERT_L;
         else
@@ -94,7 +94,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     }
     else
     {
-        draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
+        // draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
         if (ray->angle > M_PI && ray->angle < 2 * M_PI)
             ray->side = HORZ_U;
         else
@@ -103,7 +103,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }
-    ray->length = 10000;
+    ray->length = 0;
     return (0);
 }
 
@@ -115,10 +115,10 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     float c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
     while (i < WIDTH)
     {
+        angle = up_degree(angle, (60.0/WIDTH));
         ray[i].p_x = player->p_x;
         ray[i].p_y = player->p_y;
-        ray[i].angle = up_degree(angle, (60.0/WIDTH));
-        angle = up_degree(angle, (60.0/WIDTH));
+        ray[i].angle = angle;
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
         ray[i].c = c;

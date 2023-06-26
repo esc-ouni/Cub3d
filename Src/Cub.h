@@ -139,7 +139,7 @@ typedef struct s_ray
 }		t_ray;
 
 int 	darkenColor(int color, int amount);
-
+float		ft_sqrt(float nb);
 float		ft_pow(float n);
 float		ft_abs(float n);
 float   	trigo(float angle, t_flag flag);
