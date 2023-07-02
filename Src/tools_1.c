@@ -11,7 +11,9 @@ void move_right(t_player *player)
 	{
 		player->p_x += x;
 		player->p_y += y;
-		update_scene(player);
+		// update_scene(player);
+		updateAndRenderScene(player);
+
 	}
 }
 void move_left(t_player *player)
@@ -24,7 +26,8 @@ void move_left(t_player *player)
 	{
 		player->p_x += x;
 		player->p_y += y;
-		update_scene(player);
+		// update_scene(player);
+		updateAndRenderScene(player);
 	}
 }
 void move_up(t_player *player)
@@ -36,7 +39,8 @@ void move_up(t_player *player)
 	{
 		player->p_x += x;
 		player->p_y += y;
-		update_scene(player);
+		updateAndRenderScene(player);
+		// update_scene(player);
 	}
 }
 void move_down(t_player *player)
@@ -48,7 +52,9 @@ void move_down(t_player *player)
 	{
 		player->p_x -= x;
 		player->p_y -= y;
-		update_scene(player);
+		// update_scene(player);
+		updateAndRenderScene(player);
+
 	}
 }
 
@@ -78,13 +84,16 @@ void rotate_right(t_player *player)
 {
 	rotate_vector(player->direction, 25.5);
 	update_degree(player, 25.5);
-	update_scene(player);
+	// update_scene(player);
+	updateAndRenderScene(player);
 }
 void rotate_left(t_player *player)
 {
 	rotate_vector(player->direction, -25.5);
 	update_degree(player, -25.5);
-	update_scene(player);
+	// update_scene(player);
+	updateAndRenderScene(player);
+
 }
 
 int	handler(int key, t_player *player)
@@ -160,14 +169,18 @@ int mouse_movement(int x, int y, t_player *player)
 		{
 			rotate_vector(player->direction, ((x - last_pos)/3));
 			update_degree(player, ((x - last_pos)/3));
-			update_scene(player);
+			// update_scene(player);
+			updateAndRenderScene(player);
+
 			last_pos = x;
 		}
 		else if (x < last_pos)
 		{
 			rotate_vector(player->direction, ((x - last_pos)/3));
 			update_degree(player, ((x - last_pos)/3));
-			update_scene(player);
+			// update_scene(player);
+			updateAndRenderScene(player);
+
 			last_pos = x;
 		}
 	// }

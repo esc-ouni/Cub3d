@@ -1,5 +1,36 @@
 #include "Cub.h"
 
+
+// Global variables
+int frameCount = 0;
+int lastFrameTime = 0;
+
+// Function to update and render the scene
+void updateAndRenderScene(t_player *player)
+{
+    // Put your scene update and rendering logic here
+	update_scene(player);
+    
+    // Increment frame count
+    frameCount++;
+
+    // Get the current time in milliseconds
+    int currentTime = (int) (clock() * 1000 / CLOCKS_PER_SEC);
+
+    // Calculate time difference from the last frame
+    int deltaTime = currentTime - lastFrameTime;
+
+    // Update the title of the window with the current FPS
+    char fpsString[20];
+    // printf("")
+    sprintf(fpsString, "FPS: %.2f", 1000.0 / deltaTime);
+    mlx_string_put(player->vars->mlx, player->vars->win, 1600, 10, 0x000000, fpsString);
+    // printf("")
+
+    // Update the last frame time
+    lastFrameTime = currentTime;
+}
+
 //######################
 
 int darkenColor(int color, int amount) {
@@ -72,7 +103,7 @@ void update_scene(t_player *player)
     p_img = new_image(player->vars);
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
 	// draw_player(player, p_img);
-	// ray = cast_rays(player, p_img, ray);
+	ray = cast_rays(player, p_img, ray);
 
 
 	// draw_3d_map(player, p_img, ray);
