@@ -148,6 +148,7 @@ typedef struct s_ray
 t_vector    *vec2;
 t_vector    *vec1;
 
+t_vector    *vec;
 
 
 int 	darkenColor(int color, int amount);

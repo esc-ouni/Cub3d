@@ -135,7 +135,9 @@ t_player *init(int argc, char const *argv[])
 	vec2 = NULL;
  	vec2 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
 	vec1 = NULL;
- 	vec1 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
+ 	vec1 = h_malloc(&collector, sizeof(t_vector), vec1, NTMP);
+	vec = NULL;
+ 	vec = h_malloc(&collector, sizeof(t_vector), vec, NTMP);
 	return (player);
 }
 
@@ -143,26 +145,18 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 {
 	int i, j, k, x, y;
 
-	i = -5;
-	j = -5; 
-	k = 0; 
+	i = -0;
 
-	// x = (int)player->p_x/ 5;
-	// y = (int)player->p_y/ 5;
     float dx = player->p_x + 70 * trigo(player->angle, COS);
     float dy = player->p_y + 70 * trigo(player->angle, SIN);
     draw_line(player, p_img, RED, (int)dx, (int)dy);
 
+	// rotate_vector(vec, )
 
-	// while(i < 5)
+	// while(i < 320)
 	// {
-	// 	while(j < 5)
-	// 	{
-	// 		my_mlx_pixel_put(player, p_img, x + i, y + j, BLUE);
-	// 		j++;
-	// 	}
+
 	// 	i++;
-	// 	j = -5;
 	// }
 	return (p_img);
 }
