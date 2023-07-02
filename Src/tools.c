@@ -147,18 +147,23 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	j = -5; 
 	k = 0; 
 
-	x = (int)player->p_x/ M_BLOCK;
-	y = (int)player->p_y/ M_BLOCK;
-	while(i < 5)
-	{
-		while(j < 5)
-		{
-			my_mlx_pixel_put(player, p_img, x + i, y + j, BLUE);
-			j++;
-		}
-		i++;
-		j = -5;
-	}
+	// x = (int)player->p_x/ 5;
+	// y = (int)player->p_y/ 5;
+    float dx = player->p_x + 70 * trigo(player->angle, COS);
+    float dy = player->p_y + 70 * trigo(player->angle, SIN);
+    draw_line(player, p_img, RED, (int)dx, (int)dy);
+
+
+	// while(i < 5)
+	// {
+	// 	while(j < 5)
+	// 	{
+	// 		my_mlx_pixel_put(player, p_img, x + i, y + j, BLUE);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// 	j = -5;
+	// }
 	return (p_img);
 }
 
@@ -332,16 +337,20 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
     int i = 0;
 
-    float dx = x2 - (int)player->p_x;
-    float dy = y2 - (int)player->p_y;
+    // float dx = 20 * trigo(player->angle, COS);
+    // float dy = 20 * trigo(player->angle, SIN);
+
+    float dx = x2/5 - player->p_x/5;
+    float dy = y2/5 - player->p_y/5;
+
     float steps = ft_abs(dy);
 	if (ft_abs(dx) > ft_abs(dy))
 		steps = ft_abs(dx);
     float x_inc = dx / steps;
     float y_inc = dy / steps;
 
-    float x = (int)player->p_x;
-    float y = (int)player->p_y;
+    float x = (int)player->p_x/5;
+    float y = (int)player->p_y/5;
 
     while ( i < steps)
     {

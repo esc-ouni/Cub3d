@@ -171,6 +171,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
+    // draw_line(player, p_img, BLUE, 0, 0);
 
     float c = ((700 * 50) / trigo(deg_to_rad(30), TAN));
     while (i < WIDTH)

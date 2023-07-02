@@ -82,15 +82,15 @@ void	update_degree(t_player *player, float deg_angle)
 
 void rotate_right(t_player *player)
 {
-	rotate_vector(player->direction, 25.5);
-	update_degree(player, 25.5);
+	rotate_vector(player->direction, 15);
+	update_degree(player, 15);
 	// update_scene(player);
 	updateAndRenderScene(player);
 }
 void rotate_left(t_player *player)
 {
-	rotate_vector(player->direction, -25.5);
-	update_degree(player, -25.5);
+	rotate_vector(player->direction, -15);
+	update_degree(player, -15);
 	// update_scene(player);
 	updateAndRenderScene(player);
 
