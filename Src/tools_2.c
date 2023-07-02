@@ -254,9 +254,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
         while (i < 36)
         {
             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
-            {
                 return (vector);
-            }
             vector->y += stepy;
             vector->x += stepx;
             i++;
@@ -272,9 +270,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
         while (i < 36)
         {
             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
-            {
                 return (vector);
-            }
             vector->x += stepx;
             vector->y += stepy;
             i++;
@@ -302,9 +298,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
         while (i < 36)
         {
             if (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
-            {
                 return (vector);
-            }
             vector->x += stepx;
             vector->y += stepy;
             i++;
@@ -320,9 +314,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
         while (i < 36)
         {
             if (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
-            {
                 return (vector);
-            }
             vector->x += stepx;
             vector->y += stepy;
             i++;
