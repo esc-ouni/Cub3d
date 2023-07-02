@@ -40,7 +40,12 @@ int darkenColor(int color, int amount) {
     red = (red * (100 - amount)) / 100;
     green = (green * (100 - amount)) / 100;
     blue = (blue * (100 - amount)) / 100;
-
+    if (blue < 0)
+        blue = 0;
+    if (red < 0)
+        red = 0;
+    if (green < 0)
+        green = 0;
     return (red << 16) | (green << 8) | blue;
 }
 
@@ -95,14 +100,17 @@ t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
 void update_scene(t_player *player)
 {
 	t_data *p_img;
+	t_data *p_r_img;
 	t_ray  *ray;
 
 	ray = NULL;
 	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
     p_img = new_image(player->vars);
+    p_r_img = new_image(player->vars);
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
-	draw_player(player, p_img);
-	ray = cast_rays(player, p_img, ray);
+    p_r_img = ft_transparency(player, p_r_img, WIDTH, HEIGHT);
+	draw_player(player, p_r_img);
+	ray = cast_rays(player, p_r_img, ray);
 
 
 	draw_3d_map(player, p_img, ray);
@@ -110,6 +118,7 @@ void update_scene(t_player *player)
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, 0, 0);
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_r_img->img_ptr, 0, 0);
     // if (player->vars->last_img)
 	//     mlx_destroy_image(player->vars->mlx, p_img->img_ptr);
 	// player->vars->last_img = NULL;
@@ -164,7 +173,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 	int i = 0;
 
     float c = ((700 * 50) / trigo(deg_to_rad(30), TAN));
-    while (i < WIDTH    )
+    while (i < WIDTH)
     {
         angle = up_degree(angle, (60.0/WIDTH));
         ray[i].p_x = player->p_x;
