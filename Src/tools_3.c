@@ -85,6 +85,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
         return (get_map(collector, argc, argv));
 	}
     exit_with_err(collector, ARGS);
+    return (NULL);
 }
 
 float   trigo(float angle, t_flag flag)

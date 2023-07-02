@@ -20,13 +20,16 @@
 #define SOUTH 270
 #define WEST  180
 
-#define WIDTH 800
-#define HEIGHT 500
+#define WIDTH 1800
+#define HEIGHT 700
 #define BLOCK 50
+#define M_BLOCK 10
 #define PI 3.14159265
 
-#define C_COLOR 0x002f4f4f
-#define F_COLOR 0x001f2f4f
+#define TRANS 0xFF000000
+
+#define C_COLOR 0x00191970
+#define F_COLOR 0x002e3134
 
 #define GREY 0x005A5A5A
 #define L_GREY 0x00d3d3d3
@@ -114,6 +117,8 @@ typedef struct s_vars
 	t_data 			*load_texture;
 	t_collector 	**collector;
 	t_data 			*last_img;
+	t_data 			*fix_img;
+	t_data 			*m_fix_img;
 }	t_vars;
 
 typedef struct s_player
@@ -168,6 +173,7 @@ t_data	*new_image_from_xpm(t_player *player, char *file_dstination);
 
 void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index, int amount);
 
+t_data	*draw_cf(t_player *player);
 void	debug(void);
 int 	ft_ext(t_player *player);
 t_data	*new_image(t_vars *vars);

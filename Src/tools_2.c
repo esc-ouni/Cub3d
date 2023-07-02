@@ -46,6 +46,22 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     }
 }
 
+t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
+{
+    int i = 0, j = 0;
+    while (i < WIDTH)
+    {
+        while (j < HEIGHT)
+        {
+            my_mlx_pixel_put(player, p_img, i, j, TRANS);
+            j++;
+        }
+        i++;
+        j = 0;
+    }
+    return (p_img);
+}
+
 void update_scene(t_player *player)
 {
 	t_data *p_img;
@@ -53,15 +69,20 @@ void update_scene(t_player *player)
 
 	ray = NULL;
 	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
-	p_img = draw_2d_map(player);
-	draw_player(player, p_img);
-	ray = cast_rays(player, p_img, ray);
-	draw_3d_map(player, p_img, ray);
+    p_img = new_image(player->vars);
+    p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
+	// draw_player(player, p_img);
+	// ray = cast_rays(player, p_img, ray);
+
+
+	// draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-    if (player->vars->last_img)
-	    mlx_destroy_image(player->vars->mlx, p_img->img_ptr);
-	player->vars->last_img = NULL;
+	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, 0, 0);
+    // if (player->vars->last_img)
+	//     mlx_destroy_image(player->vars->mlx, p_img->img_ptr);
+	// player->vars->last_img = NULL;
 }
 
 float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
@@ -83,7 +104,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     // h_y = ft_abs(player->p_y - vec2->y);
     if ((v_x < h_x))
     {
-        // draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
+        draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         if (ray->angle > M_PI / 2 && ray->angle < 3 * M_PI / 2)
             ray->side = VERT_L;
         else
@@ -94,7 +115,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     }
     else
     {
-        // draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
+        draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
         if (ray->angle > M_PI && ray->angle < 2 * M_PI)
             ray->side = HORZ_U;
         else
@@ -112,8 +133,8 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
 
-    float c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
-    while (i < WIDTH)
+    float c = ((700 * 50) / trigo(deg_to_rad(30), TAN));
+    while (i < WIDTH    )
     {
         angle = up_degree(angle, (60.0/WIDTH));
         ray[i].p_x = player->p_x;
@@ -122,7 +143,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
         ray[i].c = c;
-        draw_ray(player, p_img, BLUE, &ray[i]);
+        draw_ray(player, p_img, RED, &ray[i]);
         i++;
     }
     return (&(ray[0]));

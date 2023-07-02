@@ -27,7 +27,7 @@ t_data		*new_image(t_vars *vars)
 	t_data			*img;
 
 	img = NULL;
-	img = h_malloc(vars->collector, sizeof(t_data), img, TMP);
+	img = h_malloc(vars->collector, sizeof(t_data), img, NTMP);
 	p = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	if (!p)
 	{

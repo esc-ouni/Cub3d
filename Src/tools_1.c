@@ -114,11 +114,11 @@ void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 	int	i = 0;
 	int	j = 0;
 
-	x *= BLOCK;
-	y *= BLOCK;
-	while(i + 1 < BLOCK)
+	x *= M_BLOCK;
+	y *= M_BLOCK;
+	while(i + 1 < M_BLOCK)
 	{
-		while(j + 1 < BLOCK)
+		while(j + 1 < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, BLACK);
 			j++;
@@ -133,14 +133,14 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 	int	j = 0;
 
 
-	x *= BLOCK;
-	y *= BLOCK;
-	while(i + 1< BLOCK)
+	x *= M_BLOCK;
+	y *= M_BLOCK;
+	while(i + 1< M_BLOCK)
 	{
-		while(j + 1< BLOCK)
+		while(j + 1 < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, WHITE);
-			if(j == (BLOCK - 1))
+			if(j == (M_BLOCK - 1))
 				my_mlx_pixel_put(player, mapp, x + i, y + j, BLACK);
 			j++;
 		}
@@ -174,6 +174,35 @@ int mouse_movement(int x, int y, t_player *player)
 	return (0);
 }
 
+t_data	*draw_cf(t_player *player)
+{
+	int		ix;
+	int		iy;
+	int		color;
+	char	**map;
+	t_data	*mapp;
+
+	color = BLACK;
+	map = player->vars->map;
+	ix = 0;
+	iy = 0;
+	mapp = new_image(player->vars);
+	// player->vars->last_img = mapp;
+	while (ix < WIDTH)
+	{
+		color = C_COLOR;
+		while (iy < HEIGHT)
+		{
+			my_mlx_pixel_put(player, mapp, ix, iy, color);
+			if (iy == HEIGHT/2)
+				color = F_COLOR;
+			iy++;
+		}
+		iy = 0;
+		ix++;
+	}
+	return (mapp);
+}
 
 t_data	*draw_2d_map(t_player *player)
 {
@@ -187,36 +216,40 @@ t_data	*draw_2d_map(t_player *player)
 	map = player->vars->map;
 	ix = 0;
 	iy = 0;
-	mapp = new_image(player->vars);
-	player->vars->last_img = mapp;
-	while (ix < WIDTH)
+	// mapp = new_image(player->vars);
+
+	void			*p;
+	t_data			*img;
+
+	img = NULL;
+	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
+	p = mlx_new_image(player->vars->mlx, 360, 140);
+	if (!p)
 	{
-		color = C_COLOR;
-		// if (ix >= 1800)
-		while (iy < HEIGHT)
-		{
-			my_mlx_pixel_put(player, mapp, ix, iy, color);
-			if (iy == HEIGHT/2)
-				color = F_COLOR;
-			iy++;
-		}
-		iy = 0;
-		ix++;
+		if (player->vars->last_img)
+			mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
+		exit_with_err(player->vars->collector, MLX);
 	}
-	// ix = 0;
-	// iy = 0;
-	// while(map[iy])
-	// {
-	// 	while(map[iy][ix])
-	// 	{
-	// 		if (map[iy][ix] == '1')
-	// 			draw_wall(mapp, ix, iy);
-	// 		else 
-	// 			draw_nwall(mapp, ix, iy);
-	// 		ix++;
-	// 	}	
-	// 	iy++;
-	// 	ix = 0;
-	// }
-	return (mapp);
+	img->img_ptr = p;
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
+	img->byte_pixel /= 8;
+
+
+
+
+	while(map[iy])
+	{
+		ix = 0;
+		while(map[iy][ix])
+		{
+			if (map[iy][ix] == '1')
+				draw_wall(player, img, ix, iy);
+			else 
+				draw_nwall(player, img, ix, iy);
+			ix++;
+		}	
+		iy++;
+	}
+	
+	return (img);
 }

@@ -39,12 +39,12 @@ void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
 	tmp = data->img_addr;
 	if(!tmp)
 	    exit_with_err(player->vars->collector, MLX);
-	i = (y * data->size_line) + ((data->byte_pixel) * x);
-	// *(unsigned int *)tmp = color;
-	tmp[i] = color;
-	tmp[i+1] = color >>= 8;
-	tmp[i+2] = color >>= 8;
-	tmp[i+3] = color >>= 8;
+	tmp = tmp  + (y * data->size_line) + ((data->byte_pixel) * x);
+	*(unsigned int *)tmp = color;
+	// tmp[i] = color;
+	// tmp[i+1] = color >>= 8;
+	// tmp[i+2] = color >>= 8;
+	// tmp[i+3] = color >>= 8;
 }
 
 char	*ft_mstrdup(t_collector **collector, char *s1)
@@ -128,6 +128,8 @@ t_player *init(int argc, char const *argv[])
 	player->vars->dn = new_image_from_xpm(player, "./Ext/dn.xpm");
 	player->vars->lf = new_image_from_xpm(player, "./Ext/lf.xpm");
 	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
+	player->vars->fix_img = draw_cf(player);
+	player->vars->m_fix_img = draw_2d_map(player);
 	return (player);
 }
 
@@ -139,18 +141,18 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	j = -5; 
 	k = 0; 
 
-	// x = (int)player->p_x;
-	// y = (int)player->p_y;
-	// while(i < 5)
-	// {
-	// 	while(j < 5)
-	// 	{
-	// 		my_mlx_pixel_put(p_img, x + i, y + j, BLUE);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// 	j = -5;
-	// }
+	x = (int)player->p_x/ M_BLOCK;
+	y = (int)player->p_y/ M_BLOCK;
+	while(i < 5)
+	{
+		while(j < 5)
+		{
+			my_mlx_pixel_put(player, p_img, x + i, y + j, BLUE);
+			j++;
+		}
+		i++;
+		j = -5;
+	}
 	return (p_img);
 }
 
@@ -335,13 +337,13 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     float x = (int)player->p_x;
     float y = (int)player->p_y;
 
-//     while ( i < steps)
-//     {
-// 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-//         x += x_inc;
-//         y += y_inc;
-//         i++;
-//     }
+    while ( i < steps)
+    {
+		my_mlx_pixel_put(player, p_img, (int)x, (int)y, color);
+        x += x_inc;
+        y += y_inc;
+        i++;
+    }
 }
 
 float	ft_pow(float n)
