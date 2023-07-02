@@ -111,6 +111,8 @@ t_player *init(int argc, char const *argv[])
 		ft_collectorclear(vars->collector, ALL);
 		exit (1);
 	}
+
+
 	player->direction = NULL;
 	player->vars = vars;
 	player->vars->last_img = NULL;
@@ -130,6 +132,10 @@ t_player *init(int argc, char const *argv[])
 	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);
+	vec2 = NULL;
+ 	vec2 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
+	vec1 = NULL;
+ 	vec1 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
 	return (player);
 }
 

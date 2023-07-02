@@ -1,6 +1,5 @@
 #include "Cub.h"
 
-
 // Global variables
 int frameCount = 0;
 int lastFrameTime = 0;
@@ -102,11 +101,11 @@ void update_scene(t_player *player)
 	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
     p_img = new_image(player->vars);
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
-	// draw_player(player, p_img);
+	draw_player(player, p_img);
 	ray = cast_rays(player, p_img, ray);
 
 
-	// draw_3d_map(player, p_img, ray);
+	draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
@@ -116,17 +115,17 @@ void update_scene(t_player *player)
 	// player->vars->last_img = NULL;
 }
 
+
 float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
-    t_vector    *vec1;
-    t_vector    *vec2;
     int         v_x;
     int         v_y;
     int         h_x;
     int         h_y;
 
-    vec1 = find_vertical_iterset(player, ray);
-    vec2 = find_horizontal_iterset(player, ray);
+
+    vec1 = find_vertical_iterset(player, ray, vec1);
+    vec2 = find_horizontal_iterset(player, ray, vec2);
     
     v_x = ft_abs(player->p_x - vec1->x);
     // v_y = ft_abs(player->p_y - vec1->y);
@@ -135,7 +134,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     // h_y = ft_abs(player->p_y - vec2->y);
     if ((v_x < h_x))
     {
-        draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
+        // draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         if (ray->angle > M_PI / 2 && ray->angle < 3 * M_PI / 2)
             ray->side = VERT_L;
         else
@@ -146,7 +145,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     }
     else
     {
-        draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
+        // draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
         if (ray->angle > M_PI && ray->angle < 2 * M_PI)
             ray->side = HORZ_U;
         else
@@ -236,59 +235,107 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	return (0);
 }
 
-t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
-{
-	t_vector *vector;
-    int i = 0;
-    float    stepy;
-    float    stepx;
 
-	vector = NULL;
-	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
+
+
+// t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
+// {
+// 	t_vector *vector;
+//     int i = 0;
+//     float    stepy;
+//     float    stepx;
+
+// 	vector = NULL;
+// 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
+//     if ((ray->angle > 0 && ray->angle < M_PI))
+//     {
+//         stepy = BLOCK;
+//         stepx = (stepy / ray->t1);
+//         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
+//         vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
+//         while (i < 36)
+//         {
+//             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
+//                 return (vector);
+//             vector->y += stepy;
+//             vector->x += stepx;
+//             i++;
+//         }
+//         return (vector);
+//     }
+//     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
+//     {
+//         stepy = -BLOCK;
+//         stepx = (BLOCK / ray->t2);
+//         vector->y = floor(player->p_y / BLOCK) * BLOCK ;
+//         vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;   
+//         while (i < 36)
+//         {
+//             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
+//                 return (vector);
+//             vector->x += stepx;
+//             vector->y += stepy;
+//             i++;
+//         }
+//         return (vector);
+//     }
+//     return (vector);
+// }
+
+
+t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector)
+{
+    float stepy, stepx;
+    int i = 0;
+
     if ((ray->angle > 0 && ray->angle < M_PI))
     {
         stepy = BLOCK;
         stepx = (stepy / ray->t1);
-        vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
-        vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
+        float ceil_p_y = ceil(player->p_y / BLOCK) * BLOCK;
+        vector->y = ceil_p_y;
+        vector->x = player->p_x + ((ceil_p_y - player->p_y) / ray->t1);
         while (i < 36)
         {
             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
-                return (vector);
+                return vector;
             vector->y += stepy;
             vector->x += stepx;
             i++;
         }
-        return (vector);
+        return vector;
     }
     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
     {
         stepy = -BLOCK;
         stepx = (BLOCK / ray->t2);
-        vector->y = floor(player->p_y / BLOCK) * BLOCK ;
-        vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;   
+        float floor_p_y = floor(player->p_y / BLOCK) * BLOCK;
+        vector->y = floor_p_y;
+        vector->x = player->p_x + (player->p_y - floor_p_y) / ray->t2;
         while (i < 36)
         {
             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
-                return (vector);
+                return vector;
             vector->x += stepx;
             vector->y += stepy;
             i++;
         }
-        return (vector);
+        return vector;
     }
-    return (vector);
+    return vector;
 }
 
-t_vector *find_vertical_iterset(t_player *player, t_ray *ray)
+
+
+
+
+
+t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
-	t_vector *vector;
     int i = 0;
     float    stepx;
     float    stepy;
 
-	vector = NULL;
-	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
     if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle < 2 * (M_PI))) || (((ray->angle > 0) && (ray->angle < (M_PI / 2)))))
     {
         stepx = BLOCK;

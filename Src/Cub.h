@@ -1,6 +1,7 @@
 #ifndef CUB_H
 #define CUB_H
 
+
 #include <libc.h>
 #include <string.h>
 #include <string.h>
@@ -143,6 +144,12 @@ typedef struct s_ray
 	float 		c;
 }		t_ray;
 
+
+t_vector    *vec2;
+t_vector    *vec1;
+
+
+
 int 	darkenColor(int color, int amount);
 float		ft_sqrt(float nb);
 float		ft_pow(float n);
@@ -160,9 +167,16 @@ t_data		*draw_2d_map(t_player *player);
 void 		rotate_vector(t_vector *direction, float angle);
 int 		mouse_movement(int x, int y, t_player *player);
 void    	exit_with_err(t_collector **collector, t_flag cause);
-t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
+
+
+// t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);
+// t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
+t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector);
+t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
+
+
+
 int 		check_collision_v2(t_player *player, int x, int y);
-t_vector	*find_vertical_iterset(t_player *player, t_ray *ray);
 int 		check_collision(t_player *player, int x, int y);
 void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
