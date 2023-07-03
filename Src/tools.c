@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
+/*   Updated: 2023/07/03 14:08:05 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cub.h"
 
 int ft_ext(t_player *player)
@@ -88,6 +100,16 @@ int	count_alloc_size(t_collector **collector, int fd)
 	return (size+=1);
 }
 
+void strt()
+{
+	#if (WIDTH > 2560) || (HEIGHT > 1396)
+		#undef WIDTH
+		#undef HEIGHT
+		#define WIDTH 2560
+		#define HEIGHT 1396
+	#endif
+}
+
 t_player *init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
@@ -95,6 +117,7 @@ t_player *init(int argc, char const *argv[])
 	t_player 			*player;
 
 	
+	strt();
 	collector = NULL;
 	player = NULL;
 	vars = NULL;
@@ -141,9 +164,21 @@ t_player *init(int argc, char const *argv[])
 	return (player);
 }
 
+void draw_triangle(t_player *player, t_data *p_r_img, int x, int y, int color)
+{
+    for(int i = 0; i < 30; i++)
+    {
+        for(int j = 0; j < i; j++)
+        {
+            my_mlx_pixel_put(player, p_r_img, x + j, y + i, color);
+        }
+    }
+}
+
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
-
+	// draw_triangle(player, p_img, (int)player->p_x/5, (int)player->p_y/5, BLUE);
+	draw_point(player, p_img, player->p_x/5, player->p_y/5, RED);
 	return (p_img);
 }
 
@@ -225,7 +260,7 @@ int check_collision(t_player *player, int x, int y)
 	return (1);
 }
 
-void draw_point(t_player *player, int x, int y)
+void draw_point(t_player *player, t_data *img, int x, int y, int color)
 {
     int i, j;
 
@@ -237,7 +272,7 @@ void draw_point(t_player *player, int x, int y)
         {
             while(j < 2)
             {
-                mlx_pixel_put(player->vars->mlx, player->vars->win, x + i, y + j, RED);
+				my_mlx_pixel_put(player, img, x + i, y + j, color);
                 j++;
             }
             i++;

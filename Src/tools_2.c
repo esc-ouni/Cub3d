@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
+/*   Updated: 2023/07/03 14:02:49 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cub.h"
 
 // Global variables
@@ -23,7 +35,7 @@ void updateAndRenderScene(t_player *player)
     char fpsString[20];
     // printf("")
     sprintf(fpsString, "FPS: %.2f", 1000.0 / deltaTime);
-    mlx_string_put(player->vars->mlx, player->vars->win, 1600, 10, 0x000000, fpsString);
+    mlx_string_put(player->vars->mlx, player->vars->win, WIDTH - 150, 10, GREEN, fpsString);
     // printf("")
 
     // Update the last frame time
@@ -111,7 +123,6 @@ void update_scene(t_player *player)
     p_r_img = ft_transparency(player, p_r_img, WIDTH, HEIGHT);
 	draw_player(player, p_r_img);
 	ray = cast_rays(player, p_r_img, ray);
-
 
 	draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);

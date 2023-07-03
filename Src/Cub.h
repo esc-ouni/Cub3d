@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
+/*   Updated: 2023/07/03 14:08:30 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 #define CUB_H
 
@@ -21,10 +33,10 @@
 #define SOUTH 270
 #define WEST  180
 
-#define WIDTH 1800
-#define HEIGHT 700
+#define WIDTH 1400
+#define HEIGHT 800
 #define BLOCK 50
-#define M_BLOCK 8
+#define M_BLOCK 10
 #define PI 3.14159265
 
 #define TRANS 0xFF000000
@@ -56,6 +68,13 @@
 # define K_DN        125
 # define K_R         124
 # define K_L         123
+
+# if (WIDTH > 2560) || (HEIGHT > 1396)
+	#undef WIDTH
+	#undef HEIGHT
+	#define WIDTH 2560
+	#define HEIGHT 1396
+# endif
 
 typedef enum e_flag
 {
@@ -154,6 +173,7 @@ t_vector    *vec;
 int 	darkenColor(int color, int amount);
 float		ft_sqrt(float nb);
 float		ft_pow(float n);
+void 		draw_point(t_player *player, t_data *img, int x, int y, int color);
 float		ft_abs(float n);
 float   	trigo(float angle, t_flag flag);
 float 		rad_to_deg(float angle);
