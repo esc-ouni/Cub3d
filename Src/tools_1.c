@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 13:54:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:05:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void move_right(t_player *player)
 {
 	float angle = up_degree(player->angle, 90);
 
-	int x = 40 * trigo(angle, COS);
-	int y = 40 * trigo(angle, SIN);
+	int x = MV_SP * trigo(angle, COS);
+	int y = MV_SP * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
 	{
-		player->p_x += x;
-		player->p_y += y;
+		// player->p_x += x;
+		// player->p_y += y;
 		// update_scene(player);
 		updateAndRenderScene(player);
 
@@ -31,27 +31,27 @@ void move_right(t_player *player)
 void move_left(t_player *player)
 {
 	float angle = up_degree(player->angle, -90);
-	int x = 40 * trigo(angle, COS);
-	int y = 40 * trigo(angle, SIN);
+	int x = MV_SP * trigo(angle, COS);
+	int y = MV_SP * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
 	{
-		player->p_x += x;
-		player->p_y += y;
+		// player->p_x += x;
+		// player->p_y += y;
 		// update_scene(player);
 		updateAndRenderScene(player);
 	}
 }
 void move_up(t_player *player)
 {
-	int x = 40 * trigo(player->angle, COS);
-	int y = 40 * trigo(player->angle, SIN);
+	int x = MV_SP * trigo(player->angle, COS);
+	int y = MV_SP * trigo(player->angle, SIN);
 
 	// printf("x : %f, y : %f\n", player->p_x, player->p_y);
 	if (check_collision(player, x, y))
 	{
-		player->p_x += x;
-		player->p_y += y;
+		// player->p_x += x;
+		// player->p_y += y;
 		// printf("x : %f, y : %f\n", player->p_x, player->p_y);
 		updateAndRenderScene(player);
 		// update_scene(player);
@@ -59,13 +59,13 @@ void move_up(t_player *player)
 }
 void move_down(t_player *player)
 {
-	int x = 40 * trigo(player->angle, COS);
-	int y = 40 * trigo(player->angle, SIN);
+	int x = MV_SP * trigo(player->angle, COS);
+	int y = MV_SP * trigo(player->angle, SIN);
 
 	if (check_collision(player, -x, -y))
 	{
-		player->p_x -= x;
-		player->p_y -= y;
+		// player->p_x -= x;
+		// player->p_y -= y;
 		// update_scene(player);
 		updateAndRenderScene(player);
 
@@ -233,8 +233,8 @@ t_data	*draw_cf(t_player *player)
 
 t_data	*draw_2d_map(t_player *player)
 {
-	int m_w;
-	int m_h;
+	int 	m_w;
+	int 	m_h;
 	int		ix;
 	int		iy;
 	int		color;
@@ -251,7 +251,9 @@ t_data	*draw_2d_map(t_player *player)
 	while (map[i])
 		i++;
 	m_h = i;
-	// mapp = new_image(player->vars);
+	
+	player->vars->map_w =  m_w;
+	player->vars->map_h =  m_h;
 
 	void			*p;
 	t_data			*img;

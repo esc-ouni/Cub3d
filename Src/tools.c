@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 14:08:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:06:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ int	count_alloc_size(t_collector **collector, int fd)
 
 void strt()
 {
-	#if (WIDTH > 2560) || (HEIGHT > 1396)
-		#undef WIDTH
-		#undef HEIGHT
-		#define WIDTH 2560
-		#define HEIGHT 1396
-	#endif
+	// #if (WIDTH > 2560) || (HEIGHT > 1396)
+	// 	#undef WIDTH
+	// 	#undef HEIGHT
+	// 	#define WIDTH 2560
+	// 	#define HEIGHT 1396
+	// #endif
 }
 
 t_player *init(int argc, char const *argv[])
@@ -206,12 +206,44 @@ int check_collision_v2(t_player *player, int x, int y)
 
 int check_collision(t_player *player, int x, int y)
 {
-	int i = 40;
-	float px;
-	float py;
+	int i = MV_SP;
+	float px = player->p_x;
+	float py = player->p_y;
 	int m_y;
 	int m_x;
 
+	float x_inc = ((float)x/MV_SP);
+	float y_inc = ((float)y/MV_SP);
+
+	m_x = (floor((px + x)/BLOCK));
+	m_y = (floor((py + y)/BLOCK));
+
+	// printf("x : %d, y : %d\n", m_x, m_y);
+	if (m_x <= 0 || m_y <= 0)
+		return 0;
+	if (m_x >= player->vars->map_w  || m_y >= player->vars->map_h)
+		return 0;
+
+
+	while(i)
+	{
+		if (player->vars->map[m_y][m_x] == '1')
+			return (0);
+		m_x = (floor((px += x_inc)/BLOCK));
+		m_y = (floor((py += y_inc)/BLOCK));
+		i--;
+	}
+	m_x = (floor((px += x_inc)/BLOCK));
+	m_y = (floor((py += y_inc)/BLOCK));
+	if (player->vars->map[m_y][m_x] == '0')
+	{
+		player->p_x = px;
+		player->p_y = py;
+		return (1);
+	}
+	return (0);
+
+	
 	// if (x >= 0 && y >= 0)
 	// {
 	// 	while(i)
@@ -257,7 +289,7 @@ int check_collision(t_player *player, int x, int y)
 	// 		i--;
 	// 	}
 	// }
-	return (1);
+	// return (1);
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)

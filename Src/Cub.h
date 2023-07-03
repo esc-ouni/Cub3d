@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 14:08:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:06:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@
 #define SOUTH 270
 #define WEST  180
 
+
 #define WIDTH 1400
 #define HEIGHT 800
 #define BLOCK 50
+#define MV_SP 40
 #define M_BLOCK 10
 #define PI 3.14159265
 
@@ -129,6 +131,8 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	char			**map;
+	int				map_w;
+	int				map_h;
 	t_data 			*up;
 	t_data 			*dn;
 	t_data 			*lf;
