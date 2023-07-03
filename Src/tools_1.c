@@ -35,10 +35,12 @@ void move_up(t_player *player)
 	int x = 40 * trigo(player->angle, COS);
 	int y = 40 * trigo(player->angle, SIN);
 
+	// printf("x : %f, y : %f\n", player->p_x, player->p_y);
 	if (check_collision(player, x, y))
 	{
 		player->p_x += x;
 		player->p_y += y;
+		// printf("x : %f, y : %f\n", player->p_x, player->p_y);
 		updateAndRenderScene(player);
 		// update_scene(player);
 	}
@@ -219,16 +221,24 @@ t_data	*draw_cf(t_player *player)
 
 t_data	*draw_2d_map(t_player *player)
 {
+	int m_w;
+	int m_h;
 	int		ix;
 	int		iy;
 	int		color;
 	char	**map;
 	t_data	*mapp;
 
+	int i = 0;
+
 	color = BLACK;
 	map = player->vars->map;
 	ix = 0;
 	iy = 0;
+	m_w = ft_strlen(map[0]);
+	while (map[i])
+		i++;
+	m_h = i;
 	// mapp = new_image(player->vars);
 
 	void			*p;
@@ -236,7 +246,7 @@ t_data	*draw_2d_map(t_player *player)
 
 	img = NULL;
 	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
-	p = mlx_new_image(player->vars->mlx, 360, 140);
+	p = mlx_new_image(player->vars->mlx, m_w * M_BLOCK, m_h * M_BLOCK);
 	if (!p)
 	{
 		if (player->vars->last_img)

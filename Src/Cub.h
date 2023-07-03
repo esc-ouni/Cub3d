@@ -24,7 +24,7 @@
 #define WIDTH 1800
 #define HEIGHT 700
 #define BLOCK 50
-#define M_BLOCK 10
+#define M_BLOCK 8
 #define PI 3.14159265
 
 #define TRANS 0xFF000000
@@ -179,7 +179,8 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
 
 int 		check_collision_v2(t_player *player, int x, int y);
 int 		check_collision(t_player *player, int x, int y);
-void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
+// void 		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
+void 		draw_line(t_player *player, t_data *p_img, int color, float x, float y, float x2, float y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 
