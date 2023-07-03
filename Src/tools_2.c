@@ -61,7 +61,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
     int     color;
     float   d_h = HEIGHT/2;
 
-    c = ray[i].c;
+    c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
     i = 0;
     while (i < WIDTH)
     {
@@ -137,11 +137,11 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     vec2 = find_horizontal_iterset(player, ray, vec2);
     
     v_x = ft_abs(player->p_x - vec1->x);
-    // v_y = ft_abs(player->p_y - vec1->y);
+    v_y = ft_abs(player->p_y - vec1->y);
     
     h_x = ft_abs(player->p_x - vec2->x);
-    // h_y = ft_abs(player->p_y - vec2->y);
-    if ((v_x < h_x))
+    h_y = ft_abs(player->p_y - vec2->y);
+    if ((v_x < h_x) || (v_y < h_y))
     {
         // draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         if (ray->angle > M_PI / 2 && ray->angle < 3 * M_PI / 2)
@@ -163,7 +163,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
     }
-    ray->length = 0;
+    ray->length = 10000;
     return (0);
 }
 
@@ -171,19 +171,16 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
     float angle = player->angle - deg_to_rad(30);
 	int i = 0;
-    // draw_line(player, p_img, BLUE, 0, 0);
 
-    float c = ((700 * 50) / trigo(deg_to_rad(30), TAN));
     while (i < WIDTH)
     {
-        angle = up_degree(angle, (60.0/WIDTH));
         ray[i].p_x = player->p_x;
         ray[i].p_y = player->p_y;
-        ray[i].angle = angle;
+        ray[i].angle = up_degree(angle, (60.0/WIDTH));
+        angle = up_degree(angle, (60.0/WIDTH));
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
-        ray[i].c = c;
-        draw_ray(player, p_img, RED, &ray[i]);
+        draw_ray(player, p_img, BLUE, &ray[i]);
         i++;
     }
     return (&(ray[0]));
@@ -302,9 +299,8 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
     {
         stepy = BLOCK;
         stepx = (stepy / ray->t1);
-        float ceil_p_y = ceil(player->p_y / BLOCK) * BLOCK;
-        vector->y = ceil_p_y;
-        vector->x = player->p_x + ((ceil_p_y - player->p_y) / ray->t1);
+        vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
+        vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
         while (i < 36)
         {
             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
@@ -319,9 +315,8 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
     {
         stepy = -BLOCK;
         stepx = (BLOCK / ray->t2);
-        float floor_p_y = floor(player->p_y / BLOCK) * BLOCK;
-        vector->y = floor_p_y;
-        vector->x = player->p_x + (player->p_y - floor_p_y) / ray->t2;
+        vector->y = floor(player->p_y / BLOCK) * BLOCK;
+        vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
         while (i < 36)
         {
             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
