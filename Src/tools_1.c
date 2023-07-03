@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 16:05:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/03 17:58:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ void move_right(t_player *player)
 	int y = MV_SP * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
-	{
-		// player->p_x += x;
-		// player->p_y += y;
-		// update_scene(player);
 		updateAndRenderScene(player);
-
-	}
 }
 void move_left(t_player *player)
 {
@@ -35,27 +29,15 @@ void move_left(t_player *player)
 	int y = MV_SP * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
-	{
-		// player->p_x += x;
-		// player->p_y += y;
-		// update_scene(player);
 		updateAndRenderScene(player);
-	}
 }
 void move_up(t_player *player)
 {
 	int x = MV_SP * trigo(player->angle, COS);
 	int y = MV_SP * trigo(player->angle, SIN);
 
-	// printf("x : %f, y : %f\n", player->p_x, player->p_y);
 	if (check_collision(player, x, y))
-	{
-		// player->p_x += x;
-		// player->p_y += y;
-		// printf("x : %f, y : %f\n", player->p_x, player->p_y);
 		updateAndRenderScene(player);
-		// update_scene(player);
-	}
 }
 void move_down(t_player *player)
 {
@@ -63,13 +45,7 @@ void move_down(t_player *player)
 	int y = MV_SP * trigo(player->angle, SIN);
 
 	if (check_collision(player, -x, -y))
-	{
-		// player->p_x -= x;
-		// player->p_y -= y;
-		// update_scene(player);
 		updateAndRenderScene(player);
-
-	}
 }
 
 float	up_degree(float angle, float add_angle)
@@ -98,14 +74,12 @@ void rotate_right(t_player *player)
 {
 	rotate_vector(player->direction, 15);
 	update_degree(player, 15);
-	// update_scene(player);
 	updateAndRenderScene(player);
 }
 void rotate_left(t_player *player)
 {
 	rotate_vector(player->direction, -15);
 	update_degree(player, -15);
-	// update_scene(player);
 	updateAndRenderScene(player);
 
 }
