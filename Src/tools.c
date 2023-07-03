@@ -177,51 +177,51 @@ int check_collision(t_player *player, int x, int y)
 	int m_y;
 	int m_x;
 
-	if (x >= 0 && y >= 0)
-	{
-		while(i)
-		{
-			m_x = ((px += (float)x/40)/BLOCK);
-			m_y = ((py += (float)y/40)/BLOCK);
+	// if (x >= 0 && y >= 0)
+	// {
+	// 	while(i)
+	// 	{
+	// 		m_x = ((px += (float)x/40)/BLOCK);
+	// 		m_y = ((py += (float)y/40)/BLOCK);
 
-			if (player->vars->map[m_y][m_x] == '1')
-				return (0);
-			i--;
-		}
-	}
-	else if (x < 0 && y < 0)
-	{
-		while(i)
-		{
-			m_x = ((px += (float)x/40)/BLOCK);
-			m_y = ((py += (float)y/40)/BLOCK);
-			if (player->vars->map[m_y][m_x] == '1')
-				return (0);
-			i--;
-		}
-	}
-	else if (x > 0 && y < 0)
-	{
-		while(i)
-		{
-			m_x = ((px += (float)x/40)/BLOCK);
-			m_y = ((py += (float)y/40)/BLOCK);
-			if (player->vars->map[m_y][m_x] == '1')
-				return (0);
-			i--;
-		}
-	}
-	else if (x < 0 && y > 0)
-	{
-		while(i)
-		{
-			m_x = ((px += (float)x/40)/BLOCK);
-			m_y = ((py += (float)y/40)/BLOCK);
-			if (player->vars->map[m_y][m_x] == '1')
-				return (0);
-			i--;
-		}
-	}
+	// 		if (player->vars->map[m_y][m_x] == '1')
+	// 			return (0);
+	// 		i--;
+	// 	}
+	// }
+	// else if (x < 0 && y < 0)
+	// {
+	// 	while(i)
+	// 	{
+	// 		m_x = ((px += (float)x/40)/BLOCK);
+	// 		m_y = ((py += (float)y/40)/BLOCK);
+	// 		if (player->vars->map[m_y][m_x] == '1')
+	// 			return (0);
+	// 		i--;
+	// 	}
+	// }
+	// else if (x > 0 && y < 0)
+	// {
+	// 	while(i)
+	// 	{
+	// 		m_x = ((px += (float)x/40)/BLOCK);
+	// 		m_y = ((py += (float)y/40)/BLOCK);
+	// 		if (player->vars->map[m_y][m_x] == '1')
+	// 			return (0);
+	// 		i--;
+	// 	}
+	// }
+	// else if (x < 0 && y > 0)
+	// {
+	// 	while(i)
+	// 	{
+	// 		m_x = ((px += (float)x/40)/BLOCK);
+	// 		m_y = ((py += (float)y/40)/BLOCK);
+	// 		if (player->vars->map[m_y][m_x] == '1')
+	// 			return (0);
+	// 		i--;
+	// 	}
+	// }
 	return (1);
 }
 
