@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 10:33:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 11:03:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct s_ray
 {
 	float		p_x;
 	float		p_y;
-	int			length;
+	float			length;
 	float		angle;
 	float		t1;
 	float		t2;
