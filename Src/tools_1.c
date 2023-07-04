@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 17:58:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 10:30:58 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ t_data	*draw_cf(t_player *player)
 	map = player->vars->map;
 	ix = 0;
 	iy = 0;
-	mapp = new_image(player->vars);
+	mapp = new_image(player->vars, WIDTH, HEIGHT, NTMP);
 	// player->vars->last_img = mapp;
 	while (ix < WIDTH)
 	{
@@ -213,8 +213,9 @@ t_data	*draw_2d_map(t_player *player)
 	int		iy;
 	int		color;
 	char	**map;
-	t_data	*mapp;
+	t_data	*img;
 
+	img = NULL;
 	int i = 0;
 
 	color = BLACK;
@@ -228,26 +229,7 @@ t_data	*draw_2d_map(t_player *player)
 	
 	player->vars->map_w =  m_w;
 	player->vars->map_h =  m_h;
-
-	void			*p;
-	t_data			*img;
-
-	img = NULL;
-	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
-	p = mlx_new_image(player->vars->mlx, m_w * M_BLOCK, m_h * M_BLOCK);
-	if (!p)
-	{
-		if (player->vars->last_img)
-			mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
-		exit_with_err(player->vars->collector, MLX);
-	}
-	img->img_ptr = p;
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
-	img->byte_pixel /= 8;
-
-
-
-
+	img = new_image(player->vars, m_w * M_BLOCK, m_h * M_BLOCK, NTMP);
 	while(map[iy])
 	{
 		ix = 0;

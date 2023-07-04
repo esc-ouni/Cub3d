@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 16:06:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 10:33:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_vector    *vec2;
 t_vector    *vec1;
 
 t_vector    *vec;
+t_ray  		*ray;
 
 
 int 	darkenColor(int color, int amount);
@@ -218,7 +219,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 t_data	*draw_cf(t_player *player);
 void	debug(void);
 int 	ft_ext(t_player *player);
-t_data	*new_image(t_vars *vars);
+t_data	*new_image(t_vars *vars, int width, int height, t_flag type);
 void	free_tmp(t_collector **collector);
 void	free_ntmp(t_collector **collector);
 void	head_alloc(t_collector **collector);

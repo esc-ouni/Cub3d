@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 16:06:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 10:33:58 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ t_player *init(int argc, char const *argv[])
  	vec1 = h_malloc(&collector, sizeof(t_vector), vec1, NTMP);
 	vec = NULL;
  	vec = h_malloc(&collector, sizeof(t_vector), vec, NTMP);
+	ray = NULL;
+	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
 	return (player);
 }
 

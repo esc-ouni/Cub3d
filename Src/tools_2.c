@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 14:02:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 10:33:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,9 @@ void update_scene(t_player *player)
 {
 	t_data *p_img;
 	t_data *p_r_img;
-	t_ray  *ray;
 
-	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, TMP);
-    p_img = new_image(player->vars);
-    p_r_img = new_image(player->vars);
+    p_img = new_image(player->vars, WIDTH, HEIGHT, TMP);
+    p_r_img = new_image(player->vars, WIDTH, HEIGHT, TMP);
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
     p_r_img = ft_transparency(player, p_r_img, WIDTH, HEIGHT);
 	draw_player(player, p_r_img);
