@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 10:33:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 11:57:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,6 @@ t_player *init(int argc, char const *argv[])
 		ft_collectorclear(vars->collector, ALL);
 		exit (1);
 	}
-
-
 	player->direction = NULL;
 	player->vars = vars;
 	player->vars->last_img = NULL;
@@ -155,6 +153,7 @@ t_player *init(int argc, char const *argv[])
 	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);
+	player->m = 0;
 	vec2 = NULL;
  	vec2 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
 	vec1 = NULL;

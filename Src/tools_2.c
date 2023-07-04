@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 11:04:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 11:51:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,11 @@ void update_scene(t_player *player)
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
-	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, 0, 0);
-	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_r_img->img_ptr, 0, 0);
+    if (player->m)
+    {
+        mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, 0, 0);
+        mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_r_img->img_ptr, 0, 0);
+    }
     // if (player->vars->last_img)
 	//     mlx_destroy_image(player->vars->mlx, p_img->img_ptr);
 	// player->vars->last_img = NULL;

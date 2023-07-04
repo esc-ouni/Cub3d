@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 11:03:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 12:05:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,14 @@
 #define GREY 0x005A5A5A
 #define L_GREY 0x00d3d3d3
 
+#define M_BLACK 0x99000000
+#define M_WHITE 0x99FFFFFF
+
 #define BLACK 0x00000000
+#define WHITE 0x00FFFFFF
+
 #define GREEN 0x00008000
 #define V_GREEN 0x009FE2BF
-#define WHITE 0x00FFFFFF
 #define V_WHITE 0x006C705D
 #define BLUE 0x00030DFF
 #define RED 0x00FF0D03
@@ -149,6 +153,7 @@ typedef struct s_player
 {
 	float		p_x;
 	float		p_y;
+	int         m;
 	float		angle;
 	t_vector 	*direction;
 	t_vars	*vars;
@@ -158,7 +163,7 @@ typedef struct s_ray
 {
 	float		p_x;
 	float		p_y;
-	float			length;
+	float		length;
 	float		angle;
 	float		t1;
 	float		t2;
@@ -193,6 +198,8 @@ t_data		*draw_2d_map(t_player *player);
 void 		rotate_vector(t_vector *direction, float angle);
 int 		mouse_movement(int x, int y, t_player *player);
 void    	exit_with_err(t_collector **collector, t_flag cause);
+
+t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height);
 
 
 // t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray);

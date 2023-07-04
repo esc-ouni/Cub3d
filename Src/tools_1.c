@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 10:30:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 12:04:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,31 @@ void rotate_left(t_player *player)
 
 int	handler(int key, t_player *player)
 {
+	// printf("%d\n", key);
 	if (key == 53 || key == 17)
 	{
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
-	if (key == M_UP)
+	if (key == 46)
+	{
+		if (player->m == 1)	
+			player->m = 0;
+		else
+			player->m = 1;
+		updateAndRenderScene(player);
+	}
+	else if (key == M_UP)
 		move_up(player);
-	if (key == M_DN)
+	else if (key == M_DN)
 		move_down(player);
-	if (key == K_R)
+	else if (key == K_R)
 		rotate_right(player);
-	if (key == K_L)
+	else if (key == K_L)
 		rotate_left(player);
-	if (key == M_RG)
+	else if (key == M_RG)
 		move_right(player);
-	if (key == M_LF)
+	else if (key == M_LF)
 		move_left(player);
 	return(0);
 }
@@ -117,7 +126,7 @@ void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 	{
 		while(j + 1 < M_BLOCK)
 		{
-			my_mlx_pixel_put(player, mapp, x + i, y + j, BLACK);
+			my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
 		}
 		i++;
@@ -136,9 +145,9 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 	{
 		while(j + 1 < M_BLOCK)
 		{
-			my_mlx_pixel_put(player, mapp, x + i, y + j, WHITE);
+			my_mlx_pixel_put(player, mapp, x + i, y + j, M_WHITE);
 			if(j == (M_BLOCK - 1))
-				my_mlx_pixel_put(player, mapp, x + i, y + j, BLACK);
+				my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
 		}
 		i++;
@@ -218,7 +227,7 @@ t_data	*draw_2d_map(t_player *player)
 	img = NULL;
 	int i = 0;
 
-	color = BLACK;
+	color = M_BLACK;
 	map = player->vars->map;
 	ix = 0;
 	iy = 0;
@@ -230,6 +239,7 @@ t_data	*draw_2d_map(t_player *player)
 	player->vars->map_w =  m_w;
 	player->vars->map_h =  m_h;
 	img = new_image(player->vars, m_w * M_BLOCK, m_h * M_BLOCK, NTMP);
+	// img = ft_transparency(player, img,  m_w * M_BLOCK, m_h * M_BLOCK);
 	while(map[iy])
 	{
 		ix = 0;
