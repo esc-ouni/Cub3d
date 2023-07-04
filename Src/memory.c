@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 10:24:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 13:26:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
 	p = mlx_xpm_file_to_image(player->vars->mlx, file_dstination, &width, &height);
 	if (!p)
 	{
-		if (player->vars->last_img)
-			mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
+		// if (player->vars->last_img)
+		// 	mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
 		exit_with_err(player->vars->collector, MLX);
 	}
 	img->img_ptr = p;
