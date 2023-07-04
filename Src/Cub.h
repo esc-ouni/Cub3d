@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 12:05:31 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 13:56:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 #define GREY 0x005A5A5A
 #define L_GREY 0x00d3d3d3
 
-#define M_BLACK 0x99000000
-#define M_WHITE 0x99FFFFFF
+#define M_BLACK 0x88000000
+#define M_WHITE 0x88FFFFFF
 
 #define BLACK 0x00000000
 #define WHITE 0x00FFFFFF
