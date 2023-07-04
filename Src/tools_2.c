@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 13:57:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 14:04:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     h_y = ft_abs(player->p_y - vec2->y);
     if ((v_x < h_x) || (v_y < h_y))
     {
-        // draw_line(player, p_img, color, (int)vec1->x, (int)vec1->y);
         if ((ray->angle < ((2 * M_PI)) && (ray->angle > 3 * (2 * M_PI))))
             ray->side = VERT_R;
         else
@@ -163,7 +162,6 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     }
     else
     {
-        // draw_line(player, p_img, color, (int)vec2->x, (int)vec2->y);
         if ((ray->angle > 0 && ray->angle < M_PI))
             ray->side = HORZ_D;
         else

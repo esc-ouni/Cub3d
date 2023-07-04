@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 11:57:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 14:06:26 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,7 @@ void draw_triangle(t_player *player, t_data *p_r_img, int x, int y, int color)
 
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
-	// draw_triangle(player, p_img, (int)player->p_x/5, (int)player->p_y/5, BLUE);
-	draw_point(player, p_img, player->p_x/5, player->p_y/5, RED);
+	draw_point(player, p_img, player->p_x/5, player->p_y/5, BLUE);
 	return (p_img);
 }
 
@@ -187,7 +186,7 @@ void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
 

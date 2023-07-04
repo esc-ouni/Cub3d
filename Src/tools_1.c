@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 13:24:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/04 14:14:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	update_degree(t_player *player, float deg_angle)
 
 void rotate_right(t_player *player)
 {
-	rotate_vector(player->direction, 15);
+	// rotate_vector(player->direction, 15);
 	update_degree(player, 15);
 	updateAndRenderScene(player);
 }
 void rotate_left(t_player *player)
 {
-	rotate_vector(player->direction, -15);
+	// rotate_vector(player->direction, -15);
 	update_degree(player, -15);
 	updateAndRenderScene(player);
 
@@ -160,27 +160,22 @@ int mouse_movement(int x, int y, t_player *player)
 	(void)y;
 	static int last_pos;
 
-	// if (x >= 0 && x <= WIDTH)
-	// {
-		if (x > last_pos)
-		{
-			rotate_vector(player->direction, ((x - last_pos)/3));
-			update_degree(player, ((x - last_pos)/3));
-			// update_scene(player);
-			updateAndRenderScene(player);
-
-			last_pos = x;
-		}
-		else if (x < last_pos)
-		{
-			rotate_vector(player->direction, ((x - last_pos)/3));
-			update_degree(player, ((x - last_pos)/3));
-			// update_scene(player);
-			updateAndRenderScene(player);
-
-			last_pos = x;
-		}
-	// }
+	if (x > last_pos)
+	{
+		rotate_vector(player->direction, ((x - last_pos)/3));
+		// update_degree(player, ((x - last_pos)/5));
+		update_degree(player, 5);
+		updateAndRenderScene(player);
+		last_pos = x;
+	}
+	else if (x < last_pos)
+	{
+		rotate_vector(player->direction, ((x - last_pos)/3));
+		// update_degree(player, ((x - last_pos)/5));
+		// update_degree(player, -5);
+		updateAndRenderScene(player);
+		last_pos = x;
+	}
 	return (0);
 }
 
@@ -197,7 +192,6 @@ t_data	*draw_cf(t_player *player)
 	ix = 0;
 	iy = 0;
 	mapp = new_image(player->vars, WIDTH, HEIGHT, NTMP);
-	// player->vars->last_img = mapp;
 	while (ix < WIDTH)
 	{
 		color = C_COLOR;
