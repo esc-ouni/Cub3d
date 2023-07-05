@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 13:56:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/05 13:52:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 #define HEIGHT 800
 #define BLOCK 50
 #define MV_SP 40
-#define M_BLOCK 10
+#define M_BLOCK 41
 #define PI 3.14159265
 
 #define TRANS 0xFF000000
@@ -89,6 +89,7 @@ typedef enum e_flag
 	NTMP,
 	ARGS,
 	OPEN,
+	MAP,
 	TMP,
 	ALL,
 	MLX,

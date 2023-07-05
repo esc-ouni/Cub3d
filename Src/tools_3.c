@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/03 13:54:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/05 13:54:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void    exit_with_err(t_collector **collector, t_flag cause)
 		write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
     else if (cause == OPEN)
 		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
+    else if (cause == MAP)
+		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
     ft_collectorclear(collector, ALL);
     exit (1);
 }
