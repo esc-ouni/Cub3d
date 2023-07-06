@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 14:06:26 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/06 10:53:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ t_player *init(int argc, char const *argv[])
 	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);
+	player->factor = BLOCK / M_BLOCK;
 	player->m = 0;
 	vec2 = NULL;
  	vec2 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
@@ -178,7 +179,7 @@ void draw_triangle(t_player *player, t_data *p_r_img, int x, int y, int color)
 
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
-	draw_point(player, p_img, player->p_x/5, player->p_y/5, BLUE);
+	draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
 	return (p_img);
 }
 
@@ -430,8 +431,8 @@ void draw_line(t_player *player, t_data *p_img, int color, float x, float y, flo
     // float dx = 20 * trigo(player->angle, COS);
     // float dy = 20 * trigo(player->angle, SIN);
 
-    float dx = x2/5 - x/5;
-    float dy = y2/5 - y/5;
+    float dx = x2/player->factor - x/player->factor;
+    float dy = y2/player->factor - y/player->factor;
 
     float steps = ft_abs(dy);
 	if (ft_abs(dx) > ft_abs(dy))

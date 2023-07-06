@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/05 13:52:31 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/06 10:56:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 #define HEIGHT 800
 #define BLOCK 50
 #define MV_SP 40
-#define M_BLOCK 41
+#define M_BLOCK 10
 #define PI 3.14159265
 
 #define TRANS 0xFF000000
@@ -156,6 +156,7 @@ typedef struct s_player
 	float		p_y;
 	int         m;
 	float		angle;
+	float		factor;
 	t_vector 	*direction;
 	t_vars	*vars;
 }		t_player;
