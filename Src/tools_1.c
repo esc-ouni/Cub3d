@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/05 13:50:31 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:45:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,6 @@ t_data	*draw_2d_map(t_player *player)
 	while (map[i])
 		i++;
 	m_h = i;
-	
 	player->vars->map_w =  m_w;
 	player->vars->map_h =  m_h;
 	if ((m_w * M_BLOCK >= WIDTH) || (m_h * M_BLOCK >= HEIGHT))

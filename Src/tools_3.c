@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 11:39:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:47:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void    check_map(t_collector **collector, int argc, char const *argv[])
 
 char **get_map(t_collector **collector, int argc, char const *argv[])
 {
-	int	fd;
-	char **map;
-	char *s;
-	int i;
-	int i2;
-    int itsmap;
+	int	    fd;
+	char    **map;
+	char    *s;
+	int     i;
+	int     i2;
+    int     itsmap;
 
     itsmap = 0;
 	i = 0;
@@ -85,18 +85,20 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
 
 char **parse_file(t_collector **collector, int argc, char const *argv[])
 {
+    char **map;
     int fd;
 
     fd = 0;
-	if (argc == 2 && argv[1])   //to_prot
+	if (argc == 2 && argv[1])
 	{
         fd = open(argv[1], O_RDONLY);
         if (fd == -1)
             exit_with_err(collector, OPEN);
+        map = get_map(collector, argc, argv);
         check_errs(collector, argc, argv);
         // check_dups();
         // check_map();  
-        return (get_map(collector, argc, argv));
+        return (map);
 	}
     exit_with_err(collector, ARGS);
     return (NULL);
