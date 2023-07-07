@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 14:04:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:39:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 
 t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
 {
-    int i = 0, j = 0;
-    while (i < WIDTH)
+    int i = 0;
+    int j = 0;
+    while (i < width)
     {
-        while (j < HEIGHT)
+        while (j < height)
         {
             my_mlx_pixel_put(player, p_img, i, j, TRANS);
             j++;
@@ -136,6 +137,7 @@ void update_scene(t_player *player)
 
 float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
+    (void)p_img;
     int         v_x;
     int         v_y;
     int         h_x;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/06 10:53:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:37:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void rotate_vector(t_vector *direction, float angle)
 
 void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
 {
-	int i;
 	char *tmp;
 
 	tmp = data->img_addr;
@@ -53,10 +52,6 @@ void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
 	    exit_with_err(player->vars->collector, MLX);
 	tmp = tmp  + (y * data->size_line) + ((data->byte_pixel) * x);
 	*(unsigned int *)tmp = color;
-	// tmp[i] = color;
-	// tmp[i+1] = color >>= 8;
-	// tmp[i+2] = color >>= 8;
-	// tmp[i+3] = color >>= 8;
 }
 
 char	*ft_mstrdup(t_collector **collector, char *s1)
@@ -187,7 +182,7 @@ void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
 
@@ -424,7 +419,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 }
 
 
-void draw_line(t_player *player, t_data *p_img, int color, float x, float y, float x2, float y2)
+void 	draw_line(t_player *player, t_data *p_img, int color, float x, float y, float x2, float y2)
 {
     int i = 0;
 

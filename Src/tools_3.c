@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/05 13:54:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:39:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
 
 float   trigo(float angle, t_flag flag)
 {
-    static int i;
+    // static int i;
 
     // printf("angle : %f, index : %d\n",rad_to_deg(angle) ,i++);
     if (flag == COS)
