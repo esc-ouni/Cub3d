@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 11:47:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 12:08:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,9 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void    check_dups(t_collector **collector, int argc, char const *argv[])
+void    check_dups(t_collector **collector, char **map)
 {
-    int fd;
-
-    fd = 0;
-    if (fd == -1)
-        exit_with_err(collector, OPEN);
-
+    
 }
 void    check_errs(t_collector **collector, int argc, char const *argv[])
 {
@@ -83,7 +78,20 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
     return (map);
 }
 
-char **parse_file(t_collector **collector, int argc, char const *argv[])
+void    get_elements(t_collector **collector, char const *argv[], t_player *player)
+{
+    int fd;
+
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        exit_with_err(collector, OPEN);
+	player->vars->up = new_image_from_xpm(player, "./Ext/up.xpm");
+	player->vars->dn = new_image_from_xpm(player, "./Ext/dn.xpm");
+	player->vars->lf = new_image_from_xpm(player, "./Ext/lf.xpm");
+	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
+}
+
+char **parse_file(t_collector **collector, int argc, char const *argv[], t_player *player)
 {
     char **map;
     int fd;
@@ -94,9 +102,10 @@ char **parse_file(t_collector **collector, int argc, char const *argv[])
         fd = open(argv[1], O_RDONLY);
         if (fd == -1)
             exit_with_err(collector, OPEN);
+        get_elements(collector, argv, player);
         map = get_map(collector, argc, argv);
         check_errs(collector, argc, argv);
-        // check_dups();
+        check_dups(collector, map);
         // check_map();  
         return (map);
 	}

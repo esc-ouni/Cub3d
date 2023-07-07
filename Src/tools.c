@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 11:37:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 12:06:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,15 +122,15 @@ t_player *init(int argc, char const *argv[])
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
-    vars->map = parse_file(&collector, argc, argv);
-	if(!vars->mlx || !vars->win)
-	{
-		write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
-		ft_collectorclear(vars->collector, ALL);
-		exit (1);
-	}
+	// if(!vars->mlx || !vars->win)
+	// {
+	// 	write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
+	// 	ft_collectorclear(vars->collector, ALL);
+	// 	exit (1);
+	// }
 	player->direction = NULL;
 	player->vars = vars;
+    vars->map = parse_file(&collector, argc, argv, player);
 	player->vars->last_img = NULL;
 	player->vars->last_img = h_malloc(&collector, sizeof(t_data *), player->vars->last_img, NTMP);
 	player->vars->last_img = NULL;
@@ -140,12 +140,6 @@ t_player *init(int argc, char const *argv[])
 	player->direction->x = 1;
 	player->direction->y = 0;
 	player->angle = 0.0001;
-	player->vars->texture = new_image_from_xpm(player, "./Ext/texture.xpm");
-	player->vars->load_texture = new_image_from_xpm(player, "./Ext/texture2.xpm");
-	player->vars->up = new_image_from_xpm(player, "./Ext/up.xpm");
-	player->vars->dn = new_image_from_xpm(player, "./Ext/dn.xpm");
-	player->vars->lf = new_image_from_xpm(player, "./Ext/lf.xpm");
-	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);
 	player->factor = BLOCK / M_BLOCK;

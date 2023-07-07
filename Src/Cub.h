@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 11:36:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 12:07:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void		my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color);
 void		ft_collectorclear(t_collector **collector, t_flag flag);
 void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
-char 		**parse_file(t_collector **collector, int argc, char const *argv[]);
+char 		**parse_file(t_collector **collector, int argc, char const *argv[], t_player *player);
 t_data		*draw_player(t_player *player, t_data *p_img);
 
 #endif

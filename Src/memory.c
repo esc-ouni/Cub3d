@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/04 13:26:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 12:05:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
 	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
 	p = mlx_xpm_file_to_image(player->vars->mlx, file_dstination, &width, &height);
 	if (!p)
-	{
-		// if (player->vars->last_img)
-		// 	mlx_destroy_image(player->vars->mlx, player->vars->last_img->img_ptr);
 		exit_with_err(player->vars->collector, MLX);
-	}
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;
@@ -42,11 +38,7 @@ t_data	*new_image(t_vars *vars, int width, int height, t_flag type)
 	img = h_malloc(vars->collector, sizeof(t_data), img, type);
 	p = mlx_new_image(vars->mlx, width, height);
 	if (!p)
-	{
-		// if (vars->last_img)
-		// 	mlx_destroy_image(vars->mlx, vars->last_img->img_ptr);
 		exit_with_err(vars->collector, MLX);
-	}
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;
