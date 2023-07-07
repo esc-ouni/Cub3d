@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 11:39:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 12:19:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void updateAndRenderScene(t_player *player)
 {
     // Put your scene update and rendering logic here
 	update_scene(player);
+	ft_collectorclear(player->vars->collector, TMP);
     
     // Increment frame count
     frameCount++;
