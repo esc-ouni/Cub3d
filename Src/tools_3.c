@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 12:08:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:30:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,18 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void    check_dups(t_collector **collector, char **map)
+void    check_dups(t_collector **collector, char **map, t_player *player)
 {
-    
+    int so;
+    int no;
+    int we;
+    int ea;
+    int fd;
+
+    // fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        exit_with_err(collector, OPEN);
+
 }
 void    check_errs(t_collector **collector, int argc, char const *argv[])
 {
@@ -63,7 +72,7 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
         exit_with_err(collector, OPEN);
     while((s = get_next_line(fd))) //not appopriate
     {
-        if(strcmp("0", s) || strcmp("1", s))
+        if(i == 5)
             itsmap = 1;
         if (itsmap)
         {
@@ -102,10 +111,10 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
         fd = open(argv[1], O_RDONLY);
         if (fd == -1)
             exit_with_err(collector, OPEN);
+        check_errs(collector, argc, argv);
+        check_dups(collector, map, player);
         get_elements(collector, argv, player);
         map = get_map(collector, argc, argv);
-        check_errs(collector, argc, argv);
-        check_dups(collector, map);
         // check_map();  
         return (map);
 	}
