@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 15:30:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:22:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void    get_elements(t_collector **collector, char const *argv[], t_player *play
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(collector, OPEN);
-	player->vars->up = new_image_from_xpm(player, "./Ext/up.xpm");
-	player->vars->dn = new_image_from_xpm(player, "./Ext/dn.xpm");
-	player->vars->lf = new_image_from_xpm(player, "./Ext/lf.xpm");
-	player->vars->rg = new_image_from_xpm(player, "./Ext/rg.xpm");
+	player->vars->up = new_image_from_xpm(player, player->vars->up_c);
+	player->vars->dn = new_image_from_xpm(player, player->vars->dn_c);
+	player->vars->lf = new_image_from_xpm(player, player->vars->lf_c);
+	player->vars->rg = new_image_from_xpm(player, player->vars->rg_c);
 }
 
 char **parse_file(t_collector **collector, int argc, char const *argv[], t_player *player)

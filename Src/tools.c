@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 12:06:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:22:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,10 @@ t_player *init(int argc, char const *argv[])
 	// }
 	player->direction = NULL;
 	player->vars = vars;
+	vars->dn_c = NULL;
+	vars->up_c = NULL;
+	vars->lf_c = NULL;
+	vars->rg_c = NULL;
     vars->map = parse_file(&collector, argc, argv, player);
 	player->vars->last_img = NULL;
 	player->vars->last_img = h_malloc(&collector, sizeof(t_data *), player->vars->last_img, NTMP);
@@ -153,17 +157,6 @@ t_player *init(int argc, char const *argv[])
 	ray = NULL;
 	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
 	return (player);
-}
-
-void draw_triangle(t_player *player, t_data *p_r_img, int x, int y, int color)
-{
-    for(int i = 0; i < 30; i++)
-    {
-        for(int j = 0; j < i; j++)
-        {
-            my_mlx_pixel_put(player, p_r_img, x + j, y + i, color);
-        }
-    }
 }
 
 t_data 	*draw_player(t_player *player, t_data *p_img)
@@ -389,18 +382,18 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	char *s;
 
 	if (color == HORZ_D)
-		s = player->vars->lf->img_addr;
+		s = player->vars->dn->img_addr;
 	else if (color == HORZ_U)
 		s = player->vars->up->img_addr;
 	else if (color == VERT_L)
-		s = player->vars->up->img_addr;
-	else if (color == VERT_R)
 		s = player->vars->lf->img_addr;
-	// s = player->vars->texture->img_addr;
+	else if (color == VERT_R)
+		s = player->vars->rg->img_addr;
 
     int drawHeight = y2 - y1;
+	int y = y1;
 
-    for(int y = y1; y < y2; y++)
+    while (y < y2)
     {
        if (y < HEIGHT && y > 0)
         {
@@ -409,6 +402,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 			color = darkenColor(color, amount);
 			my_mlx_pixel_put(player, p_img, x1, y, color);
         }
+		y++;
     }
 }
 
