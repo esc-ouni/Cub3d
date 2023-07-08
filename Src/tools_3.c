@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:24:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:39:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void    check_errs(t_collector **collector, int argc, char const *argv[])
     if(ft_strlen(strstr(argv[1], ".cub")) != 4)
         exit_with_err(collector, PARSE);
 }
-void    check_map(t_collector **collector, int argc, char const *argv[])
+void    check_map(t_collector **collector, char **map)
 {
+    
 }
 
 char **get_map(t_collector **collector, int argc, char const *argv[])
@@ -88,13 +89,39 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
     return (map);
 }
 
-void    get_elements(t_collector **collector, char const *argv[], t_player *player)
+void    get_elem(t_collector **collector, char const *argv[], t_player *player)
 {
+    char *s;
     int fd;
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(collector, OPEN);
+    while((s = get_next_line(fd))) //not appopriate
+    {
+        if (strnstr(s, "NO", 2))
+            player->vars->up_c = ft_mstrdup(collector, s+3);
+        else if (strnstr(s, "SO", 2))
+            player->vars->dn_c = ft_mstrdup(collector, s+3);
+        else if (strnstr(s, "WE", 2))
+            player->vars->rg_c = ft_mstrdup(collector, s+3);
+        else if (strnstr(s, "EA", 2))
+            player->vars->lf_c = ft_mstrdup(collector, s+3);
+        free(s);
+        s = NULL;
+    }
+}
+
+void    get_elements(t_collector **collector, char const *argv[], t_player *player)
+{
+    // int fd;
+
+    // fd = open(argv[1], O_RDONLY);
+    // if (fd == -1)
+    //     exit_with_err(collector, OPEN);
+
+    get_elem(collector, argv, player);
+    
 	player->vars->up = new_image_from_xpm(player, player->vars->up_c);
 	player->vars->dn = new_image_from_xpm(player, player->vars->dn_c);
 	player->vars->lf = new_image_from_xpm(player, player->vars->lf_c);
@@ -116,7 +143,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
         check_dups(collector, map, argv, player);
         get_elements(collector, argv, player);
         map = get_map(collector, argc, argv);
-        // check_map();  
+        check_map(collector, map);  
         return (map);
 	}
     exit_with_err(collector, ARGS);
