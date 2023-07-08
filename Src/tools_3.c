@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 12:39:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 13:03:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
     return (map);
 }
 
+int extract_color(char *color)
+{
+    int color_c;
+    return (color_c);
+}
+
 void    get_elem(t_collector **collector, char const *argv[], t_player *player)
 {
     char *s;
@@ -107,15 +113,13 @@ void    get_elem(t_collector **collector, char const *argv[], t_player *player)
             player->vars->rg_c = ft_mstrdup(collector, s+3);
         else if (strnstr(s, "EA", 2))
             player->vars->lf_c = ft_mstrdup(collector, s+3);
-        // else if (strnstr(s, "F", 2))
-        //     player->vars->lf_c = ft_mstrdup(collector, s+3);
-        // else if (strnstr(s, "C", 2))
-        //     player->vars->lf_c = ft_mstrdup(collector, s+3);
+        else if (strnstr(s, "F", 1))
+            player->vars->f_color = extract_color(s+2);
+        else if (strnstr(s, "C", 1))
+            player->vars->c_color = extract_color(s+2);
         free(s);
         s = NULL;
     }
-    player->vars->c_color = ;
-    player->vars->f_color = ;
 }
 
 void    get_elements(t_collector **collector, char const *argv[], t_player *player)
