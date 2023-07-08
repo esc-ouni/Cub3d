@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 12:04:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 12:39:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ void    get_elem(t_collector **collector, char const *argv[], t_player *player)
             player->vars->rg_c = ft_mstrdup(collector, s+3);
         else if (strnstr(s, "EA", 2))
             player->vars->lf_c = ft_mstrdup(collector, s+3);
+        // else if (strnstr(s, "F", 2))
+        //     player->vars->lf_c = ft_mstrdup(collector, s+3);
+        // else if (strnstr(s, "C", 2))
+        //     player->vars->lf_c = ft_mstrdup(collector, s+3);
         free(s);
         s = NULL;
     }
