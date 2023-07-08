@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 11:45:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:48:58 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,12 +194,12 @@ t_data	*draw_cf(t_player *player)
 	mapp = new_image(player->vars, WIDTH, HEIGHT, NTMP);
 	while (ix < WIDTH)
 	{
-		color = C_COLOR;
+		color = player->vars->c_color;
 		while (iy < HEIGHT)
 		{
 			my_mlx_pixel_put(player, mapp, ix, iy, color);
 			if (iy == HEIGHT/2)
-				color = F_COLOR;
+				color = player->vars->f_color;
 			iy++;
 		}
 		iy = 0;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:45:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:51:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ t_player *init(int argc, char const *argv[])
 	vars->up_c = NULL;
 	vars->lf_c = NULL;
 	vars->rg_c = NULL;
+	vars->c_color = 0;
+    vars->f_color = 0;
     vars->map = parse_file(&collector, argc, argv, player);
 	player->vars->last_img = NULL;
 	player->vars->last_img = h_malloc(&collector, sizeof(t_data *), player->vars->last_img, NTMP);

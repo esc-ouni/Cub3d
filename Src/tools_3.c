@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:42:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:51:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void    get_elem(t_collector **collector, char const *argv[], t_player *player)
         free(s);
         s = NULL;
     }
+
+
 }
 
 void    get_elements(t_collector **collector, char const *argv[], t_player *player)

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:21:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:49:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ typedef struct s_vars
 	char			**map;
 	int				map_w;
 	int				map_h;
+	int 			c_color;
+	int 			f_color;
 	char			*up_c;
 	char			*dn_c;
 	char			*lf_c;
