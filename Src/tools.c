@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:22:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:45:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ t_player *init(int argc, char const *argv[])
 	player->p_y = 250;
 	player->direction->x = 1;
 	player->direction->y = 0;
-	player->angle = 0.0001;
+	player->angle = 0;
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);
 	player->factor = BLOCK / M_BLOCK;
