@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 11:48:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 14:24:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ void    exit_with_err(t_collector **collector, t_flag cause)
 
 void    check_dups(t_collector **collector, char **map, char const *argv[], t_player *player)
 {
-    int so;
-    int no;
-    int we;
-    int ea;
+    (void)map;
+    (void)player;
+    // int so;
+    // int no;
+    // int we;
+    // int ea;
     int fd;
 
     fd = open(argv[1], O_RDONLY);
@@ -46,16 +48,20 @@ void    check_dups(t_collector **collector, char **map, char const *argv[], t_pl
 }
 void    check_errs(t_collector **collector, int argc, char const *argv[])
 {
+    (void)argc;
     if(ft_strlen(strstr(argv[1], ".cub")) != 4)
         exit_with_err(collector, PARSE);
 }
 void    check_map(t_collector **collector, char **map)
 {
-    
+    (void)map;
+    (void)collector;   
 }
 
 char **get_map(t_collector **collector, int argc, char const *argv[])
 {
+    (void)argc;
+
 	int	    fd;
 	char    **map;
 	char    *s;
@@ -89,9 +95,18 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
     return (map);
 }
 
-int extract_color(char *color)
+int extract_color(t_player *player, char *color)
 {
+    char **s;
     int color_c;
+
+    color_c = 0;
+    s = ft_msplit(player->vars, color, ',', TMP);
+    while (*s)
+    {
+        printf("'%s  %d'\n", *s , ft_atoi(*s));
+        s++;
+    }
     return (color_c);
 }
 
@@ -114,9 +129,9 @@ void    get_elem(t_collector **collector, char const *argv[], t_player *player)
         else if (strnstr(s, "EA", 2))
             player->vars->lf_c = ft_mstrdup(collector, s+3, TMP);
         else if (strnstr(s, "F", 1))
-            player->vars->f_color = extract_color(s+2);
+            player->vars->f_color = extract_color(player, s+2);
         else if (strnstr(s, "C", 1))
-            player->vars->c_color = extract_color(s+2);
+            player->vars->c_color = extract_color(player, s+2);
         free(s);
         s = NULL;
     }
@@ -143,6 +158,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
     char **map;
     int fd;
 
+    map = NULL;
     fd = 0;
 	if (argc == 2 && argv[1])
 	{
