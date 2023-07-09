@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 11:49:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:22:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <mlx.h>
 #include <fcntl.h>
 #include "../Get_next_line/get_next_line.h"
+#include "../LIBF/libft.h"
 
 #define HORZ_U 15
 #define HORZ_D 16

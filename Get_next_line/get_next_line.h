@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:33:15 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 17:30:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:26:28 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd);
 char	*str_alloc(int fd, char	*str);
 char	*r_reset(char *buff);
 int		check(char *buff);
-int		ft_strlen(char *s);
+int		ft_gstrlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*line_extract(char *str);
 

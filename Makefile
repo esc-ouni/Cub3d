@@ -4,7 +4,7 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 all:
 	clear
-	gcc $(FLAGS) $(MATH) $(MLX)  Get_next_line/*.c ./Src/*.c -o Cub -lm
+	gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o Cub -lm
 	./Cub Ext/map.cub
 
 fclean:

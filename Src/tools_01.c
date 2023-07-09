@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:39:03 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 11:49:26 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:27:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-static int	check(char c, char const *set)
+static int	p_check(char c, char const *set)
 {
 	size_t	i;
 
@@ -35,7 +35,7 @@ static int	ns_start(char const *s1, char const *set)
 	l_f = 0;
 	while (s1[i])
 	{
-		if (check(s1[i], set) == 1)
+		if (p_check(s1[i], set) == 1)
 			l_f++;
 		else
 			break ;
@@ -53,7 +53,7 @@ static int	ns_end(char const *s1, char const *set)
 	l = l_e;
 	while (l)
 	{
-		if (check(s1[l_e], set) == 1)
+		if (p_check(s1[l_e], set) == 1)
 			l_e--;
 		else
 			break ;
@@ -78,7 +78,7 @@ char const *set, t_flag flag)
 	l_f = ns_start(s1, set);
 	l_e = ns_end(s1, set);
 	if (l_f > l_e)
-		return (ft_mstrdup(vars, "", TMP));
+		return (ft_mstrdup(vars->collector, "", TMP));
 	l = l_e - l_f + 1;
 	ns = (char *)h_malloc(vars->collector, sizeof (char) * (l + 1), ns, flag);
 	if (!ns)
@@ -102,7 +102,7 @@ start, size_t len)
 	if (s == NULL)
 		return (NULL);
 	if (start > (unsigned int)ft_strlen(s))
-		return (ft_mstrdup(vars, "", TMP));
+		return (ft_mstrdup(vars->collector, "", TMP));
 	l = (unsigned int)ft_strlen(s + start);
 	if (l < len)
 		len = l;

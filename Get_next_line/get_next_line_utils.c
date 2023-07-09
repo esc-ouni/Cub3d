@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:13:26 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 17:14:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:27:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+int	ft_gstrlen(char *s)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ char	*ft_strjoin(char *s1, char *s2)
 			return (NULL);
 		s1[0] = '\0';
 	}
-	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	new = malloc(sizeof(char) * (ft_gstrlen(s1) + ft_gstrlen(s2) + 1));
 	if (!new)
 		return (NULL);
 	while (s1[i])
@@ -109,7 +109,7 @@ char	*r_reset(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	new = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
+	new = malloc(sizeof(char) * (ft_gstrlen(buffer) - i + 1));
 	if (!new)
 		return (NULL);
 	i2 = i + 1;

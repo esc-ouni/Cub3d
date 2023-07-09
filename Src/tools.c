@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:51:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:25:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
 	*(unsigned int *)tmp = color;
 }
 
-char	*ft_mstrdup(t_collector **collector, char *s1)
+char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
 {
 	size_t	i;
 	char	*s;
@@ -64,7 +64,7 @@ char	*ft_mstrdup(t_collector **collector, char *s1)
 	if (!s1)
 		return (NULL);
 	s = (char *)h_malloc(collector, sizeof(char) * \
-	(ft_strlen(s1) + 1), s, NTMP);
+	(ft_strlen(s1) + 1), s, flag);
 	while (s1[i] != '\0')
 	{
 		s[i] = s1[i];
