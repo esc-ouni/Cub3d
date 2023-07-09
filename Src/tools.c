@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 13:25:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:32:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,33 +405,6 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 			my_mlx_pixel_put(player, p_img, x1, y, color);
         }
 		y++;
-    }
-}
-
-
-void 	draw_line(t_player *player, t_data *p_img, int color, float x, float y, float x2, float y2)
-{
-    int i = 0;
-
-    // float dx = 20 * trigo(player->angle, COS);
-    // float dy = 20 * trigo(player->angle, SIN);
-
-    float dx = x2/player->factor - x/player->factor;
-    float dy = y2/player->factor - y/player->factor;
-
-    float steps = ft_abs(dy);
-	if (ft_abs(dx) > ft_abs(dy))
-		steps = ft_abs(dx);
-    float x_inc = dx / steps;
-    float y_inc = dy / steps;
-
-    while ( i < steps)
-    {
-		// my_mlx_pixel_put(player, p_img, (int)x, (int)y, color);
-		mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
-        x += x_inc;
-        y += y_inc;
-        i++;
     }
 }
 

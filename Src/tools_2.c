@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/07 12:19:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:34:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void update_scene(t_player *player)
 float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
     (void)p_img;
+    (void)color;
     int         v_x;
     int         v_y;
     int         h_x;
@@ -153,7 +154,7 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     
     h_x = ft_abs(player->p_x - vec2->x);
     h_y = ft_abs(player->p_y - vec2->y);
-    if ((v_x < h_x) || (v_y < h_y))
+    if ((v_x <= h_x) && (v_y <= h_y))
     {
         if ((ray->angle < ((2 * M_PI)) && (ray->angle > 3 * (2 * M_PI))))
             ray->side = VERT_R;

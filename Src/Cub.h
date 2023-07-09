@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 13:22:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:32:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,6 @@ t_vector 	*find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vecto
 t_vector 	*find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
 int 		check_collision_v2(t_player *player, int x, int y);
 int 		check_collision(t_player *player, int x, int y);
-void 		draw_line(t_player *player, t_data *p_img, int color, float x, float y, float x2, float y2);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 void 		updateAndRenderScene(t_player *player);
@@ -230,7 +229,6 @@ t_data		*new_image(t_vars *vars, int width, int height, t_flag type);
 void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);
-// char		*ft_mstrdup(t_collector **collector, char *s1);
 void		tmp_alloc(t_collector **collector, size_t s, void **p);
 void		my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color);
 void		ft_collectorclear(t_collector **collector, t_flag flag);
