@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 14:53:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 15:19:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,14 @@ int extract_color(t_player *player, char *color)
     color_c = 0;
     color = ft_mstrtrim(player->vars, color, " ", TMP);
     s = ft_msplit(player->vars, color, ',', TMP);
-    while (*s)
-    {
-        color_c <<= 8;
-        color_c = ft_atoi(*s);
-        printf("'%s  %d'\n", *s , ft_atoi(*s));
-        s++;
-    }
+
+    color_c = ft_atoi(*s);
+    color_c <<= 8;
+    s++;
+    color_c |= ft_atoi(*s);
+    color_c <<= 8;
+    s++;
+    color_c |= ft_atoi(*s);
     printf("finale color : %d\n", color_c);
     printf("\n");
     return (color_c);
