@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 13:03:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 11:48:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char **get_map(t_collector **collector, int argc, char const *argv[])
             itsmap = 1;
         if (itsmap)
         {
-            map[i2] = ft_mstrdup(collector, s);
+            map[i2] = ft_mstrdup(collector, s, NTMP);
             i2++;
         }
         free(s);
@@ -106,13 +106,13 @@ void    get_elem(t_collector **collector, char const *argv[], t_player *player)
     while((s = get_next_line(fd))) //not appopriate
     {
         if (strnstr(s, "NO", 2))
-            player->vars->up_c = ft_mstrdup(collector, s+3);
+            player->vars->up_c = ft_mstrdup(collector, s+3, TMP);
         else if (strnstr(s, "SO", 2))
-            player->vars->dn_c = ft_mstrdup(collector, s+3);
+            player->vars->dn_c = ft_mstrdup(collector, s+3, TMP);
         else if (strnstr(s, "WE", 2))
-            player->vars->rg_c = ft_mstrdup(collector, s+3);
+            player->vars->rg_c = ft_mstrdup(collector, s+3, TMP);
         else if (strnstr(s, "EA", 2))
-            player->vars->lf_c = ft_mstrdup(collector, s+3);
+            player->vars->lf_c = ft_mstrdup(collector, s+3, TMP);
         else if (strnstr(s, "F", 1))
             player->vars->f_color = extract_color(s+2);
         else if (strnstr(s, "C", 1))

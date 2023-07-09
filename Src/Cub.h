@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:49:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 11:49:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,12 @@ t_vector    *vec;
 t_ray  		*ray;
 
 
+char		**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag);
+char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag);
+char		*ft_mstrtrim(t_vars *vars, char const *s1, char const *set, t_flag flag);
+char		*ft_msubstr(t_vars *vars, char const *s, unsigned int start, size_t len);
+
+
 int 		darkenColor(int color, int amount);
 float		ft_pow(float n);
 void 		draw_point(t_player *player, t_data *img, int x, int y, int color);
@@ -223,7 +229,7 @@ t_data		*new_image(t_vars *vars, int width, int height, t_flag type);
 void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);
-char		*ft_mstrdup(t_collector **collector, char *s1);
+// char		*ft_mstrdup(t_collector **collector, char *s1);
 void		tmp_alloc(t_collector **collector, size_t s, void **p);
 void		my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color);
 void		ft_collectorclear(t_collector **collector, t_flag flag);
