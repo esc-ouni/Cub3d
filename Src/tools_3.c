@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/10 11:06:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/10 11:07:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,7 @@ void    check_map(t_collector **collector, char **map)
         while(map[y][x])
         {
             if (map[y][x] == '0')
-            {
-                if (!point_surronded(collector, map, y, x))
-                    exit_with_err(collector, PARSE);
-            }
+                point_surronded(collector, map, y, x);
             x++;  
         }
         y++;
@@ -233,7 +230,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
         check_dups(collector, map, argv, player);
         i = get_elements(collector, argv, player);
         map = get_map(collector, argc, argv, i);
-        // check_map(collector, map);  
+        check_map(collector, map); 
         return (map);
 	}
     exit_with_err(collector, ARGS);
