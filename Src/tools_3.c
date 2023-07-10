@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/10 10:20:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/10 11:06:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,65 @@ void    check_dups(t_collector **collector, char **map, char const *argv[], t_pl
     
 
 }
+
 void    check_errs(t_collector **collector, int argc, char const *argv[])
 {
     (void)argc;
     if(ft_strlen(strstr(argv[1], ".cub")) != 4)
         exit_with_err(collector, PARSE);
 }
+
+int     point_surronded(t_collector **collector, char **map, int y, int x)
+{
+    // int _x = 0;
+    // int _y = 0;
+
+    int x_m = 0;
+    int y_m = 0;
+
+    while (map[y_m])
+        y_m++;
+    
+    x_m = ft_strlen(map[y_m]);
+
+    if ((x - 1) < 0 || (x + 1) > x_m)
+        exit_with_err(collector, PARSE);
+    if (map[y][x-1] == ' ' || map[y][x+1] == ' ')    
+        exit_with_err(collector, PARSE);
+
+    if ((y - 1) < 0 || (y + 1) > y_m)
+        exit_with_err(collector, PARSE);
+
+    if (x > ft_strlen(map[y_m-1]) || x > ft_strlen(map[y_m+1]))
+        exit_with_err(collector, PARSE);
+
+    if (map[y-1][x] == ' ' || map[y+1][x] == ' ')    
+        exit_with_err(collector, PARSE);
+    
+    return (1);
+}
+
 void    check_map(t_collector **collector, char **map)
 {
+    int y = 0;
+    int x = 0;
+
     (void)map;
     (void)collector;
-      
+    while (map[y])
+    {
+        while(map[y][x])
+        {
+            if (map[y][x] == '0')
+            {
+                if (!point_surronded(collector, map, y, x))
+                    exit_with_err(collector, PARSE);
+            }
+            x++;  
+        }
+        y++;
+        x = 0;
+    }
 }
 
 char **get_map(t_collector **collector, int argc, char const *argv[], int t)
@@ -115,7 +163,7 @@ int extract_color(t_player *player, char *color)
     return (color_c);
 }
 
-int    get_elem(t_collector **collector, char const *argv[], t_player *player)
+int     get_elem(t_collector **collector, char const *argv[], t_player *player)
 {
     char *s;
     int fd;
@@ -138,7 +186,7 @@ int    get_elem(t_collector **collector, char const *argv[], t_player *player)
             player->vars->f_color = extract_color(player, s+1);
         else if (strnstr(s, "C", 1))
             player->vars->c_color = extract_color(player, s+1);
-        else if (strnstr(s, "11", ft_strlen(s)))
+        else if (strnstr(s, "1", ft_strlen(s)))
         {
             free(s);
             return  i;
@@ -185,7 +233,7 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
         check_dups(collector, map, argv, player);
         i = get_elements(collector, argv, player);
         map = get_map(collector, argc, argv, i);
-        check_map(collector, map);  
+        // check_map(collector, map);  
         return (map);
 	}
     exit_with_err(collector, ARGS);
