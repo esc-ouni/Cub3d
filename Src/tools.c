@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 13:32:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/10 09:59:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void strt()
 	// #endif
 }
 
-t_player *init(int argc, char const *argv[])
+t_player *	init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
 	t_vars 				*vars;

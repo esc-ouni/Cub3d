@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 15:19:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:13:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,14 @@ int extract_color(t_player *player, char *color)
     color_c <<= 8;
     s++;
     color_c |= ft_atoi(*s);
-    printf("finale color : %d\n", color_c);
-    printf("\n");
     return (color_c);
 }
 
-void    get_elem(t_collector **collector, char const *argv[], t_player *player)
+int    get_elem(t_collector **collector, char const *argv[], t_player *player)
 {
     char *s;
     int fd;
+    int i = 0;;
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
@@ -138,31 +137,41 @@ void    get_elem(t_collector **collector, char const *argv[], t_player *player)
             player->vars->f_color = extract_color(player, s+1);
         else if (strnstr(s, "C", 1))
             player->vars->c_color = extract_color(player, s+1);
+        else if (strnstr(s, "111", ft_strlen(s)))
+        {
+            free(s);
+            return  i;
+        }
         free(s);
+        i++;
         s = NULL;
     }
+    return (0);
 }
 
-void    get_elements(t_collector **collector, char const *argv[], t_player *player)
+int    get_elements(t_collector **collector, char const *argv[], t_player *player)
 {
+    int i = 0;
     // int fd;
 
     // fd = open(argv[1], O_RDONLY);
     // if (fd == -1)
     //     exit_with_err(collector, OPEN);
 
-    get_elem(collector, argv, player);
+    i = get_elem(collector, argv, player);
     
 	player->vars->up = new_image_from_xpm(player, player->vars->up_c);
 	player->vars->dn = new_image_from_xpm(player, player->vars->dn_c);
 	player->vars->lf = new_image_from_xpm(player, player->vars->lf_c);
 	player->vars->rg = new_image_from_xpm(player, player->vars->rg_c);
+    return (i);
 }
 
 char **parse_file(t_collector **collector, int argc, char const *argv[], t_player *player)
 {
     char **map;
     int fd;
+    int i = 0;
 
     map = NULL;
     fd = 0;
@@ -173,8 +182,9 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
             exit_with_err(collector, OPEN);
         check_errs(collector, argc, argv);
         check_dups(collector, map, argv, player);
-        get_elements(collector, argv, player);
-        map = get_map(collector, argc, argv, 8);
+        i = get_elements(collector, argv, player);
+        printf("%d\n", i);
+        map = get_map(collector, argc, argv, i);
         check_map(collector, map);  
         return (map);
 	}
