@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/10 11:16:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/10 11:22:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void    check_dups(t_collector **collector, char **map, char const *argv[], t_pl
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(collector, OPEN);
+    
     
 
 }
