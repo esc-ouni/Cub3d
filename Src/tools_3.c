@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/10 11:14:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/10 11:16:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int     point_surronded(t_collector **collector, char **map, int y, int x)
         y_m++;
     
     x_m = ft_strlen(map[y]);
-    // printf("x   : %d, y   : %d\n", x, y);
-    // printf("x_m : %d, y_m : %d\n", x_m, y_m);
 
     if ((x - 1) < 0 || (x + 1) > x_m)
         exit_with_err(collector, PARSE);
