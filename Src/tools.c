@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/11 11:50:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/11 12:36:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,8 +400,8 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
        if (y < HEIGHT && y > 0)
         {
 			int texY = ((y - y1) * 50) / drawHeight;
-			color = darkenColor(color, amount);
 			color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
+			color = darkenColor(color, amount);
 			my_mlx_pixel_put(player, p_img, x1, y, color);
         }
 		y++;
