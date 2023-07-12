@@ -170,8 +170,8 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	float		p_x;
-	float		p_y;
+	float		dx;
+	float		dy;
 	float		length;
 	float		angle;
 	float		t1;

@@ -151,7 +151,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     {
         ray->side = (ray->angle < 2 * M_PI && ray->angle > 3 * M_PI / 2) ? VERT_R : VERT_L;
         // draw_line(player, p_img, RED, vec1->x, vec1->y);
-        ray->tex_i = (int)vec1->y % BLOCK;
+        // ray->tex_i = (int)vec1->y % BLOCK;
         ray->length = v_dist;
     }
     else
@@ -216,8 +216,6 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 
     while (i < WIDTH)
     {
-        ray[i].p_x = player->p_x;
-        ray[i].p_y = player->p_y;
         ray[i].angle = up_degree(angle, f_angle);
         angle = up_degree(angle, f_angle);
         ray[i].t1 = trigo(ray[i].angle, TAN);
@@ -334,37 +332,36 @@ int wall_hit_vlf(t_player *player, int x, int y)
 
 t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
-    float stepy, stepx;
     int i = 0;
 
     if ((ray->angle > 0 && ray->angle < M_PI))
     {
-        stepy = BLOCK;
-        stepx = (stepy / ray->t1);
+        ray->dy = BLOCK;
+        ray->dx = (ray->dy / ray->t1);
         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
         vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
         while (i < 36)
         {
             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
                 return vector;
-            vector->y += stepy;
-            vector->x += stepx;
+            vector->y += ray->dy;
+            vector->x += ray->dx;
             i++;
         }
         return vector;
     }
     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
     {
-        stepy = -BLOCK;
-        stepx = (BLOCK / ray->t2);
+        ray->dy = -BLOCK;
+        ray->dx = (BLOCK / ray->t2);
         vector->y = floor(player->p_y / BLOCK) * BLOCK;
         vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
         while (i < 36)
         {
             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
                 return vector;
-            vector->x += stepx;
-            vector->y += stepy;
+            vector->x += ray->dx;
+            vector->y += ray->dy;
             i++;
         }
         return vector;
@@ -380,37 +377,35 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
 t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
     int i = 0;
-    float    stepx;
-    float    stepy;
 
     if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle < 2 * (M_PI))) || (((ray->angle > 0) && (ray->angle < (M_PI / 2)))))
     {
-        stepx = BLOCK;
-        stepy = stepx * ray->t1;
-        vector->x = (ceil(ray->p_x/ BLOCK) * BLOCK);
-        vector->y = ray->p_y + ((vector->x - ray->p_x) * ray->t1);
+        ray->dx = BLOCK;
+        ray->dy = ray->dx * ray->t1;
+        vector->x = (ceil(player->p_x/ BLOCK) * BLOCK);
+        vector->y = player->p_y + ((vector->x - player->p_x) * ray->t1);
         while (i < 36)
         {
             if (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
                 return (vector);
-            vector->x += stepx;
-            vector->y += stepy;
+            vector->x += ray->dx;
+            vector->y += ray->dy;
             i++;
         }
         return NULL;
     }
     else if ((ray->angle > (M_PI / 2)) || (ray->angle < 3 * (M_PI / 2)))
     {
-        stepx = -BLOCK;
-        stepy = BLOCK * ray->t2;
-        vector->x = (floor(ray->p_x / BLOCK) * BLOCK);
-        vector->y = ray->p_y - ((vector->x - ray->p_x) * ray->t2);
+        ray->dx = -BLOCK;
+        ray->dy = BLOCK * ray->t2;
+        vector->x = (floor(player->p_x / BLOCK) * BLOCK);
+        vector->y = player->p_y - ((vector->x - player->p_x) * ray->t2);
         while (i < 36)
         {
             if (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
                 return (vector);
-            vector->x += stepx;
-            vector->y += stepy;
+            vector->x += ray->dx;
+            vector->y += ray->dy;
             i++;
         }
         return (vector);
