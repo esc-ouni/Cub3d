@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/10 11:22:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:50:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char **get_map(t_collector **collector, int argc, char const *argv[], int t)
 	i2 = 0;
 	fd = 0;
 	map = NULL;  
-    map = h_malloc(collector, (count_alloc_size(collector, fd) * sizeof(char *)), map, NTMP);
+    map = h_malloc(collector, (count_alloc_size(collector, argv, fd) * sizeof(char *)), map, NTMP);
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(collector, OPEN);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/11 12:36:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/12 18:06:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
 	return (s);
 }
 
-int	count_alloc_size(t_collector **collector, int fd)
+int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 {
 	int size;
 	char *s;
 
 	size = 0;
 	s = NULL;
-	fd = open("/Users/idouni/Desktop/789/Ext/map.Cub", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	    exit_with_err(collector, OPEN);
 	while ((s = get_next_line(fd)))
@@ -381,27 +381,29 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
     (void)player;
     (void)index;
     (void)x2;
-	char *s;
+	// char *s;
 
 	if (color == HORZ_D)
-		s = player->vars->dn->img_addr;
-	else if (color == HORZ_U)
-		s = player->vars->up->img_addr;
-	else if (color == VERT_L)
-		s = player->vars->lf->img_addr;
+		color = WHITE;
+		// s = player->vars->dn->img_addr;
+	// else if (color == HORZ_U)
+	// 	s = player->vars->up->img_addr;
+	// else if (color == VERT_L)
+	// 	s = player->vars->lf->img_addr;
 	else if (color == VERT_R)
-		s = player->vars->rg->img_addr;
+		color = GREY;
+		// s = player->vars->rg->img_addr;
 
-    int drawHeight = y2 - y1;
+    // int drawHeight = y2 - y1;
 	int y = y1;
 
+	color = darkenColor(color, amount);
     while (y < y2)
     {
        if (y < HEIGHT && y > 0)
         {
-			int texY = ((y - y1) * 50) / drawHeight;
-			color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
-			color = darkenColor(color, amount);
+			// int texY = ((y - y1) * 50) / drawHeight;
+			// color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
 			my_mlx_pixel_put(player, p_img, x1, y, color);
         }
 		y++;
