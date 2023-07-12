@@ -155,6 +155,12 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 	}
 }
 
+// int	call_mouse(int x, int y, t_player *player)
+// {
+// 	// printf()
+// 	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+// }
+
 int mouse_movement(int x, int y, t_player *player)
 {
 	(void)y;
@@ -163,16 +169,16 @@ int mouse_movement(int x, int y, t_player *player)
 	if (x > last_pos)
 	{
 		rotate_vector(player->direction, ((x - last_pos)/3));
-		// update_degree(player, ((x - last_pos)/5));
-		update_degree(player, 5);
+		update_degree(player, ((x - last_pos)/5));
+		// update_degree(player, 1);
 		updateAndRenderScene(player);
 		last_pos = x;
 	}
 	else if (x < last_pos)
 	{
 		rotate_vector(player->direction, ((x - last_pos)/3));
-		// update_degree(player, ((x - last_pos)/5));
-		// update_degree(player, -5);
+		update_degree(player, ((x - last_pos)/5));
+		// update_degree(player, -1);
 		updateAndRenderScene(player);
 		last_pos = x;
 	}

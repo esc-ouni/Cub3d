@@ -167,11 +167,13 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	return (p_img);
 }
 
+
+
 void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
 	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
-	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
 
@@ -384,7 +386,7 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	// char *s;
 
 	if (color == HORZ_D)
-		color = WHITE;
+		color = L_GREY;
 		// s = player->vars->dn->img_addr;
 	// else if (color == HORZ_U)
 	// 	s = player->vars->up->img_addr;
