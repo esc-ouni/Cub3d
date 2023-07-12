@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/11 11:29:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:32:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,5 @@ void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char 		**parse_file(t_collector **collector, int argc, char const *argv[], t_player *player);
 t_data		*draw_player(t_player *player, t_data *p_img);
-
-void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 
 #endif
