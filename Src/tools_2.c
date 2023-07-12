@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 13:34:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/11 11:52:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void update_scene(t_player *player)
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
     if (player->m)
     {
-        mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, 0, 0);
+        mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, -10, -10);
         mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_r_img->img_ptr, 0, 0);
     }
     ft_collectorclear(player->vars->collector, TMP);
@@ -154,22 +154,24 @@ float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     
     h_x = ft_abs(player->p_x - vec2->x);
     h_y = ft_abs(player->p_y - vec2->y);
-    if ((v_x <= h_x) && (v_y <= h_y))
+    if ((v_x < h_x) || (v_y < h_y))
     {
         if ((ray->angle < ((2 * M_PI)) && (ray->angle > 3 * (2 * M_PI))))
             ray->side = VERT_R;
         else
             ray->side = VERT_L;
+        draw_line(player, p_img, RED, vec1->x, vec1->y);
         ray->tex_i = (int)vec1->y % BLOCK;
         ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
         return (0);
     }
-    else
+    else if ((v_x > h_x) || (v_y > h_y))
     {
         if ((ray->angle > 0 && ray->angle < M_PI))
             ray->side = HORZ_D;
         else
             ray->side = HORZ_U;
+        draw_line(player, p_img, RED, vec2->x, vec2->y);
         ray->tex_i = (int)vec2->x % BLOCK;
         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
         return (0);
