@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 10:08:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:31:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ typedef struct s_player
 	float		t_angle;
 	float		f_angle;
 	float		factor;
-	// t_vector 	*direction;
+	int			color;
 	t_vars	*vars;
 }		t_player;
 
@@ -222,7 +222,7 @@ t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 void 		updateAndRenderScene(t_player *player);
 t_data		*new_image_from_xpm(t_player *player, char *file_dstination);
-void		draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index, int amount);
+void 		draw_wall_part(t_player *player, t_data *p_img, t_ray ray, int x1, int y1, int x2, int y2,  int amount);
 t_data		*draw_cf(t_player *player);
 void		debug(void);
 int 		ft_ext(t_player *player);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 10:19:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:37:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,16 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
     int     i;
     int     start;
-    int     end;
     float   w_height;
     float   c;
-    int     color;
-    float   d_h = HEIGHT/2;
 
     c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
     i = 0;
     while (i < WIDTH)
     {
-        if (ray[i].side == HORZ_D)
-            color = HORZ_D;
-        else if (ray[i].side == HORZ_U)
-            color = HORZ_U;
-        else if (ray[i].side == VERT_L)
-            color = VERT_L;
-        else if (ray[i].side == VERT_R)
-            color = VERT_R;
         w_height = c / (ray[i].length * trigo(ray[i].angle - player->angle, COS));
-        start = d_h - (w_height/2);
-        end = start + w_height;
-        draw_wall_part(player, p_img, color, i, (int)start, i, (int)end, ray[i].tex_i, 5000/w_height);
+        start = HEIGHT/2 - (w_height/2);
+        draw_wall_part(player, p_img, ray[i], i, (int)start, i, start + w_height, 5000/w_height);
         i++;
     }
 }

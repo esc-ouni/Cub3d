@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 10:12:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:33:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_player *	init(int argc, char const *argv[])
 	player->p_x = 250;
 	player->p_y = 250;
 	player->angle = 0;
+	player->color = 0;
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);
 	player->factor = BLOCK / M_BLOCK;
@@ -278,40 +279,50 @@ void draw_point(t_player *player, t_data *img, int x, int y, int color)
     }
 }
 
-void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index,  int amount)
+void draw_wall_part(t_player *player, t_data *p_img, t_ray ray, int x1, int y1, int x2, int y2,  int amount)
 {
     (void)amount;
     (void)player;
-    (void)index;
     (void)x2;
+
 	// char *s;
 
-	if (color == HORZ_D)
-		color = GREY;
-		// s = player->vars->dn->img_addr;
-	else if (color == HORZ_U)
-		color = GREY;
-		// s = player->vars->up->img_addr;
-	else if (color == VERT_L)
-		color = L_GREY ;
-		// s = player->vars->lf->img_addr;
-	else if (color == VERT_R)
-		color = L_GREY ;
+	// if (color == HORZ_D)
+	// 	color = GREY;
+	// 	// s = player->vars->dn->img_addr;
+	// else if (color == HORZ_U)
+	// 	color = GREY;
+	// 	// s = player->vars->up->img_addr;
+	// else if (color == VERT_L)
+	// 	color = L_GREY ;
+	// 	// s = player->vars->lf->img_addr;
+	// else if (color == VERT_R)
+	// 	color = L_GREY ;
 		// s = player->vars->rg->img_addr;
 
-    // int drawHeight = y2 - y1;
-	int y = y1;
 
-	color = darkenColor(color, amount);
-    while (y < y2)
+	if (ray.side == HORZ_D)
+		player->color = GREY;
+	else if (ray.side == HORZ_U)
+ 		player->color = GREY;
+	else if (ray.side == VERT_L)
+		player->color = L_GREY ;
+	else if (ray.side == VERT_R)
+		player->color = L_GREY ;
+	
+    // int drawHeight = y2 - y1;
+	// int y = y1;
+
+	player->color = darkenColor(player->color, amount);
+    while (y1 < y2)
     {
-       if (y < HEIGHT && y > 0)
+       if (y1 < HEIGHT && y1 > 0)
         {
 			// int texY = ((y - y1) * 50) / drawHeight;
-			// color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
-			my_mlx_pixel_put(player, p_img, x1, y, color);
+			// player->color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
+			my_mlx_pixel_put(player, p_img, x1, y1, player->color);
         }
-		y++;
+		y1++;
     }
 }
 
