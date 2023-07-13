@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:51:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:14:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,17 +208,16 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 
 t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
-    float angle = player->angle - deg_to_rad(30);
-    float f_angle = 60.0/WIDTH;
 	int i = 0;
+    player->t_angle = up_degree(player->angle, -30);
 
     while (i < WIDTH)
     {
-        ray[i].angle = angle;
+        ray[i].angle = player->t_angle;
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
         draw_ray(player, p_img, BLUE, &ray[i]);
-        angle = up_degree(angle, f_angle);
+        player->t_angle = up_degree(player->t_angle, player->f_angle);
         i++;
     }
     return (&(ray[0]));

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:56:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:08:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ typedef struct s_player
 	float		p_y;
 	int         m;
 	float		angle;
+	float		t_angle;
+	float		f_angle;
 	float		factor;
 	// t_vector 	*direction;
 	t_vars	*vars;
