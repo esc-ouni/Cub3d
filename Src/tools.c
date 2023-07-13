@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:19:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:57:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ t_player *	init(int argc, char const *argv[])
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
 	if(!vars->mlx || !vars->win)
 		exit_with_err(&collector, MLX);
-	player->direction = NULL;
 	player->vars = vars;
 	vars->dn_c = NULL;
 	vars->up_c = NULL;
@@ -122,14 +121,8 @@ t_player *	init(int argc, char const *argv[])
 	vars->c_color = 0;
     vars->f_color = 0;
     vars->map = parse_file(&collector, argc, argv, player);
-	player->vars->last_img = NULL;
-	player->vars->last_img = h_malloc(&collector, sizeof(t_data *), player->vars->last_img, NTMP);
-	player->vars->last_img = NULL;
-	player->direction = h_malloc(&collector, sizeof(t_vector), player->direction, NTMP);
 	player->p_x = 250;
 	player->p_y = 250;
-	player->direction->x = 1;
-	player->direction->y = 0;
 	player->angle = 0;
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);

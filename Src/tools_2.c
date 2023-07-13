@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:32:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:51:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     if (ray->v_d_inter < ray->h_d_inter)
     {
         ray->side = ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) || (ray->angle >= 0 && ray->angle < M_PI / 2)) ? VERT_R : VERT_L;
-        // draw_line(player, p_img, RED, vec1->x, vec1->y);
         ray->length = ray->v_d_inter;
     }
     else
@@ -215,11 +214,11 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 
     while (i < WIDTH)
     {
-        ray[i].angle = up_degree(angle, f_angle);
-        angle = up_degree(angle, f_angle);
+        ray[i].angle = angle;
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
         draw_ray(player, p_img, BLUE, &ray[i]);
+        angle = up_degree(angle, f_angle);
         i++;
     }
     return (&(ray[0]));

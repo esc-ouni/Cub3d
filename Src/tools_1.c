@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:48:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:56:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int mouse_movement(int x, int y, t_player *player)
 
 	if (x > last_pos)
 	{
-		rotate_vector(player->direction, ((x - last_pos)/3));
+		// rotate_vector(player->direction, ((x - last_pos)/3));
 		update_degree(player, ((x - last_pos)/5));
 		// update_degree(player, 1);
 		updateAndRenderScene(player);
@@ -176,7 +176,7 @@ int mouse_movement(int x, int y, t_player *player)
 	}
 	else if (x < last_pos)
 	{
-		rotate_vector(player->direction, ((x - last_pos)/3));
+		// rotate_vector(player->direction, ((x - last_pos)/3));
 		update_degree(player, ((x - last_pos)/5));
 		// update_degree(player, -1);
 		updateAndRenderScene(player);

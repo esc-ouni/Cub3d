@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:26:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:56:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,9 @@ typedef struct s_vars
 	t_data 			*dn;
 	t_data 			*lf;
 	t_data 			*rg;
-	t_data 			*texture;
-	t_data 			*load_texture;
-	t_collector 	**collector;
-	t_data 			*last_img;
 	t_data 			*fix_img;
 	t_data 			*m_fix_img;
+	t_collector 	**collector;
 }	t_vars;
 
 typedef struct s_player
@@ -164,7 +161,7 @@ typedef struct s_player
 	int         m;
 	float		angle;
 	float		factor;
-	t_vector 	*direction;
+	// t_vector 	*direction;
 	t_vars	*vars;
 }		t_player;
 
