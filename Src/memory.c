@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/08 10:23:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 08:50:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_data	*new_image(t_vars *vars, int width, int height, t_flag type)
 
 void	debug(void)
 {
-	printf("\x1B[32m");
-	printf("\nDEBUG OK\n");
-	printf("\x1B[0m");
+	write(1, "\x1B[32m", 6);
+	write(1, "\nDEBUG OK\n", 11);
+	write(1, "\x1B[0m", 5);
 }
 
 void	tmp_alloc(t_collector **collector, size_t s, void **p)

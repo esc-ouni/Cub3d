@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/12 18:06:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 08:50:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,6 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	return (size+=1);
 }
 
-void strt()
-{
-	// #if (WIDTH > 2560) || (HEIGHT > 1396)
-	// 	#undef WIDTH
-	// 	#undef HEIGHT
-	// 	#define WIDTH 2560
-	// 	#define HEIGHT 1396
-	// #endif
-}
-
 t_player *	init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
@@ -112,7 +102,6 @@ t_player *	init(int argc, char const *argv[])
 	t_player 			*player;
 
 	
-	strt();
 	collector = NULL;
 	player = NULL;
 	vars = NULL;
@@ -122,12 +111,8 @@ t_player *	init(int argc, char const *argv[])
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
-	// if(!vars->mlx || !vars->win)
-	// {
-	// 	write (2, "\033[0;32mMLX_FAILED\033[0;37m\n", 29);
-	// 	ft_collectorclear(vars->collector, ALL);
-	// 	exit (1);
-	// }
+	if(!vars->mlx || !vars->win)
+		exit_with_err(&collector, MLX);
 	player->direction = NULL;
 	player->vars = vars;
 	vars->dn_c = NULL;
@@ -166,8 +151,6 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
 	return (p_img);
 }
-
-
 
 void hooks(t_player *player)
 {
@@ -300,82 +283,6 @@ void draw_point(t_player *player, t_data *img, int x, int y, int color)
         i++;
     }
 }
-
-// void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index)
-// {
-//     int i = 0;
-
-// 	(void)player;
-// 	(void)index;
-//     float dx = x2 - x1;
-//     float dy = y2 - y1;
-//     float steps = ft_abs(dy);
-// 	if (ft_abs(dx) > ft_abs(dy))
-// 		steps = ft_abs(dx);
-//     float x_inc = dx / steps;
-//     float y_inc = dy / steps;
-
-//     float x = x1;
-//     float y = y1;
-
-//     while ( i < steps)
-//     {
-// 		if (i < 50)
-// 		{
-// 			color = (player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index)] << 24) |
-// 					(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 1)] << 16) |
-// 					(player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 2)] << 8) |
-// 					player->vars->texture->img_addr[(i * player->vars->texture->size_line) + (index + 3)];
-// 		}
-// 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-//         x += x_inc;
-//         y += y_inc;
-//         i++;
-//     }
-// 		printf("\n\n");
-
-// }
-
-
-// void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index,  int amount)
-// {
-// 	(void)amount;
-// 	(void)player;
-// 	(void)index;
-//     int i = 0;
-//     int k = 0;
-
-// 	// char *tmp;
-//     float dx = x2 - x1;
-//     float dy = y2 - y1;
-//     float steps = ft_abs(dy);
-// 	if (ft_abs(dx) > ft_abs(dy))
-// 		steps = ft_abs(dx);
-//     float x_inc = dx / steps;
-//     float y_inc = dy / steps;
-
-//     float x = x1;
-//     float y = y1;
-
-
-// 	y = y1;
-// 	k = (int)(y2 - y1)/BLOCK - 1;
-// 	color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
-// 	while ( y < y2)
-// 	{
-// 		if (!k)
-// 		{
-// 			i++;
-// 			color = *(int *)(player->vars->texture->img_addr + ((i * player->vars->texture->size_line) + (index * player->vars->texture->byte_pixel)));
-//         	color = darkenColor(color, amount);
-// 			k = (int)(y2 - y1)/BLOCK - 1;
-// 		}
-// 		my_mlx_pixel_put(p_img, (int)x, (int)y, color);
-// 		x += 0 * x_inc * y_inc;
-// 		y += 1;
-// 		k--;
-// 	}
-// }
 
 void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, int x2, int y2, int index,  int amount)
 {
