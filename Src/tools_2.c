@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 10:37:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:39:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void update_scene(t_player *player)
 	draw_player(player, p_r_img);
 	ray = cast_rays(player, p_r_img, ray);
 
-	draw_3d_map(player, p_img, ray);
+	draw_3d_map(player, p_img, ray);//to_be_recoded
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
