@@ -6,17 +6,18 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 12:06:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 19:25:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
 
+#include <libc.h>
 #include <string.h>
 #include <string.h>
 #include <math.h>
-#include "../../minilibx-linux/mlx.h"
+#include <mlx.h>
 #include <fcntl.h>
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"
