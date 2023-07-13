@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/12 18:05:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:32:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
         if (ray[i].side == HORZ_D)
             color = HORZ_D;
         else if (ray[i].side == HORZ_U)
-            color = HORZ_D;
+            color = HORZ_U;
         else if (ray[i].side == VERT_L)
-            color = VERT_R;
+            color = VERT_L;
         else if (ray[i].side == VERT_R)
             color = VERT_R;
         w_height = c / (ray[i].length * trigo(ray[i].angle - player->angle, COS));
@@ -144,20 +144,19 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     vec1 = find_vertical_iterset(player, ray, vec1);
     vec2 = find_horizontal_iterset(player, ray, vec2);
 
-    float v_dist = sqrt(ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y));
-    float h_dist = sqrt(ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y));
+    ray->v_d_inter = sqrt(ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y));
+    ray->h_d_inter = sqrt(ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y));
 
-    if (v_dist < h_dist)
+    if (ray->v_d_inter < ray->h_d_inter)
     {
-        ray->side = (ray->angle < 2 * M_PI && ray->angle > 3 * M_PI / 2) ? VERT_R : VERT_L;
+        ray->side = ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) || (ray->angle >= 0 && ray->angle < M_PI / 2)) ? VERT_R : VERT_L;
         // draw_line(player, p_img, RED, vec1->x, vec1->y);
-        // ray->tex_i = (int)vec1->y % BLOCK;
-        ray->length = v_dist;
+        ray->length = ray->v_d_inter;
     }
     else
     {
         ray->side = (ray->angle > 0 && ray->angle < M_PI) ? HORZ_D : HORZ_U;
-        ray->length = h_dist;
+        ray->length = ray->h_d_inter;
     }
     return 0;
 }
@@ -378,7 +377,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
     int i = 0;
 
-    if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle < 2 * (M_PI))) || (((ray->angle > 0) && (ray->angle < (M_PI / 2)))))
+    if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle <= 2 * (M_PI))) || (((ray->angle >= 0) && (ray->angle < (M_PI / 2)))))
     {
         ray->dx = BLOCK;
         ray->dy = ray->dx * ray->t1;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 08:50:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:19:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,14 +293,16 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	// char *s;
 
 	if (color == HORZ_D)
-		color = L_GREY;
+		color = WHITE;
 		// s = player->vars->dn->img_addr;
-	// else if (color == HORZ_U)
-	// 	s = player->vars->up->img_addr;
-	// else if (color == VERT_L)
-	// 	s = player->vars->lf->img_addr;
+	else if (color == HORZ_U)
+		color = GREEN;
+		// s = player->vars->up->img_addr;
+	else if (color == VERT_L)
+		color = RED;
+		// s = player->vars->lf->img_addr;
 	else if (color == VERT_R)
-		color = GREY;
+		color = BLUE ;
 		// s = player->vars->rg->img_addr;
 
     // int drawHeight = y2 - y1;
