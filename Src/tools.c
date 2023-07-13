@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 11:45:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 12:05:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int ft_ext(t_player *player)
 {
     destroy_prev_imges(player);
+	destroy_fix_imges(player);
 	ft_collectorclear(player->vars->collector, ALL);
 	exit(0);
 }

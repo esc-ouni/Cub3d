@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 11:59:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 12:03:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,16 @@ t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
         j = 0;
     }
     return (p_img);
+}
+
+void    destroy_fix_imges(t_player *player)
+{
+    mlx_destroy_image(player->vars->mlx, player->vars->dn->img_ptr);
+    mlx_destroy_image(player->vars->mlx, player->vars->rg->img_ptr);
+    mlx_destroy_image(player->vars->mlx, player->vars->lf->img_ptr);
+    mlx_destroy_image(player->vars->mlx, player->vars->up->img_ptr);
+    mlx_destroy_image(player->vars->mlx, player->vars->fix_img->img_ptr);
+    mlx_destroy_image(player->vars->mlx, player->vars->m_fix_img->img_ptr);
 }
 
 void    destroy_prev_imges(t_player *player)
