@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:57:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:59:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_player *	init(int argc, char const *argv[])
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub");
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub3D");
 	if(!vars->mlx || !vars->win)
 		exit_with_err(&collector, MLX);
 	player->vars = vars;
@@ -286,16 +286,16 @@ void draw_wall_part(t_player *player, t_data *p_img, int color,int x1, int y1, i
 	// char *s;
 
 	if (color == HORZ_D)
-		color = WHITE;
+		color = GREY;
 		// s = player->vars->dn->img_addr;
 	else if (color == HORZ_U)
-		color = GREEN;
+		color = GREY;
 		// s = player->vars->up->img_addr;
 	else if (color == VERT_L)
-		color = RED;
+		color = L_GREY ;
 		// s = player->vars->lf->img_addr;
 	else if (color == VERT_R)
-		color = BLUE ;
+		color = L_GREY ;
 		// s = player->vars->rg->img_addr;
 
     // int drawHeight = y2 - y1;
