@@ -23,23 +23,23 @@ void updateAndRenderScene(t_player *player)
 	update_scene(player);
     
     // Increment frame count
-    frameCount++;
+    // frameCount++;
 
-    // Get the current time in milliseconds
-    int currentTime = (int) (clock() * 1000 / CLOCKS_PER_SEC);
+    // // Get the current time in milliseconds
+    // int currentTime = (int) (clock() * 1000 / CLOCKS_PER_SEC);
 
-    // Calculate time difference from the last frame
-    int deltaTime = currentTime - lastFrameTime;
+    // // Calculate time difference from the last frame
+    // int deltaTime = currentTime - lastFrameTime;
 
-    // Update the title of the window with the current FPS
-    char fpsString[20];
-    // printf("")
-    sprintf(fpsString, "FPS: %.2f", 1000.0 / deltaTime);
-    mlx_string_put(player->vars->mlx, player->vars->win, WIDTH - 150, 10, GREEN, fpsString);
-    // printf("")
+    // // Update the title of the window with the current FPS
+    // char fpsString[20];
+    // // printf("")
+    // sprintf(fpsString, "FPS: %.2f", 1000.0 / deltaTime);
+    // mlx_string_put(player->vars->mlx, player->vars->win, WIDTH - 150, 10, GREEN, fpsString);
+    // // printf("")
 
-    // Update the last frame time
-    lastFrameTime = currentTime;
+    // // Update the last frame time
+    // lastFrameTime = currentTime;
 }
 
 //######################
