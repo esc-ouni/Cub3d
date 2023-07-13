@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 09:56:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 11:44:37 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	handler(int key, t_player *player)
 	// printf("%d\n", key);
 	if (key == 53 || key == 17)
 	{
+    	destroy_prev_imges(player);
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}

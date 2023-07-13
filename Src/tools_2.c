@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 10:39:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 11:42:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void updateAndRenderScene(t_player *player)
 {
     // Put your scene update and rendering logic here
 	update_scene(player);
-	ft_collectorclear(player->vars->collector, TMP);
     
     // Increment frame count
     frameCount++;
@@ -64,6 +63,13 @@ int darkenColor(int color, int amount) {
 
 //######################
 
+// void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
+// {
+//     (void)player;
+//     (void)p_img;
+//     (void)ray;
+// }
+
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
     int     i;
@@ -99,11 +105,24 @@ t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
     return (p_img);
 }
 
+void    destroy_prev_imges(t_player *player)
+{
+    int i = 0;
+
+    while (player->p[i])
+    {
+        mlx_destroy_image(player->vars->mlx, player->p[i]);
+        player->p[i] = NULL;
+        i++;
+    }   
+}
+
 void update_scene(t_player *player)
 {
 	t_data *p_img;
 	t_data *p_r_img;
 
+    destroy_prev_imges(player);
     p_img = new_image(player->vars, WIDTH, HEIGHT, TMP);
     p_r_img = new_image(player->vars, WIDTH, HEIGHT, TMP);
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
@@ -120,6 +139,9 @@ void update_scene(t_player *player)
         mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->m_fix_img->img_ptr, 0, 0);
         mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_r_img->img_ptr, 0, 0);
     }
+    player->p[0] = p_img->img_ptr;
+    player->p[1] = p_r_img->img_ptr;
+    player->p[2] = NULL;
     ft_collectorclear(player->vars->collector, TMP);
 }
 
