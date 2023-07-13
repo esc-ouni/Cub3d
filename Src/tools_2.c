@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 11:42:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/13 11:59:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,31 @@ int darkenColor(int color, int amount) {
 
 //######################
 
+// void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
+// {
+//     int i = 0;
+//     float w_heig = ((900 * 50) / trigo(deg_to_rad(30), TAN)) / (ray.length * trigo(ray.angle - player->angle, COS));
+//     int start = HEIGHT/2 - w_heig/2;
+    
+//     while (i < w_heig)
+//     {
+//         my_mlx_pixel_put(player, p_img, x_index, start +i, GREEN);
+//         i++;
+//     }
+// }
+
 // void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 // {
+//     int i = 0;
 //     (void)player;
 //     (void)p_img;
 //     (void)ray;
+
+//     while (i < WIDTH)
+//     {
+//         draw_wall_S(player, p_img, ray[i], i);
+//         i++;
+//     }
 // }
 
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
