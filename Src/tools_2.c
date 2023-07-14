@@ -92,7 +92,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     else if (ray.side == VERT_L)
         s = player->vars->lf->img_addr;
 
-    while (i < w_heig)
+    while (i < w_heig && i < 10000)
     {
         if (start + i > 0 && start + i < HEIGHT)
         {
@@ -291,7 +291,7 @@ int wall_hit_hup(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }
@@ -305,7 +305,7 @@ int wall_hit_hdn(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }
@@ -319,7 +319,7 @@ int wall_hit_vrg(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }
@@ -333,7 +333,7 @@ int wall_hit_vlf(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }

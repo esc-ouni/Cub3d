@@ -87,8 +87,8 @@ void    check_mapb(t_player *player, char **map)
     int y = 0;
     int x = 0;
     int c = 0;
-    int p_y = 0;
-    int p_x = 0;
+    float p_y = 0;
+    float p_x = 0;
 
     while (map[y])
     {
@@ -96,8 +96,8 @@ void    check_mapb(t_player *player, char **map)
         {
             if (map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
             {
-                p_x = x * BLOCK;
-                p_y = y * BLOCK;
+                p_x = (float)(x * BLOCK);
+                p_y = (float)(y * BLOCK);
                 c++;
             }
             else if (map[y][x] != '0' && map[y][x] != '1')
@@ -109,6 +109,8 @@ void    check_mapb(t_player *player, char **map)
     }
     if (c != 1)
         exit_with_err(player->vars->collector, PARSE);
+    player->p_x = p_x + BLOCK/2;
+	player->p_y = p_y + BLOCK/2;
 }
 
 void    check_map(t_player *player, char **map)

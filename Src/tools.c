@@ -123,8 +123,6 @@ t_player *	init(int argc, char const *argv[])
 	vars->c_color = 0;
     vars->f_color = 0;
     vars->map = parse_file(player, argc, argv);
-	player->p_x = 250;
-	player->p_y = 250;
 	player->angle = 0;
 	player->color = 0;
 	player->vars->fix_img = draw_cf(player);
