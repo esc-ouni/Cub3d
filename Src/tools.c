@@ -318,7 +318,7 @@ void draw_wall_part(t_player *player, t_data *p_img, t_ray ray, int x1, int y1, 
     // int drawHeight = y2 - y1;
 	// int y = y1;
 
-	player->color = darkenColor(player->color, amount);
+    player->color = darkenColor(player->color, ((int)ray.length * 255)/ 1700);
     while (y1 < y2)
     {
        if (y1 < HEIGHT && y1 > 0)
