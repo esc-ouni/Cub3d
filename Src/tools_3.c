@@ -30,7 +30,7 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void    check_dups(t_collector **collector, char **map, char const *argv[], t_player *player)
+void    check_dups(t_player *player, char **map, char const *argv[])
 {
     (void)map;
     (void)player;
@@ -42,20 +42,20 @@ void    check_dups(t_collector **collector, char **map, char const *argv[], t_pl
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
-        exit_with_err(collector, OPEN);
+        exit_with_err(player->vars->collector, OPEN);
     
     
 
 }
 
-void    check_errs(t_collector **collector, int argc, char const *argv[])
+void    check_errs(t_player *player, int argc, char const *argv[])
 {
     (void)argc;
     if(ft_strlen(strstr(argv[1], ".cub")) != 4)
-        exit_with_err(collector, PARSE);
+        exit_with_err(player->vars->collector, PARSE);
 }
 
-int     point_surronded(t_collector **collector, char **map, int y, int x)
+int     point_surronded(t_player *player, char **map, int y, int x)
 {
     int x_m = 0;
     int y_m = 0;
@@ -66,33 +66,63 @@ int     point_surronded(t_collector **collector, char **map, int y, int x)
     x_m = ft_strlen(map[y]);
 
     if ((x - 1) < 0 || (x + 1) > x_m)
-        exit_with_err(collector, PARSE);
+        exit_with_err(player->vars->collector, PARSE);
 
     if (map[y][x-1] == ' ' || map[y][x+1] == ' ')    
-        exit_with_err(collector, PARSE);
+        exit_with_err(player->vars->collector, PARSE);
 
     if ((y - 1) < 0 || (y + 1) > y_m)
-        exit_with_err(collector, PARSE);
+        exit_with_err(player->vars->collector, PARSE);
 
     if (x > ft_strlen(map[y-1]) || x > ft_strlen(map[y+1]))
-        exit_with_err(collector, PARSE);
+        exit_with_err(player->vars->collector, PARSE);
 
     if (map[y-1][x] == ' ' || map[y+1][x] == ' ')    
-        exit_with_err(collector, PARSE);
+        exit_with_err(player->vars->collector, PARSE);
     return (1);
 }
 
-void    check_map(t_collector **collector, char **map)
+void    check_mapb(t_player *player, char **map)
 {
     int y = 0;
     int x = 0;
+    int c = 0;
+    int p_y = 0;
+    int p_x = 0;
 
     while (map[y])
     {
         while(map[y][x])
         {
+            if (map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
+            {
+                p_x = x * BLOCK;
+                p_y = y * BLOCK;
+                c++;
+            }
+            else if (map[y][x] != '0' && map[y][x] != '1')
+                exit_with_err(player->vars->collector, PARSE);
+            x++;
+        }
+        y++;
+        x = 0;
+    }
+    if (c != 1)
+        exit_with_err(player->vars->collector, PARSE);
+}
+
+void    check_map(t_player *player, char **map)
+{
+    int y = 0;
+    int x = 0;
+
+    check_mapb(player, map);
+    while (map[y])
+    {
+        while(map[y][x])
+        {
             if (map[y][x] == '0')
-                point_surronded(collector, map, y, x);
+                point_surronded(player, map, y, x);
             x++;  
         }
         y++;
@@ -100,7 +130,7 @@ void    check_map(t_collector **collector, char **map)
     }
 }
 
-char **get_map(t_collector **collector, int argc, char const *argv[], int t)
+char **get_map(t_player *player, int argc, char const *argv[], int t)
 {
     (void)argc;
 
@@ -116,17 +146,17 @@ char **get_map(t_collector **collector, int argc, char const *argv[], int t)
 	i2 = 0;
 	fd = 0;
 	map = NULL;  
-    map = h_malloc(collector, (count_alloc_size(collector, argv, fd) * sizeof(char *)), map, NTMP);
+    map = h_malloc(player->vars->collector, (count_alloc_size(player->vars->collector, argv, fd) * sizeof(char *)), map, NTMP);
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
-        exit_with_err(collector, OPEN);
+        exit_with_err(player->vars->collector, OPEN);
     while((s = get_next_line(fd))) //not appopriate
     {
         if(i == t)
             itsmap = 1;
         if (itsmap)
         {
-            map[i2] = ft_mstrdup(collector, s, NTMP);
+            map[i2] = ft_mstrdup(player->vars->collector, s, NTMP);
             i2++;
         }
         free(s);
@@ -156,7 +186,7 @@ int extract_color(t_player *player, char *color)
     return (color_c);
 }
 
-int     get_elem(t_collector **collector, char const *argv[], t_player *player)
+int     get_elem(t_player *player, char const *argv[])
 {
     char *s;
     int fd;
@@ -164,17 +194,17 @@ int     get_elem(t_collector **collector, char const *argv[], t_player *player)
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
-        exit_with_err(collector, OPEN);
+        exit_with_err(player->vars->collector, OPEN);
     while((s = get_next_line(fd))) //not appopriate
     {
         if (strnstr(s, "NO", 2))
-            player->vars->up_c = ft_mstrdup(collector, s+3, TMP);
+            player->vars->up_c = ft_mstrdup(player->vars->collector, s+3, TMP);
         else if (strnstr(s, "SO", 2))
-            player->vars->dn_c = ft_mstrdup(collector, s+3, TMP);
+            player->vars->dn_c = ft_mstrdup(player->vars->collector, s+3, TMP);
         else if (strnstr(s, "WE", 2))
-            player->vars->rg_c = ft_mstrdup(collector, s+3, TMP);
+            player->vars->rg_c = ft_mstrdup(player->vars->collector, s+3, TMP);
         else if (strnstr(s, "EA", 2))
-            player->vars->lf_c = ft_mstrdup(collector, s+3, TMP);
+            player->vars->lf_c = ft_mstrdup(player->vars->collector, s+3, TMP);
         else if (strnstr(s, "F", 1))
             player->vars->f_color = extract_color(player, s+1);
         else if (strnstr(s, "C", 1))
@@ -191,7 +221,7 @@ int     get_elem(t_collector **collector, char const *argv[], t_player *player)
     return (0);
 }
 
-int    get_elements(t_collector **collector, char const *argv[], t_player *player)
+int    get_elements(t_player *player, char const *argv[])
 {
     int i = 0;
     // int fd;
@@ -200,7 +230,7 @@ int    get_elements(t_collector **collector, char const *argv[], t_player *playe
     // if (fd == -1)
     //     exit_with_err(collector, OPEN);
 
-    i = get_elem(collector, argv, player);
+    i = get_elem(player, argv);
     
 	player->vars->up = new_image_from_xpm(player, player->vars->up_c);
 	player->vars->dn = new_image_from_xpm(player, player->vars->dn_c);
@@ -209,7 +239,7 @@ int    get_elements(t_collector **collector, char const *argv[], t_player *playe
     return (i);
 }
 
-char **parse_file(t_collector **collector, int argc, char const *argv[], t_player *player)
+char **parse_file(t_player *player, int argc, char const *argv[])
 {
     char **map;
     int fd;
@@ -221,16 +251,15 @@ char **parse_file(t_collector **collector, int argc, char const *argv[], t_playe
 	{
         fd = open(argv[1], O_RDONLY);
         if (fd == -1)
-            exit_with_err(collector, OPEN);
-        // debug();
-        check_errs(collector, argc, argv);
-        check_dups(collector, map, argv, player);
-        i = get_elements(collector, argv, player);
-        map = get_map(collector, argc, argv, i);
-        check_map(collector, map); 
+            exit_with_err(player->vars->collector, OPEN);
+        check_errs(player, argc, argv);
+        check_dups(player, map, argv);
+        i = get_elements(player, argv);
+        map = get_map(player, argc, argv, i);
+        check_map(player, map); 
         return (map);
 	}
-    exit_with_err(collector, ARGS);
+    exit_with_err(player->vars->collector, ARGS);
     return (NULL);
 }
 

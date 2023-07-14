@@ -1,4 +1,4 @@
-FLAGS = -Wall -Wextra -Werror #-fsanitize=undefined,address -g
+FLAGS = -Wall -Wextra -Werror -fsanitize=undefined,address -g
 MATH = -Oz -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 

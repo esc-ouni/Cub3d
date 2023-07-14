@@ -240,7 +240,7 @@ void		my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color);
 void		ft_collectorclear(t_collector **collector, t_flag flag);
 void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
-char 		**parse_file(t_collector **collector, int argc, char const *argv[], t_player *player);
+char 		**parse_file(t_player *player, int argc, char const *argv[]);
 t_data		*draw_player(t_player *player, t_data *p_img);
 
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);

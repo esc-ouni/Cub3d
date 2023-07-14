@@ -171,7 +171,7 @@ void update_scene(t_player *player)
 	draw_player(player, p_r_img);
 	ray = cast_rays(player, p_r_img, ray);
 
-	draw_3d_map(player, p_img, ray);//to_be_recoded
+	draw_3d_map(player, p_img, ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);

@@ -122,7 +122,7 @@ t_player *	init(int argc, char const *argv[])
 	vars->rg_c = NULL;
 	vars->c_color = 0;
     vars->f_color = 0;
-    vars->map = parse_file(&collector, argc, argv, player);
+    vars->map = parse_file(player, argc, argv);
 	player->p_x = 250;
 	player->p_y = 250;
 	player->angle = 0;
