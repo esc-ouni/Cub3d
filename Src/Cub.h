@@ -22,6 +22,9 @@
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"
 
+
+
+
 #define HORZ_U 15
 #define HORZ_D 16
 #define VERT_L 17
