@@ -42,6 +42,7 @@
 #define BLOCK 50
 #define MV_SP 40
 #define M_BLOCK 10
+#define MAX_R WIDTH
 
 #define TRANS 0xFF000000
 
@@ -82,6 +83,7 @@
 	#undef HEIGHT
 	#define WIDTH 2560
 	#define HEIGHT 1396
+	#define MAX_R 2560
 # endif
 
 typedef enum e_flag

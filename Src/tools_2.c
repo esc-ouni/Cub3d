@@ -88,7 +88,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
         color = L_GREY;
     else if (ray.side == VERT_R || ray.side == VERT_L)
         color = GREY;
-    color = darkenColor(color, ((int)ray.length * 255)/ 1700);
+    color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
     while (i < w_heig)
     {
         if (start + i > 0 && start + i < HEIGHT)
