@@ -39,7 +39,6 @@
 #define BLOCK 50
 #define MV_SP 40
 #define M_BLOCK 10
-#define PI 3.14159265
 
 #define TRANS 0xFF000000
 

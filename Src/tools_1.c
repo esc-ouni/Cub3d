@@ -52,7 +52,7 @@ float	up_degree(float angle, float add_angle)
 {
 	add_angle = deg_to_rad(add_angle);
 	angle += add_angle;
-	if (angle >= (2 * M_PI))
+	if (angle > (2 * M_PI))
 		angle -= 2 * M_PI;
 	else if (angle < 0)
 		angle += 2 * M_PI;
