@@ -162,6 +162,8 @@ void    check_map(t_player *player, char **map)
         {
             if (map[y][x] == '0')
                 point_surronded(player, map, y, x);
+            else if ((map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W'))
+                point_surronded(player, map, y, x);
             x++;  
         }
         y++;

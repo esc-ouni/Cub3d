@@ -124,9 +124,9 @@ void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 
 	x *= M_BLOCK;
 	y *= M_BLOCK;
-	while(i + 1 < M_BLOCK)
+	while(i < M_BLOCK)
 	{
-		while(j + 1 < M_BLOCK)
+		while(j < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
@@ -143,13 +143,13 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 
 	x *= M_BLOCK;
 	y *= M_BLOCK;
-	while(i + 1< M_BLOCK)
+	while(i < M_BLOCK)
 	{
-		while(j + 1 < M_BLOCK)
+		while(j < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, M_WHITE);
-			if(j == (M_BLOCK - 1))
-				my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
+			// if(j == (M_BLOCK - 1))
+			// 	my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
 		}
 		i++;
@@ -235,14 +235,18 @@ t_data	*draw_2d_map(t_player *player)
 	iy = 0;
 	m_w = ft_strlen(map[0]);
 	while (map[i])
+	{
+		if (ft_strlen(map[i]) > m_w)
+			m_w = ft_strlen(map[i]);
 		i++;
+	}
 	m_h = i;
 	player->vars->map_w =  m_w;
 	player->vars->map_h =  m_h;
 	if ((m_w * M_BLOCK >= WIDTH) || (m_h * M_BLOCK >= HEIGHT))
 		exit_with_err(player->vars->collector, MAP);
 	img = new_image(player->vars, m_w * M_BLOCK, m_h * M_BLOCK, NTMP);
-	// img = ft_transparency(player, img,  m_w * M_BLOCK, m_h * M_BLOCK);
+	img = ft_transparency(player, img,  m_w * M_BLOCK, m_h * M_BLOCK);
 	while(map[iy])
 	{
 		ix = 0;

@@ -14,22 +14,24 @@
 
 void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
 {
+    (void)p_img;
     int i = 0;
 
-    float dx = x2/5 - (int)player->p_x/5;
-    float dy = y2/5 - (int)player->p_y/5;
+    float dx = x2/player->factor - player->p_x/player->factor;
+    float dy = y2/player->factor - player->p_y/player->factor;
     float steps = ft_abs(dy);
 	if (ft_abs(dx) > ft_abs(dy))
 		steps = ft_abs(dx);
     float x_inc = dx / steps;
     float y_inc = dy / steps;
 
-    float x = (int)player->p_x/5;
-    float y = (int)player->p_y/5;
+    float x = player->p_x/player->factor;
+    float y = player->p_y/player->factor;
 
-    while ( i < steps)
+    while (i < steps)
     {
 		my_mlx_pixel_put(player, p_img, (int)x, (int)y, color);
+		// mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;
         i++;

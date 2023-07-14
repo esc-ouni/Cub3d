@@ -146,7 +146,8 @@ t_player *	init(int argc, char const *argv[])
 
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
-	draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
+	// draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
+	draw_line(player, p_img, BLUE, player->p_x + (40 * trigo(player->angle, COS)), player->p_y + (40 * trigo(player->angle, SIN)));
 	return (p_img);
 }
 
@@ -174,14 +175,14 @@ int check_collision_v2(t_player *player, int x, int y)
 
 int check_collision(t_player *player, int x, int y)
 {
-	int i = MV_SP;
+	// int i = MV_SP;
 	float px = player->p_x;
 	float py = player->p_y;
 	int m_y;
 	int m_x;
 
-	float x_inc = ((float)x/MV_SP);
-	float y_inc = ((float)y/MV_SP);
+	// float x_inc = ((float)x/MV_SP);
+	// float y_inc = ((float)y/MV_SP);
 
 	m_x = (floor((px + x)/BLOCK));
 	m_y = (floor((py + y)/BLOCK));
@@ -192,72 +193,42 @@ int check_collision(t_player *player, int x, int y)
 	if (m_x >= player->vars->map_w  || m_y >= player->vars->map_h)
 		return 0;
 
+	// if (player->angle > 0 && player->angle < M_PI)
+	// // while(i)
+	// // {
+	// // 	if (player->vars->map[m_y][m_x] == '1')
+	// // 		return (0);
+	// // 	m_x = (floor((px += x_inc)/BLOCK));
+	// // 	m_y = (floor((py += y_inc)/BLOCK));
+	// // 	i--;
+	// // }
+	// // m_x = (floor((px += x_inc)/BLOCK));
+	// // m_y = (floor((py += y_inc)/BLOCK));
+	// // if (player->vars->map[m_y][m_x] == '0')
+	// // {
+	// // 	player->p_x = px;
+	// // 	player->p_y = py;
+	// // 	return (1);
+	// // }
+	// if (player->angle < (2 * M_PI) && player->angle > M_PI)
 
-	while(i)
-	{
-		if (player->vars->map[m_y][m_x] == '1')
-			return (0);
-		m_x = (floor((px += x_inc)/BLOCK));
-		m_y = (floor((py += y_inc)/BLOCK));
-		i--;
-	}
-	m_x = (floor((px += x_inc)/BLOCK));
-	m_y = (floor((py += y_inc)/BLOCK));
-	if (player->vars->map[m_y][m_x] == '0')
-	{
-		player->p_x = px;
-		player->p_y = py;
-		return (1);
-	}
+	// while(i)
+	// {
+	// 	if (player->vars->map[m_y][m_x] == '1')
+	// 		return (0);
+	// 	m_x = (floor((px += x_inc)/BLOCK));
+	// 	m_y = (floor((py += y_inc)/BLOCK));
+	// 	i--;
+	// }
+	// m_x = (floor((px += x_inc)/BLOCK));
+	// m_y = (floor((py += y_inc)/BLOCK));
+	// if (player->vars->map[m_y][m_x] == '0')
+	// {
+	// 	player->p_x = px;
+	// 	player->p_y = py;
+	// 	return (1);
+	// }
 	return (0);
-
-	
-	// if (x >= 0 && y >= 0)
-	// {
-	// 	while(i)
-	// 	{
-	// 		m_x = ((px += (float)x/40)/BLOCK);
-	// 		m_y = ((py += (float)y/40)/BLOCK);
-
-	// 		if (player->vars->map[m_y][m_x] == '1')
-	// 			return (0);
-	// 		i--;
-	// 	}
-	// }
-	// else if (x < 0 && y < 0)
-	// {
-	// 	while(i)
-	// 	{
-	// 		m_x = ((px += (float)x/40)/BLOCK);
-	// 		m_y = ((py += (float)y/40)/BLOCK);
-	// 		if (player->vars->map[m_y][m_x] == '1')
-	// 			return (0);
-	// 		i--;
-	// 	}
-	// }
-	// else if (x > 0 && y < 0)
-	// {
-	// 	while(i)
-	// 	{
-	// 		m_x = ((px += (float)x/40)/BLOCK);
-	// 		m_y = ((py += (float)y/40)/BLOCK);
-	// 		if (player->vars->map[m_y][m_x] == '1')
-	// 			return (0);
-	// 		i--;
-	// 	}
-	// }
-	// else if (x < 0 && y > 0)
-	// {
-	// 	while(i)
-	// 	{
-	// 		m_x = ((px += (float)x/40)/BLOCK);
-	// 		m_y = ((py += (float)y/40)/BLOCK);
-	// 		if (player->vars->map[m_y][m_x] == '1')
-	// 			return (0);
-	// 		i--;
-	// 	}
-	// }
-	// return (1);
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
