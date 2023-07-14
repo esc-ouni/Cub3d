@@ -82,6 +82,29 @@ int     point_surronded(t_player *player, char **map, int y, int x)
     return (1);
 }
 
+void    check_mapa(t_player *player, char **map)
+{
+    int y = 0;
+    int x = 0;
+
+    while(map[y][x])
+    {
+        if (map[y][x] != '1' && map[y][x] != ' ')
+            exit_with_err(player->vars->collector, PARSE);
+        x++;
+    }
+    while (map[y])
+        y++;
+    y--;
+    x = 0;
+    while(map[y][x])
+    {
+        if (map[y][x] != '1' && map[y][x] != ' ')
+            exit_with_err(player->vars->collector, PARSE);
+        x++;
+    }
+}
+
 void    check_mapb(t_player *player, char **map)
 {
     int y = 0;
@@ -118,6 +141,7 @@ void    check_map(t_player *player, char **map)
     int y = 0;
     int x = 0;
 
+    check_mapa(player, map);
     check_mapb(player, map);
     while (map[y])
     {
