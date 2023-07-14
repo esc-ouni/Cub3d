@@ -76,25 +76,28 @@ int darkenColor(int color, int amount)
 
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 {
+    char *s = NULL;
     int i = 0;
     int tex_y = 0;
-
-    
-    int color;
+    int color = 0;
     float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * 100;
     int start = HEIGHT/2 - w_heig/2;
-    color = 0;
+    
+    if (ray.side == HORZ_D)
+        s = player->vars->up->img_addr;
+    else if (ray.side == HORZ_U)
+        s = player->vars->dn->img_addr;
+    else if (ray.side == VERT_R)
+        s = player->vars->rg->img_addr;
+    else if (ray.side == VERT_L)
+        s = player->vars->lf->img_addr;
 
-    // if (ray.side == HORZ_D || ray.side == HORZ_U)
-    //     color = L_GREY;
-    // else if (ray.side == VERT_R || ray.side == VERT_L)
-    //     color = GREY;
     while (i < w_heig)
     {
         if (start + i > 0 && start + i < HEIGHT)
         {
             tex_y = i * (BLOCK / w_heig);
-            color = *(unsigned int *)(player->vars->up->img_addr + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
+            color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
             color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
