@@ -46,7 +46,7 @@ void updateAndRenderScene(t_player *player)
 
 int darkenColor(int color, int amount)
 {
-    (void)amount;
+    amount/=2;
     int r = 0;
     int g = 0;
     int b = 0;
@@ -77,22 +77,38 @@ int darkenColor(int color, int amount)
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 {
     int i = 0;
+    int tex_y = 0;
+
     
     int color;
-    // float w_heig = ((HEIGHT * 50) / trigo(deg_to_rad(30), TAN)) / (ray.length * trigo(ray.angle - player->angle, COS));
     float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * 100;
     int start = HEIGHT/2 - w_heig/2;
     color = 0;
-    
-    if (ray.side == HORZ_D || ray.side == HORZ_U)
-        color = L_GREY;
-    else if (ray.side == VERT_R || ray.side == VERT_L)
-        color = GREY;
-    color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
+
+    int factor = 0;
+    int f_factor = 0;
+    factor = w_heig / BLOCK;
+    f_factor = factor;
+
+    // if (ray.side == HORZ_D || ray.side == HORZ_U)
+    //     color = L_GREY;
+    // else if (ray.side == VERT_R || ray.side == VERT_L)
+    //     color = GREY;
     while (i < w_heig)
     {
         if (start + i > 0 && start + i < HEIGHT)
+        {
+            tex_y = (i * BLOCK) / w_heig;
+            color = *(unsigned int *)(player->vars->up->img_addr + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
+            color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
+            if (!factor)
+            {
+                tex_y++;
+                factor = f_factor;
+            }
+            factor--;
+        }
         i++;
     }
 }
@@ -110,24 +126,6 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
         i++;
     }
 }
-
-// void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
-// {
-//     int     i;
-//     int     start;
-//     float   w_height;
-//     float   c;
-
-//     c = ((900 * 50) / trigo(deg_to_rad(30), TAN));
-//     i = 0;
-//     while (i < WIDTH)
-//     {
-//         w_height = c / (ray[i].length * trigo(ray[i].angle - player->angle, COS));
-//         start = HEIGHT/2 - (w_height/2);
-//         draw_wall_part(player, p_img, ray[i], i, (int)start, i, start + w_height, ((int)ray[i].length * 255)/ 1600);
-//         i++;
-//     }
-// }
 
 t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
 {
@@ -214,6 +212,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
             ray->side = VERT_R;
         else
             ray->side = VERT_L;
+        ray->tex_x = (int)vec1->y % BLOCK;
         ray->length = ray->v_d_inter;
     }
     else
@@ -222,6 +221,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
             ray->side = HORZ_D;
         else
             ray->side = HORZ_U;
+        ray->tex_x = (int)vec2->x % BLOCK;
         ray->length = ray->h_d_inter;
     }
     return 0;

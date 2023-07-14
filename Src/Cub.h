@@ -182,7 +182,7 @@ typedef struct s_ray
 	float		v_d_inter;
 	float		h_d_inter;
 	int			side;
-	int			tex_i;
+	int			tex_x;
 	float 		c;
 }		t_ray;
 
