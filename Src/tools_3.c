@@ -74,7 +74,7 @@ int     point_surronded(t_player *player, char **map, int y, int x)
     if ((y - 1) < 0 || (y + 1) > y_m)
         exit_with_err(player->vars->collector, PARSE);
 
-    if (x > ft_strlen(map[y-1]) || x > ft_strlen(map[y+1]))
+    if (x >= ft_strlen(map[y-1]) || x >= ft_strlen(map[y+1]))
         exit_with_err(player->vars->collector, PARSE);
 
     if (map[y-1][x] == ' ' || map[y+1][x] == ' ')    
@@ -87,12 +87,25 @@ void    check_mapa(t_player *player, char **map)
     int y = 0;
     int x = 0;
 
+
+
+    //check middle
+    while(map[y])
+    {
+        if ((map[y][0] != '1' && map[y][0] != ' ') || (map[y][ft_strlen(map[y]) - 1] != '1' && map[y][ft_strlen(map[y]) - 1] != ' '))
+            exit_with_err(player->vars->collector, PARSE);
+        y++;
+    }
+    //check upper
+    y = 0;
+    x = 0;
     while(map[y][x])
     {
         if (map[y][x] != '1' && map[y][x] != ' ')
             exit_with_err(player->vars->collector, PARSE);
         x++;
     }
+    //check bottom
     while (map[y])
         y++;
     y--;
