@@ -78,7 +78,8 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 {
     int i = 0;
     int color;
-    float w_heig = ((HEIGHT * 50) / trigo(deg_to_rad(30), TAN)) / (ray.length * trigo(ray.angle - player->angle, COS));
+    // float w_heig = ((HEIGHT * 50) / trigo(deg_to_rad(30), TAN)) / (ray.length * trigo(ray.angle - player->angle, COS));
+    float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * 100;
     int start = HEIGHT/2 - w_heig/2;
     color = 0;
     
