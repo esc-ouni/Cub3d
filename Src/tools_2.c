@@ -46,7 +46,7 @@ void updateAndRenderScene(t_player *player)
 
 int darkenColor(int color, int amount)
 {
-    amount/=2;
+    amount/=1.3;
     int r = 0;
     int g = 0;
     int b = 0;
@@ -85,11 +85,6 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     int start = HEIGHT/2 - w_heig/2;
     color = 0;
 
-    int factor = 0;
-    int f_factor = 0;
-    factor = w_heig / BLOCK;
-    f_factor = factor;
-
     // if (ray.side == HORZ_D || ray.side == HORZ_U)
     //     color = L_GREY;
     // else if (ray.side == VERT_R || ray.side == VERT_L)
@@ -98,16 +93,10 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     {
         if (start + i > 0 && start + i < HEIGHT)
         {
-            tex_y = (i * BLOCK) / w_heig;
+            tex_y = i * (BLOCK / w_heig);
             color = *(unsigned int *)(player->vars->up->img_addr + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
             color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
-            if (!factor)
-            {
-                tex_y++;
-                factor = f_factor;
-            }
-            factor--;
         }
         i++;
     }
