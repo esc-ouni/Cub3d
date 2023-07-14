@@ -77,6 +77,7 @@ int darkenColor(int color, int amount)
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 {
     int i = 0;
+    
     int color;
     // float w_heig = ((HEIGHT * 50) / trigo(deg_to_rad(30), TAN)) / (ray.length * trigo(ray.angle - player->angle, COS));
     float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * 100;
