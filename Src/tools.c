@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 10:42:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 11:56:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,29 +188,59 @@ int check_collision_v2(t_player *player, int x, int y)
 	return (0);
 }
 
+
+void collision_line(t_player *player, float x2, float y2)
+{
+    int i = 0;
+
+    float dx = x2 - player->p_x;
+    float dy = y2 - player->p_y;
+    float steps = ft_abs(dy);
+	if (ft_abs(dx) > ft_abs(dy))
+		steps = ft_abs(dx);
+    float x_inc = dx / steps;
+    float y_inc = dy / steps;
+
+    float x = player->p_x;
+    float y = player->p_y;
+
+    while (i < steps)
+    {
+        if (player->vars->map[(int)((player->p_y + y_inc)/BLOCK)][(int)((player->p_x + x_inc)/BLOCK)] == '1')
+			return;
+		player->p_x += x_inc;
+		player->p_y += y_inc;
+        x += x_inc;
+        y += y_inc;
+        i++;
+    }
+}
+
 int check_collision(t_player *player, int x, int y)
 {
-	// int m_y;
-	// int m_x;
+	int m_y;
+	int m_x;
 
-	// m_x = (floor((player->p_x + x + (BLOCK/2))/BLOCK));
-	// m_y = (floor((player->p_y + y + (BLOCK/2))/BLOCK));
+	m_y = ceil((player->p_y + y + (BLOCK/2))/BLOCK);
+	m_x = ceil((player->p_x + x + (BLOCK/2))/BLOCK);
 
+	if (x < 0)
+		m_x = floor((player->p_x + x - (BLOCK/2))/BLOCK);
+	if (y < 0)
+		m_y = floor((player->p_y + y - (BLOCK/2))/BLOCK);
+	if (m_x < 0 || m_y < 0)
+		return 0;
+	if (m_x >= ft_strlen(player->vars->map[m_y]) || m_y > player->vars->map_h)
+		return 0;
 	// printf("x : %d, y : %d\n", m_x, m_y);
-	// if (m_x <= 0 || m_y <= 0)
-	// 	return 0;
-	// if (m_x >= ft_strlen(player->vars->map[m_y]) - 1  || m_y >= player->vars->map_h)
-	// 	return 0;
+	collision_line(player, player->p_x + x, player->p_y + y);
+		return (1);
 	// if (player->vars->map[m_y][m_x] == '0')
 	// {
 	// 	player->p_x += x;
 	// 	player->p_y += y;
 	// 	return (1);
 	// }
-	// return (0);
-	player->p_x += x;
-	player->p_y += y;
-	return (1);
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
