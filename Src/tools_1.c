@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 11:42:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 20:21:01 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	handler(int key, t_player *player)
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
-	else if (key == 46)
+	if (key == 46)
 	{
 		if (player->m == 1)	
 			player->m = 0;
@@ -100,17 +100,17 @@ int	handler(int key, t_player *player)
 			player->m = 1;
 		updateAndRenderScene(player);
 	}
-	else if (key == M_UP)
+	if (key == M_UP)
 		move_up(player);
-	else if (key == M_DN)
+	if (key == M_DN)
 		move_down(player);
-	else if (key == K_R)
+	if (key == K_R)
 		rotate_right(player);
-	else if (key == K_L)
+	if (key == K_L)
 		rotate_left(player);
-	else if (key == M_RG)
+	if (key == M_RG)
 		move_right(player);
-	else if (key == M_LF)
+	if (key == M_LF)
 		move_left(player);
 	return(0);
 }

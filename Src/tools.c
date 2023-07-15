@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 14:20:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 21:27:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ t_player *	init(int argc, char const *argv[])
 
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
-	// draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
-	draw_line(player, p_img, BLUE, player->p_x + (40 * trigo(player->angle, COS)), player->p_y + (40 * trigo(player->angle, SIN)));
+	draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
+	// draw_line(player, p_img, BLUE, player->p_x + (40 * trigo(player->angle, COS)), player->p_y + (40 * trigo(player->angle, SIN)));
 	return (p_img);
 }
 
@@ -218,30 +218,82 @@ void collision_line(t_player *player, float x2, float y2)
 
 int check_collision(t_player *player, int x, int y)
 {
-	int m_y;
-	int m_x;
+	int k = 0;
+	int xo = BLOCK/3;
+	int yo = BLOCK/3;
 
-	m_y = ceil((player->p_y + y + (BLOCK/2))/BLOCK);
-	m_x = ceil((player->p_x + x + (BLOCK/2))/BLOCK);
-
-	if (x < 0)
-		m_x = floor((player->p_x + x - (BLOCK/2))/BLOCK);
 	if (y < 0)
-		m_y = floor((player->p_y + y - (BLOCK/2))/BLOCK);
-	if (m_x < 0 || m_y < 0)
-		return 0;
-	if (m_x >= ft_strlen(player->vars->map[m_y]) || m_y > player->vars->map_h)
-		return 0;
-	// collision_line(player, player->p_x + x, player->p_y + y);
-	// printf("x : %d, y : %d\n", m_x, m_y);
-	if (player->vars->map[m_y][m_x] == '0')
-	{
-		player->p_x += x;
+		yo = -BLOCK/3;
+	if (x < 0)
+		xo = -BLOCK/3;
+	if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] == '0')
 		player->p_y += y;
-		return (1);
-	}
-	return (0);
+    else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] == '0')
+		player->p_y += 1;
+	else
+		k++;
+	// 	return (0);
+
+    if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] == '0')
+		player->p_x += x;
+    else if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + xo)/BLOCK)] == '0')
+		player->p_x += 1;
+	else
+		k++;
+	// 	return (0);
+	if (k == 2)
+		return (0);
+	return (1);
 }
+
+// int check_collision(t_player *player, int x, int y)
+// {
+// 	int t = (BLOCK/2);
+// 	int t2 = (BLOCK/2);
+
+// 	if (x < 0)
+// 		t = -(BLOCK/2);
+// 	if (y < 0)
+// 		t2 = -(BLOCK/2);
+// 	if (player->angle >= (M_PI / 4) && player->angle <= 3 *(M_PI / 4))
+// 	{
+// 		if (wall_hit_hdn(player, player->p_x + x + t, player->p_y + y + t2))
+// 		{
+// 			player->p_x += x;
+// 			player->p_y += y;
+// 			return (1);
+// 		}
+// 	}
+// 	else if (player->angle > 3 * (M_PI / 4) && player->angle <= 5 *(M_PI / 4))
+// 	{
+// 		if (wall_hit_vlf(player, player->p_x + x + t, player->p_y + y + t2))
+// 		{
+// 			player->p_x += x;
+// 			player->p_y += y;
+// 			return (1);
+// 		}
+// 	}
+// 	else if (player->angle > 5 * (M_PI / 4) && player->angle <= 7 *(M_PI / 4))
+// 	{
+// 		if (wall_hit_hup(player, player->p_x + x + t, player->p_y + y + t2))
+// 		{
+// 			player->p_x += x;
+// 			player->p_y += y;
+// 			return (1);
+// 		}
+// 	}
+// 	else
+// 	{
+		// if (wall_hit_vrg(player, player->p_x + x + t, player->p_y + y + t2))
+// 		{
+// 			player->p_x += x;
+// 			player->p_y += y;
+// 			return (1);
+// 		}
+// 	}
+// 	return (0);
+// }
+
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
 {

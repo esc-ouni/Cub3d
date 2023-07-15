@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 14:20:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 19:09:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ int wall_hit_hup(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }
@@ -305,7 +305,7 @@ int wall_hit_hdn(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }
@@ -319,7 +319,7 @@ int wall_hit_vrg(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }
@@ -333,7 +333,7 @@ int wall_hit_vlf(t_player *player, int x, int y)
 		return 0;
 	if (m_x > 35|| m_y > 13)
 		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
+	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
 	return (0);
 }

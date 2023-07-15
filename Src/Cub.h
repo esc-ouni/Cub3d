@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 14:23:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 19:09:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 #define WIDTH 1400
 #define HEIGHT 800
 #define BLOCK 1000
-#define MV_SP 400
+#define MV_SP 500
 #define M_BLOCK 10
 #define MAX_R  180000
 
@@ -198,6 +198,12 @@ char		**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag);
 char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag);
 char		*ft_mstrtrim(t_vars *vars, char const *s1, char const *set, t_flag flag);
 char		*ft_msubstr(t_vars *vars, char const *s, unsigned int start, size_t len);
+
+
+int 		wall_hit_hup(t_player *player, int x, int y);
+int 		wall_hit_hdn(t_player *player, int x, int y);
+int			wall_hit_vrg(t_player *player, int x, int y);
+int 		wall_hit_vlf(t_player *player, int x, int y);
 
 void   		destroy_prev_imges(t_player *player);
 void    	destroy_fix_imges(t_player *player);
