@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 11:42:38 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 10:42:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void    check_mapb(t_player *player, char **map)
                 p_y = (float)(y * BLOCK);
                 c++;
             }
-            else if (map[y][x] != '0' && map[y][x] != '1')
+            else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != ' ')
                 exit_with_err(player->vars->collector, PARSE);
             x++;
         }

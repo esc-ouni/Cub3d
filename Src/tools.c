@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 19:24:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 10:42:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,25 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	return (p_img);
 }
 
+int func(int key, t_player *player)
+{
+	if (key == 46)
+	{
+		if (player->m == 1)	
+			player->m = 0;
+		else
+			player->m = 1;
+		updateAndRenderScene(player);
+	}
+	return(0);
+}
+
 void hooks(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
-	mlx_hook(player->vars->win, 2, 1L << 0, handler, player);
+	// mlx_hook(player->vars->win, 2, 1L<<0, func, player);	
+	mlx_hook(player->vars->win, 2, 1L<<0, handler, player);
+	mlx_hook(player->vars->win, 3, 1L<<1, handler, player);
 	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_loop(player->vars->mlx);
 }
@@ -175,60 +190,27 @@ int check_collision_v2(t_player *player, int x, int y)
 
 int check_collision(t_player *player, int x, int y)
 {
-	// int i = MV_SP;
-	float px = player->p_x;
-	float py = player->p_y;
-	int m_y;
-	int m_x;
+	// int m_y;
+	// int m_x;
 
-	// float x_inc = ((float)x/MV_SP);
-	// float y_inc = ((float)y/MV_SP);
-
-	m_x = (floor((px + x)/BLOCK));
-	m_y = (floor((py + y)/BLOCK));
+	// m_x = (floor((player->p_x + x + (BLOCK/2))/BLOCK));
+	// m_y = (floor((player->p_y + y + (BLOCK/2))/BLOCK));
 
 	// printf("x : %d, y : %d\n", m_x, m_y);
-	if (m_x <= 0 || m_y <= 0)
-		return 0;
-	if (m_x >= player->vars->map_w  || m_y >= player->vars->map_h)
-		return 0;
-
-	// if (player->angle > 0 && player->angle < M_PI)
-	// // while(i)
-	// // {
-	// // 	if (player->vars->map[m_y][m_x] == '1')
-	// // 		return (0);
-	// // 	m_x = (floor((px += x_inc)/BLOCK));
-	// // 	m_y = (floor((py += y_inc)/BLOCK));
-	// // 	i--;
-	// // }
-	// // m_x = (floor((px += x_inc)/BLOCK));
-	// // m_y = (floor((py += y_inc)/BLOCK));
-	// // if (player->vars->map[m_y][m_x] == '0')
-	// // {
-	// // 	player->p_x = px;
-	// // 	player->p_y = py;
-	// // 	return (1);
-	// // }
-	// if (player->angle < (2 * M_PI) && player->angle > M_PI)
-
-	// while(i)
-	// {
-	// 	if (player->vars->map[m_y][m_x] == '1')
-	// 		return (0);
-	// 	m_x = (floor((px += x_inc)/BLOCK));
-	// 	m_y = (floor((py += y_inc)/BLOCK));
-	// 	i--;
-	// }
-	// m_x = (floor((px += x_inc)/BLOCK));
-	// m_y = (floor((py += y_inc)/BLOCK));
+	// if (m_x <= 0 || m_y <= 0)
+	// 	return 0;
+	// if (m_x >= ft_strlen(player->vars->map[m_y]) - 1  || m_y >= player->vars->map_h)
+	// 	return 0;
 	// if (player->vars->map[m_y][m_x] == '0')
 	// {
-	// 	player->p_x = px;
-	// 	player->p_y = py;
+	// 	player->p_x += x;
+	// 	player->p_y += y;
 	// 	return (1);
 	// }
-	return (0);
+	// return (0);
+	player->p_x += x;
+	player->p_y += y;
+	return (1);
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
