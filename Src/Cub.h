@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 14:00:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 14:23:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@
 #define WIDTH 1400
 #define HEIGHT 800
 #define BLOCK 1000
-#define MV_SP 30
+#define MV_SP 400
 #define M_BLOCK 10
-#define MAX_R WIDTH
+#define MAX_R  180000
 
 #define TRANS 0xFF000000
 
