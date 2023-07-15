@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 09:16:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 14:02:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     int i = 0;
     int tex_y = 0;
     int color = 0;
-    float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * 100;
+    float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * 2000;
     int start = HEIGHT/2 - w_heig/2;
     
     if (ray.side == HORZ_D)
@@ -98,7 +98,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
         {
             tex_y = i * (BLOCK / w_heig);
             color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
-            color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
+            // color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
         i++;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 11:56:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/15 13:33:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void collision_line(t_player *player, float x2, float y2)
 
     while (i < steps)
     {
-        if (player->vars->map[(int)((player->p_y + y_inc)/BLOCK)][(int)((player->p_x + x_inc)/BLOCK)] == '1')
+        if (player->vars->map[(int)(floor(player->p_y + y_inc + (BLOCK/2))/BLOCK)][(int)(floor(player->p_x + x_inc + (BLOCK/2))/BLOCK)] == '1')
 			return;
 		player->p_x += x_inc;
 		player->p_y += y_inc;
@@ -216,31 +216,58 @@ void collision_line(t_player *player, float x2, float y2)
     }
 }
 
+// int check_collision(t_player *player, int x, int y)
+// {
+	// int m_y;
+	// int m_x;
+
+	// m_y = ceil((player->p_y + y + (BLOCK/2))/BLOCK);
+	// m_x = ceil((player->p_x + x + (BLOCK/2))/BLOCK);
+
+	// if (x < 0)
+	// 	m_x = floor((player->p_x + x - (BLOCK/2))/BLOCK);
+	// if (y < 0)
+	// 	m_y = floor((player->p_y + y - (BLOCK/2))/BLOCK);
+	// if (m_x < 0 || m_y < 0)
+	// 	return 0;
+	// if (m_x >= ft_strlen(player->vars->map[m_y]) || m_y > player->vars->map_h)
+	// 	return 0;
+	// collision_line(player, player->p_x + x, player->p_y + y);
+	// 	return (1);
+// }
+
+// int check_collision(float player_x, float player_y, float direction_x, float direction_y, char** map, int 36, int map_height)
 int check_collision(t_player *player, int x, int y)
 {
-	int m_y;
-	int m_x;
+    float next_x = player->p_x;
+    float next_y = player->p_y;
+    float direction_x = player->p_x + x;
+    float direction_y = player->p_y + y;
 
-	m_y = ceil((player->p_y + y + (BLOCK/2))/BLOCK);
-	m_x = ceil((player->p_x + x + (BLOCK/2))/BLOCK);
+    // Normalize the direction vector
+    float direction_length = sqrt(direction_x * direction_x + direction_y * direction_y);
+    float dir_x = direction_x / direction_length;
+    float dir_y = direction_y / direction_length;
 
-	if (x < 0)
-		m_x = floor((player->p_x + x - (BLOCK/2))/BLOCK);
-	if (y < 0)
-		m_y = floor((player->p_y + y - (BLOCK/2))/BLOCK);
-	if (m_x < 0 || m_y < 0)
-		return 0;
-	if (m_x >= ft_strlen(player->vars->map[m_y]) || m_y > player->vars->map_h)
-		return 0;
-	// printf("x : %d, y : %d\n", m_x, m_y);
-	collision_line(player, player->p_x + x, player->p_y + y);
-		return (1);
-	// if (player->vars->map[m_y][m_x] == '0')
-	// {
-	// 	player->p_x += x;
-	// 	player->p_y += y;
-	// 	return (1);
-	// }
+    // Check if the next position collides with a wall
+    while (next_x > 0 && next_x < WIDTH && next_y > 0 && next_y < HEIGHT)
+    {
+        // Calculate the map cell indices
+        int map_x = (int)(next_x / BLOCK);
+        int map_y = (int)(next_y / BLOCK);
+
+        // Check if the map cell contains a wall ('1')
+        if (player->vars->map[map_y][map_x] == '1')
+            return 0; // Collision detected with a wall
+
+		player->p_x += next_x;
+		player->p_y += next_y;
+        // Move to the next position
+        next_x += dir_x;
+        next_y += dir_y;
+    }
+
+    return 1; // No collision with a wall
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
