@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 11:38:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 21:32:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define CUB_H
 
 #include <libc.h>
-#include <string.h>
+#include <unistd.h>
 #include <string.h>
 #include <math.h>
 #include <mlx.h>
@@ -38,7 +38,7 @@
 #define WIDTH 1800
 #define HEIGHT 900
 #define BLOCK 1000
-#define MV_SP 500
+#define MV_SP 100
 #define M_BLOCK 10
 
 #define TRANS 0xFF000000

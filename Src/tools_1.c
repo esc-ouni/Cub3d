@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 11:50:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 21:33:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	update_degree(t_player *player, float deg_angle)
 
 void rotate_right(t_player *player)
 {
-	update_degree(player, 10);
+	update_degree(player, 5);
 	updateAndRenderScene(player);
 }
 void rotate_left(t_player *player)
 {
-	update_degree(player, -10);
+	update_degree(player, -5);
 	updateAndRenderScene(player);
 
 }
