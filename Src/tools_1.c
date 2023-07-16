@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 21:59:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 10:44:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,14 @@ int	handler(int key, t_player *player)
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
-	if (key == 46)
-	{
-		if (player->m == 1)	
-			player->m = 0;
-		else
-			player->m = 1;
-		updateAndRenderScene(player);
-	}
+	// if (key == 46)
+	// {
+	// 	if (player->m == 1)	
+	// 		player->m = 0;
+	// 	else
+	// 		player->m = 1;
+	// 	updateAndRenderScene(player);
+	// }
 	if (key == M_UP)
 		move_up(player);
 	if (key == M_DN)
@@ -163,24 +163,27 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 
 int mouse_movement(int x, int y, t_player *player)
 {
-	(void)y;
 	static int last_pos;
+	(void)y;
 
-	if (x > last_pos)
+	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 	{
-		// rotate_vector(player->direction, ((x - last_pos)/3));
-		update_degree(player, ((x - last_pos)/5));
-		// update_degree(player, 1);
-		updateAndRenderScene(player);
-		last_pos = x;
-	}
-	else if (x < last_pos)
-	{
-		// rotate_vector(player->direction, ((x - last_pos)/3));
-		update_degree(player, ((x - last_pos)/5));
-		// update_degree(player, -1);
-		updateAndRenderScene(player);
-		last_pos = x;
+		if (x > last_pos)
+		{
+			// rotate_vector(player->direction, ((x - last_pos)/3));
+			update_degree(player, ((x - last_pos) * (360.0/WIDTH)));
+			// update_degree(player, 1);
+			updateAndRenderScene(player);
+			last_pos = x;
+		}
+		else if (x < last_pos)
+		{
+			// rotate_vector(player->direction, ((x - last_pos)/3));
+			update_degree(player, ((x - last_pos) * (360.0/WIDTH)));
+			// update_degree(player, -1);
+			updateAndRenderScene(player);
+			last_pos = x;
+		}
 	}
 	return (0);
 }

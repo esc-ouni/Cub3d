@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 22:06:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 10:44:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 #include "../LIBF/libft.h"
 
 
-
-
 #define HORZ_U 15
 #define HORZ_D 16
 #define VERT_L 17
@@ -37,7 +35,7 @@
 #define WEST  180
 
 
-#define WIDTH 1400
+#define WIDTH 1800
 #define HEIGHT 800
 #define BLOCK 1000
 #define MV_SP 500
