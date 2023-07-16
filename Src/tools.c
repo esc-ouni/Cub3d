@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 10:50:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:40:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ t_player *	init(int argc, char const *argv[])
 	player->vars->m_fix_img = draw_2d_map(player);
 	player->factor = BLOCK / M_BLOCK;
 	player->m = 0;
+	player->max_r = sqrt(ft_pow(player->vars->map_h) + ft_pow(player->vars->map_h)) * BLOCK;
     player->f_angle = 60.0/WIDTH;
 	player->p = NULL;
 	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
@@ -236,17 +237,17 @@ int check_collision(t_player *player, int x, int y)
 		yo = -BLOCK/3;
 	if (x < 0)
 		xo = -BLOCK/3;
-	if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] == '0')
+	if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
 		player->p_y += y;
-    else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] == '0')
+    else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
 		player->p_y += 1;
 	else
 		k++;
 	// 	return (0);
 
-    if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] == '0')
+    if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
 		player->p_x += x;
-    else if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + xo)/BLOCK)] == '0')
+    else if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
 		player->p_x += 1;
 	else
 		k++;
@@ -361,7 +362,7 @@ void draw_wall_part(t_player *player, t_data *p_img, t_ray ray, int x1, int y1, 
     // int drawHeight = y2 - y1;
 	// int y = y1;
 
-    player->color = darkenColor(player->color, ((int)ray.length * 255)/ MAX_R);
+    player->color = darkenColor(player->color, ((int)ray.length * 255)/ player->max_r);
     while (y1 < y2)
     {
        if (y1 < HEIGHT && y1 > 0)

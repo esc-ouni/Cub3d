@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 10:50:27 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:38:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 #define BLOCK 1000
 #define MV_SP 500
 #define M_BLOCK 10
-#define MAX_R  30000
 
 #define TRANS 0xFF000000
 
@@ -81,7 +80,6 @@
 	#undef HEIGHT
 	#define WIDTH 2560
 	#define HEIGHT 1396
-	#define MAX_R 2560
 # endif
 
 typedef enum e_flag
@@ -165,6 +163,7 @@ typedef struct s_player
 	float		f_angle;
 	float		factor;
 	int			color;
+	float		max_r;
 	void		**p;
 	t_vars	*vars;
 }		t_player;

@@ -6,7 +6,7 @@ all:
 	clear
 	gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o Cub -lm
 	# clang LIBF/*.c Get_next_line/*.c ./Src/*.c -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm -lbsd
-	./Cub Ext/map.cub
+	./Cub Ext/map.cub > file.txt
 
 fclean:
 	rm -rf *.o *.dSYM .vscode

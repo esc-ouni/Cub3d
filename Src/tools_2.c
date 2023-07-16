@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 11:00:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:41:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void updateAndRenderScene(t_player *player)
 
 int darkenColor(int color, int amount)
 {
-    amount/=1.3;
+    amount/=2;
     int r = 0;
     int g = 0;
     int b = 0;
@@ -98,7 +98,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
         {
             tex_y = i * (BLOCK / w_heig);
             color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
-            color = darkenColor(color, ((int)ray.length * 255)/ MAX_R);
+            color = darkenColor(color, (float)(ray.length * 255)/ player->max_r);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
         i++;
@@ -117,7 +117,6 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
         draw_wall_S(player, p_img, ray[i], i);
         i++;
     }
-    printf("\n\n");
 }
 
 t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
@@ -277,6 +276,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
         draw_ray(player, p_img, BLUE, &ray[i]);
+        printf("%0.0f\n", ray->length);
         player->t_angle = up_degree(player->t_angle, player->f_angle);
         i++;
     }

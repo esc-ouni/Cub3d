@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 10:49:52 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:50:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ t_data	*draw_2d_map(t_player *player)
 		{
 			if (map[iy][ix] == '1')
 				draw_wall(player, img, ix, iy);
-			else 
+			else if (map[iy][ix] == '0' || map[iy][ix] == 'E' || map[iy][ix] == 'W' || map[iy][ix] == 'S' || map[iy][ix] == 'N')
 				draw_nwall(player, img, ix, iy);
 			ix++;
 		}	
