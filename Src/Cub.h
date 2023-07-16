@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 10:45:52 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 10:50:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,8 @@ float 		deg_to_rad(float angle);
 t_player	*init(int argc, char const *argv[]);
 void		hooks(t_player *player);
 int			count_alloc_size(t_collector **collector, char const *argv[], int fd);
-int			handler(int key, t_player *player);
+int			handlerp(int key, t_player *player);
+int			handlerr(int key, t_player *player);
 void 		update_scene(t_player *player);
 t_data		*draw_2d_map(t_player *player);
 void 		rotate_vector(t_vector *direction, float angle);

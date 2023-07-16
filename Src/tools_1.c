@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 10:44:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 10:49:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void rotate_left(t_player *player)
 
 }
 
-int	handler(int key, t_player *player)
+int	handlerp(int key, t_player *player)
 {
 	// printf("%d\n", key);
 	if (key == 53 || key == 17)
@@ -92,14 +92,39 @@ int	handler(int key, t_player *player)
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
-	// if (key == 46)
-	// {
-	// 	if (player->m == 1)	
-	// 		player->m = 0;
-	// 	else
-	// 		player->m = 1;
-	// 	updateAndRenderScene(player);
-	// }
+	if (key == 46)
+	{
+		if (player->m == 1)	
+			player->m = 0;
+		else
+			player->m = 1;
+		updateAndRenderScene(player);
+	}
+	if (key == M_UP)
+		move_up(player);
+	if (key == M_DN)
+		move_down(player);
+	if (key == K_R)
+		rotate_right(player);
+	if (key == K_L)
+		rotate_left(player);
+	if (key == M_RG)
+		move_right(player);
+	if (key == M_LF)
+		move_left(player);
+	return(0);
+}
+
+int	handlerr(int key, t_player *player)
+{
+	// printf("%d\n", key);
+	if (key == 53 || key == 17)
+	{
+    	destroy_prev_imges(player);
+		destroy_fix_imges(player);
+		ft_collectorclear(player->vars->collector, ALL);
+		exit(0);
+	}
 	if (key == M_UP)
 		move_up(player);
 	if (key == M_DN)
