@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 16:26:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 16:28:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void updateAndRenderScene(t_player *player)
 
 int darkenColor(int color, int amount)
 {
-    amount/=2;
+    amount/=1.3;
     int r = 0;
     int g = 0;
     int b = 0;

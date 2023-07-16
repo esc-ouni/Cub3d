@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 10:42:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 16:47:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,32 @@ void    check_dups(t_player *player, char **map, char const *argv[])
 {
     (void)map;
     (void)player;
-    // int so;
-    // int no;
-    // int we;
-    // int ea;
-    int fd;
+    (void)argv;
+    // char *str = NULL;
+    // int s = 0;
+    // int n = 0;
+    // int w = 0;
+    // int e = 0;
+    // int fd;
 
-    fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
-    
-    
-
+    // fd = open(argv[1], O_RDONLY);
+    // if (fd == -1)
+    //     exit_with_err(player->vars->collector, OPEN);
+    // while((str = get_next_line(fd)))
+    // {
+    //     if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "NO", 2))
+    //         n++;
+    //     else if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "SO", 2))
+    //         s++;
+    //     else if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "WE", 2))
+    //         w++;
+    //     else if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "EA", 2))
+    //         e++;
+    //     // free(str);
+    //     // str = NULL;
+    // }
+    // if (n != 1 || e != 1 || w != 1 || s != 1)
+    //     exit_with_err(player->vars->collector, PARSE);
 }
 
 void    check_errs(t_player *player, int argc, char const *argv[])
