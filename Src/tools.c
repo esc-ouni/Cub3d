@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 16:55:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 21:04:04 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ t_player *	init(int argc, char const *argv[])
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
 	draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
-	// draw_line(player, p_img, BLUE, player->p_x + (40 * trigo(player->angle, COS)), player->p_y + (40 * trigo(player->angle, SIN)));
+	draw_line(player, p_img, BLUE, player->p_x + (900 * trigo(player->angle, COS)), player->p_y + (900 * trigo(player->angle, SIN)));
 	return (p_img);
 }
 
