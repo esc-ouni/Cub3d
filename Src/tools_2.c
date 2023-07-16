@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 19:09:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:00:17 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     else if (ray.side == VERT_L)
         s = player->vars->lf->img_addr;
 
-    while (i < w_heig && i < 10000)
+    while (i < w_heig)
     {
         if (start + i > 0 && start + i < HEIGHT)
         {
@@ -117,6 +117,7 @@ void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
         draw_wall_S(player, p_img, ray[i], i);
         i++;
     }
+    printf("\n\n");
 }
 
 t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
