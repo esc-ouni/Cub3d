@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 21:32:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/17 21:03:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"
 
+#define MV_SP 100
+#define R_AN  3
 
 #define HORZ_U 15
 #define HORZ_D 16
@@ -38,7 +40,7 @@
 #define WIDTH 1800
 #define HEIGHT 900
 #define BLOCK 1000
-#define MV_SP 100
+
 #define M_BLOCK 10
 
 #define TRANS 0xFF000000
@@ -155,6 +157,13 @@ typedef struct s_vars
 
 typedef struct s_player
 {
+	int w;
+	int s;
+	int d;
+	int a;
+	int rl;
+	int rg;
+	
 	float		p_x;
 	float		p_y;
 	int         m;
@@ -202,6 +211,7 @@ int 		wall_hit_hdn(t_player *player, int x, int y);
 int			wall_hit_vrg(t_player *player, int x, int y);
 int 		wall_hit_vlf(t_player *player, int x, int y);
 
+void		update_degree(t_player *player, float deg_angle);
 void   		destroy_prev_imges(t_player *player);
 void    	destroy_fix_imges(t_player *player);
 int 		darkenColor(int color, int amount);

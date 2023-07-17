@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 17:29:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/17 21:02:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void updateAndRenderScene(t_player *player)
     // Put your scene update and rendering logic here
 	update_scene(player);
     
-    // Increment frame count
+    // // Increment frame count
     frameCount++;
 
     // Get the current time in milliseconds
@@ -162,6 +162,37 @@ void update_scene(t_player *player)
 {
 	t_data *p_img;
 	t_data *p_r_img;
+
+    if (player->w == 1)
+    {
+        player->p_x += MV_SP * trigo(player->angle, COS);
+        player->p_y += MV_SP * trigo(player->angle, SIN);
+    }
+    else if (player->s == 1)
+    {
+        player->p_x -= MV_SP * trigo(player->angle, COS);
+        player->p_y -= MV_SP * trigo(player->angle, SIN);
+    }
+    else if (player->d == 1)
+    {
+        player->p_x += MV_SP * trigo(up_degree(player->angle, 90), COS);
+        player->p_y += MV_SP * trigo(up_degree(player->angle, 90), SIN);
+    }   
+    else if (player->a == 1)
+    {
+        player->p_x += MV_SP * trigo(up_degree(player->angle, -90), COS);
+        player->p_y += MV_SP * trigo(up_degree(player->angle, -90), SIN);
+    } 
+    else if (player->rl == 1)
+    {
+        update_degree(player, -R_AN);
+    }   
+    else if (player->rg == 1)
+    {
+        update_degree(player, R_AN);
+    }
+    // else
+    //     return ;
 
     destroy_prev_imges(player);
     p_img = new_image(player->vars, WIDTH, HEIGHT, TMP);

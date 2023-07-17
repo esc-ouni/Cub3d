@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 21:33:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/17 20:47:49 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void move_right(t_player *player)
 	int y = MV_SP * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
-		updateAndRenderScene(player);
+		player->d = 1;
 }
 void move_left(t_player *player)
 {
@@ -29,7 +29,7 @@ void move_left(t_player *player)
 	int y = MV_SP * trigo(angle, SIN);
 
 	if (check_collision(player, x, y))
-		updateAndRenderScene(player);
+		player->a = 1;
 }
 void move_up(t_player *player)
 {
@@ -37,7 +37,7 @@ void move_up(t_player *player)
 	int y = MV_SP * trigo(player->angle, SIN);
 
 	if (check_collision(player, x, y))
-		updateAndRenderScene(player);
+		player->w = 1;
 }
 void move_down(t_player *player)
 {
@@ -45,7 +45,7 @@ void move_down(t_player *player)
 	int y = MV_SP * trigo(player->angle, SIN);
 
 	if (check_collision(player, -x, -y))
-		updateAndRenderScene(player);
+		player->s = 1;
 }
 
 float	up_degree(float angle, float add_angle)
@@ -72,13 +72,15 @@ void	update_degree(t_player *player, float deg_angle)
 
 void rotate_right(t_player *player)
 {
-	update_degree(player, 5);
-	updateAndRenderScene(player);
+	player->d = 1;
+	// update_degree(player, 5);
+	// updateAndRenderScene(player);
 }
 void rotate_left(t_player *player)
 {
-	update_degree(player, -5);
-	updateAndRenderScene(player);
+	player->a = 1;
+	// update_degree(player, -5);
+	// updateAndRenderScene(player);
 
 }
 
@@ -101,17 +103,29 @@ int	handlerp(int key, t_player *player)
 		updateAndRenderScene(player);
 	}
 	if (key == M_UP)
-		move_up(player);
+		player->w = 1;
 	if (key == M_DN)
-		move_down(player);
-	if (key == K_R)
-		rotate_right(player);
-	if (key == K_L)
-		rotate_left(player);
+		player->s = 1;
 	if (key == M_RG)
-		move_right(player);
+		player->d = 1;
 	if (key == M_LF)
-		move_left(player);
+		player->a = 1;
+	if (key == K_R)
+		player->rg = 1;
+	if (key == K_L)
+		player->rl = 1;
+	// if (key == M_UP)
+	// 	move_up(player);
+	// if (key == M_DN)
+	// 	move_down(player);
+	// if (key == K_R)
+	// 	rotate_right(player);
+	// if (key == K_L)
+	// 	rotate_left(player);
+	// if (key == M_RG)
+	// move_right(player);
+	// if (key == M_LF)
+	// 	move_left(player);
 	return(0);
 }
 
@@ -126,17 +140,17 @@ int	handlerr(int key, t_player *player)
 		exit(0);
 	}
 	if (key == M_UP)
-		move_up(player);
+		player->w = 0;
 	if (key == M_DN)
-		move_down(player);
-	if (key == K_R)
-		rotate_right(player);
-	if (key == K_L)
-		rotate_left(player);
+		player->s = 0;
 	if (key == M_RG)
-		move_right(player);
+		player->d = 0;
 	if (key == M_LF)
-		move_left(player);
+		player->a = 0;
+	if (key == K_R)
+		player->rg = 0;
+	if (key == K_L)
+		player->rl = 0;
 	return(0);
 }
 
