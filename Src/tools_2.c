@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/17 21:02:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 11:50:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,28 +160,30 @@ void    destroy_prev_imges(t_player *player)
 
 void update_scene(t_player *player)
 {
-	t_data *p_img;
-	t_data *p_r_img;
 
     if (player->w == 1)
     {
-        player->p_x += MV_SP * trigo(player->angle, COS);
-        player->p_y += MV_SP * trigo(player->angle, SIN);
+        check_collision(player, MV_SP * trigo(player->angle, COS), MV_SP * trigo(player->angle, SIN));
+        // player->p_x += MV_SP * trigo(player->angle, COS);
+        // player->p_y += MV_SP * trigo(player->angle, SIN);
     }
     else if (player->s == 1)
     {
-        player->p_x -= MV_SP * trigo(player->angle, COS);
-        player->p_y -= MV_SP * trigo(player->angle, SIN);
+        check_collision(player, -(MV_SP * trigo(player->angle, COS)), -(MV_SP * trigo(player->angle, SIN)));
+        // player->p_x -= MV_SP * trigo(player->angle, COS);
+        // player->p_y -= MV_SP * trigo(player->angle, SIN);
     }
     else if (player->d == 1)
     {
-        player->p_x += MV_SP * trigo(up_degree(player->angle, 90), COS);
-        player->p_y += MV_SP * trigo(up_degree(player->angle, 90), SIN);
+        check_collision(player, MV_SP * trigo(up_degree(player->angle, 90), COS), MV_SP * trigo(up_degree(player->angle, 90), SIN));
+        // player->p_x += MV_SP * trigo(up_degree(player->angle, 90), COS);
+        // player->p_y += MV_SP * trigo(up_degree(player->angle, 90), SIN);
     }   
     else if (player->a == 1)
     {
-        player->p_x += MV_SP * trigo(up_degree(player->angle, -90), COS);
-        player->p_y += MV_SP * trigo(up_degree(player->angle, -90), SIN);
+        check_collision(player, MV_SP * trigo(up_degree(player->angle, -90), COS), MV_SP * trigo(up_degree(player->angle, -90), SIN));
+        // player->p_x += MV_SP * trigo(up_degree(player->angle, -90), COS);
+        // player->p_y += MV_SP * trigo(up_degree(player->angle, -90), SIN);
     } 
     else if (player->rl == 1)
     {
@@ -191,8 +193,11 @@ void update_scene(t_player *player)
     {
         update_degree(player, R_AN);
     }
-    // else
-    //     return ;
+    else
+        return ;
+    
+	t_data *p_img;
+	t_data *p_r_img;
 
     destroy_prev_imges(player);
     p_img = new_image(player->vars, WIDTH, HEIGHT, TMP);

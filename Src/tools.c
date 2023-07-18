@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/17 21:02:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 11:45:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ int func(int key, t_player *player)
 
 int fun(int key, t_player *player)
 {
-	(void)player;
 	if (key == 1)
 		mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	return (0);
@@ -176,7 +175,7 @@ int fun(int key, t_player *player)
 int hokking(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_hook(player->vars->win, 2, 1L<<0, handlerp, player);
 	mlx_hook(player->vars->win, 3, 1L<<1, handlerr, player);
 	updateAndRenderScene(player);
@@ -249,18 +248,16 @@ int check_collision(t_player *player, int x, int y)
 	if (x < 0)
 		xo = -BLOCK/3;
 	if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
-		k = 0;
-		// player->p_y += y;
-    // else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
-	// 	player->p_y += 1;
+		player->p_y += y;
+    else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
+		player->p_y += 1;
 	else
 		k++;
 
     if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
-		k = 0;
-		// player->p_x += x;
-    // else if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
-	// 	player->p_x += 1;
+		player->p_x += x;
+    else if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
+		player->p_x += 1;
 	else
 		k++;
 	if (k == 2)
