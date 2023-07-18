@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 16:45:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 17:35:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,20 +246,24 @@ char **get_map(t_player *player, int argc, char const *argv[], int t)
 
 int extract_color(t_player *player, char *color)
 {
+    int i = 0;
     char **s;
     int color_c;
 
     color_c = 0;
     color = ft_mstrtrim(player->vars, color, " ", TMP);
     s = ft_msplit(player->vars, color, ',', TMP);
-
-    color_c = ft_atoi(player->vars->collector, *s);
+    while (s[i])
+        i++;
+    if (i != 3)
+        exit_with_err(player->vars->collector, PARSE);
+    color_c = ft_atoi(player->vars->collector, ft_mstrtrim(player->vars, *s, " ", TMP));
     color_c <<= 8;
     s++;
-    color_c |= ft_atoi(player->vars->collector, *s);
+    color_c |= ft_atoi(player->vars->collector, ft_mstrtrim(player->vars, *s, " ", TMP));
     color_c <<= 8;
     s++;
-    color_c |= ft_atoi(player->vars->collector, *s);
+    color_c |= ft_atoi(player->vars->collector, ft_mstrtrim(player->vars, *s, " ", TMP));
     return (color_c);
 }
 

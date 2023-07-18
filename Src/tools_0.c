@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:39:03 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 16:07:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 17:31:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,18 +123,10 @@ int	ft_atoi(t_collector **collector, const char *str)
 	s = 1;
 	r = 0;
 	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	while ((str[i] == 45 || str[i] == 43))
+	while (str[i])
 	{
-		if (str[i] == 45)
-			s *= -1;
-		i++;
 		if ((str[i] < 48 || str[i] > 57))
-			return (0);
-	}
-	while (str[i] >= 48 && str[i] <= 57)
-	{
+			exit_with_err(collector, PARSE);
 		r = r * 10 + (str[i] - 48);
 		r = check(collector, r, s);
 		i++;
