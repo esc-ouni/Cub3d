@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 14:05:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:02:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int fun(int key, t_player *player)
 int hokking(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
-	// mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
+	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
 	mlx_hook(player->vars->win, 2, 1L<<0, handlerp, player);
 	mlx_hook(player->vars->win, 3, 1L<<1, handlerr, player);
 	updateAndRenderScene(player);
