@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 18:04:38 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 18:45:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,7 +480,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
             vector->y += ray->dy;
             i++;
         }
-        return NULL;
+        return (vector);
     }
     else if ((ray->angle > (M_PI / 2)) || (ray->angle < 3 * (M_PI / 2)))
     {
