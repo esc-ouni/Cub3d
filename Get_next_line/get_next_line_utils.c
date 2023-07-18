@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:13:26 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/09 13:27:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 16:03:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (new);
 }
 
-int	check(char *s)
+int	g_check(char *s)
 {
 	int	i;
 
@@ -77,7 +77,7 @@ char	*str_alloc(int fd, char	*buffer)
 	if (!buff)
 		return (NULL);
 	bytes = 1;
-	while (!check(buffer) && bytes != 0)
+	while (!g_check(buffer) && bytes != 0)
 	{
 		bytes = read(fd, buff, BUFFER_SIZE);
 		if (bytes == -1)

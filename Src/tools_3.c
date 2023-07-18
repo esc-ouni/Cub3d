@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 15:16:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 16:08:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void    check_dups(t_player *player, int argc, char const *argv[])
     int e = 0;
     int c = 0;
     int f = 0;
+    char *first_part = NULL;
     int fd;
 
     fd = open(argv[1], O_RDONLY);
@@ -47,19 +48,20 @@ void    check_dups(t_player *player, int argc, char const *argv[])
         exit_with_err(player->vars->collector, OPEN);
     while((str = get_next_line(fd)))
     {
-        if (ft_msplit(player->vars, str, ' ', TMP)[0] && !ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "NO", 2))
+        first_part = ft_msplit(player->vars, str, ' ', TMP)[0];
+        if (first_part && !ft_strncmp(first_part, "NO", ft_strlen(first_part)))
             n++;
-        else if (ft_msplit(player->vars, str, ' ', TMP)[0] && !ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "SO", 2))
+        else if (first_part && !ft_strncmp(first_part, "SO", ft_strlen(first_part)))
             s++;
-        else if (ft_msplit(player->vars, str, ' ', TMP)[0] && !ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "WE", 2))
+        else if (first_part && !ft_strncmp(first_part, "WE", ft_strlen(first_part)))
             w++;
-        else if (ft_msplit(player->vars, str, ' ', TMP)[0] && !ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "EA", 2))
+        else if (first_part && !ft_strncmp(first_part, "EA", ft_strlen(first_part)))
             e++;
-        else if (ft_msplit(player->vars, str, ' ', TMP)[0] && !ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "F", 1))
+        else if (first_part && !ft_strncmp(first_part, "F", ft_strlen(first_part)))
             f++;
-        else if (ft_msplit(player->vars, str, ' ', TMP)[0] && !ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "C", 1))
+        else if (first_part && !ft_strncmp(first_part, "C", ft_strlen(first_part)))
             c++;
-        else if (ft_msplit(player->vars, str, ' ', TMP)[0] && !strnstr(str, "1", ft_strlen(str)) && !strnstr(str, "0", ft_strlen(str)))
+        else if (first_part && !strnstr(str, "1", ft_strlen(str)) && !strnstr(str, "0", ft_strlen(str)))
         {
             free(str);
             str = NULL;
@@ -251,13 +253,13 @@ int extract_color(t_player *player, char *color)
     color = ft_mstrtrim(player->vars, color, " ", TMP);
     s = ft_msplit(player->vars, color, ',', TMP);
 
-    color_c = ft_atoi(*s);
+    color_c = ft_atoi(player->vars->collector, *s);
     color_c <<= 8;
     s++;
-    color_c |= ft_atoi(*s);
+    color_c |= ft_atoi(player->vars->collector, *s);
     color_c <<= 8;
     s++;
-    color_c |= ft_atoi(*s);
+    color_c |= ft_atoi(player->vars->collector, *s);
     return (color_c);
 }
 
@@ -273,17 +275,17 @@ int     get_elem(t_player *player, char const *argv[])
     while((s = get_next_line(fd))) //not appopriate
     {
         if (strnstr(s, "NO", 2))
-            player->vars->up_c = ft_mstrdup(player->vars->collector, s+3, TMP);
+            player->vars->up_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
         else if (strnstr(s, "SO", 2))
-            player->vars->dn_c = ft_mstrdup(player->vars->collector, s+3, TMP);
+            player->vars->dn_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
         else if (strnstr(s, "WE", 2))
-            player->vars->rg_c = ft_mstrdup(player->vars->collector, s+3, TMP);
+            player->vars->rg_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
         else if (strnstr(s, "EA", 2))
-            player->vars->lf_c = ft_mstrdup(player->vars->collector, s+3, TMP);
+            player->vars->lf_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
         else if (strnstr(s, "F", 1))
-            player->vars->f_color = extract_color(player, s+1);
+            player->vars->f_color = extract_color(player, ft_mstrtrim(player->vars, s+1, " ", TMP));
         else if (strnstr(s, "C", 1))
-            player->vars->c_color = extract_color(player, s+1);
+            player->vars->c_color = extract_color(player, ft_mstrtrim(player->vars, s+1, " ", TMP));
         else if (strnstr(s, "1", ft_strlen(s)))
         {
             free(s);

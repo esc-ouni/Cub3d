@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 13:16:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 16:07:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ int 		wall_hit_hdn(t_player *player, int x, int y);
 int			wall_hit_vrg(t_player *player, int x, int y);
 int 		wall_hit_vlf(t_player *player, int x, int y);
 
+int			ft_atoi(t_collector **collector, const char *str);
 void		update_degree(t_player *player, float deg_angle);
 void   		destroy_prev_imges(t_player *player);
 void    	destroy_fix_imges(t_player *player);
