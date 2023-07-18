@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 13:13:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:05:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ t_player *	init(int argc, char const *argv[])
 	vars->rg_c = NULL;
 	vars->c_color = 0;
     vars->f_color = 0;
-    vars->map = parse_file(player, argc, argv);
 	player->angle = 0;
+    vars->map = parse_file(player, argc, argv);
 	player->color = 0;
 	player->vars->fix_img = draw_cf(player);
 	player->vars->m_fix_img = draw_2d_map(player);

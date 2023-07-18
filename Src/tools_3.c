@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/16 16:47:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:12:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void    check_mapb(t_player *player, char **map)
     int y = 0;
     int x = 0;
     int c = 0;
+    int chr = 0;
     float p_y = 0;
     float p_x = 0;
 
@@ -148,6 +149,7 @@ void    check_mapb(t_player *player, char **map)
             {
                 p_x = (float)(x * BLOCK);
                 p_y = (float)(y * BLOCK);
+                chr = map[y][x];
                 c++;
             }
             else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != ' ')
@@ -161,6 +163,14 @@ void    check_mapb(t_player *player, char **map)
         exit_with_err(player->vars->collector, PARSE);
     player->p_x = p_x + BLOCK/2;
 	player->p_y = p_y + BLOCK/2;
+    if (chr == 'N')
+	    player->angle = 3 * (M_PI/2);
+    else if (chr == 'E')
+	    player->angle = 0;
+    else if (chr == 'S')
+	    player->angle = M_PI/2;
+    else if (chr == 'W')
+	    player->angle = M_PI;
 }
 
 void    check_map(t_player *player, char **map)

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 12:32:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:03:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,8 @@ void update_scene(t_player *player)
         update_degree(player, -R_AN);
     else if (player->rg == 1)
         update_degree(player, R_AN);
-    else
-        return ;
+    // else
+    //     return ;
     
 	t_data *p_img;
 	t_data *p_r_img;
