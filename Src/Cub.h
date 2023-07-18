@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 16:07:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 18:06:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"
 
-#define MV_SP 100
+#define MV_SP 200
 #define R_AN  3
 
 #define HORZ_U 15

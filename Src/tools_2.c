@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 14:03:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 18:04:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void updateAndRenderScene(t_player *player)
 
 int darkenColor(int color, int amount)
 {
-    amount/=2;
+    amount/=1.2;
     int r = 0;
     int g = 0;
     int b = 0;
@@ -175,15 +175,15 @@ void update_scene(t_player *player)
     }
     else if (player->d == 1)
     {
-        check_collision(player, MV_SP * trigo(up_degree(player->angle, 90), COS), MV_SP * trigo(up_degree(player->angle, 90), SIN));
-        // player->p_x += MV_SP * trigo(up_degree(player->angle, 90), COS);
-        // player->p_y += MV_SP * trigo(up_degree(player->angle, 90), SIN);
+        check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, 90), COS), MV_SP/2 * trigo(up_degree(player->angle, 90), SIN));
+        // player->p_x += MV_SP/2 * trigo(up_degree(player->angle, 90), COS);
+        // player->p_y += MV_SP/2 * trigo(up_degree(player->angle, 90), SIN);
     }   
     else if (player->a == 1)
     {
-        check_collision(player, MV_SP * trigo(up_degree(player->angle, -90), COS), MV_SP * trigo(up_degree(player->angle, -90), SIN));
-        // player->p_x += MV_SP * trigo(up_degree(player->angle, -90), COS);
-        // player->p_y += MV_SP * trigo(up_degree(player->angle, -90), SIN);
+        check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, -90), COS), MV_SP/2 * trigo(up_degree(player->angle, -90), SIN));
+        // player->p_x += MV_SP/2 * trigo(up_degree(player->angle, -90), COS);
+        // player->p_y += MV_SP/2 * trigo(up_degree(player->angle, -90), SIN);
     } 
     else if (player->rl == 1)
         update_degree(player, -R_AN);
@@ -321,7 +321,7 @@ int wall_hit_hup(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 35|| m_y > 13)
+	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -335,7 +335,7 @@ int wall_hit_hdn(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 35|| m_y > 13)
+	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -349,7 +349,7 @@ int wall_hit_vrg(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 35|| m_y > 13)
+	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -363,7 +363,7 @@ int wall_hit_vlf(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_x > 35|| m_y > 13)
+	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -428,7 +428,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
         ray->dx = (ray->dy / ray->t1);
         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
         vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
-        while (i < 36)
+        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
                 return vector;
@@ -444,7 +444,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
         ray->dx = (BLOCK / ray->t2);
         vector->y = floor(player->p_y / BLOCK) * BLOCK;
         vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
-        while (i < 36)
+        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
                 return vector;
@@ -472,7 +472,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
         ray->dy = ray->dx * ray->t1;
         vector->x = (ceil(player->p_x/ BLOCK) * BLOCK);
         vector->y = player->p_y + ((vector->x - player->p_x) * ray->t1);
-        while (i < 36)
+        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
             if (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
                 return (vector);
@@ -488,7 +488,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
         ray->dy = BLOCK * ray->t2;
         vector->x = (floor(player->p_x / BLOCK) * BLOCK);
         vector->y = player->p_y - ((vector->x - player->p_x) * ray->t2);
-        while (i < 36)
+        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
             if (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
                 return (vector);
