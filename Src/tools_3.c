@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 14:12:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:29:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,24 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void    check_dups(t_player *player, char **map, char const *argv[])
+void    check_dups(t_player *player, int argc, char const *argv[])
 {
-    (void)map;
-    (void)player;
-    (void)argv;
-    // char *str = NULL;
+    (void)argc;
+    char *str = NULL;
     // int s = 0;
     // int n = 0;
     // int w = 0;
     // int e = 0;
-    // int fd;
+    int fd;
 
-    // fd = open(argv[1], O_RDONLY);
-    // if (fd == -1)
-    //     exit_with_err(player->vars->collector, OPEN);
-    // while((str = get_next_line(fd)))
-    // {
-    //     if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "NO", 2))
-    //         n++;
-    //     else if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "SO", 2))
-    //         s++;
-    //     else if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "WE", 2))
-    //         w++;
-    //     else if (!ft_strncmp(ft_msplit(player->vars, str, ' ', TMP)[0], "EA", 2))
-    //         e++;
-    //     // free(str);
-    //     // str = NULL;
-    // }
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        exit_with_err(player->vars->collector, OPEN);
+    while((str = get_next_line(fd)))
+    {
+        free(str);
+        str = NULL;
+    }
     // if (n != 1 || e != 1 || w != 1 || s != 1)
     //     exit_with_err(player->vars->collector, PARSE);
 }
@@ -318,7 +308,7 @@ char **parse_file(t_player *player, int argc, char const *argv[])
         if (fd == -1)
             exit_with_err(player->vars->collector, OPEN);
         check_errs(player, argc, argv);
-        check_dups(player, map, argv);
+        check_dups(player, argc, argv);
         i = get_elements(player, argv);
         map = get_map(player, argc, argv, i);
         check_map(player, map); 
