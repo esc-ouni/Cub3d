@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 16:28:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/18 16:34:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 void    exit_with_err(t_collector **collector, t_flag cause)
 {
-    if (cause == MALLOC)
-        write (2, "\033[0;32mError\nMALLOC_FAILED\033[0;37m\n", 35);
-    else if (cause == PARSE)
-        write (2, "\033[0;32mError\nMISCONFIGURATION_OF_.cub_FILE\033[0;37m\n", 51);
-    else if (cause == ARGS)
-        write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 51);
-    else if (cause == MLX)
-		write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
-    else if (cause == OPEN)
-		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
-    else if (cause == MAP)
-		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
+    (void)cause;
+    // if (cause == MALLOC)
+    //     write (2, "\033[0;32mError\nMALLOC_FAILED\033[0;37m\n", 35);
+    // else if (cause == PARSE)
+    //     write (2, "\033[0;32mError\nMISCONFIGURATION_OF_.cub_FILE\033[0;37m\n", 51);
+    // else if (cause == ARGS)
+    //     write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 51);
+    // else if (cause == MLX)
+	// 	write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
+    // else if (cause == OPEN)
+	// 	write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
+    // else if (cause == MAP)
+	// 	write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
+    printf("Error\n");
     ft_collectorclear(collector, ALL);
     exit (1);
 }
