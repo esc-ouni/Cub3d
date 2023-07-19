@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 18:45:20 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:14:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,7 +321,7 @@ int wall_hit_hup(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
+	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -335,7 +335,7 @@ int wall_hit_hdn(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
+	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -349,7 +349,7 @@ int wall_hit_vrg(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
+	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);
@@ -363,7 +363,7 @@ int wall_hit_vlf(t_player *player, int x, int y)
 
 	if (m_x < 0|| m_y < 0)
 		return 0;
-	if (m_y > player->vars->map_h || m_x > ft_strlen(player->vars->map[m_y]))
+	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
 		return 0;
 	if (player->vars->map[m_y][m_x] != '1')
 		return (1);

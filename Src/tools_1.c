@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/17 20:47:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:12:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	update_degree(t_player *player, float deg_angle)
 	player->angle += deg_angle;
 	if (player->angle >= (2 * M_PI))
 		player->angle -= 2 * M_PI;
-	else if (player->angle < 0)
+	else if (player->angle <= 0)
 		player->angle += 2 * M_PI;
 }
 

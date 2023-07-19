@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/13 11:44:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 16:38:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
 {
-	void 	*p;
+	void 			*p;
 	t_data			*img;
-	int 	width,height;
+	int 			width,height;
 
 	img = NULL;
 	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
