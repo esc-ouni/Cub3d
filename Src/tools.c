@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 17:57:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:17:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,13 +165,6 @@ int func(int key, t_player *player)
 	return (0);
 }
 
-int fun(int key, t_player *player)
-{
-	if (key == 1)
-		mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
-	return (0);
-}
-
 int hokking(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
@@ -184,57 +177,7 @@ int hokking(t_player *player)
 
 void hooks(t_player *player)
 {
-	// mlx_hook(player->vars->win, 2, 1L<<0, func, player);
-	// mlx_mouse_hook(player->vars->win, fun, player);
-	// mlx_hook(player->vars->win, 4, 0, fun, player);
-	
-	// mlx_hook(player->vars->win, 17, 0, ft_ext, player);
-	// // mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
-	// mlx_hook(player->vars->win, 2, 1L<<0, handlerp, player);
-	// mlx_hook(player->vars->win, 3, 1L<<1, handlerr, player);
 	mlx_loop_hook(player->vars->mlx, hokking, player);
-}
-
-int check_collision_v2(t_player *player, int x, int y)
-{
-	int m_y = ((y)/BLOCK);
-	int m_x = ((x)/BLOCK);
-
-	if (m_x < 0|| m_y < 0)
-		return 0;
-	if (m_x > 9|| m_y > 9)
-		return 0;
-	if (player->vars->map[m_y][m_x] == '0')
-		return (1);
-	return (0);
-}
-
-
-void collision_line(t_player *player, float x2, float y2)
-{
-    int i = 0;
-
-    float dx = x2 - player->p_x;
-    float dy = y2 - player->p_y;
-    float steps = ft_abs(dy);
-	if (ft_abs(dx) > ft_abs(dy))
-		steps = ft_abs(dx);
-    float x_inc = dx / steps;
-    float y_inc = dy / steps;
-
-    float x = player->p_x;
-    float y = player->p_y;
-
-    while (i < steps)
-    {
-        if (player->vars->map[(int)(floor(player->p_y + y_inc + (BLOCK/2))/BLOCK)][(int)(floor(player->p_x + x_inc + (BLOCK/2))/BLOCK)] == '1')
-			return;
-		player->p_x += x_inc;
-		player->p_y += y_inc;
-        x += x_inc;
-        y += y_inc;
-        i++;
-    }
 }
 
 int check_collision(t_player *player, int x, int y)
