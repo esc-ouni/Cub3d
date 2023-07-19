@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 17:21:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:16:28 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,13 +237,11 @@ void    	exit_with_err(t_collector **collector, t_flag cause);
 t_data		*ft_transparency(t_player *player, t_data *p_img, int width, int height);
 t_vector 	*find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector);
 t_vector 	*find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
-int 		check_collision_v2(t_player *player, int x, int y);
 int 		check_collision(t_player *player, int x, int y);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 void 		updateAndRenderScene(t_player *player);
 t_data		*new_image_from_xpm(t_player *player, char *file_dstination);
-void 		draw_wall_part(t_player *player, t_data *p_img, t_ray ray, int x1, int y1, int x2, int y2,  int amount);
 t_data		*draw_cf(t_player *player);
 void		debug(void);
 int 		ft_ext(t_player *player);

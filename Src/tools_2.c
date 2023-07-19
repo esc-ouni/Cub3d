@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 18:00:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:32:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,12 +258,12 @@ int wall_hit_hup(t_player *player, int x, int y)
 	int m_x = ((x)/BLOCK);
 
 	if (m_x < 0|| m_y < 0)
-		return 0;
+		return 1;
 	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
-		return 0;
+		return 1;
 	if (player->vars->map[m_y][m_x] != '1')
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int wall_hit_hdn(t_player *player, int x, int y)
@@ -272,12 +272,12 @@ int wall_hit_hdn(t_player *player, int x, int y)
 	int m_x = ((x)/BLOCK);
 
 	if (m_x < 0|| m_y < 0)
-		return 0;
+		return 1;
 	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
-		return 0;
+		return 1;
 	if (player->vars->map[m_y][m_x] != '1')
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int wall_hit_vrg(t_player *player, int x, int y)
@@ -286,12 +286,12 @@ int wall_hit_vrg(t_player *player, int x, int y)
 	int m_x = ((x)/BLOCK);
 
 	if (m_x < 0|| m_y < 0)
-		return 0;
+		return 1;
 	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
-		return 0;
+		return 1;
 	if (player->vars->map[m_y][m_x] != '1')
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int wall_hit_vlf(t_player *player, int x, int y)
@@ -300,12 +300,12 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	int m_x = ((x)/BLOCK) - 1;
 
 	if (m_x < 0|| m_y < 0)
-		return 0;
+		return 1;
 	if (m_y >= player->vars->map_h || m_x >= ft_strlen(player->vars->map[m_y]))
-		return 0;
+		return 1;
 	if (player->vars->map[m_y][m_x] != '1')
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector)
@@ -320,7 +320,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
         vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
         while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
-            if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
+            if (wall_hit_hdn(player, (int)vector->x, (int)vector->y))
                 return vector;
             vector->y += ray->dy;
             vector->x += ray->dx;
@@ -336,7 +336,7 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
         vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
         while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
-            if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
+            if (wall_hit_hup(player, (int)vector->x, (int)vector->y))
                 return vector;
             vector->x += ray->dx;
             vector->y += ray->dy;
@@ -359,7 +359,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
         vector->y = player->p_y + ((vector->x - player->p_x) * ray->t1);
         while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
-            if (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
+            if (wall_hit_vrg(player, (int)vector->x, (int)vector->y))
                 return (vector);
             vector->x += ray->dx;
             vector->y += ray->dy;
@@ -375,7 +375,7 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
         vector->y = player->p_y - ((vector->x - player->p_x) * ray->t2);
         while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
         {
-            if (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
+            if (wall_hit_vlf(player, (int)vector->x, (int)vector->y))
                 return (vector);
             vector->x += ray->dx;
             vector->y += ray->dy;
