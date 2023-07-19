@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 17:19:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:55:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,14 +180,14 @@ int check_collision(t_player *player, int x, int y)
 	if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
 		player->p_y += y;
     else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)(player->p_x/BLOCK)] != '1')
-		player->p_y += 1;
+		player->p_y += (yo/ft_abs(yo));
 	else
 		k++;
 
     if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
 		player->p_x += x;
     else if(player->vars->map[(int)(player->p_y/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
-		player->p_x += 1;
+		player->p_x += (xo/(BLOCK/3));
 	else
 		k++;
 	if (k == 2)
