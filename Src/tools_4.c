@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/15 11:47:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:01:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     while (i < steps)
     {
 		my_mlx_pixel_put(player, p_img, (int)x, (int)y, color);
-		// mlx_pixel_put(player->vars->mlx, player->vars->win, (int)x, (int)y, color);
         x += x_inc;
         y += y_inc;
         i++;

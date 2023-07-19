@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 17:47:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:00:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,29 +162,13 @@ void update_scene(t_player *player)
 {
 
     if (player->w == 1)
-    {
         check_collision(player, MV_SP * trigo(player->angle, COS), MV_SP * trigo(player->angle, SIN));
-        // player->p_x += MV_SP * trigo(player->angle, COS);
-        // player->p_y += MV_SP * trigo(player->angle, SIN);
-    }
     else if (player->s == 1)
-    {
         check_collision(player, -(MV_SP * trigo(player->angle, COS)), -(MV_SP * trigo(player->angle, SIN)));
-        // player->p_x -= MV_SP * trigo(player->angle, COS);
-        // player->p_y -= MV_SP * trigo(player->angle, SIN);
-    }
     else if (player->d == 1)
-    {
         check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, 90), COS), MV_SP/2 * trigo(up_degree(player->angle, 90), SIN));
-        // player->p_x += MV_SP/2 * trigo(up_degree(player->angle, 90), COS);
-        // player->p_y += MV_SP/2 * trigo(up_degree(player->angle, 90), SIN);
-    }   
     else if (player->a == 1)
-    {
         check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, -90), COS), MV_SP/2 * trigo(up_degree(player->angle, -90), SIN));
-        // player->p_x += MV_SP/2 * trigo(up_degree(player->angle, -90), COS);
-        // player->p_y += MV_SP/2 * trigo(up_degree(player->angle, -90), SIN);
-    } 
     else if (player->rl == 1)
         update_degree(player, -R_AN);
     else if (player->rg == 1)
@@ -250,52 +234,6 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     }
     return 0;
 }
-
-
-// float   draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
-// {
-//     (void)p_img;
-//     (void)color;
-//     int         v_x;
-//     int         v_y;
-//     int         h_x;
-//     int         h_y;
-
-
-//     vec1 = find_vertical_iterset(player, ray, vec1);
-//     vec2 = find_horizontal_iterset(player, ray, vec2);
-    
-//     v_x = ft_abs(player->p_x - vec1->x);
-//     v_y = ft_abs(player->p_y - vec1->y);
-    
-//     h_x = ft_abs(player->p_x - vec2->x);
-//     h_y = ft_abs(player->p_y - vec2->y);
-    
-//     if ((v_x < h_x) || (v_y < h_y))
-//     {
-//         if ((ray->angle < ((2 * M_PI)) && (ray->angle > 3 * (2 * M_PI))))
-//             ray->side = VERT_R;
-//         else
-//             ray->side = VERT_L;
-//         draw_line(player, p_img, RED, vec1->x, vec1->y);
-//         ray->tex_i = (int)vec1->y % BLOCK;
-//         ray->length = sqrt((ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y)));
-//         return (0);
-//     }
-//     else
-//     {
-//         if ((ray->angle > 0 && ray->angle < M_PI))
-//             ray->side = HORZ_D;
-//         else
-//             ray->side = HORZ_U;
-//         draw_line(player, p_img, RED, vec2->x, vec2->y);
-//         ray->tex_i = (int)vec2->x % BLOCK;
-//         ray->length = sqrt((ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y)));
-//         return (0);
-//     }
-//     ray->length = 0;
-//     return (0);
-// }
 
 t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
 {
@@ -370,54 +308,6 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	return (0);
 }
 
-
-
-
-// t_vector *find_horizontal_iterset(t_player *player, t_ray *ray)
-// {
-// 	t_vector *vector;
-//     int i = 0;
-//     float    stepy;
-//     float    stepx;
-
-// 	vector = NULL;
-// 	vector = h_malloc(player->vars->collector, sizeof(t_vector), vector, TMP);
-//     if ((ray->angle > 0 && ray->angle < M_PI))
-//     {
-//         stepy = BLOCK;
-//         stepx = (stepy / ray->t1);
-//         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
-//         vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
-//         while (i < 36)
-//         {
-//             if (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
-//                 return (vector);
-//             vector->y += stepy;
-//             vector->x += stepx;
-//             i++;
-//         }
-//         return (vector);
-//     }
-//     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
-//     {
-//         stepy = -BLOCK;
-//         stepx = (BLOCK / ray->t2);
-//         vector->y = floor(player->p_y / BLOCK) * BLOCK ;
-//         vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;   
-//         while (i < 36)
-//         {
-//             if (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
-//                 return (vector);
-//             vector->x += stepx;
-//             vector->y += stepy;
-//             i++;
-//         }
-//         return (vector);
-//     }
-//     return (vector);
-// }
-
-
 t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
     int i = 0;
@@ -456,11 +346,6 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
     }
     return vector;
 }
-
-
-
-
-
 
 t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {

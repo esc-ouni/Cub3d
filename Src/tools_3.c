@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 17:35:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:01:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     else if (cause == PARSE)
         write (2, "\033[0;32mError\nMISCONFIGURATION_OF_.cub_FILE\033[0;37m\n", 51);
     else if (cause == ARGS)
-        write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 51);
+        write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 45);
     else if (cause == MLX)
 		write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
     else if (cause == OPEN)
