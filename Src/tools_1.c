@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 18:07:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:14:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 
 void move_right(t_player *player)
 {
-	float angle = up_degree(player->angle, 90);
+	// float angle = up_degree(player->angle, 90);
 
-	int x = MV_SP * trigo(angle, COS);
-	int y = MV_SP * trigo(angle, SIN);
+	// int x = MV_SP * trigo(angle, COS);
+	// int y = MV_SP * trigo(angle, SIN);
 
-	if (check_collision(player, x, y))
+	// if (check_collision(player, x, y))
 		player->d = 1;
 }
 void move_left(t_player *player)
 {
-	float angle = up_degree(player->angle, -90);
-	int x = MV_SP * trigo(angle, COS);
-	int y = MV_SP * trigo(angle, SIN);
+	// float angle = up_degree(player->angle, -90);
+	// int x = MV_SP * trigo(angle, COS);
+	// int y = MV_SP * trigo(angle, SIN);
 
-	if (check_collision(player, x, y))
+	// if (check_collision(player, x, y))
 		player->a = 1;
 }
 void move_up(t_player *player)
 {
-	int x = MV_SP * trigo(player->angle, COS);
-	int y = MV_SP * trigo(player->angle, SIN);
+	// int x = MV_SP * trigo(player->angle, COS);
+	// int y = MV_SP * trigo(player->angle, SIN);
 
-	if (check_collision(player, x, y))
+	// if (check_collision(player, x, y))
 		player->w = 1;
 }
 void move_down(t_player *player)
 {
-	int x = MV_SP * trigo(player->angle, COS);
-	int y = MV_SP * trigo(player->angle, SIN);
+	// int x = MV_SP * trigo(player->angle, COS);
+	// int y = MV_SP * trigo(player->angle, SIN);
 
-	if (check_collision(player, -x, -y))
+	// if (check_collision(player, -x, -y))
 		player->s = 1;
 }
 
@@ -209,17 +209,13 @@ int mouse_movement(int x, int y, t_player *player)
 	{
 		if (x > last_pos)
 		{
-			// rotate_vector(player->direction, ((x - last_pos)/3));
 			update_degree(player, ((x - last_pos) * (360.0/WIDTH)));
-			// update_degree(player, 1);
 			updateAndRenderScene(player);
 			last_pos = x;
 		}
 		else if (x < last_pos)
 		{
-			// rotate_vector(player->direction, ((x - last_pos)/3));
 			update_degree(player, ((x - last_pos) * (360.0/WIDTH)));
-			// update_degree(player, -1);
 			updateAndRenderScene(player);
 			last_pos = x;
 		}
