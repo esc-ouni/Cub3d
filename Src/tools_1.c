@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 17:12:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 18:07:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 		while(j < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, M_WHITE);
-			// if(j == (M_BLOCK - 1))
-			// 	my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
+			if(j == (M_BLOCK - 1)|| i == 0)
+				my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
 		}
 		i++;
