@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 17:17:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:19:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,19 +152,6 @@ t_data 	*draw_player(t_player *player, t_data *p_img)
 	return (p_img);
 }
 
-int func(int key, t_player *player)
-{
-	if (key == 46)
-	{
-		if (player->m == 1)	
-			player->m = 0;
-		else
-			player->m = 1;
-		updateAndRenderScene(player);
-	}
-	return (0);
-}
-
 int hokking(t_player *player)
 {
 	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
@@ -208,55 +195,6 @@ int check_collision(t_player *player, int x, int y)
 	return (1);
 }
 
-// int check_collision(t_player *player, int x, int y)
-// {
-// 	int t = (BLOCK/2);
-// 	int t2 = (BLOCK/2);
-
-// 	if (x < 0)
-// 		t = -(BLOCK/2);
-// 	if (y < 0)
-// 		t2 = -(BLOCK/2);
-// 	if (player->angle >= (M_PI / 4) && player->angle <= 3 *(M_PI / 4))
-// 	{
-// 		if (wall_hit_hdn(player, player->p_x + x + t, player->p_y + y + t2))
-// 		{
-// 			player->p_x += x;
-// 			player->p_y += y;
-// 			return (1);
-// 		}
-// 	}
-// 	else if (player->angle > 3 * (M_PI / 4) && player->angle <= 5 *(M_PI / 4))
-// 	{
-// 		if (wall_hit_vlf(player, player->p_x + x + t, player->p_y + y + t2))
-// 		{
-// 			player->p_x += x;
-// 			player->p_y += y;
-// 			return (1);
-// 		}
-// 	}
-// 	else if (player->angle > 5 * (M_PI / 4) && player->angle <= 7 *(M_PI / 4))
-// 	{
-// 		if (wall_hit_hup(player, player->p_x + x + t, player->p_y + y + t2))
-// 		{
-// 			player->p_x += x;
-// 			player->p_y += y;
-// 			return (1);
-// 		}
-// 	}
-// 	else
-// 	{
-		// if (wall_hit_vrg(player, player->p_x + x + t, player->p_y + y + t2))
-// 		{
-// 			player->p_x += x;
-// 			player->p_y += y;
-// 			return (1);
-// 		}
-// 	}
-// 	return (0);
-// }
-
-
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
 {
     int i, j;
@@ -279,57 +217,11 @@ void draw_point(t_player *player, t_data *img, int x, int y, int color)
     }
 }
 
-void draw_wall_part(t_player *player, t_data *p_img, t_ray ray, int x1, int y1, int x2, int y2,  int amount)
-{
-    (void)amount;
-    (void)player;
-    (void)x2;
-
-	// char *s;
-
-	// if (color == HORZ_D)
-	// 	color = GREY;
-	// 	// s = player->vars->dn->img_addr;
-	// else if (color == HORZ_U)
-	// 	color = GREY;
-	// 	// s = player->vars->up->img_addr;
-	// else if (color == VERT_L)
-	// 	color = L_GREY ;
-	// 	// s = player->vars->lf->img_addr;
-	// else if (color == VERT_R)
-	// 	color = L_GREY ;
-		// s = player->vars->rg->img_addr;
-
-
-	if (ray.side == HORZ_D)
-		player->color = GREY;
-	else if (ray.side == HORZ_U)
- 		player->color = GREY;
-	else if (ray.side == VERT_L)
-		player->color = L_GREY ;
-	else if (ray.side == VERT_R)
-		player->color = L_GREY ;
-	
-    // int drawHeight = y2 - y1;
-	// int y = y1;
-
-    player->color = darkenColor(player->color, ((int)ray.length * 255)/ player->max_r);
-    while (y1 < y2)
-    {
-       if (y1 < HEIGHT && y1 > 0)
-        {
-			// int texY = ((y - y1) * 50) / drawHeight;
-			// player->color = *(int *)(s + ((texY * player->vars->up->size_line) + (index * player->vars->up->byte_pixel)));
-			my_mlx_pixel_put(player, p_img, x1, y1, player->color);
-        }
-		y1++;
-    }
-}
-
 float	ft_pow(float n)
 {
 	return (n * n);
 }
+
 float	ft_abs(float n)
 {
 	if (n < 0)
