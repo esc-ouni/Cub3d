@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 18:16:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/20 20:52:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 #define HEIGHT 900
 #define BLOCK 1000
 
-#define M_BLOCK 10
+#define M_BLOCK 8
 
 #define TRANS 0xFF000000
 
