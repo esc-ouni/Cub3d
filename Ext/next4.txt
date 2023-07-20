@@ -1,9 +1,0 @@
-#sizeing
-#getting tex x y to be recoded
-#optimize rendering
-#parse file
-#retouch
-
-
-    #undef MY_MACRO
-    #define MY_MACRO 20
