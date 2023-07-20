@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/20 21:12:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/20 21:16:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void updateAndRenderScene(t_player *player)
 
 int darkenColor(int color, int amount)
 {
-    amount*=2;
+    // amount*=2;
     int r = 0;
     int g = 0;
     int b = 0;
@@ -98,7 +98,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
         {
             tex_y = i * (BLOCK / w_heig);
             color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
-            color = darkenColor(color, (float)(ray.length * 255)/ player->max_r);
+            color = darkenColor(color, (float)(ray.length * 255)/ (BLOCK * 40));
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
         i++;
