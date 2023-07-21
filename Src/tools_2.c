@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/20 21:16:38 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:29:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,22 @@ int darkenColor(int color, int amount)
     return (color);
 }
 
+char *get_texture(t_player *player, t_ray ray)
+{
+    char *s;
+    
+    s = NULL;
+    if (ray.side == HORZ_D)
+        s = player->vars->dn->img_addr;
+    else if (ray.side == HORZ_U)
+        s = player->vars->up->img_addr;
+    else if (ray.side == VERT_R)
+        s = player->vars->rg->img_addr;
+    else if (ray.side == VERT_L)
+        s = player->vars->lf->img_addr;
+    return (s);
+}
+
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 {
     char *s = NULL;
@@ -83,14 +99,8 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     float w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * (BLOCK * 1.7);
     int start = HEIGHT/2 - w_heig/2;
     
-    if (ray.side == HORZ_D)
-        s = player->vars->dn->img_addr;
-    else if (ray.side == HORZ_U)
-        s = player->vars->up->img_addr;
-    else if (ray.side == VERT_R)
-        s = player->vars->rg->img_addr;
-    else if (ray.side == VERT_L)
-        s = player->vars->lf->img_addr;
+
+    s = get_texture(player, ray);
 
     while (i < w_heig)
     {
