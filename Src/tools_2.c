@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:42:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 10:19:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int lastFrameTime = 0;
 void updateAndRenderScene(t_player *player)
 {
     // Put your scene update and rendering logic here
-	update_scene(player);
+	update_params(player);
+	// update_scene(player);
     
     // // Increment frame count
     frameCount++;
@@ -165,9 +166,8 @@ void    destroy_prev_imges(t_player *player)
     }   
 }
 
-void update_scene(t_player *player)
+void update_params(t_player *player)
 {
-
     if (player->w == 1)
         check_collision(player, MV_SP * trigo(player->angle, COS), MV_SP * trigo(player->angle, SIN));
     else if (player->w == -1)
@@ -180,9 +180,13 @@ void update_scene(t_player *player)
         update_degree(player, -R_AN);
     else if (player->rl == -1)
         update_degree(player, R_AN);
-    // else
-    //     return ;
-    
+    else
+        return ; 
+    update_scene(player);   
+}
+
+void update_scene(t_player *player)
+{
 	t_data *p_img;
 	t_data *p_r_img;
 

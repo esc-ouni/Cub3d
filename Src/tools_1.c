@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:46:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 10:21:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	handlerp(int key, t_player *player)
 			player->m = 0;
 		else
 			player->m = 1;
-		updateAndRenderScene(player);
+		update_scene(player);
 	}
 	if (key == M_UP)
 		player->w = 1;

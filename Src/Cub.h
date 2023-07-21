@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:39:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 10:19:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,10 +177,6 @@ typedef struct s_player
 	int d;
 	int rl;
 
-	t_vector	*vec2;
-	t_vector	*vec1;
-	t_vector	*vec;
-	t_ray		*ray;
 	
 	float		p_x;
 	float		p_y;
@@ -190,8 +186,10 @@ typedef struct s_player
 	float		f_angle;
 	float		factor;
 	int			color;
-	float		max_r;
 	void		**p;
+	t_vector	*vec2;
+	t_vector	*vec1;
+	t_ray		*ray;
 	t_vars	*vars;
 }		t_player;
 
@@ -208,6 +206,7 @@ int 		wall_hit_hdn(t_player *player, int x, int y);
 int			wall_hit_vrg(t_player *player, int x, int y);
 int 		wall_hit_vlf(t_player *player, int x, int y);
 
+void 		update_params(t_player *player);
 int			ft_atoi(t_collector **collector, const char *str);
 void		update_degree(t_player *player, float deg_angle);
 void   		destroy_prev_imges(t_player *player);
@@ -253,6 +252,6 @@ void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char 		**parse_file(t_player *player, int argc, char const *argv[]);
 t_data		*draw_player(t_player *player, t_data *p_img);
 
-void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
+void		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
 
 #endif

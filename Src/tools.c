@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:40:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 10:07:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ t_player *	init(int argc, char const *argv[])
 	player->vars->m_fix_img = draw_2d_map(player);
 	player->factor = BLOCK / M_BLOCK;
 	player->m = 0;
-	player->max_r = sqrt(ft_pow(player->vars->map_h) + ft_pow(player->vars->map_h)) * BLOCK;
     player->f_angle = 60.0/WIDTH;
 	player->p = NULL;
 	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
