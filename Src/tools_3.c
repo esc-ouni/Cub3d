@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:22:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 22:00:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,18 @@ char **get_map(t_player *player, int argc, char const *argv[], int t)
     return (map);
 }
 
+void    check_vergs(t_player *player, char *s)
+{
+    if (!ft_strchr(s, ','))
+        exit_with_err(player->vars->collector, PARSE);
+    else if (ft_strchr(ft_strchr(ft_strchr(s, ',')+1, ',')+1, ','))
+        exit_with_err(player->vars->collector, PARSE);
+    else if (ft_strchr(ft_strchr(s, ',')+1, ','))
+        return ;
+    else
+        exit_with_err(player->vars->collector, PARSE);
+}
+
 int extract_color(t_player *player, char *color)
 {
     int i = 0;
@@ -252,6 +264,7 @@ int extract_color(t_player *player, char *color)
 
     color_c = 0;
     color = ft_mstrtrim(player->vars, color, " ", TMP);
+    check_vergs(player, color);
     s = ft_msplit(player->vars, color, ',', TMP);
     while (s[i])
         i++;
