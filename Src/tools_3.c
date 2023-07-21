@@ -61,7 +61,7 @@ void    check_dups(t_player *player, int argc, char const *argv[])
             f++;
         else if (first_part && !ft_strncmp(first_part, "C", ft_strlen(first_part)))
             c++;
-        else if (first_part && !strnstr(str, "1", ft_strlen(str)) && !strnstr(str, "0", ft_strlen(str)))
+        else if (first_part && !ft_strnstr(str, "1", ft_strlen(str)) && !ft_strnstr(str, "0", ft_strlen(str)))
         {
             free(str);
             str = NULL;
@@ -278,19 +278,19 @@ int     get_elem(t_player *player, char const *argv[])
         exit_with_err(player->vars->collector, OPEN);
     while((s = get_next_line(fd))) //not appopriate
     {
-        if (strnstr(s, "NO", 2))
+        if (ft_strnstr(s, "NO", 2))
             player->vars->up_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
-        else if (strnstr(s, "SO", 2))
+        else if (ft_strnstr(s, "SO", 2))
             player->vars->dn_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
-        else if (strnstr(s, "WE", 2))
+        else if (ft_strnstr(s, "WE", 2))
             player->vars->rg_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
-        else if (strnstr(s, "EA", 2))
+        else if (ft_strnstr(s, "EA", 2))
             player->vars->lf_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
-        else if (strnstr(s, "F", 1))
+        else if (ft_strnstr(s, "F", 1))
             player->vars->f_color = extract_color(player, ft_mstrtrim(player->vars, s+1, " ", TMP));
-        else if (strnstr(s, "C", 1))
+        else if (ft_strnstr(s, "C", 1))
             player->vars->c_color = extract_color(player, ft_mstrtrim(player->vars, s+1, " ", TMP));
-        else if (strnstr(s, "1", ft_strlen(s)))
+        else if (ft_strnstr(s, "1", ft_strlen(s)))
         {
             free(s);
             return  i;

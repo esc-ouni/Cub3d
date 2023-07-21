@@ -14,11 +14,13 @@
 #define CUB_H
 
 
-#include <libc.h>
+#include <time.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-#include <mlx.h>
+// #include "mlx.h"
+#include "../../minilibx-linux/mlx.h"
 #include <fcntl.h>
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"
