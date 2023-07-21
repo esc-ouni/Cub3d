@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 08:18:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:35:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,14 @@ t_player *	init(int argc, char const *argv[])
 	player->p = NULL;
 	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
 	player->p[0] = NULL;
-	vec2 = NULL;
- 	vec2 = h_malloc(&collector, sizeof(t_vector), vec2, NTMP);
-	vec1 = NULL;
- 	vec1 = h_malloc(&collector, sizeof(t_vector), vec1, NTMP);
-	vec = NULL;
- 	vec = h_malloc(&collector, sizeof(t_vector), vec, NTMP);
-	ray = NULL;
-	ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, ray, NTMP);
+	player->vec2 = NULL;
+ 	player->vec2 = h_malloc(&collector, sizeof(t_vector), player->vec2, NTMP);
+	player->vec1 = NULL;
+ 	player->vec1 = h_malloc(&collector, sizeof(t_vector), player->vec1, NTMP);
+	player->vec = NULL;
+ 	player->vec = h_malloc(&collector, sizeof(t_vector), player->vec, NTMP);
+	player->ray = NULL;
+	player->ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, player->ray, NTMP);
 	return (player);
 }
 

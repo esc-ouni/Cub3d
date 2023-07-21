@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:29:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:37:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,6 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 void    draw_3d_map(t_player *player, t_data *p_img, t_ray *ray)
 {
     int i = 0;
-    (void)player;
-    (void)p_img;
-    (void)ray;
 
     while (i < WIDTH)
     {
@@ -195,9 +192,9 @@ void update_scene(t_player *player)
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
     p_r_img = ft_transparency(player, p_r_img, WIDTH, HEIGHT);
 	draw_player(player, p_r_img);
-	ray = cast_rays(player, p_r_img, ray);
+	player->ray = cast_rays(player, p_r_img, player->ray);
 
-	draw_3d_map(player, p_img, ray);
+	draw_3d_map(player, p_img, player->ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, p_img->img_ptr, 0, 0);
@@ -218,11 +215,11 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     (void)p_img;
     (void)color;
 
-    vec1 = find_vertical_iterset(player, ray, vec1);
-    vec2 = find_horizontal_iterset(player, ray, vec2);
+    player->vec1 = find_vertical_iterset(player, ray, player->vec1);
+    player->vec2 = find_horizontal_iterset(player, ray, player->vec2);
 
-    ray->v_d_inter = sqrt(ft_pow(vec1->x - player->p_x) + ft_pow(vec1->y - player->p_y));
-    ray->h_d_inter = sqrt(ft_pow(vec2->x - player->p_x) + ft_pow(vec2->y - player->p_y));
+    ray->v_d_inter = sqrt(ft_pow(player->vec1->x - player->p_x) + ft_pow(player->vec1->y - player->p_y));
+    ray->h_d_inter = sqrt(ft_pow(player->vec2->x - player->p_x) + ft_pow(player->vec2->y - player->p_y));
 
     if (ray->v_d_inter < ray->h_d_inter)
     {
@@ -230,7 +227,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
             ray->side = VERT_R;
         else
             ray->side = VERT_L;
-        ray->tex_x = (int)vec1->y % BLOCK;
+        ray->tex_x = (int)player->vec1->y % BLOCK;
         ray->length = ray->v_d_inter;
     }
     else
@@ -239,7 +236,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
             ray->side = HORZ_D;
         else
             ray->side = HORZ_U;
-        ray->tex_x = (int)vec2->x % BLOCK;
+        ray->tex_x = (int)player->vec2->x % BLOCK;
         ray->length = ray->h_d_inter;
     }
     return 0;
