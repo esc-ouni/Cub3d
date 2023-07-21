@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:45:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:46:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	handlerp(int key, t_player *player)
 int	handlerr(int key, t_player *player)
 {
 	// printf("%d\n", key);
-	if (key == 53 || key == 17)
+	if (key == 53)
 	{
     	destroy_prev_imges(player);
 		destroy_fix_imges(player);
