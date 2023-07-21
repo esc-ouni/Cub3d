@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 11:29:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 11:38:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,15 +173,22 @@ int check_collision(t_player *player, int x, int y)
 		yo = -BLOCK/4;
 	if (x < 0)
 		xo = -BLOCK/4;
-	if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-		player->p_y += y;
-    else if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-		player->p_y += (yo/(BLOCK/4));
+    if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
+	{
+		if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
+			player->p_y += y;
+		else
+			player->p_y += (yo/(BLOCK/4));	
+	}
 
-    if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
-		player->p_x += x;
-    else if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
-		player->p_x += (xo/(BLOCK/4));
+    if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
+	{
+		if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
+			player->p_x += x;
+		else
+			player->p_x += (xo/(BLOCK/4));
+		
+	}
 	return (1);
 }
 
