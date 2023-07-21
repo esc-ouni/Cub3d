@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 10:19:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 11:41:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ typedef struct s_player
 	int w;
 	int d;
 	int rl;
+	int xf;
+	int yf;
 
 	
 	float		p_x;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 11:38:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 11:51:26 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	return (size+=1);
 }
 
-t_player *	init(int argc, char const *argv[])
+t_player *init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
 	t_vars 				*vars;
@@ -130,6 +130,8 @@ t_player *	init(int argc, char const *argv[])
 	player->factor = BLOCK / M_BLOCK;
 	player->m = 0;
     player->f_angle = 60.0/WIDTH;
+	player->xf = BLOCK/4;
+	player->yf = BLOCK/4;
 	player->p = NULL;
 	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
 	player->p[0] = NULL;
@@ -166,29 +168,28 @@ void hooks(t_player *player)
 
 int check_collision(t_player *player, int x, int y)
 {
-	int xo = BLOCK/4;
-	int yo = BLOCK/4;
-
 	if (y < 0)
-		yo = -BLOCK/4;
+		player->yf *= -1;
 	if (x < 0)
-		xo = -BLOCK/4;
-    if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
+		player->xf *= -1;
+    if(player->vars->map[(int)(((player->p_y + player->yf)/BLOCK))][(int)((player->p_x + player->xf)/BLOCK)] != '1')
 	{
-		if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
+		if (player->vars->map[(int)(((player->p_y + y + player->yf)/BLOCK))][(int)((player->p_x + player->xf)/BLOCK)] != '1')
 			player->p_y += y;
 		else
-			player->p_y += (yo/(BLOCK/4));	
+			player->p_y += (player->yf/(BLOCK/4));	
 	}
 
-    if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
+    if(player->vars->map[(int)((player->p_y + player->yf)/BLOCK)][(int)((player->p_x + player->xf)/BLOCK)] != '1')
 	{
-		if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
+		if(player->vars->map[(int)((player->p_y + player->yf)/BLOCK)][(int)((player->p_x + x + player->xf)/BLOCK)] != '1')
 			player->p_x += x;
 		else
-			player->p_x += (xo/(BLOCK/4));
+			player->p_x += (player->xf/(BLOCK/4));
 		
 	}
+		player->yf = (BLOCK/4);
+		player->xf = player->yf;
 	return (1);
 }
 
