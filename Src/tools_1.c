@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 21:47:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 22:15:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	update_degree(t_player *player, float deg_angle)
 
 int	handlerp(int key, t_player *player)
 {
-	printf("%d\n", key);
-	if (key == 259)
-		return (0);
+	// printf("%d\n", key);
+	// if (key == 259)
+	// 	return (0);
 	if (key == 53 || key == 17)
 	{
     	destroy_prev_imges(player);

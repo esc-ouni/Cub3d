@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 11:51:26 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 22:37:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,31 +166,56 @@ void hooks(t_player *player)
 	mlx_loop_hook(player->vars->mlx, hokking, player);
 }
 
-int check_collision(t_player *player, int x, int y)
+
+
+    // Check if the player is currently in a wall
+    // if(player->vars->map[(int)(player->p_y/BLOCK)][(int)(player->p_x/BLOCK)] == '1') {
+    //     player->yf = 0;
+    //     player->xf = 0;
+    //     return (0);
+    // }
+
+
+void check_collision(t_player *player, int x, int y)
 {
 	if (y < 0)
 		player->yf *= -1;
+	else if (y == 0)
+		player->yf = 0;
 	if (x < 0)
 		player->xf *= -1;
+	else if (x == 0)
+		player->xf = 0;
+	if (player->vars->map[(int)(((player->p_y + player->yf)/BLOCK))][(int)((player->p_x + player->xf)/BLOCK)] == '1')
+	{
+		player->yf = (BLOCK/4);
+		player->xf = (BLOCK/4);
+		return ;
+	}
     if(player->vars->map[(int)(((player->p_y + player->yf)/BLOCK))][(int)((player->p_x + player->xf)/BLOCK)] != '1')
 	{
 		if (player->vars->map[(int)(((player->p_y + y + player->yf)/BLOCK))][(int)((player->p_x + player->xf)/BLOCK)] != '1')
 			player->p_y += y;
 		else
-			player->p_y += (player->yf/(BLOCK/4));	
+			player->p_y = (player->p_y - ((int)player->p_y % BLOCK)) + (3 * (BLOCK/4));	
 	}
 
+	if (player->vars->map[(int)((player->p_y + player->yf)/BLOCK)][(int)((player->p_x + player->xf)/BLOCK)] == '1')
+	{
+		player->yf = (BLOCK/4);
+		player->xf = (BLOCK/4);
+		return ;
+	}
     if(player->vars->map[(int)((player->p_y + player->yf)/BLOCK)][(int)((player->p_x + player->xf)/BLOCK)] != '1')
 	{
 		if(player->vars->map[(int)((player->p_y + player->yf)/BLOCK)][(int)((player->p_x + x + player->xf)/BLOCK)] != '1')
 			player->p_x += x;
 		else
-			player->p_x += (player->xf/(BLOCK/4));
+			player->p_x = (player->p_x - ((int)player->p_x % BLOCK)) + (3 * (BLOCK/4));
 		
 	}
-		player->yf = (BLOCK/4);
-		player->xf = player->yf;
-	return (1);
+	player->yf = (BLOCK/4);
+	player->xf = (BLOCK/4);
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
