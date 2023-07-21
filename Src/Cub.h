@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 13:09:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 20:58:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-// #include "mlx.h"
-#include "../../minilibx-linux/mlx.h"
+#include <mlx.h>
+// #include "../../minilibx-linux/mlx.h"
 #include <fcntl.h>
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"

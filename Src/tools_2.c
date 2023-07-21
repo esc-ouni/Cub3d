@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 10:25:26 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 21:08:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     ray->v_d_inter = sqrt(ft_pow(player->vec1->x - player->p_x) + ft_pow(player->vec1->y - player->p_y));
     ray->h_d_inter = sqrt(ft_pow(player->vec2->x - player->p_x) + ft_pow(player->vec2->y - player->p_y));
 
-    if (ray->v_d_inter < ray->h_d_inter)
+    if (ray->v_d_inter <= ray->h_d_inter)
     {
         if ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) || (ray->angle >= 0 && ray->angle < M_PI / 2))
             ray->side = VERT_R;
@@ -321,21 +321,16 @@ int wall_hit_vlf(t_player *player, int x, int y)
 
 t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
-    int i = 0;
-
     if ((ray->angle > 0 && ray->angle < M_PI))
     {
         ray->dy = BLOCK;
         ray->dx = (ray->dy / ray->t1);
         vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
         vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
-        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
+        while (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
         {
-            if (wall_hit_hdn(player, (int)vector->x, (int)vector->y))
-                return vector;
             vector->y += ray->dy;
             vector->x += ray->dx;
-            i++;
         }
         return vector;
     }
@@ -345,13 +340,10 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
         ray->dx = (BLOCK / ray->t2);
         vector->y = floor(player->p_y / BLOCK) * BLOCK;
         vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
-        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
+        while (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
         {
-            if (wall_hit_hup(player, (int)vector->x, (int)vector->y))
-                return vector;
             vector->x += ray->dx;
             vector->y += ray->dy;
-            i++;
         }
         return vector;
     }
@@ -360,21 +352,16 @@ t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector
 
 t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
-    int i = 0;
-
     if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle <= 2 * (M_PI))) || (((ray->angle >= 0) && (ray->angle < (M_PI / 2)))))
     {
         ray->dx = BLOCK;
         ray->dy = ray->dx * ray->t1;
         vector->x = (ceil(player->p_x/ BLOCK) * BLOCK);
         vector->y = player->p_y + ((vector->x - player->p_x) * ray->t1);
-        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
+        while (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
         {
-            if (wall_hit_vrg(player, (int)vector->x, (int)vector->y))
-                return (vector);
             vector->x += ray->dx;
             vector->y += ray->dy;
-            i++;
         }
         return (vector);
     }
@@ -384,13 +371,10 @@ t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
         ray->dy = BLOCK * ray->t2;
         vector->x = (floor(player->p_x / BLOCK) * BLOCK);
         vector->y = player->p_y - ((vector->x - player->p_x) * ray->t2);
-        while (i < ft_strlen(player->vars->map[(int)(player->p_y/BLOCK)]))
+        while (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
         {
-            if (wall_hit_vlf(player, (int)vector->x, (int)vector->y))
-                return (vector);
             vector->x += ray->dx;
             vector->y += ray->dy;
-            i++;
         }
         return (vector);
     }
