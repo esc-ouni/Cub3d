@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 18:14:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 08:20:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,18 +114,6 @@ int	handlerp(int key, t_player *player)
 		player->rg = 1;
 	if (key == K_L)
 		player->rl = 1;
-	// if (key == M_UP)
-	// 	move_up(player);
-	// if (key == M_DN)
-	// 	move_down(player);
-	// if (key == K_R)
-	// 	rotate_right(player);
-	// if (key == K_L)
-	// 	rotate_left(player);
-	// if (key == M_RG)
-	// move_right(player);
-	// if (key == M_LF)
-	// 	move_left(player);
 	return(0);
 }
 
@@ -185,8 +173,8 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 		while(j < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, M_WHITE);
-			if(j == (M_BLOCK - 1)|| i == 0)
-				my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
+			// if(j == (M_BLOCK - 1)|| i == 0)
+			// 	my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
 		}
 		i++;
@@ -290,7 +278,7 @@ t_data	*draw_2d_map(t_player *player)
 		{
 			if (map[iy][ix] == '1')
 				draw_wall(player, img, ix, iy);
-			else if (map[iy][ix] == '0' || map[iy][ix] == 'E' || map[iy][ix] == 'W' || map[iy][ix] == 'S' || map[iy][ix] == 'N')
+			else if (map[iy][ix] != '1' && map[iy][ix] != ' ')
 				draw_nwall(player, img, ix, iy);
 			ix++;
 		}	
