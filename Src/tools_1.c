@@ -6,47 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 08:20:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:45:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
-
-void move_right(t_player *player)
-{
-	// float angle = up_degree(player->angle, 90);
-
-	// int x = MV_SP * trigo(angle, COS);
-	// int y = MV_SP * trigo(angle, SIN);
-
-	// if (check_collision(player, x, y))
-		player->d = 1;
-}
-void move_left(t_player *player)
-{
-	// float angle = up_degree(player->angle, -90);
-	// int x = MV_SP * trigo(angle, COS);
-	// int y = MV_SP * trigo(angle, SIN);
-
-	// if (check_collision(player, x, y))
-		player->a = 1;
-}
-void move_up(t_player *player)
-{
-	// int x = MV_SP * trigo(player->angle, COS);
-	// int y = MV_SP * trigo(player->angle, SIN);
-
-	// if (check_collision(player, x, y))
-		player->w = 1;
-}
-void move_down(t_player *player)
-{
-	// int x = MV_SP * trigo(player->angle, COS);
-	// int y = MV_SP * trigo(player->angle, SIN);
-
-	// if (check_collision(player, -x, -y))
-		player->s = 1;
-}
 
 float	up_degree(float angle, float add_angle)
 {
@@ -67,21 +31,6 @@ void	update_degree(t_player *player, float deg_angle)
 		player->angle -= 2 * M_PI;
 	else if (player->angle <= 0)
 		player->angle += 2 * M_PI;
-}
-
-
-void rotate_right(t_player *player)
-{
-	player->d = 1;
-	// update_degree(player, 5);
-	// updateAndRenderScene(player);
-}
-void rotate_left(t_player *player)
-{
-	player->a = 1;
-	// update_degree(player, -5);
-	// updateAndRenderScene(player);
-
 }
 
 int	handlerp(int key, t_player *player)
@@ -105,15 +54,15 @@ int	handlerp(int key, t_player *player)
 	if (key == M_UP)
 		player->w = 1;
 	if (key == M_DN)
-		player->s = 1;
+		player->w = -1;
 	if (key == M_RG)
 		player->d = 1;
 	if (key == M_LF)
-		player->a = 1;
-	if (key == K_R)
-		player->rg = 1;
+		player->d = -1;
 	if (key == K_L)
 		player->rl = 1;
+	if (key == K_R)
+		player->rl = -1;
 	return(0);
 }
 
@@ -127,17 +76,11 @@ int	handlerr(int key, t_player *player)
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
 	}
-	if (key == M_UP)
+	if (key == M_UP || key == M_DN)
 		player->w = 0;
-	if (key == M_DN)
-		player->s = 0;
-	if (key == M_RG)
+	if (key == M_RG || key == M_LF)
 		player->d = 0;
-	if (key == M_LF)
-		player->a = 0;
-	if (key == K_R)
-		player->rg = 0;
-	if (key == K_L)
+	if (key == K_R || key == K_L)
 		player->rl = 0;
 	return(0);
 }
@@ -181,12 +124,6 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 		j = 0;
 	}
 }
-
-// int	call_mouse(int x, int y, t_player *player)
-// {
-// 	// printf()
-// 	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
-// }
 
 int mouse_movement(int x, int y, t_player *player)
 {

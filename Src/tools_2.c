@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:37:20 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:42:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,15 +170,15 @@ void update_scene(t_player *player)
 
     if (player->w == 1)
         check_collision(player, MV_SP * trigo(player->angle, COS), MV_SP * trigo(player->angle, SIN));
-    else if (player->s == 1)
+    else if (player->w == -1)
         check_collision(player, -(MV_SP * trigo(player->angle, COS)), -(MV_SP * trigo(player->angle, SIN)));
     else if (player->d == 1)
         check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, 90), COS), MV_SP/2 * trigo(up_degree(player->angle, 90), SIN));
-    else if (player->a == 1)
+    else if (player->d == -1)
         check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, -90), COS), MV_SP/2 * trigo(up_degree(player->angle, -90), SIN));
     else if (player->rl == 1)
         update_degree(player, -R_AN);
-    else if (player->rg == 1)
+    else if (player->rl == -1)
         update_degree(player, R_AN);
     // else
     //     return ;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 09:36:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/21 09:39:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,8 @@ typedef struct s_ray
 typedef struct s_player
 {
 	int w;
-	int s;
 	int d;
-	int a;
 	int rl;
-	int rg;
 
 	t_vector	*vec2;
 	t_vector	*vec1;
