@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 15:29:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 17:19:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void    exit_with_err(t_collector **collector, t_flag cause)
 
 void    check_dups(t_player *player, int argc, char const *argv[])
 {
-    (void)argc;
     char *str = NULL;
     int s = 0;
     int n = 0;
