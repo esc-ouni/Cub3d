@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 21:08:38 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 11:37:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ float draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
         ray->tex_x = (int)player->vec2->x % BLOCK;
         ray->length = ray->h_d_inter;
     }
-    return 0;
+    return 1;
 }
 
 t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)

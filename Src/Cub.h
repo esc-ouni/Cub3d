@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 22:32:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 12:31:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 #include "../Get_next_line/get_next_line.h"
 #include "../LIBF/libft.h"
 
-#define MV_SP 200
-#define R_AN  3
 
 #define HORZ_U 15
 #define HORZ_D 16
@@ -43,6 +41,9 @@
 #define WIDTH 1800
 #define HEIGHT 900
 #define BLOCK 1000
+
+#define MV_SP (BLOCK/5)
+#define R_AN  3
 
 #define M_BLOCK 8
 
@@ -197,6 +198,7 @@ typedef struct s_player
 	t_vars	*vars;
 }		t_player;
 
+void update_params(t_player *player);
 
 
 char		**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag);
@@ -236,7 +238,7 @@ void    	exit_with_err(t_collector **collector, t_flag cause);
 t_data		*ft_transparency(t_player *player, t_data *p_img, int width, int height);
 t_vector 	*find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector);
 t_vector 	*find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
-void 		check_collision(t_player *player, int x, int y);
+void 		check_collision(t_player *player, float x, float y);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
 float   	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 void 		updateAndRenderScene(t_player *player);
