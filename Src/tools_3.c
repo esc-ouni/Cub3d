@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/21 22:00:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 13:28:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ void    check_mapb(t_player *player, char **map)
     int x = 0;
     int c = 0;
     int chr = 0;
-    float p_y = 0;
-    float p_x = 0;
+    double  p_y = 0;
+    double  p_x = 0;
 
     while (map[y])
     {
@@ -159,8 +159,8 @@ void    check_mapb(t_player *player, char **map)
         {
             if (map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
             {
-                p_x = (float)(x * BLOCK);
-                p_y = (float)(y * BLOCK);
+                p_x = (double )(x * BLOCK);
+                p_y = (double )(y * BLOCK);
                 chr = map[y][x];
                 c++;
             }
@@ -357,7 +357,7 @@ char **parse_file(t_player *player, int argc, char const *argv[])
     return (NULL);
 }
 
-float   trigo(float angle, t_flag flag)
+double    trigo(double  angle, t_flag flag)
 {
     // static int i;
 

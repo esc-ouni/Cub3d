@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 18:01:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 13:28:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void draw_line(t_player *player, t_data *p_img, int color, int x2, int y2)
     (void)p_img;
     int i = 0;
 
-    float dx = x2/player->factor - player->p_x/player->factor;
-    float dy = y2/player->factor - player->p_y/player->factor;
-    float steps = ft_abs(dy);
+    double  dx = x2/player->factor - player->p_x/player->factor;
+    double  dy = y2/player->factor - player->p_y/player->factor;
+    double  steps = ft_abs(dy);
 	if (ft_abs(dx) > ft_abs(dy))
 		steps = ft_abs(dx);
-    float x_inc = dx / steps;
-    float y_inc = dy / steps;
+    double  x_inc = dx / steps;
+    double  y_inc = dy / steps;
 
-    float x = player->p_x/player->factor;
-    float y = player->p_y/player->factor;
+    double  x = player->p_x/player->factor;
+    double  y = player->p_y/player->factor;
 
     while (i < steps)
     {

@@ -1,6 +1,6 @@
 ifeq ($(WSL_DISTRO_NAME), Ubuntu)
 FLAGS = -Wall -Wextra -Werror 
-MATH = -Oz -ffast-math
+MATH = -O3 -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 LIBF_DIR := LIBF
