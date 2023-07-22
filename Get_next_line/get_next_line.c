@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:32:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 22:54:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:19:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ char	*line_extract(char *buffer)
 	i2 = i;
 	while (buffer[i] != '\n' && buffer[i])
 		new[i2++] = buffer[i++];
-	// if (buffer[i] == '\n')
-	// {
-	// 	new[i2] = '\n';
-	// 	i2++;
-	// }
 	new[i2] = '\0';
 	return (new);
 }

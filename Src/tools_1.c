@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 15:51:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:31:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-float 	up_degree(float  angle, float  add_angle)
+float	up_degree(float angle, float add_angle)
 {
 	add_angle = deg_to_rad(add_angle);
 	angle += add_angle;
@@ -23,7 +23,7 @@ float 	up_degree(float  angle, float  add_angle)
 	return (angle);
 }
 
-void	update_degree(t_player *player, float  deg_angle)
+void	update_degree(t_player *player, float deg_angle)
 {
 	deg_angle = deg_to_rad(deg_angle);
 	player->angle += deg_angle;
@@ -35,10 +35,9 @@ void	update_degree(t_player *player, float  deg_angle)
 
 int	handlerp(int key, t_player *player)
 {
-	// printf("%d\n", key);
 	if (key == 53 || key == 17)
 	{
-    	destroy_prev_imges(player);
+		destroy_prev_imges(player);
 		destroy_fix_imges(player);
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
@@ -63,15 +62,14 @@ int	handlerp(int key, t_player *player)
 		player->rl = 1;
 	if (key == K_R)
 		player->rl = -1;
-	return(0);
+	return (0);
 }
 
 int	handlerr(int key, t_player *player)
 {
-	// printf("%d\n", key);
 	if (key == 53)
 	{
-    	destroy_prev_imges(player);
+		destroy_prev_imges(player);
 		destroy_fix_imges(player);
 		ft_collectorclear(player->vars->collector, ALL);
 		exit(0);
@@ -82,19 +80,21 @@ int	handlerr(int key, t_player *player)
 		player->d = 0;
 	if (key == K_R || key == K_L)
 		player->rl = 0;
-	return(0);
+	return (0);
 }
 
 void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 {
-	int	i = 0;
-	int	j = 0;
+	int	i;
+	int	j;
 
+	j = 0;
+	i = 0;
 	x *= M_BLOCK;
 	y *= M_BLOCK;
-	while(i < M_BLOCK)
+	while (i < M_BLOCK)
 	{
-		while(j < M_BLOCK)
+		while (j < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
@@ -105,15 +105,16 @@ void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 }
 void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 {
-	int	i = 0;
-	int	j = 0;
+	int	i;
+	int	j;
 
-
+	j = 0;
+	i = 0;
 	x *= M_BLOCK;
 	y *= M_BLOCK;
-	while(i < M_BLOCK)
+	while (i < M_BLOCK)
 	{
-		while(j < M_BLOCK)
+		while (j < M_BLOCK)
 		{
 			my_mlx_pixel_put(player, mapp, x + i, y + j, M_WHITE);
 			// if(j == (M_BLOCK - 1)|| i == 0)
@@ -125,11 +126,11 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 	}
 }
 
-int mouse_movement(int x, int y, t_player *player)
+int	mouse_movement(int x, int y, t_player *player)
 {
-	static int last_pos;
-	(void)y;
+	static int	last_pos;
 
+	(void)y;
 	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 	{
 		if (x > last_pos)
@@ -179,43 +180,38 @@ t_data	*draw_cf(t_player *player)
 
 t_data	*draw_2d_map(t_player *player)
 {
-	int 	m_w;
-	int 	m_h;
+	int		i;
 	int		ix;
 	int		iy;
 	int		color;
-	char	**map;
 	t_data	*img;
 
-	img = NULL;
-	int i = 0;
-
-	color = M_BLACK;
-	map = player->vars->map;
+	i = 0;
 	ix = 0;
 	iy = 0;
-	m_w = ft_strlen(map[0]);
-	while (map[i])
+	img = NULL;
+	color = M_BLACK;
+	player->vars->map_w = ft_strlen(player->vars->map[0]);
+	while (player->vars->map[i])
 	{
-		if (ft_strlen(map[i]) > m_w)
-			m_w = ft_strlen(map[i]);
+		if (ft_strlen(player->vars->map[i]) > player->vars->map_w)
+			player->vars->map_w = ft_strlen(player->vars->map[i]);
 		i++;
 	}
-	m_h = i;
-	player->vars->map_w =  m_w;
-	player->vars->map_h =  m_h;
-	if ((m_w * M_BLOCK >= WIDTH) || (m_h * M_BLOCK >= HEIGHT))
+	player->vars->map_h = i;
+	if ((player->vars->map_w * M_BLOCK >= WIDTH) || \
+	(player->vars->map_h * M_BLOCK >= HEIGHT))
 		exit_with_err(player->vars->collector, MAP);
-	img = new_image(player->vars, m_w * M_BLOCK, m_h * M_BLOCK, NTMP);
-	img = ft_transparency(player, img,  m_w * M_BLOCK, m_h * M_BLOCK);
-	while(map[iy])
+	img = new_image(player->vars, player->vars->map_w * M_BLOCK, player->vars->map_h * M_BLOCK, NTMP);
+	img = ft_transparency(player, img, player->vars->map_w * M_BLOCK, player->vars->map_h * M_BLOCK);
+	while(player->vars->map[iy])
 	{
 		ix = 0;
-		while(map[iy][ix])
+		while(player->vars->map[iy][ix])
 		{
-			if (map[iy][ix] == '1')
+			if (player->vars->map[iy][ix] == '1')
 				draw_wall(player, img, ix, iy);
-			else if (map[iy][ix] != '1' && map[iy][ix] != ' ')
+			else if (player->vars->map[iy][ix] != '1' && player->vars->map[iy][ix] != ' ')
 				draw_nwall(player, img, ix, iy);
 			ix++;
 		}	

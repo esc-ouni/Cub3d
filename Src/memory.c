@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/19 16:38:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:20:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
 {
-	void 			*p;
-	t_data			*img;
-	int 			width,height;
+	void	*p;
+	t_data	*img;
+	int		width;
+	int		height;
 
 	img = NULL;
 	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
-	p = mlx_xpm_file_to_image(player->vars->mlx, file_dstination, &width, &height);
+	p = mlx_xpm_file_to_image(player->vars->mlx, file_dstination, \
+	&width, &height);
 	if (!p)
 		exit_with_err(player->vars->collector, MLX);
 	img->img_ptr = p;
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
+	&(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;
 	return (img);
 }
@@ -40,7 +43,8 @@ t_data	*new_image(t_vars *vars, int width, int height, t_flag type)
 	if (!p)
 		exit_with_err(vars->collector, MLX);
 	img->img_ptr = p;
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), &(img->size_line), &(img->endian));
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
+	&(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;
 	return (img);
 }
