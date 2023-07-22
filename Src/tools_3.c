@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 17:54:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 19:13:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,68 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void    check_dups(t_player *player, char const *argv[])
+// void	check_dups2(t_player *player, char *str, int *s, int *n)
+// {
+	
+// }
+
+// void	check_dups3(t_player *player, char *str, int *w, int *e)
+// {
+	
+// }
+
+// void	check_dups4(t_player *player, char *str, int *c, int *f)
+// {
+	
+// }
+
+int	ft_strt(t_player *player, char const *argv[], t_int *set)
 {
-    char *str = NULL;
-    int s = 0;
-    int n = 0;
-    int w = 0;
-    int e = 0;
-    int c = 0;
-    int f = 0;
-    char *first_part = NULL;
-    int fd;
+    int 	fd;
+	t_int	*get;
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(player->vars->collector, OPEN);
+	get = h_malloc(player->vars->collector, sizeof(t_int), set, TMP);
+
+	get->n = 0;
+	get->e = 0;
+	get->s = 0;
+	get->w = 0;
+	get->c = 0;
+	get->f = 0;
+	set = get;
+	return (fd);
+}
+
+void    check_dups(t_player *player, char const *argv[])
+{
+    int 	fd;
+    char 	*str;
+	t_int	*set;
+    char 	*first_part;
+
+	str = NULL;
+	set = NULL;
+	set = h_malloc(player->vars->collector, sizeof(t_int *), set, TMP);
+	fd = ft_strt(player, argv, set);
+	first_part = NULL;
     while((str = get_next_line(fd)))
     {
         first_part = ft_msplit(player->vars, str, ' ', TMP)[0];
         if (first_part && !ft_strncmp(first_part, "NO", ft_strlen(first_part)))
-            n++;
+            set->n+=1;
         else if (first_part && !ft_strncmp(first_part, "SO", ft_strlen(first_part)))
-            s++;
+            set->s+=1;
         else if (first_part && !ft_strncmp(first_part, "WE", ft_strlen(first_part)))
-            w++;
+            set->w+=1;
         else if (first_part && !ft_strncmp(first_part, "EA", ft_strlen(first_part)))
-            e++;
+            set->e+=1;
         else if (first_part && !ft_strncmp(first_part, "F", ft_strlen(first_part)))
-            f++;
+            set->f+=1;
         else if (first_part && !ft_strncmp(first_part, "C", ft_strlen(first_part)))
-            c++;
+            set->c+=1;
         else if (first_part && !ft_strnstr(str, "1", ft_strlen(str)) && !ft_strnstr(str, "0", ft_strlen(str)))
         {
             free(str);
@@ -69,7 +101,8 @@ void    check_dups(t_player *player, char const *argv[])
         free(str);
         str = NULL;
     }
-    if (n != 1 || e != 1 || w != 1 || s != 1 || f != 1 || c != 1)
+	printf("%d, %d, %d, %d\n", set->n, set->s, set->e, set->w);
+    if (set->n != 1 || set->e != 1 || set->w != 1 || set->s != 1 || set->f != 1 || set->c != 1)
         exit_with_err(player->vars->collector, PARSE);
 }
 

@@ -30,7 +30,7 @@ re: fclean all
 else
 NAME = Cub3D
 FLAGS = -Wall -Wextra -Werror #-fsanitize=undefined,address -g
-MATH = -Oz -ffast-math
+MATH = -O3 -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all:

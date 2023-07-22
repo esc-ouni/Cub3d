@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 18:07:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 18:16:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char *get_texture(t_player *player, t_ray ray)
     return (s);
 }
 
-int	get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
+int get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
 {
 	int color;
 	
