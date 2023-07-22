@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 13:28:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 14:36:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-double 	up_degree(double  angle, double  add_angle)
+float 	up_degree(float  angle, float  add_angle)
 {
 	add_angle = deg_to_rad(add_angle);
 	angle += add_angle;
@@ -23,7 +23,7 @@ double 	up_degree(double  angle, double  add_angle)
 	return (angle);
 }
 
-void	update_degree(t_player *player, double  deg_angle)
+void	update_degree(t_player *player, float  deg_angle)
 {
 	deg_angle = deg_to_rad(deg_angle);
 	player->angle += deg_angle;

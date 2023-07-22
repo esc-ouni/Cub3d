@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 14:28:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 14:36:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ int ft_ext(t_player *player)
 	exit(0);
 }
 
-double  	deg_to_rad(double  angle)
+float  	deg_to_rad(float  angle)
 {
     angle = (angle * M_PI / 180);
 	return (angle);
 }
 
-double  	rad_to_deg(double  angle)
+float  	rad_to_deg(float  angle)
 {
     angle = (angle * 180 / M_PI);
 	return (angle);
 }
 
-void rotate_vector(t_vector *direction, double  angle)
+void rotate_vector(t_vector *direction, float  angle)
 {
 	angle = deg_to_rad(angle);
-    double  cos_angle = trigo(angle, COS);
-    double  sin_angle = trigo(angle, SIN);
+    float  cos_angle = trigo(angle, COS);
+    float  sin_angle = trigo(angle, SIN);
 
-    double  new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
-    double  new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
+    float  new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
+    float  new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
 
     direction->x = new_x;
     direction->y = new_y;
@@ -161,32 +161,32 @@ int hokking(t_player *player)
 	return (0);
 }
 
-void check_collision(t_player *player, double x, double y)
+void check_collision(t_player *player, float x, float y)
 {
-    int xo = 400;
-    int yo = 400;
+    int xo = BLOCK/4;
+    int yo = BLOCK/4;
 
     if (y < 0)
-        yo = -400;
+        yo = -BLOCK/4;
     if (x < 0)
-        xo = -400;
+        xo = -BLOCK/4;
 
-    // if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-    // {
-        if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1' && player->vars->map[(int)(((player->p_y + y )/BLOCK))][(int)((player->p_x)/BLOCK)] != '1')
+    if(player->vars->map[(int)(((player->p_y + y)/BLOCK))][(int)((player->p_x)/BLOCK)] != '1')
+    {
+        if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
             player->p_y += y;
         // else
         //     player->p_y += (yo/(300));    
-    // }
+    }
 
-    // if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)(((player->p_x + xo)/BLOCK))] != '1')
-    // {
-        if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1' && player->vars->map[(int)((player->p_y )/BLOCK)][(int)((player->p_x + x)/BLOCK)] != '1')
+    if(player->vars->map[(int)((player->p_y)/BLOCK)][(int)((player->p_x + x)/BLOCK)] != '1')
+    {
+        if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
             player->p_x += x;
         // else
         //     player->p_x += (xo/(300));
-    // }
-    printf("x : %0.0f, y : %0.0f\n", player->p_x, player->p_y);
+    }
+    // printf("x : %0.0f, y : %0.0f\n", player->p_x, player->p_y);
 }
 
 
@@ -241,12 +241,12 @@ void draw_point(t_player *player, t_data *img, int x, int y, int color)
     }
 }
 
-double 	ft_pow(double  n)
+float 	ft_pow(float  n)
 {
 	return (n * n);
 }
 
-double 	ft_abs(double  n)
+float 	ft_abs(float  n)
 {
 	if (n < 0)
 		n = -n;

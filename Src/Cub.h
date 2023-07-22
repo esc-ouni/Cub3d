@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 13:58:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 14:36:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ typedef struct s_collector
 
 typedef struct  s_vector
 {
-    double  x;
-    double  y;
+    float  x;
+    float  y;
 }               t_vector;
 
 typedef struct s_data
@@ -161,17 +161,17 @@ typedef struct s_vars
 
 typedef struct s_ray
 {
-	double 		dx;
-	double 		dy;
-	double 		length;
-	double 		angle;
-	double 		t1;
-	double 		t2;
-	double 		v_d_inter;
-	double 		h_d_inter;
+	float 		dx;
+	float 		dy;
+	float 		length;
+	float 		angle;
+	float 		t1;
+	float 		t2;
+	float 		v_d_inter;
+	float 		h_d_inter;
 	int			side;
 	int			tex_x;
-	double  		c;
+	float  		c;
 }		t_ray;
 
 typedef struct s_player
@@ -183,13 +183,13 @@ typedef struct s_player
 	int yf;
 
 	
-	double 		p_x;
-	double 		p_y;
+	float 		p_x;
+	float 		p_y;
 	int         m;
-	double 		angle;
-	double 		t_angle;
-	double 		f_angle;
-	double 		factor;
+	float 		angle;
+	float 		t_angle;
+	float 		f_angle;
+	float 		factor;
 	int			color;
 	void		**p;
 	t_vector	*vec2;
@@ -215,17 +215,17 @@ int 		wall_hit_vlf(t_player *player, int x, int y);
 
 void 		update_params(t_player *player);
 int			ft_atoi(t_collector **collector, const char *str);
-void		update_degree(t_player *player, double  deg_angle);
+void		update_degree(t_player *player, float  deg_angle);
 void   		destroy_prev_imges(t_player *player);
 void    	destroy_fix_imges(t_player *player);
 int 		darkenColor(int color, int amount);
-double 		ft_pow(double  n);
+float 		ft_pow(float  n);
 void 		draw_point(t_player *player, t_data *img, int x, int y, int color);
-double 		ft_abs(double  n);
-double    	trigo(double  angle, t_flag flag);
-double  		rad_to_deg(double  angle);
-double 		up_degree(double  angle, double  add_angle);
-double  		deg_to_rad(double  angle);
+float 		ft_abs(float  n);
+float    	trigo(float  angle, t_flag flag);
+float  		rad_to_deg(float  angle);
+float 		up_degree(float  angle, float  add_angle);
+float  		deg_to_rad(float  angle);
 t_player	*init(int argc, char const *argv[]);
 void		hooks(t_player *player);
 int			count_alloc_size(t_collector **collector, char const *argv[], int fd);
@@ -233,15 +233,15 @@ int			handlerp(int key, t_player *player);
 int			handlerr(int key, t_player *player);
 void 		update_scene(t_player *player);
 t_data		*draw_2d_map(t_player *player);
-void 		rotate_vector(t_vector *direction, double  angle);
+void 		rotate_vector(t_vector *direction, float  angle);
 int 		mouse_movement(int x, int y, t_player *player);
 void    	exit_with_err(t_collector **collector, t_flag cause);
 t_data		*ft_transparency(t_player *player, t_data *p_img, int width, int height);
 t_vector 	*find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector);
 t_vector 	*find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
-void 		check_collision(t_player *player, double  x, double  y);
+void 		check_collision(t_player *player, float  x, float  y);
 t_ray 		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
-double    	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
+float    	draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
 void 		updateAndRenderScene(t_player *player);
 t_data		*new_image_from_xpm(t_player *player, char *file_dstination);
 t_data		*draw_cf(t_player *player);

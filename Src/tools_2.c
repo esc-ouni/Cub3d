@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 13:31:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 14:36:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     int i = 0;
     int tex_y = 0;
     int color = 0;
-    double  w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * (BLOCK * 1.7);
+    float  w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * (BLOCK * 1.7);
     int start = HEIGHT/2 - w_heig/2;
     
 
@@ -109,7 +109,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
         {
             tex_y = i * (BLOCK / w_heig);
             color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
-            color = darkenColor(color, (double )(ray.length * 255)/ (BLOCK * 40));
+            color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
         i++;
@@ -214,7 +214,7 @@ void update_scene(t_player *player)
 }
 
 
-double  draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
+float  draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
 {
     (void)p_img;
     (void)color;
