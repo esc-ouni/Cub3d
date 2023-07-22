@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 16:41:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 17:00:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define HEIGHT 1000
 # define BLOCK 1000
 
-# define MV_SP (BLOCK / 5)
+# define MV_SP (BLOCK/7)
 # define R_AN  3
 
 # define M_BLOCK 8
