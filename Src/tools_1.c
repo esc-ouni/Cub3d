@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 16:31:38 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:46:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ void	update_degree(t_player *player, float deg_angle)
 		player->angle += 2 * M_PI;
 }
 
+void	m_map(t_player *player)
+{
+	if (player->m == 1)	
+		player->m = 0;
+	else
+		player->m = 1;
+	update_scene(player);
+}
+
 int	handlerp(int key, t_player *player)
 {
 	if (key == 53 || key == 17)
@@ -40,16 +49,9 @@ int	handlerp(int key, t_player *player)
 		destroy_prev_imges(player);
 		destroy_fix_imges(player);
 		ft_collectorclear(player->vars->collector, ALL);
-		exit(0);
 	}
 	if (key == 46)
-	{
-		if (player->m == 1)	
-			player->m = 0;
-		else
-			player->m = 1;
-		update_scene(player);
-	}
+		m_map(player);
 	if (key == M_UP)
 		player->w = 1;
 	if (key == M_DN)
@@ -178,30 +180,15 @@ t_data	*draw_cf(t_player *player)
 	return (mapp);
 }
 
-t_data	*draw_2d_map(t_player *player)
+t_data	*creat_tmap(t_player *player)
 {
-	int		i;
 	int		ix;
 	int		iy;
-	int		color;
 	t_data	*img;
 
-	i = 0;
 	ix = 0;
 	iy = 0;
 	img = NULL;
-	color = M_BLACK;
-	player->vars->map_w = ft_strlen(player->vars->map[0]);
-	while (player->vars->map[i])
-	{
-		if (ft_strlen(player->vars->map[i]) > player->vars->map_w)
-			player->vars->map_w = ft_strlen(player->vars->map[i]);
-		i++;
-	}
-	player->vars->map_h = i;
-	if ((player->vars->map_w * M_BLOCK >= WIDTH) || \
-	(player->vars->map_h * M_BLOCK >= HEIGHT))
-		exit_with_err(player->vars->collector, MAP);
 	img = new_image(player->vars, player->vars->map_w * M_BLOCK, player->vars->map_h * M_BLOCK, NTMP);
 	img = ft_transparency(player, img, player->vars->map_w * M_BLOCK, player->vars->map_h * M_BLOCK);
 	while(player->vars->map[iy])
@@ -217,6 +204,28 @@ t_data	*draw_2d_map(t_player *player)
 		}	
 		iy++;
 	}
-	
 	return (img);
+}
+
+t_data	*draw_2d_map(t_player *player)
+{
+	int		i;
+	int		color;
+	t_data	*img;
+
+	i = 0;
+	img = NULL;
+	color = M_BLACK;
+	player->vars->map_w = ft_strlen(player->vars->map[0]);
+	while (player->vars->map[i])
+	{
+		if (ft_strlen(player->vars->map[i]) > player->vars->map_w)
+			player->vars->map_w = ft_strlen(player->vars->map[i]);
+		i++;
+	}
+	player->vars->map_h = i;
+	if ((player->vars->map_w * M_BLOCK >= WIDTH) || \
+	(player->vars->map_h * M_BLOCK >= HEIGHT))
+		exit_with_err(player->vars->collector, MAP);
+	return (creat_tmap(player));
 }
