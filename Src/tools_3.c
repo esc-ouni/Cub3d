@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 14:36:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 15:29:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,21 +315,46 @@ int     get_elem(t_player *player, char const *argv[])
     return (0);
 }
 
+void    check_xpm_size(t_player *player, char *file_dstination)
+{
+    char **sp = NULL;
+    char *s = NULL;
+    int fd = 0;
+
+    fd = open(file_dstination, O_RDONLY);
+    if (fd == -1)
+        exit_with_err(player->vars->collector, OPEN);
+    while ((s = get_next_line(fd)))
+    {
+        if (ft_strnstr(s, "\"",1))
+        {
+            sp = ft_msplit(player->vars, s+1, ' ', TMP);
+            free(s);
+            break;
+        }
+        free(s);
+        s = NULL;
+    }
+    if (!strcmp(sp[0], "1000") && !strcmp(sp[1], "1000"))
+        return ;
+    else
+		exit_with_err(player->vars->collector, MAP);
+}
+
 int    get_elements(t_player *player, char const *argv[])
 {
-    int i = 0;
-    // int fd;
-
-    // fd = open(argv[1], O_RDONLY);
-    // if (fd == -1)
-    //     exit_with_err(collector, OPEN);
-
-    i = get_elem(player, argv);
+    int i;
     
+    i = 0;
+    i = get_elem(player, argv);
 	player->vars->up = new_image_from_xpm(player, player->vars->up_c);
+    check_xpm_size(player, player->vars->up_c);
 	player->vars->dn = new_image_from_xpm(player, player->vars->dn_c);
+    check_xpm_size(player, player->vars->dn_c);
 	player->vars->lf = new_image_from_xpm(player, player->vars->lf_c);
+    check_xpm_size(player, player->vars->lf_c);
 	player->vars->rg = new_image_from_xpm(player, player->vars->rg_c);
+    check_xpm_size(player, player->vars->rg_c);
     return (i);
 }
 

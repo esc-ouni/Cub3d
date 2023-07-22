@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:33:15 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/18 16:03:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 15:21:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 # include <stdlib.h>
 # include <unistd.h>
