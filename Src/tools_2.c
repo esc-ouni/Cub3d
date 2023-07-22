@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 16:53:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 17:15:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void update_scene(t_player *player)
     p_img = ft_transparency(player, p_img, WIDTH, HEIGHT);
     p_r_img = ft_transparency(player, p_r_img, WIDTH, HEIGHT);
 	draw_player(player, p_r_img);
-	player->ray = cast_rays(player, p_r_img, player->ray);
+	player->ray = cast_rays(player, player->ray);
 
 	draw_3d_map(player, p_img, player->ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
@@ -215,17 +215,12 @@ void update_scene(t_player *player)
 }
 
 
-float  draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
+float  draw_ray(t_player *player, t_ray *ray)
 {
-    (void)p_img;
-    (void)color;
-
     player->vec1 = find_vertical_iterset(player, ray, player->vec1);
     player->vec2 = find_horizontal_iterset(player, ray, player->vec2);
-
     ray->v_d_inter = sqrt(ft_pow(player->vec1->x - player->p_x) + ft_pow(player->vec1->y - player->p_y));
     ray->h_d_inter = sqrt(ft_pow(player->vec2->x - player->p_x) + ft_pow(player->vec2->y - player->p_y));
-
     if (ray->v_d_inter < ray->h_d_inter)
     {
         if ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) || (ray->angle >= 0 && ray->angle < M_PI / 2))
@@ -247,7 +242,7 @@ float  draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray)
     return 1;
 }
 
-t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
+t_ray *cast_rays(t_player *player, t_ray *ray)
 {
 	int i = 0;
     player->t_angle = up_degree(player->angle, -30);
@@ -257,7 +252,7 @@ t_ray *cast_rays(t_player *player, t_data *p_img, t_ray *ray)
         ray[i].angle = player->t_angle;
         ray[i].t1 = trigo(ray[i].angle, TAN);
         ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
-        draw_ray(player, p_img, BLUE, &ray[i]);
+        draw_ray(player, &ray[i]);
         player->t_angle = up_degree(player->t_angle, player->f_angle);
         i++;
     }
@@ -320,64 +315,76 @@ int wall_hit_vlf(t_player *player, int x, int y)
 	return (1);
 }
 
+t_vector *h_dn_iterset(t_player *player, t_ray *ray, t_vector *vector)
+{
+	ray->dy = -BLOCK;
+	ray->dx = (BLOCK / ray->t2);
+	vector->y = floor(player->p_y / BLOCK) * BLOCK;
+	vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
+	while (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
+	{
+		vector->x += ray->dx;
+		vector->y += ray->dy;
+	}
+	return vector;
+}
+
+t_vector *h_up_iterset(t_player *player, t_ray *ray, t_vector *vector)
+{
+	ray->dy = BLOCK;
+	ray->dx = (ray->dy / ray->t1);
+	vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
+	vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
+	while (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
+	{
+		vector->y += ray->dy;
+		vector->x += ray->dx;
+	}
+	return vector;
+}
+
 t_vector *find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
     if ((ray->angle > 0 && ray->angle < M_PI))
-    {
-        ray->dy = BLOCK;
-        ray->dx = (ray->dy / ray->t1);
-        vector->y = (ceil(player->p_y / BLOCK) * BLOCK);
-        vector->x = player->p_x + ((vector->y - player->p_y) / ray->t1);
-        while (!wall_hit_hdn(player, (int)vector->x, (int)vector->y))
-        {
-            vector->y += ray->dy;
-            vector->x += ray->dx;
-        }
-        return vector;
-    }
+		vector = h_up_iterset(player, ray, vector);
     else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
-    {
-        ray->dy = -BLOCK;
-        ray->dx = (BLOCK / ray->t2);
-        vector->y = floor(player->p_y / BLOCK) * BLOCK;
-        vector->x = player->p_x + (player->p_y - vector->y) / ray->t2;
-        while (!wall_hit_hup(player, (int)vector->x, (int)vector->y))
-        {
-            vector->x += ray->dx;
-            vector->y += ray->dy;
-        }
-        return vector;
-    }
+		vector = h_dn_iterset(player, ray, vector);
     return vector;
+}
+
+t_vector	*h_rg_iterset(t_player *player, t_ray *ray, t_vector *vector)
+{
+	ray->dx = BLOCK;
+	ray->dy = ray->dx * ray->t1;
+	vector->x = (ceil(player->p_x/ BLOCK) * BLOCK);
+	vector->y = player->p_y + ((vector->x - player->p_x) * ray->t1);
+	while (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
+	{
+		vector->x += ray->dx;
+		vector->y += ray->dy;
+	}
+	return (vector);
+}
+
+t_vector	*h_lf_iterset(t_player *player, t_ray *ray, t_vector *vector)
+{
+	ray->dx = -BLOCK;
+	ray->dy = BLOCK * ray->t2;
+	vector->x = (floor(player->p_x / BLOCK) * BLOCK);
+	vector->y = player->p_y - ((vector->x - player->p_x) * ray->t2);
+	while (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
+	{
+		vector->x += ray->dx;
+		vector->y += ray->dy;
+	}
+	return (vector);
 }
 
 t_vector *find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector)
 {
     if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle <= 2 * (M_PI))) || (((ray->angle >= 0) && (ray->angle < (M_PI / 2)))))
-    {
-        ray->dx = BLOCK;
-        ray->dy = ray->dx * ray->t1;
-        vector->x = (ceil(player->p_x/ BLOCK) * BLOCK);
-        vector->y = player->p_y + ((vector->x - player->p_x) * ray->t1);
-        while (!wall_hit_vrg(player, (int)vector->x, (int)vector->y))
-        {
-            vector->x += ray->dx;
-            vector->y += ray->dy;
-        }
-        return (vector);
-    }
+		vector = h_rg_iterset(player, ray, vector);
     else if ((ray->angle > (M_PI / 2)) || (ray->angle < 3 * (M_PI / 2)))
-    {
-        ray->dx = -BLOCK;
-        ray->dy = BLOCK * ray->t2;
-        vector->x = (floor(player->p_x / BLOCK) * BLOCK);
-        vector->y = player->p_y - ((vector->x - player->p_x) * ray->t2);
-        while (!wall_hit_vlf(player, (int)vector->x, (int)vector->y))
-        {
-            vector->x += ray->dx;
-            vector->y += ray->dy;
-        }
-        return (vector);
-    }
+		vector = h_lf_iterset(player, ray, vector);
     return (vector);
 }

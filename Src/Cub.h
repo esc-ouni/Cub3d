@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 17:00:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 17:15:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,8 +235,8 @@ t_data		*ft_transparency(t_player *player, t_data *p_img, int width, int height)
 t_vector	*find_horizontal_iterset(t_player *player, t_ray *ray, t_vector *vector);
 t_vector	*find_vertical_iterset(t_player *player, t_ray *ray, t_vector *vector);
 void		check_collision(t_player *player, float  x, float  y);
-t_ray		*cast_rays(t_player *player, t_data *p_img, t_ray *ray);
-float		draw_ray(t_player *player, t_data *p_img, int color, t_ray *ray);
+t_ray		*cast_rays(t_player *player, t_ray *ray);
+float		draw_ray(t_player *player, t_ray *ray);
 void		updateAndRenderScene(t_player *player);
 t_data		*new_image_from_xpm(t_player *player, char *file_dstination);
 t_data		*draw_cf(t_player *player);
