@@ -1,5 +1,5 @@
 ifeq ($(WSL_DISTRO_NAME), Ubuntu)
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
 MATH = -O3 -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 
@@ -29,7 +29,7 @@ fclean:
 re: fclean all 
 else
 NAME = Cub3D
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror #-fsanitize=undefined,address -g
 MATH = -Oz -ffast-math
 MLX = -lmlx -framework OpenGL -framework AppKit
 

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 17:19:09 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 17:54:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void    check_dups(t_player *player, int argc, char const *argv[])
+void    check_dups(t_player *player, char const *argv[])
 {
     char *str = NULL;
     int s = 0;
@@ -371,7 +371,7 @@ char **parse_file(t_player *player, int argc, char const *argv[])
         if (fd == -1)
             exit_with_err(player->vars->collector, OPEN);
         check_errs(player, argc, argv);
-        check_dups(player, argc, argv);
+        check_dups(player, argv);
         i = get_elements(player, argv);
         map = get_map(player, argc, argv, i);
         check_map(player, map); 

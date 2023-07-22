@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 17:15:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/22 18:07:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,15 @@ char *get_texture(t_player *player, t_ray ray)
     return (s);
 }
 
+int	get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
+{
+	int color;
+	
+	color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel));
+	color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
+	return (color);
+}
+
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 {
     char *s = NULL;
@@ -107,8 +116,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
         if (start + i > 0 && start + i < HEIGHT)
         {
             tex_y = i * (BLOCK / w_heig);
-            color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel)); 
-            color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
+			color = get_color_from_tex(player, s, ray, tex_y);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
 		if (start + i >= HEIGHT)
