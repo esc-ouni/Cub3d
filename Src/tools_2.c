@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:48:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 18:08:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,21 @@ char *get_texture(t_player *player, t_ray ray)
     return (s);
 }
 
-unsigned int get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
+int get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
 {
+	int color;
+	char *tmp;
 
-
-	unsigned int color;
-	unsigned int *ar = (unsigned int *)(s + (tex_y * player->vars->lf->size_line) + (ray.tex_x * player->vars->lf->byte_pixel));
-	
-	
-	if (ar)
+	if (tex_y >= BLOCK || ray.tex_x >= BLOCK)
+		return (0);
+	tmp = (s + (tex_y * player->vars->lf->size_line) + (ray.tex_x * player->vars->lf->byte_pixel));
+	if (tmp)
 	{
-		color = *ar;
-		color = mlx_get_color_value(player->vars->mlx, *ar);
+		color = *(int *)tmp;
 		color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
 		return (color);
 	}
 	return (0);
-	
 }
 
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
@@ -114,20 +112,20 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     char *s = NULL;
     int i = 0;
     int tex_y = 0;
-    unsigned int color = 0;
+    int color = 0;
     float  w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * (BLOCK * 1.7);
     int start = HEIGHT/2 - w_heig/2;
     
 
     s = get_texture(player, ray);
 
-	player->t_img = p_img;
     while (i < w_heig)
     {
-        if (start + i > 0 && start + i < HEIGHT && ray.tex_x < BLOCK && tex_y < BLOCK)
+        if (start + i > 0 && start + i < HEIGHT)
         {
-            tex_y = i * (float)(BLOCK / w_heig);
+            tex_y = i * (BLOCK / w_heig);
 			color = get_color_from_tex(player, s, ray, tex_y);
+			player->t_img = p_img;
             my_mlx_pixel_put(player, x_index, start + i, color);
         }
 		if (start + i >= HEIGHT)
