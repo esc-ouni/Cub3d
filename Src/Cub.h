@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 18:37:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 19:13:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,8 @@ typedef struct s_ray
 	float		angle;
 	float		t1;
 	float		t2;
-	float		v_d_inter;
-	float		h_d_inter;
+	float		v_d;
+	float		h_d;
 	int			side;
 	int			tex_x;
 	int			tex_y;
@@ -203,8 +203,8 @@ typedef struct s_player
 	float		factor;
 	int			color;
 	void		**p;
-	t_vector	*vec2;
-	t_vector	*vec1;
+	t_vector	*v2;
+	t_vector	*v1;
 	t_ray		*ray;
 	t_vars		*v;
 	t_data		*t_img;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 18:56:20 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 19:20:17 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,15 @@ void updateAndRenderScene(t_player *plyr)
 
 //######################
 
-int darkenColor(int color, int amount)
+int	darkenColor(int color, int amount)
 {
-	int r = 0;
-	int g = 0;
-	int b = 0;
+	int	r;
+	int	g;
+	int	b;
 
+	r = 0;
+	g = 0;
+	b = 0;
 	b |= (unsigned char)color;
 	color >>= 8;
 	g |= (unsigned char)color;
@@ -245,20 +248,19 @@ void	update_scene(t_player *plyr)
 	ft_collectorclear(plyr->v->collector, TMP);
 }
 
-float  draw_ray(t_player *plyr, t_ray *ray)
+float	draw_ray(t_player *plyr, t_ray *ray)
 {
-	plyr->vec1 = find_vertical_iterset(plyr, ray, plyr->vec1);
-	plyr->vec2 = find_horizontal_iterset(plyr, ray, plyr->vec2);
-	ray->v_d_inter = sqrt(ft_pow(plyr->vec1->x - plyr->p_x) + ft_pow(plyr->vec1->y - plyr->p_y));
-	ray->h_d_inter = sqrt(ft_pow(plyr->vec2->x - plyr->p_x) + ft_pow(plyr->vec2->y - plyr->p_y));
-	if (ray->v_d_inter < ray->h_d_inter)
+	plyr->v1 = find_vertical_iterset(plyr, ray, plyr->v1);
+	plyr->v2 = find_horizontal_iterset(plyr, ray, plyr->v2);
+	if (ray->v_d < ray->h_d)
 	{
-		if ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) || (ray->angle >= 0 && ray->angle < M_PI / 2))
+		if ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) \
+		|| (ray->angle >= 0 && ray->angle < M_PI / 2))
 			ray->side = VERT_R;
 		else
 			ray->side = VERT_L;
-		ray->tex_x = (int)plyr->vec1->y % BLOCK;
-		ray->length = ray->v_d_inter;
+		ray->tex_x = (int)plyr->v1->y % BLOCK;
+		ray->length = ray->v_d;
 	}
 	else
 	{
@@ -266,17 +268,18 @@ float  draw_ray(t_player *plyr, t_ray *ray)
 			ray->side = HORZ_D;
 		else
 			ray->side = HORZ_U;
-		ray->tex_x = (int)plyr->vec2->x % BLOCK;
-		ray->length = ray->h_d_inter;
+		ray->tex_x = (int)plyr->v2->x % BLOCK;
+		ray->length = ray->h_d;
 	}
-	return 1;
+	return (1);
 }
 
-t_ray *cast_rays(t_player *plyr, t_ray *ray)
+t_ray	*cast_rays(t_player *plyr, t_ray *ray)
 {
-	int i = 0;
-	plyr->t_angle = up_degree(plyr->angle, -30);
+	int	i;
 
+	i = 0;
+	plyr->t_angle = up_degree(plyr->angle, -30);
 	while (i < WIDTH)
 	{
 		ray[i].angle = plyr->t_angle;
@@ -291,13 +294,15 @@ t_ray *cast_rays(t_player *plyr, t_ray *ray)
 
 int wall_hit_hup(t_player *plyr, int x, int y)
 {
-	int m_y = ((y)/BLOCK) - 1;
-	int m_x = ((x)/BLOCK);
+	int	m_y;
+	int	m_x;
 
+	m_x = ((x) / BLOCK);
+	m_y = ((y) / BLOCK) - 1;
 	if (m_x < 0|| m_y < 0)
-		return 1;
+		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
-		return 1;
+		return (1);
 	if (plyr->v->map[m_y][m_x] != '1')
 		return (0);
 	return (1);
@@ -305,13 +310,15 @@ int wall_hit_hup(t_player *plyr, int x, int y)
 
 int wall_hit_hdn(t_player *plyr, int x, int y)
 {
-	int m_y = ((y)/BLOCK);
-	int m_x = ((x)/BLOCK);
+	int	m_y;
+	int	m_x;
 
+	m_x = ((x) / BLOCK);
+	m_y = ((y) / BLOCK);
 	if (m_x < 0|| m_y < 0)
-		return 1;
+		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
-		return 1;
+		return (1);
 	if (plyr->v->map[m_y][m_x] != '1')
 		return (0);
 	return (1);
@@ -319,13 +326,15 @@ int wall_hit_hdn(t_player *plyr, int x, int y)
 
 int wall_hit_vrg(t_player *plyr, int x, int y)
 {
-	int m_y = ((y)/BLOCK);
-	int m_x = ((x)/BLOCK);
+	int	m_y;
+	int	m_x;
 
+	m_x = ((x) / BLOCK);
+	m_y = ((y) / BLOCK);
 	if (m_x < 0|| m_y < 0)
-		return 1;
+		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
-		return 1;
+		return (1);
 	if (plyr->v->map[m_y][m_x] != '1')
 		return (0);
 	return (1);
@@ -333,19 +342,21 @@ int wall_hit_vrg(t_player *plyr, int x, int y)
 
 int wall_hit_vlf(t_player *plyr, int x, int y)
 {
-	int m_y = ((y)/BLOCK);
-	int m_x = ((x)/BLOCK) - 1;
+	int	m_y;
+	int	m_x;
 
-	if (m_x < 0|| m_y < 0)
-		return 1;
+	m_y = ((y) / BLOCK);
+	m_x = ((x) / BLOCK) - 1;
+	if (m_x < 0 || m_y < 0)
+		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
-		return 1;
+		return (1);
 	if (plyr->v->map[m_y][m_x] != '1')
 		return (0);
 	return (1);
 }
 
-t_vector *h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
+t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dy = -BLOCK;
 	ray->dx = (BLOCK / ray->t2);
@@ -356,10 +367,10 @@ t_vector *h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 		vector->x += ray->dx;
 		vector->y += ray->dy;
 	}
-	return vector;
+	return (vector);
 }
 
-t_vector *h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
+t_vector	*h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dy = BLOCK;
 	ray->dx = (ray->dy / ray->t1);
@@ -370,7 +381,7 @@ t_vector *h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 		vector->y += ray->dy;
 		vector->x += ray->dx;
 	}
-	return vector;
+	return (vector);
 }
 
 t_vector *find_horizontal_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
@@ -379,7 +390,9 @@ t_vector *find_horizontal_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 		vector = h_up_iterset(plyr, ray, vector);
 	else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
 		vector = h_dn_iterset(plyr, ray, vector);
-	return vector;
+	ray->h_d = sqrt(ft_pow(plyr->v2->x - plyr->p_x) + \
+	ft_pow(plyr->v2->y - plyr->p_y));
+	return (vector);
 }
 
 t_vector	*h_rg_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
@@ -410,11 +423,14 @@ t_vector	*h_lf_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 	return (vector);
 }
 
-t_vector *find_vertical_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
+t_vector	*find_vertical_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
-	if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle <= 2 * (M_PI))) || (((ray->angle >= 0) && (ray->angle < (M_PI / 2)))))
+	if (((ray->angle > (3 * (M_PI / 2))) && (ray->angle <= 2 * (M_PI))) || \
+	(((ray->angle >= 0) && (ray->angle < (M_PI / 2)))))
 		vector = h_rg_iterset(plyr, ray, vector);
 	else if ((ray->angle > (M_PI / 2)) || (ray->angle < 3 * (M_PI / 2)))
 		vector = h_lf_iterset(plyr, ray, vector);
+	ray->v_d = sqrt(ft_pow(plyr->v1->x - plyr->p_x) + \
+	ft_pow(plyr->v1->y - plyr->p_y));
 	return (vector);
 }

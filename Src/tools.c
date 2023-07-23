@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 18:58:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 19:13:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,10 @@ t_player *init(int argc, char const *argv[])
 	plyr->p = h_malloc(&collector, 3 * sizeof(void *), plyr->p, NTMP);
 	plyr->p[0] = NULL;
 	plyr->t_img = NULL;
-	plyr->vec2 = NULL;
- 	plyr->vec2 = h_malloc(&collector, sizeof(t_vector), plyr->vec2, NTMP);
-	plyr->vec1 = NULL;
- 	plyr->vec1 = h_malloc(&collector, sizeof(t_vector), plyr->vec1, NTMP);
+	plyr->v2 = NULL;
+ 	plyr->v2 = h_malloc(&collector, sizeof(t_vector), plyr->v2, NTMP);
+	plyr->v1 = NULL;
+ 	plyr->v1 = h_malloc(&collector, sizeof(t_vector), plyr->v1, NTMP);
 	plyr->ray = NULL;
 	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * WIDTH) + 1, plyr->ray, NTMP);
 	return (plyr);
