@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 19:13:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 19:26:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ int			ft_atoi(t_collector **collector, const char *str);
 void		update_degree(t_player *plyr, float  deg_angle);
 void		destroy_prev_imges(t_player *plyr);
 void		destroy_fix_imges(t_player *plyr);
-int			darkenColor(int color, int amount);
+int			darken_color(int color, int amount);
 float		ft_pow(float n);
 float		ft_abs(float n);
 float		trigo(float angle, t_flag flag);
