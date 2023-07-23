@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:22:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:48:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,14 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 
     s = get_texture(player, ray);
 
+	player->t_img = p_img;
     while (i < w_heig)
     {
         if (start + i > 0 && start + i < HEIGHT && ray.tex_x < BLOCK && tex_y < BLOCK)
         {
             tex_y = i * (float)(BLOCK / w_heig);
 			color = get_color_from_tex(player, s, ray, tex_y);
-            my_mlx_pixel_put(player, p_img, x_index, start + i, color);
+            my_mlx_pixel_put(player, x_index, start + i, color);
         }
 		if (start + i >= HEIGHT)
 			return ;
@@ -150,11 +151,12 @@ t_data *ft_transparency(t_player *player, t_data *p_img, int width, int height)
 {
     int i = 0;
     int j = 0;
-    while (i < width)
+	player->t_img = p_img;
+	while (i < width)
     {
         while (j < height)
         {
-            my_mlx_pixel_put(player, p_img, i, j, TRANS);
+            my_mlx_pixel_put(player, i, j, TRANS);
             j++;
         }
         i++;
@@ -199,8 +201,8 @@ void update_params(t_player *player)
         update_degree(player, -R_AN);
     else if (player->rl == -1)
         update_degree(player, R_AN);
-    else
-        return ; 
+    // else
+    //     return ; 
     update_scene(player);   
 }
 

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:25:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:52:04 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,12 @@ void	draw_wall(t_player *player, t_data *mapp, int x, int y)
 	i = 0;
 	x *= M_BLOCK;
 	y *= M_BLOCK;
+	player->t_img = mapp;
 	while (i < M_BLOCK)
 	{
 		while (j < M_BLOCK)
 		{
-			my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
+			my_mlx_pixel_put(player, x + i, y + j, M_BLACK);
 			j++;
 		}
 		i++;
@@ -126,11 +127,12 @@ void	draw_nwall(t_player *player, t_data *mapp, int x, int y)
 	i = 0;
 	x *= M_BLOCK;
 	y *= M_BLOCK;
+	player->t_img = mapp;
 	while (i < M_BLOCK)
 	{
 		while (j < M_BLOCK)
 		{
-			my_mlx_pixel_put(player, mapp, x + i, y + j, M_WHITE);
+			my_mlx_pixel_put(player, x + i, y + j, M_WHITE);
 			// if(j == (M_BLOCK - 1)|| i == 0)
 			// 	my_mlx_pixel_put(player, mapp, x + i, y + j, M_BLACK);
 			j++;
@@ -160,7 +162,6 @@ int	mouse_movement(int x, int y, t_player *player)
 			last_pos = x;
 		}
 	}
-	update_scene(player);
 	return (0);
 }
 
@@ -177,12 +178,13 @@ t_data	*draw_cf(t_player *player)
 	ix = 0;
 	iy = 0;
 	mapp = new_image(player->vars, WIDTH, HEIGHT, NTMP);
+	player->t_img = mapp;
 	while (ix < WIDTH)
 	{
 		color = player->vars->c_color;
 		while (iy < HEIGHT)
 		{
-			my_mlx_pixel_put(player, mapp, ix, iy, color);
+			my_mlx_pixel_put(player, ix, iy, color);
 			if (iy == HEIGHT/2)
 				color = player->vars->f_color;
 			iy++;

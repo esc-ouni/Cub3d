@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:18:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:40:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ typedef struct s_player
 	t_vector	*vec1;
 	t_ray		*ray;
 	t_vars		*vars;
+	t_data		*t_img;
 }		t_player;
 
 int			hokking(t_player *player);
@@ -228,7 +229,6 @@ void		destroy_prev_imges(t_player *player);
 void		destroy_fix_imges(t_player *player);
 int			darkenColor(int color, int amount);
 float		ft_pow(float n);
-void		draw_point(t_player *player, t_data *img, int x, int y, int color);
 float		ft_abs(float n);
 float		trigo(float angle, t_flag flag);
 float		rad_to_deg(float angle);
@@ -259,13 +259,14 @@ void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);
 void		tmp_alloc(t_collector **collector, size_t s, void **p);
-void		my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color);
 void		ft_collectorclear(t_collector **collector, t_flag flag);
 void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char		**parse_file(t_player *player, int argc, char const *argv[]);
 t_data		*draw_player(t_player *player, t_data *p_img);
 
-void		draw_line(t_player *player, t_data *p_img, int color, int x2, int y2);
+void		draw_point(t_player *player, int x, int y, int color);
+void		my_mlx_pixel_put(t_player *player, int x, int y, int color);
+void		draw_line(t_player *player, int color, int x2, int y2);
 
 # endif

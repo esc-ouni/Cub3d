@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:31:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:46:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void rotate_vector(t_vector *direction, float  angle)
     direction->y = new_y;
 }
 
-void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_player *player, int x, int y, int color)
 {
 	char *tmp;
 
-	tmp = data->img_addr;
+	tmp = player->t_img->img_addr;
 	if(!tmp)
 	    exit_with_err(player->vars->collector, MLX);
-	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
+	tmp = tmp + (y * player->t_img->size_line) + ((player->t_img->byte_pixel) * x);
 	if (tmp)
 		*(int *)tmp = color;
 }
@@ -135,6 +135,7 @@ t_player *init(int argc, char const *argv[])
 	player->p = NULL;
 	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
 	player->p[0] = NULL;
+	player->t_img = NULL;
 	player->vec2 = NULL;
  	player->vec2 = h_malloc(&collector, sizeof(t_vector), player->vec2, NTMP);
 	player->vec1 = NULL;
@@ -146,8 +147,9 @@ t_player *init(int argc, char const *argv[])
 
 t_data 	*draw_player(t_player *player, t_data *p_img)
 {
-	draw_point(player, p_img, player->p_x/player->factor, player->p_y/player->factor, BLUE);
-	draw_line(player, p_img, BLUE, player->p_x + ((BLOCK/0.9) * trigo(player->angle, COS)), player->p_y + ((BLOCK/0.9) * trigo(player->angle, SIN)));
+	player->t_img = p_img;
+	draw_point(player, player->p_x/player->factor, player->p_y/player->factor, BLUE);
+	draw_line(player, BLUE, player->p_x + ((BLOCK/0.9) * trigo(player->angle, COS)), player->p_y + ((BLOCK/0.9) * trigo(player->angle, SIN)));
 	return (p_img);
 }
 
@@ -184,7 +186,7 @@ void check_collision(t_player *player, float x, float y)
     }
 }
 
-void draw_point(t_player *player, t_data *img, int x, int y, int color)
+void draw_point(t_player *player, int x, int y, int color)
 {
     int i, j;
 
@@ -196,7 +198,7 @@ void draw_point(t_player *player, t_data *img, int x, int y, int color)
         {
             while(j < 2)
             {
-				my_mlx_pixel_put(player, img, x + i, y + j, color);
+				my_mlx_pixel_put(player, x + i, y + j, color);
                 j++;
             }
             i++;
