@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 19:13:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 11:46:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,68 +30,36 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-// void	check_dups2(t_player *player, char *str, int *s, int *n)
-// {
-	
-// }
-
-// void	check_dups3(t_player *player, char *str, int *w, int *e)
-// {
-	
-// }
-
-// void	check_dups4(t_player *player, char *str, int *c, int *f)
-// {
-	
-// }
-
-int	ft_strt(t_player *player, char const *argv[], t_int *set)
+void    check_dups(t_player *player, char const *argv[])
 {
-    int 	fd;
-	t_int	*get;
+    char *str = NULL;
+    int s = 0;
+    int n = 0;
+    int w = 0;
+    int e = 0;
+    int c = 0;
+    int f = 0;
+    char *first_part = NULL;
+    int fd;
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(player->vars->collector, OPEN);
-	get = h_malloc(player->vars->collector, sizeof(t_int), set, TMP);
-
-	get->n = 0;
-	get->e = 0;
-	get->s = 0;
-	get->w = 0;
-	get->c = 0;
-	get->f = 0;
-	set = get;
-	return (fd);
-}
-
-void    check_dups(t_player *player, char const *argv[])
-{
-    int 	fd;
-    char 	*str;
-	t_int	*set;
-    char 	*first_part;
-
-	str = NULL;
-	set = NULL;
-	set = h_malloc(player->vars->collector, sizeof(t_int *), set, TMP);
-	fd = ft_strt(player, argv, set);
-	first_part = NULL;
     while((str = get_next_line(fd)))
     {
         first_part = ft_msplit(player->vars, str, ' ', TMP)[0];
         if (first_part && !ft_strncmp(first_part, "NO", ft_strlen(first_part)))
-            set->n+=1;
+            n++;
         else if (first_part && !ft_strncmp(first_part, "SO", ft_strlen(first_part)))
-            set->s+=1;
+            s++;
         else if (first_part && !ft_strncmp(first_part, "WE", ft_strlen(first_part)))
-            set->w+=1;
+            w++;
         else if (first_part && !ft_strncmp(first_part, "EA", ft_strlen(first_part)))
-            set->e+=1;
+            e++;
         else if (first_part && !ft_strncmp(first_part, "F", ft_strlen(first_part)))
-            set->f+=1;
+            f++;
         else if (first_part && !ft_strncmp(first_part, "C", ft_strlen(first_part)))
-            set->c+=1;
+            c++;
         else if (first_part && !ft_strnstr(str, "1", ft_strlen(str)) && !ft_strnstr(str, "0", ft_strlen(str)))
         {
             free(str);
@@ -101,8 +69,7 @@ void    check_dups(t_player *player, char const *argv[])
         free(str);
         str = NULL;
     }
-	printf("%d, %d, %d, %d\n", set->n, set->s, set->e, set->w);
-    if (set->n != 1 || set->e != 1 || set->w != 1 || set->s != 1 || set->f != 1 || set->c != 1)
+    if (n != 1 || e != 1 || w != 1 || s != 1 || f != 1 || c != 1)
         exit_with_err(player->vars->collector, PARSE);
 }
 
@@ -140,30 +107,35 @@ int     point_surronded(t_player *player, char **map, int y, int x)
     return (1);
 }
 
-void    check_mapa(t_player *player, char **map)
+void void_check_middle(t_player *player, char **map)
 {
-    int y = 0;
-    int x = 0;
+    int y;
+    int x;
 
-
-
-    //check middle
+    y = 0;
+    x = 0;
     while(map[y])
     {
         if ((map[y][0] != '1' && map[y][0] != ' ') || (map[y][ft_strlen(map[y]) - 1] != '1' && map[y][ft_strlen(map[y]) - 1] != ' '))
             exit_with_err(player->vars->collector, PARSE);
         y++;
     }
-    //check upper
+}
+
+void    check_mapa(t_player *player, char **map)
+{
+    int y;
+    int x;
+
     y = 0;
     x = 0;
+    void_check_middle(player, map);
     while(map[y][x])
     {
         if (map[y][x] != '1' && map[y][x] != ' ')
             exit_with_err(player->vars->collector, PARSE);
         x++;
     }
-    //check bottom
     while (map[y])
         y++;
     y--;
@@ -176,25 +148,23 @@ void    check_mapa(t_player *player, char **map)
     }
 }
 
-void    check_mapb(t_player *player, char **map)
+void	check_mapb_t(t_player *player, char **map, int *chr, int *c)
 {
-    int y = 0;
-    int x = 0;
-    int c = 0;
-    int chr = 0;
-    float  p_y = 0;
-    float  p_x = 0;
-
+    int y;
+    int x;
+	
+	y = 0;
+    x = 0;
     while (map[y])
     {
         while(map[y][x])
         {
             if (map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
             {
-                p_x = (float )(x * BLOCK);
-                p_y = (float )(y * BLOCK);
-                chr = map[y][x];
-                c++;
+                player->p_x = (float )(x * BLOCK) + BLOCK/2;
+                player->p_y = (float )(y * BLOCK) + BLOCK/2;
+                (*chr) = map[y][x];
+                (*c)++;
             }
             else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != ' ')
                 exit_with_err(player->vars->collector, PARSE);
@@ -203,10 +173,21 @@ void    check_mapb(t_player *player, char **map)
         y++;
         x = 0;
     }
+}
+
+
+void    check_mapb(t_player *player, char **map)
+{
+
+    int c;
+    int chr;
+
+    chr = 0;
+    c = 0;
+
+	check_mapb_t(player, map, &chr, &c);
     if (c != 1)
         exit_with_err(player->vars->collector, PARSE);
-    player->p_x = p_x + BLOCK/2;
-	player->p_y = p_y + BLOCK/2;
     if (chr == 'N')
 	    player->angle = 3 * (M_PI/2);
     else if (chr == 'E')
@@ -239,26 +220,17 @@ void    check_map(t_player *player, char **map)
     }
 }
 
-char **get_map(t_player *player, int argc, char const *argv[], int t)
+char    **get_map_cont(t_player *player, int fd, int t, char **map)
 {
-    (void)argc;
-
-	int	    fd;
-	char    **map;
-	char    *s;
-	int     i;
-	int     i2;
     int     itsmap;
+	int     i2;
+	int     i;
+	char    *s;
 
-    itsmap = 0;
 	i = 0;
 	i2 = 0;
-	fd = 0;
-	map = NULL;  
-    map = h_malloc(player->vars->collector, (count_alloc_size(player->vars->collector, argv, fd) * sizeof(char *)), map, NTMP);
-    fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
+	s = NULL;
+    itsmap = 0;
     while((s = get_next_line(fd))) //not appopriate
     {
         if(i == t)
@@ -273,7 +245,22 @@ char **get_map(t_player *player, int argc, char const *argv[], int t)
         i++;
     }
     map[i2] = NULL;
-    return (map);
+    return (map);	
+}
+
+char **get_map(t_player *player, char const *argv[], int t)
+{
+	int	    fd;
+	char    **map;
+
+	fd = 0;
+	map = NULL;  
+    map = h_malloc(player->vars->collector, (count_alloc_size(player->vars->collector, argv, fd) * sizeof(char *)), map, NTMP);
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        exit_with_err(player->vars->collector, OPEN);
+
+	return (get_map_cont(player, fd, t, map));	
 }
 
 void    check_vergs(t_player *player, char *s)
@@ -312,16 +299,9 @@ int extract_color(t_player *player, char *color)
     return (color_c);
 }
 
-int     get_elem(t_player *player, char const *argv[])
+int get_map_indx(t_player *player, int fd, int i, char *s)
 {
-    char *s;
-    int fd;
-    int i = 0;;
-
-    fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
-    while((s = get_next_line(fd))) //not appopriate
+    while((s = get_next_line(fd)))
     {
         if (ft_strnstr(s, "NO", 2))
             player->vars->up_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
@@ -344,7 +324,22 @@ int     get_elem(t_player *player, char const *argv[])
         i++;
         s = NULL;
     }
-    return (0);
+	return (0);
+}
+
+int     get_elem(t_player *player, char const *argv[])
+{
+    char *s;
+    int fd;
+    int i;
+    
+	s = NULL;
+	i = 0;
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        exit_with_err(player->vars->collector, OPEN);
+	i = get_map_indx(player, fd, i, s);
+    return (i);
 }
 
 void    check_xpm_size(t_player *player, char *file_dstination)
@@ -406,7 +401,7 @@ char **parse_file(t_player *player, int argc, char const *argv[])
         check_errs(player, argc, argv);
         check_dups(player, argv);
         i = get_elements(player, argv);
-        map = get_map(player, argc, argv, i);
+        map = get_map(player, argv, i);
         check_map(player, map); 
         return (map);
 	}
