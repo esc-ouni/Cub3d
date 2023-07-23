@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:21 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 16:08:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 18:26:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char const *argv[])
 {
-	t_player	*player;
+	t_player	*plyr;
 
-	player = init(argc, argv);
-	update_scene(player);
-	mlx_loop_hook(player->vars->mlx, hokking, player);
-	mlx_loop(player->vars->mlx);
+	plyr = init(argc, argv);
+	update_scene(plyr);
+	mlx_loop_hook(plyr->v->mlx, hokking, plyr);
+	mlx_loop(plyr->v->mlx);
 	return (0);
 }

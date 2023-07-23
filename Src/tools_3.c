@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 12:33:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 18:26:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
-void duppp(t_player *player, int fd, t_varr  *varr, char *str)
+void duppp(t_player *plyr, int fd, t_varr  *varr, char *str)
 {
     while((str = get_next_line(fd)))
     {
-        varr->first_part = ft_msplit(player->vars, str, ' ', TMP)[0];
+        varr->first_part = ft_msplit(plyr->v, str, ' ', TMP)[0];
         if (varr->first_part && !ft_strncmp(varr->first_part, "NO", ft_strlen(varr->first_part)))
             (varr->n)++;
         else if (varr->first_part && !ft_strncmp(varr->first_part, "SO", ft_strlen(varr->first_part)))
@@ -52,10 +52,10 @@ void duppp(t_player *player, int fd, t_varr  *varr, char *str)
         free(str);
     }
 	if (varr->k)
-		exit_with_err(player->vars->collector, PARSE);
+		exit_with_err(plyr->v->collector, PARSE);
 }
 
-void    check_dups(t_player *player, char const *argv[])
+void    check_dups(t_player *plyr, char const *argv[])
 {
 	t_varr  *varr;
     char 	*str;
@@ -64,9 +64,9 @@ void    check_dups(t_player *player, char const *argv[])
 	str = NULL;
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
+        exit_with_err(plyr->v->collector, OPEN);
 	varr = NULL;
-	varr = h_malloc(player->vars->collector, sizeof(t_varr), varr, TMP);
+	varr = h_malloc(plyr->v->collector, sizeof(t_varr), varr, TMP);
 	varr->c = 0;
 	varr->f = 0;
 	varr->n = 0;
@@ -75,19 +75,19 @@ void    check_dups(t_player *player, char const *argv[])
 	varr->w = 0;
 	varr->k = 0;
     varr->first_part = NULL;
-	duppp(player, fd, varr, str);
+	duppp(plyr, fd, varr, str);
     if (varr->n != 1 || varr->e != 1 || varr->w != 1 || varr->s != 1 || varr->f != 1 || varr->c != 1)
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 }
 
-void    check_errs(t_player *player, int argc, char const *argv[])
+void    check_errs(t_player *plyr, int argc, char const *argv[])
 {
     (void)argc;
     if(ft_strlen(strstr(argv[1], ".cub")) != 4)
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 }
 
-int     point_surronded(t_player *player, char **map, int y, int x)
+int     point_surronded(t_player *plyr, char **map, int y, int x)
 {
     int x_m = 0;
     int y_m = 0;
@@ -98,23 +98,23 @@ int     point_surronded(t_player *player, char **map, int y, int x)
     x_m = ft_strlen(map[y]);
 
     if ((x - 1) < 0 || (x + 1) > x_m)
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 
     if (map[y][x-1] == ' ' || map[y][x+1] == ' ')    
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 
     if ((y - 1) < 0 || (y + 1) > y_m)
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 
     if (x >= ft_strlen(map[y-1]) || x >= ft_strlen(map[y+1]))
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 
     if (map[y-1][x] == ' ' || map[y+1][x] == ' ')    
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
     return (1);
 }
 
-void void_check_middle(t_player *player, char **map)
+void void_check_middle(t_player *plyr, char **map)
 {
     int y;
     int x;
@@ -124,23 +124,23 @@ void void_check_middle(t_player *player, char **map)
     while(map[y])
     {
         if ((map[y][0] != '1' && map[y][0] != ' ') || (map[y][ft_strlen(map[y]) - 1] != '1' && map[y][ft_strlen(map[y]) - 1] != ' '))
-            exit_with_err(player->vars->collector, PARSE);
+            exit_with_err(plyr->v->collector, PARSE);
         y++;
     }
 }
 
-void    check_mapa(t_player *player, char **map)
+void    check_mapa(t_player *plyr, char **map)
 {
     int y;
     int x;
 
     y = 0;
     x = 0;
-    void_check_middle(player, map);
+    void_check_middle(plyr, map);
     while(map[y][x])
     {
         if (map[y][x] != '1' && map[y][x] != ' ')
-            exit_with_err(player->vars->collector, PARSE);
+            exit_with_err(plyr->v->collector, PARSE);
         x++;
     }
     while (map[y])
@@ -150,12 +150,12 @@ void    check_mapa(t_player *player, char **map)
     while(map[y][x])
     {
         if (map[y][x] != '1' && map[y][x] != ' ')
-            exit_with_err(player->vars->collector, PARSE);
+            exit_with_err(plyr->v->collector, PARSE);
         x++;
     }
 }
 
-void	check_mapb_t(t_player *player, char **map, int *chr, int *c)
+void	check_mapb_t(t_player *plyr, char **map, int *chr, int *c)
 {
     int y;
     int x;
@@ -168,13 +168,13 @@ void	check_mapb_t(t_player *player, char **map, int *chr, int *c)
         {
             if (map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
             {
-                player->p_x = (float )(x * BLOCK) + BLOCK/2;
-                player->p_y = (float )(y * BLOCK) + BLOCK/2;
+                plyr->p_x = (float )(x * BLOCK) + BLOCK/2;
+                plyr->p_y = (float )(y * BLOCK) + BLOCK/2;
                 (*chr) = map[y][x];
                 (*c)++;
             }
             else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != ' ')
-                exit_with_err(player->vars->collector, PARSE);
+                exit_with_err(plyr->v->collector, PARSE);
             x++;
         }
         y++;
@@ -183,7 +183,7 @@ void	check_mapb_t(t_player *player, char **map, int *chr, int *c)
 }
 
 
-void    check_mapb(t_player *player, char **map)
+void    check_mapb(t_player *plyr, char **map)
 {
 
     int c;
@@ -192,34 +192,34 @@ void    check_mapb(t_player *player, char **map)
     chr = 0;
     c = 0;
 
-	check_mapb_t(player, map, &chr, &c);
+	check_mapb_t(plyr, map, &chr, &c);
     if (c != 1)
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
     if (chr == 'N')
-	    player->angle = 3 * (M_PI/2);
+	    plyr->angle = 3 * (M_PI/2);
     else if (chr == 'E')
-	    player->angle = 0;
+	    plyr->angle = 0;
     else if (chr == 'S')
-	    player->angle = M_PI/2;
+	    plyr->angle = M_PI/2;
     else if (chr == 'W')
-	    player->angle = M_PI;
+	    plyr->angle = M_PI;
 }
 
-void    check_map(t_player *player, char **map)
+void    check_map(t_player *plyr, char **map)
 {
     int y = 0;
     int x = 0;
 
-    check_mapa(player, map);
-    check_mapb(player, map);
+    check_mapa(plyr, map);
+    check_mapb(plyr, map);
     while (map[y])
     {
         while(map[y][x])
         {
             if (map[y][x] == '0')
-                point_surronded(player, map, y, x);
+                point_surronded(plyr, map, y, x);
             else if ((map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W'))
-                point_surronded(player, map, y, x);
+                point_surronded(plyr, map, y, x);
             x++;  
         }
         y++;
@@ -227,7 +227,7 @@ void    check_map(t_player *player, char **map)
     }
 }
 
-char    **get_map_cont(t_player *player, int fd, int t, char **map)
+char    **get_map_cont(t_player *plyr, int fd, int t, char **map)
 {
     int     itsmap;
 	int     i2;
@@ -244,7 +244,7 @@ char    **get_map_cont(t_player *player, int fd, int t, char **map)
             itsmap = 1;
         if (itsmap)
         {
-            map[i2] = ft_mstrdup(player->vars->collector, s, NTMP);
+            map[i2] = ft_mstrdup(plyr->v->collector, s, NTMP);
             i2++;
         }
         free(s);
@@ -255,73 +255,73 @@ char    **get_map_cont(t_player *player, int fd, int t, char **map)
     return (map);	
 }
 
-char **get_map(t_player *player, char const *argv[], int t)
+char **get_map(t_player *plyr, char const *argv[], int t)
 {
 	int	    fd;
 	char    **map;
 
 	fd = 0;
 	map = NULL;  
-    map = h_malloc(player->vars->collector, (count_alloc_size(player->vars->collector, argv, fd) * sizeof(char *)), map, NTMP);
+    map = h_malloc(plyr->v->collector, (count_alloc_size(plyr->v->collector, argv, fd) * sizeof(char *)), map, NTMP);
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
+        exit_with_err(plyr->v->collector, OPEN);
 
-	return (get_map_cont(player, fd, t, map));	
+	return (get_map_cont(plyr, fd, t, map));	
 }
 
-void    check_vergs(t_player *player, char *s)
+void    check_vergs(t_player *plyr, char *s)
 {
     if (!ft_strchr(s, ','))
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
     else if (ft_strchr(ft_strchr(ft_strchr(s, ',')+1, ',')+1, ','))
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
     else if (ft_strchr(ft_strchr(s, ',')+1, ','))
         return ;
     else
-        exit_with_err(player->vars->collector, PARSE);
+        exit_with_err(plyr->v->collector, PARSE);
 }
 
-int extract_color(t_player *player, char *color)
+int extract_color(t_player *plyr, char *color)
 {
     int i = 0;
     char **s;
     int color_c;
 
     color_c = 0;
-    color = ft_mstrtrim(player->vars, color, " ", TMP);
-    check_vergs(player, color);
-    s = ft_msplit(player->vars, color, ',', TMP);
+    color = ft_mstrtrim(plyr->v, color, " ", TMP);
+    check_vergs(plyr, color);
+    s = ft_msplit(plyr->v, color, ',', TMP);
     while (s[i])
         i++;
     if (i != 3)
-        exit_with_err(player->vars->collector, PARSE);
-    color_c = ft_atoi(player->vars->collector, ft_mstrtrim(player->vars, *s, " ", TMP));
+        exit_with_err(plyr->v->collector, PARSE);
+    color_c = ft_atoi(plyr->v->collector, ft_mstrtrim(plyr->v, *s, " ", TMP));
     color_c <<= 8;
     s++;
-    color_c |= ft_atoi(player->vars->collector, ft_mstrtrim(player->vars, *s, " ", TMP));
+    color_c |= ft_atoi(plyr->v->collector, ft_mstrtrim(plyr->v, *s, " ", TMP));
     color_c <<= 8;
     s++;
-    color_c |= ft_atoi(player->vars->collector, ft_mstrtrim(player->vars, *s, " ", TMP));
+    color_c |= ft_atoi(plyr->v->collector, ft_mstrtrim(plyr->v, *s, " ", TMP));
     return (color_c);
 }
 
-int get_map_indx(t_player *player, int fd, int i, char *s)
+int get_map_indx(t_player *plyr, int fd, int i, char *s)
 {
     while((s = get_next_line(fd)))
     {
         if (ft_strnstr(s, "NO", 2))
-            player->vars->up_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
+            plyr->v->up_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
         else if (ft_strnstr(s, "SO", 2))
-            player->vars->dn_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
+            plyr->v->dn_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
         else if (ft_strnstr(s, "WE", 2))
-            player->vars->rg_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
+            plyr->v->rg_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
         else if (ft_strnstr(s, "EA", 2))
-            player->vars->lf_c = ft_mstrdup(player->vars->collector, ft_mstrtrim(player->vars, s+2, " ", TMP), TMP);
+            plyr->v->lf_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
         else if (ft_strnstr(s, "F", 1))
-            player->vars->f_color = extract_color(player, ft_mstrtrim(player->vars, s+1, " ", TMP));
+            plyr->v->f_color = extract_color(plyr, ft_mstrtrim(plyr->v, s+1, " ", TMP));
         else if (ft_strnstr(s, "C", 1))
-            player->vars->c_color = extract_color(player, ft_mstrtrim(player->vars, s+1, " ", TMP));
+            plyr->v->c_color = extract_color(plyr, ft_mstrtrim(plyr->v, s+1, " ", TMP));
         else if (ft_strnstr(s, "1", ft_strlen(s)))
         {
             free(s);
@@ -334,7 +334,7 @@ int get_map_indx(t_player *player, int fd, int i, char *s)
 	return (0);
 }
 
-int     get_elem(t_player *player, char const *argv[])
+int     get_elem(t_player *plyr, char const *argv[])
 {
     char *s;
     int fd;
@@ -344,12 +344,12 @@ int     get_elem(t_player *player, char const *argv[])
 	i = 0;
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
-	i = get_map_indx(player, fd, i, s);
+        exit_with_err(plyr->v->collector, OPEN);
+	i = get_map_indx(plyr, fd, i, s);
     return (i);
 }
 
-void    check_xpm_size(t_player *player, char *file_dstination)
+void    check_xpm_size(t_player *plyr, char *file_dstination)
 {
     char **sp = NULL;
     char *s = NULL;
@@ -357,12 +357,12 @@ void    check_xpm_size(t_player *player, char *file_dstination)
 
     fd = open(file_dstination, O_RDONLY);
     if (fd == -1)
-        exit_with_err(player->vars->collector, OPEN);
+        exit_with_err(plyr->v->collector, OPEN);
     while ((s = get_next_line(fd)))
     {
         if (ft_strnstr(s, "\"",1))
         {
-            sp = ft_msplit(player->vars, s+1, ' ', TMP);
+            sp = ft_msplit(plyr->v, s+1, ' ', TMP);
             free(s);
             break;
         }
@@ -372,27 +372,27 @@ void    check_xpm_size(t_player *player, char *file_dstination)
     if (!strcmp(sp[0], "1000") && !strcmp(sp[1], "1000"))
         return ;
     else
-		exit_with_err(player->vars->collector, MAP);
+		exit_with_err(plyr->v->collector, MAP);
 }
 
-int    get_elements(t_player *player, char const *argv[])
+int    get_elements(t_player *plyr, char const *argv[])
 {
     int i;
     
     i = 0;
-    i = get_elem(player, argv);
-	player->vars->up = new_image_from_xpm(player, player->vars->up_c);
-    check_xpm_size(player, player->vars->up_c);
-	player->vars->dn = new_image_from_xpm(player, player->vars->dn_c);
-    check_xpm_size(player, player->vars->dn_c);
-	player->vars->lf = new_image_from_xpm(player, player->vars->lf_c);
-    check_xpm_size(player, player->vars->lf_c);
-	player->vars->rg = new_image_from_xpm(player, player->vars->rg_c);
-    check_xpm_size(player, player->vars->rg_c);
+    i = get_elem(plyr, argv);
+	plyr->v->up = new_image_from_xpm(plyr, plyr->v->up_c);
+    check_xpm_size(plyr, plyr->v->up_c);
+	plyr->v->dn = new_image_from_xpm(plyr, plyr->v->dn_c);
+    check_xpm_size(plyr, plyr->v->dn_c);
+	plyr->v->lf = new_image_from_xpm(plyr, plyr->v->lf_c);
+    check_xpm_size(plyr, plyr->v->lf_c);
+	plyr->v->rg = new_image_from_xpm(plyr, plyr->v->rg_c);
+    check_xpm_size(plyr, plyr->v->rg_c);
     return (i);
 }
 
-char **parse_file(t_player *player, int argc, char const *argv[])
+char **parse_file(t_player *plyr, int argc, char const *argv[])
 {
     char **map;
     int fd;
@@ -404,15 +404,15 @@ char **parse_file(t_player *player, int argc, char const *argv[])
 	{
         fd = open(argv[1], O_RDONLY);
         if (fd == -1)
-            exit_with_err(player->vars->collector, OPEN);
-        check_errs(player, argc, argv);
-        check_dups(player, argv);
-        i = get_elements(player, argv);
-        map = get_map(player, argv, i);
-        check_map(player, map); 
+            exit_with_err(plyr->v->collector, OPEN);
+        check_errs(plyr, argc, argv);
+        check_dups(plyr, argv);
+        i = get_elements(plyr, argv);
+        map = get_map(plyr, argv, i);
+        check_map(plyr, map); 
         return (map);
 	}
-    exit_with_err(player->vars->collector, ARGS);
+    exit_with_err(plyr->v->collector, ARGS);
     return (NULL);
 }
 

@@ -6,17 +6,17 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:46:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 18:58:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-int ft_ext(t_player *player)
+int ft_ext(t_player *plyr)
 {
-    destroy_prev_imges(player);
-	destroy_fix_imges(player);
-	ft_collectorclear(player->vars->collector, ALL);
+    destroy_prev_imges(plyr);
+	destroy_fix_imges(plyr);
+	ft_collectorclear(plyr->v->collector, ALL);
 	exit(0);
 }
 
@@ -45,14 +45,14 @@ void rotate_vector(t_vector *direction, float  angle)
     direction->y = new_y;
 }
 
-void	my_mlx_pixel_put(t_player *player, int x, int y, int color)
+void	my_mlx_pixel_put(t_player *plyr, int x, int y, int color)
 {
 	char *tmp;
 
-	tmp = player->t_img->img_addr;
+	tmp = plyr->t_img->img_addr;
 	if(!tmp)
-	    exit_with_err(player->vars->collector, MLX);
-	tmp = tmp + (y * player->t_img->size_line) + ((player->t_img->byte_pixel) * x);
+	    exit_with_err(plyr->v->collector, MLX);
+	tmp = tmp + (y * plyr->t_img->size_line) + ((plyr->t_img->byte_pixel) * x);
 	if (tmp)
 		*(int *)tmp = color;
 }
@@ -102,13 +102,13 @@ t_player *init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
 	t_vars 				*vars;
-	t_player 			*player;
+	t_player 			*plyr;
 
 	
 	collector = NULL;
-	player = NULL;
+	plyr = NULL;
 	vars = NULL;
-	player = h_malloc(&collector, sizeof(t_player), vars, NTMP);
+	plyr = h_malloc(&collector, sizeof(t_player), vars, NTMP);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
 	vars->collector = &collector;
@@ -116,54 +116,54 @@ t_player *init(int argc, char const *argv[])
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub3D");
 	if(!vars->mlx || !vars->win)
 		exit_with_err(&collector, MLX);
-	player->vars = vars;
+	plyr->v = vars;
 	vars->dn_c = NULL;
 	vars->up_c = NULL;
 	vars->lf_c = NULL;
 	vars->rg_c = NULL;
 	vars->c_color = 0;
     vars->f_color = 0;
-	player->angle = 0;
-    vars->map = parse_file(player, argc, argv);
-	player->color = 0;
-	player->vars->fix_img = draw_cf(player);
-	player->vars->m_fix_img = draw_2d_map(player);
-	player->factor = BLOCK / M_BLOCK;
-	player->m = 0;
-    player->f_angle = 60.0/WIDTH;
-	player->mv_sp = (BLOCK/7);
-	player->p = NULL;
-	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
-	player->p[0] = NULL;
-	player->t_img = NULL;
-	player->vec2 = NULL;
- 	player->vec2 = h_malloc(&collector, sizeof(t_vector), player->vec2, NTMP);
-	player->vec1 = NULL;
- 	player->vec1 = h_malloc(&collector, sizeof(t_vector), player->vec1, NTMP);
-	player->ray = NULL;
-	player->ray = h_malloc(player->vars->collector, (sizeof(t_ray) * WIDTH) + 1, player->ray, NTMP);
-	return (player);
+	plyr->angle = 0;
+    vars->map = parse_file(plyr, argc, argv);
+	plyr->color = 0;
+	plyr->v->fix_img = draw_cf(plyr);
+	plyr->v->m_fix_img = draw_2d_map(plyr);
+	plyr->factor = BLOCK / M_B;
+	plyr->m = 0;
+    plyr->f_angle = 60.0/WIDTH;
+	plyr->mv_sp = (BLOCK/7);
+	plyr->p = NULL;
+	plyr->p = h_malloc(&collector, 3 * sizeof(void *), plyr->p, NTMP);
+	plyr->p[0] = NULL;
+	plyr->t_img = NULL;
+	plyr->vec2 = NULL;
+ 	plyr->vec2 = h_malloc(&collector, sizeof(t_vector), plyr->vec2, NTMP);
+	plyr->vec1 = NULL;
+ 	plyr->vec1 = h_malloc(&collector, sizeof(t_vector), plyr->vec1, NTMP);
+	plyr->ray = NULL;
+	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * WIDTH) + 1, plyr->ray, NTMP);
+	return (plyr);
 }
 
-t_data 	*draw_player(t_player *player, t_data *p_img)
+t_data 	*draw_player(t_player *plyr, t_data *p_img)
 {
-	player->t_img = p_img;
-	draw_point(player, player->p_x/player->factor, player->p_y/player->factor, BLUE);
-	draw_line(player, BLUE, player->p_x + ((BLOCK/0.9) * trigo(player->angle, COS)), player->p_y + ((BLOCK/0.9) * trigo(player->angle, SIN)));
+	plyr->t_img = p_img;
+	draw_point(plyr, plyr->p_x/plyr->factor, plyr->p_y/plyr->factor, BLUE);
+	draw_line(plyr, BLUE, plyr->p_x + ((BLOCK/0.9) * trigo(plyr->angle, COS)), plyr->p_y + ((BLOCK/0.9) * trigo(plyr->angle, SIN)));
 	return (p_img);
 }
 
-int hokking(t_player *player)
+int hokking(t_player *plyr)
 {
-	mlx_hook(player->vars->win, 17, 0, ft_ext, player);
-	mlx_hook(player->vars->win, 6, 0, mouse_movement, player);
-	mlx_hook(player->vars->win, 2, 1L<<0, handlerp, player);
-	mlx_hook(player->vars->win, 3, 1L<<1, handlerr, player);
-	updateAndRenderScene(player);
+	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
+	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
+	mlx_hook(plyr->v->win, 2, 1L<<0, handlerp, plyr);
+	mlx_hook(plyr->v->win, 3, 1L<<1, handlerr, plyr);
+	updateAndRenderScene(plyr);
 	return (0);
 }
 
-void check_collision(t_player *player, float x, float y)
+void check_collision(t_player *plyr, float x, float y)
 {
     int xo = BLOCK/4;
     int yo = BLOCK/4;
@@ -173,20 +173,20 @@ void check_collision(t_player *player, float x, float y)
     if (x < 0)
         xo = -BLOCK/4;
 
-    if(player->vars->map[(int)(((player->p_y + y)/BLOCK))][(int)((player->p_x)/BLOCK)] != '1')
+    if(plyr->v->map[(int)(((plyr->p_y + y)/BLOCK))][(int)((plyr->p_x)/BLOCK)] != '1' && plyr->v->map[(int)(((plyr->p_y + y + yo/2)/BLOCK))][(int)((plyr->p_x + xo/2)/BLOCK)] != '1')
     {
-        if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-            player->p_y += y;  
+        if (plyr->v->map[(int)(((plyr->p_y + y + yo)/BLOCK))][(int)((plyr->p_x + xo)/BLOCK)] != '1')
+            plyr->p_y += y;  
     }
 
-    if(player->vars->map[(int)((player->p_y)/BLOCK)][(int)((player->p_x + x)/BLOCK)] != '1')
+    if(plyr->v->map[(int)((plyr->p_y)/BLOCK)][(int)((plyr->p_x + x)/BLOCK)] != '1' && plyr->v->map[(int)((plyr->p_y + yo/2)/BLOCK)][(int)((plyr->p_x + x + xo/2)/BLOCK)] != '1')
     {
-        if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
-            player->p_x += x;
+        if(plyr->v->map[(int)((plyr->p_y + yo)/BLOCK)][(int)((plyr->p_x + x + xo)/BLOCK)] != '1')
+            plyr->p_x += x;
     }
 }
 
-void draw_point(t_player *player, int x, int y, int color)
+void draw_point(t_player *plyr, int x, int y, int color)
 {
     int i, j;
 
@@ -198,7 +198,7 @@ void draw_point(t_player *player, int x, int y, int color)
         {
             while(j < 2)
             {
-				my_mlx_pixel_put(player, x + i, y + j, color);
+				my_mlx_pixel_put(plyr, x + i, y + j, color);
                 j++;
             }
             i++;

@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 16:20:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 18:26:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
+t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 {
 	void	*p;
 	t_data	*img;
@@ -20,11 +20,11 @@ t_data	*new_image_from_xpm(t_player *player, char *file_dstination)
 	int		height;
 
 	img = NULL;
-	img = h_malloc(player->vars->collector, sizeof(t_data), img, NTMP);
-	p = mlx_xpm_file_to_image(player->vars->mlx, file_dstination, \
+	img = h_malloc(plyr->v->collector, sizeof(t_data), img, NTMP);
+	p = mlx_xpm_file_to_image(plyr->v->mlx, file_dstination, \
 	&width, &height);
 	if (!p)
-		exit_with_err(player->vars->collector, MLX);
+		exit_with_err(plyr->v->collector, MLX);
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
