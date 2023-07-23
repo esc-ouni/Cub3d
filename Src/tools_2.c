@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 18:16:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 12:47:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,16 @@ char *get_texture(t_player *player, t_ray ray)
 int get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
 {
 	int color;
-	
-	color = *(unsigned int *)(s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel));
-	color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
-	return (color);
+	char *tmp;
+
+	tmp = (s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel));
+	if (tmp)
+	{
+		color = *(int *)tmp;
+		color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
+		return (color);
+	}
+	return (0);
 }
 
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
@@ -206,7 +212,6 @@ void update_scene(t_player *player)
     p_r_img = ft_transparency(player, p_r_img, WIDTH, HEIGHT);
 	draw_player(player, p_r_img);
 	player->ray = cast_rays(player, player->ray);
-
 	draw_3d_map(player, p_img, player->ray);
 	mlx_clear_window(player->vars->mlx, player->vars->win);
 	mlx_put_image_to_window(player->vars->mlx, player->vars->win, player->vars->fix_img->img_ptr, 0, 0);

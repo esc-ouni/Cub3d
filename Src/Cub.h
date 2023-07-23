@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 19:10:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 12:31:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,17 @@ typedef struct s_vector
 	float	y;
 }	t_vector;
 
-typedef struct s_int
+typedef struct s_varr
 {
-    int s;
-    int n;
-    int w;
-    int e;
-    int c;
-    int f;
-}	t_int;
+    int		s;
+    int 	n;
+    int 	w;
+    int 	e;
+    int		c;
+    int 	f;
+	int		k;
+	char	*first_part;
+}	t_varr;
 
 typedef struct s_data
 {

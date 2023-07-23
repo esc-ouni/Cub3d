@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 16:46:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 12:26:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,23 @@ int	handlerp(int key, t_player *player)
 		player->rl = 1;
 	if (key == K_R)
 		player->rl = -1;
+	if (key == 259)
+	{
+		player->w = 0;
+		player->d = 0;
+		player->rl = 0;
+	}
 	return (0);
 }
 
 int	handlerr(int key, t_player *player)
 {
+	if (key == 259)
+	{
+		player->w = 0;
+		player->d = 0;
+		player->rl = 0;
+	}
 	if (key == 53)
 	{
 		destroy_prev_imges(player);

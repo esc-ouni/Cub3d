@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/22 14:58:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 12:46:37 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void	my_mlx_pixel_put(t_player *player, t_data *data, int x, int y, int color)
 	tmp = data->img_addr;
 	if(!tmp)
 	    exit_with_err(player->vars->collector, MLX);
-	tmp = tmp  + (y * data->size_line) + ((data->byte_pixel) * x);
-	*(unsigned int *)tmp = color;
+	tmp = tmp + (y * data->size_line) + ((data->byte_pixel) * x);
+	if (tmp)
+		*(int *)tmp = color;
 }
 
 char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
@@ -188,36 +189,6 @@ void check_collision(t_player *player, float x, float y)
     }
     // printf("x : %0.0f, y : %0.0f\n", player->p_x, player->p_y);
 }
-
-
-
-// void	check_collision(t_player *player, float x, float y)
-// {
-// 	int xo = 200;
-// 	int yo = 200;
-
-// 	if (y < 0)
-// 		yo = -200;
-// 	if (x < 0)
-// 		xo = -200;
-//     if(player->vars->map[(int)(((player->p_y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-// 	{
-// 		if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-// 			player->p_y += y;
-// 		else
-// 			player->p_y += (yo/(200));	
-// 	}
-
-//     if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + xo)/BLOCK)] != '1')
-// 	{
-// 		if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
-// 			player->p_x += x;
-// 		else
-// 			player->p_x += (xo/(200));
-		
-// 	}
-//     // printf("x : %0.0f, y : %0.0f\n", player->p_x, player->p_y);
-// }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)
 {

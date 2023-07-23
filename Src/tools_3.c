@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 11:46:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 12:33:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,53 @@ void    exit_with_err(t_collector **collector, t_flag cause)
     exit (1);
 }
 
+void duppp(t_player *player, int fd, t_varr  *varr, char *str)
+{
+    while((str = get_next_line(fd)))
+    {
+        varr->first_part = ft_msplit(player->vars, str, ' ', TMP)[0];
+        if (varr->first_part && !ft_strncmp(varr->first_part, "NO", ft_strlen(varr->first_part)))
+            (varr->n)++;
+        else if (varr->first_part && !ft_strncmp(varr->first_part, "SO", ft_strlen(varr->first_part)))
+            (varr->s)++;
+        else if (varr->first_part && !ft_strncmp(varr->first_part, "WE", ft_strlen(varr->first_part)))
+            (varr->w)++;
+        else if (varr->first_part && !ft_strncmp(varr->first_part, "EA", ft_strlen(varr->first_part)))
+            (varr->e)++;
+        else if (varr->first_part && !ft_strncmp(varr->first_part, "F", ft_strlen(varr->first_part)))
+            (varr->f)++;
+        else if (varr->first_part && !ft_strncmp(varr->first_part, "C", ft_strlen(varr->first_part)))
+            (varr->c)++;
+        else if (varr->first_part && !ft_strnstr(str, "1", ft_strlen(str)) && !ft_strnstr(str, "0", ft_strlen(str)))
+			(varr->k)++;
+        free(str);
+    }
+	if (varr->k)
+		exit_with_err(player->vars->collector, PARSE);
+}
+
 void    check_dups(t_player *player, char const *argv[])
 {
-    char *str = NULL;
-    int s = 0;
-    int n = 0;
-    int w = 0;
-    int e = 0;
-    int c = 0;
-    int f = 0;
-    char *first_part = NULL;
-    int fd;
+	t_varr  *varr;
+    char 	*str;
+    int 	fd;
 
+	str = NULL;
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         exit_with_err(player->vars->collector, OPEN);
-    while((str = get_next_line(fd)))
-    {
-        first_part = ft_msplit(player->vars, str, ' ', TMP)[0];
-        if (first_part && !ft_strncmp(first_part, "NO", ft_strlen(first_part)))
-            n++;
-        else if (first_part && !ft_strncmp(first_part, "SO", ft_strlen(first_part)))
-            s++;
-        else if (first_part && !ft_strncmp(first_part, "WE", ft_strlen(first_part)))
-            w++;
-        else if (first_part && !ft_strncmp(first_part, "EA", ft_strlen(first_part)))
-            e++;
-        else if (first_part && !ft_strncmp(first_part, "F", ft_strlen(first_part)))
-            f++;
-        else if (first_part && !ft_strncmp(first_part, "C", ft_strlen(first_part)))
-            c++;
-        else if (first_part && !ft_strnstr(str, "1", ft_strlen(str)) && !ft_strnstr(str, "0", ft_strlen(str)))
-        {
-            free(str);
-            str = NULL;
-            exit_with_err(player->vars->collector, PARSE);
-        }
-        free(str);
-        str = NULL;
-    }
-    if (n != 1 || e != 1 || w != 1 || s != 1 || f != 1 || c != 1)
+	varr = NULL;
+	varr = h_malloc(player->vars->collector, sizeof(t_varr), varr, TMP);
+	varr->c = 0;
+	varr->f = 0;
+	varr->n = 0;
+	varr->s = 0;
+	varr->e = 0;
+	varr->w = 0;
+	varr->k = 0;
+    varr->first_part = NULL;
+	duppp(player, fd, varr, str);
+    if (varr->n != 1 || varr->e != 1 || varr->w != 1 || varr->s != 1 || varr->f != 1 || varr->c != 1)
         exit_with_err(player->vars->collector, PARSE);
 }
 
