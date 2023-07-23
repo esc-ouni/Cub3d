@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 12:47:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:22:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,23 @@ char *get_texture(t_player *player, t_ray ray)
     return (s);
 }
 
-int get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
+unsigned int get_color_from_tex(t_player *player, char *s, t_ray ray, int tex_y)
 {
-	int color;
-	char *tmp;
 
-	tmp = (s + (tex_y * player->vars->up->size_line) + (ray.tex_x * player->vars->up->byte_pixel));
-	if (tmp)
+
+	unsigned int color;
+	unsigned int *ar = (unsigned int *)(s + (tex_y * player->vars->lf->size_line) + (ray.tex_x * player->vars->lf->byte_pixel));
+	
+	
+	if (ar)
 	{
-		color = *(int *)tmp;
+		color = *ar;
+		color = mlx_get_color_value(player->vars->mlx, *ar);
 		color = darkenColor(color, (float )(ray.length * 255)/ (BLOCK * 40));
 		return (color);
 	}
 	return (0);
+	
 }
 
 void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
@@ -110,7 +114,7 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
     char *s = NULL;
     int i = 0;
     int tex_y = 0;
-    int color = 0;
+    unsigned int color = 0;
     float  w_heig = HEIGHT / (ray.length * trigo(ray.angle - player->angle, COS)) * (BLOCK * 1.7);
     int start = HEIGHT/2 - w_heig/2;
     
@@ -119,9 +123,9 @@ void draw_wall_S(t_player *player, t_data *p_img, t_ray ray, int x_index)
 
     while (i < w_heig)
     {
-        if (start + i > 0 && start + i < HEIGHT)
+        if (start + i > 0 && start + i < HEIGHT && ray.tex_x < BLOCK && tex_y < BLOCK)
         {
-            tex_y = i * (BLOCK / w_heig);
+            tex_y = i * (float)(BLOCK / w_heig);
 			color = get_color_from_tex(player, s, ray, tex_y);
             my_mlx_pixel_put(player, p_img, x_index, start + i, color);
         }
@@ -184,13 +188,13 @@ void    destroy_prev_imges(t_player *player)
 void update_params(t_player *player)
 {
     if (player->w == 1)
-        check_collision(player, MV_SP * trigo(player->angle, COS), MV_SP * trigo(player->angle, SIN));
+        check_collision(player, player->mv_sp * trigo(player->angle, COS), player->mv_sp * trigo(player->angle, SIN));
     else if (player->w == -1)
-        check_collision(player, -(MV_SP * trigo(player->angle, COS)), -(MV_SP * trigo(player->angle, SIN)));
+        check_collision(player, -(player->mv_sp * trigo(player->angle, COS)), -(player->mv_sp * trigo(player->angle, SIN)));
     else if (player->d == 1)
-        check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, 90), COS), MV_SP/2 * trigo(up_degree(player->angle, 90), SIN));
+        check_collision(player, player->mv_sp/2 * trigo(up_degree(player->angle, 90), COS), player->mv_sp/2 * trigo(up_degree(player->angle, 90), SIN));
     else if (player->d == -1)
-        check_collision(player, MV_SP/2 * trigo(up_degree(player->angle, -90), COS), MV_SP/2 * trigo(up_degree(player->angle, -90), SIN));
+        check_collision(player, player->mv_sp/2 * trigo(up_degree(player->angle, -90), COS), player->mv_sp/2 * trigo(up_degree(player->angle, -90), SIN));
     else if (player->rl == 1)
         update_degree(player, -R_AN);
     else if (player->rl == -1)

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 12:31:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:18:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,20 @@
 # include "../Get_next_line/get_next_line.h"
 # include "../LIBF/libft.h"
 
-
 # define HORZ_U 15
 # define HORZ_D 16
 # define VERT_L 17
 # define VERT_R 27
-
 
 # define NORTH 90
 # define EAST  0
 # define SOUTH 270
 # define WEST  180
 
-
 # define WIDTH 2000
 # define HEIGHT 1000
 # define BLOCK 1000
 
-# define MV_SP (BLOCK/7)
 # define R_AN  3
 
 # define M_BLOCK 8
@@ -129,12 +125,12 @@ typedef struct s_vector
 
 typedef struct s_varr
 {
-    int		s;
-    int 	n;
-    int 	w;
-    int 	e;
-    int		c;
-    int 	f;
+	int		s;
+	int		n;
+	int		w;
+	int		e;
+	int		c;
+	int		f;
 	int		k;
 	char	*first_part;
 }	t_varr;
@@ -195,6 +191,11 @@ typedef struct s_player
 	float		p_x;
 	float		p_y;
 	int			m;
+	int			mv_sp;
+	float		mx;
+	float		my;
+	float		p_mx;
+	float		p_my;
 	float		angle;
 	float		t_angle;
 	float		f_angle;
@@ -209,7 +210,6 @@ typedef struct s_player
 
 int			hokking(t_player *player);
 void		update_params(t_player *player);
-
 
 char		**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag);
 char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag);

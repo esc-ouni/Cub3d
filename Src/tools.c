@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 12:46:37 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:31:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ t_player *init(int argc, char const *argv[])
 	player->factor = BLOCK / M_BLOCK;
 	player->m = 0;
     player->f_angle = 60.0/WIDTH;
-	player->xf = BLOCK/3;
-	player->yf = BLOCK/3;
+	player->mv_sp = (BLOCK/7);
 	player->p = NULL;
 	player->p = h_malloc(&collector, 3 * sizeof(void *), player->p, NTMP);
 	player->p[0] = NULL;
@@ -175,19 +174,14 @@ void check_collision(t_player *player, float x, float y)
     if(player->vars->map[(int)(((player->p_y + y)/BLOCK))][(int)((player->p_x)/BLOCK)] != '1')
     {
         if (player->vars->map[(int)(((player->p_y + y + yo)/BLOCK))][(int)((player->p_x + xo)/BLOCK)] != '1')
-            player->p_y += y;
-        // else
-        //     player->p_y += (yo/(300));    
+            player->p_y += y;  
     }
 
     if(player->vars->map[(int)((player->p_y)/BLOCK)][(int)((player->p_x + x)/BLOCK)] != '1')
     {
         if(player->vars->map[(int)((player->p_y + yo)/BLOCK)][(int)((player->p_x + x + xo)/BLOCK)] != '1')
             player->p_x += x;
-        // else
-        //     player->p_x += (xo/(300));
     }
-    // printf("x : %0.0f, y : %0.0f\n", player->p_x, player->p_y);
 }
 
 void draw_point(t_player *player, t_data *img, int x, int y, int color)

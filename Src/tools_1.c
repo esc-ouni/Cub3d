@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 12:26:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:25:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int	mouse_movement(int x, int y, t_player *player)
 			last_pos = x;
 		}
 	}
+	update_scene(player);
 	return (0);
 }
 
@@ -206,7 +207,7 @@ t_data	*creat_tmap(t_player *player)
 	while(player->vars->map[iy])
 	{
 		ix = 0;
-		while(player->vars->map[iy][ix])
+		while (player->vars->map[iy][ix])
 		{
 			if (player->vars->map[iy][ix] == '1')
 				draw_wall(player, img, ix, iy);
