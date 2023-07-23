@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 14:52:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/23 14:59:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,11 +170,9 @@ t_data	*draw_cf(t_player *player)
 	int		ix;
 	int		iy;
 	int		color;
-	char	**map;
 	t_data	*mapp;
 
 	color = BLACK;
-	map = player->vars->map;
 	ix = 0;
 	iy = 0;
 	mapp = new_image(player->vars, WIDTH, HEIGHT, NTMP);
