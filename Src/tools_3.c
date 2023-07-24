@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 10:43:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:24:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 	while ((str = get_next_line(fd)))
 	{
 		varr->fp = ft_msplit(plyr->v, str, ' ', TMP)[0];
-		if (varr->fp && !ft_strncmp(varr->fp, "NO", ft_strlen(varr->fp)))
+		if (varr->fp && !strcmp(varr->fp, "NO"))
 			(varr->n)++;
-		else if (varr->fp && !ft_strncmp(varr->fp, "SO", ft_strlen(varr->fp)))
+		else if (varr->fp && !strcmp(varr->fp, "SO"))
 			(varr->s)++;
-		else if (varr->fp && !ft_strncmp(varr->fp, "WE", ft_strlen(varr->fp)))
+		else if (varr->fp && !strcmp(varr->fp, "WE"))
 			(varr->w)++;
-		else if (varr->fp && !ft_strncmp(varr->fp, "EA", ft_strlen(varr->fp)))
+		else if (varr->fp && !strcmp(varr->fp, "EA"))
 			(varr->e)++;
-		else if (varr->fp && !ft_strncmp(varr->fp, "F", ft_strlen(varr->fp)))
+		else if (varr->fp && !strcmp(varr->fp, "F"))
 			(varr->f)++;
-		else if (varr->fp && !ft_strncmp(varr->fp, "C", ft_strlen(varr->fp)))
+		else if (varr->fp && !strcmp(varr->fp, "C"))
 			(varr->c)++;
 		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)) && \
 		!ft_strnstr(str, "0", ft_strlen(str)))
