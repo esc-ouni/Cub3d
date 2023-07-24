@@ -6,32 +6,33 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 18:26:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 10:59:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-void draw_line(t_player *plyr, int color, int x2, int y2)
+void	draw_line(t_player *plyr, int color, int x2, int y2)
 {
-    int i = 0;
+	float	x;
+	float	y;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
 
-    float  dx = x2/plyr->factor - plyr->p_x/plyr->factor;
-    float  dy = y2/plyr->factor - plyr->p_y/plyr->factor;
-    float  steps = ft_abs(dy);
-	if (ft_abs(dx) > ft_abs(dy))
-		steps = ft_abs(dx);
-    float  x_inc = dx / steps;
-    float  y_inc = dy / steps;
-
-    float  x = plyr->p_x/plyr->factor;
-    float  y = plyr->p_y/plyr->factor;
-	
-    while (i < steps)
-    {
+	x = (x2 / plyr->factor) - (plyr->p_x / plyr->factor);
+	y = (y2 / plyr->factor) - (plyr->p_y / plyr->factor);
+	steps = ft_abs(y) - 1;
+	if (ft_abs(x) > ft_abs(y))
+		steps = ft_abs(x) - 1;
+	x_inc = (float)(x / steps);
+	y_inc = (float)(y / steps);
+	x = (plyr->p_x / plyr->factor);
+	y = (plyr->p_y / plyr->factor);
+	while (steps--)
+	{
 		my_mlx_pixel_put(plyr, (int)x, (int)y, color);
-        x += x_inc;
-        y += y_inc;
-        i++;
-    }
+		x += x_inc;
+		y += y_inc;
+	}
 }

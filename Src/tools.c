@@ -6,58 +6,55 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 19:13:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 11:11:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-int ft_ext(t_player *plyr)
+int	ft_ext(t_player *plyr)
 {
-    destroy_prev_imges(plyr);
+	destroy_prev_imges(plyr);
 	destroy_fix_imges(plyr);
 	ft_collectorclear(plyr->v->collector, ALL);
 	exit(0);
 }
 
-float  	deg_to_rad(float  angle)
+float	deg_to_rad(float angle)
 {
-    angle = (angle * M_PI / 180);
+	angle = (angle * M_PI / 180);
 	return (angle);
 }
 
-float  	rad_to_deg(float  angle)
+float	rad_to_deg(float angle)
 {
-    angle = (angle * 180 / M_PI);
+	angle = (angle * 180 / M_PI);
 	return (angle);
 }
 
-void rotate_vector(t_vector *direction, float  angle)
+void	rotate_vector(t_vector *direction, float  angle)
 {
 	angle = deg_to_rad(angle);
-    float  cos_angle = trigo(angle, COS);
-    float  sin_angle = trigo(angle, SIN);
 
-    float  new_x = ((direction->x * cos_angle) - (direction->y * sin_angle));
-    float  new_y = ((direction->x * sin_angle) + (direction->y * cos_angle));
-
-    direction->x = new_x;
-    direction->y = new_y;
+	direction->x = ((direction->x * trigo(angle, COS)) - \
+	(direction->y * trigo(angle, SIN)));
+	direction->y = ((direction->x * trigo(angle, SIN)) + \
+	(direction->y * trigo(angle, COS)));
 }
 
 void	my_mlx_pixel_put(t_player *plyr, int x, int y, int color)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = plyr->t_img->img_addr;
-	if(!tmp)
-	    exit_with_err(plyr->v->collector, MLX);
+	if (!tmp)
+		exit_with_err(plyr->v->collector, MLX);
 	tmp = tmp + (y * plyr->t_img->size_line) + ((plyr->t_img->byte_pixel) * x);
 	if (tmp)
 		*(int *)tmp = color;
 }
 
-char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
+char	*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
 {
 	size_t	i;
 	char	*s;
@@ -86,7 +83,7 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	s = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-	    exit_with_err(collector, OPEN);
+		exit_with_err(collector, OPEN);
 	while ((s = get_next_line(fd)))
 	{
 		free(s);
@@ -94,17 +91,16 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 		size++;
 	}
 	if (close(fd) == -1)
-	    exit_with_err(collector, OPEN);
+		exit_with_err(collector, OPEN);
 	return (size+=1);
 }
 
 t_player *init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
-	t_vars 				*vars;
-	t_player 			*plyr;
+	t_vars				*vars;
+	t_player			*plyr;
 
-	
 	collector = NULL;
 	plyr = NULL;
 	vars = NULL;
@@ -114,7 +110,7 @@ t_player *init(int argc, char const *argv[])
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub3D");
-	if(!vars->mlx || !vars->win)
+	if (!vars->mlx || !vars->win)
 		exit_with_err(&collector, MLX);
 	plyr->v = vars;
 	vars->dn_c = NULL;
@@ -137,19 +133,20 @@ t_player *init(int argc, char const *argv[])
 	plyr->p[0] = NULL;
 	plyr->t_img = NULL;
 	plyr->v2 = NULL;
- 	plyr->v2 = h_malloc(&collector, sizeof(t_vector), plyr->v2, NTMP);
+	plyr->v2 = h_malloc(&collector, sizeof(t_vector), plyr->v2, NTMP);
 	plyr->v1 = NULL;
- 	plyr->v1 = h_malloc(&collector, sizeof(t_vector), plyr->v1, NTMP);
+	plyr->v1 = h_malloc(&collector, sizeof(t_vector), plyr->v1, NTMP);
 	plyr->ray = NULL;
 	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * WIDTH) + 1, plyr->ray, NTMP);
 	return (plyr);
 }
 
-t_data 	*draw_player(t_player *plyr, t_data *p_img)
+t_data	*draw_player(t_player *plyr, t_data *p_img)
 {
 	plyr->t_img = p_img;
 	draw_point(plyr, plyr->p_x/plyr->factor, plyr->p_y/plyr->factor, BLUE);
-	draw_line(plyr, BLUE, plyr->p_x + ((BLOCK/0.9) * trigo(plyr->angle, COS)), plyr->p_y + ((BLOCK/0.9) * trigo(plyr->angle, SIN)));
+	draw_line(plyr, BLUE, plyr->p_x + ((BLOCK / 0.9) * trigo(plyr->angle, COS)) \
+	, plyr->p_y + ((BLOCK / 0.9) * trigo(plyr->angle, SIN)));
 	return (p_img);
 }
 
