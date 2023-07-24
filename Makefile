@@ -6,20 +6,9 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/24 19:06:48 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/24 19:09:24 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# NAME = Cub3D
-# FLAGS = -Wall -Wextra -Werror
-# MATH = -O3 -ffast-math
-# MLX = -lmlx -framework OpenGL -framework AppKit
-
-# all:
-# 	clear
-# 	cc $(FLAGS) $(MATH) $(MLX) LIBFT/*.c G_N_L/*.c ./Src/*.c -o $(NAME) -lm
-# 	# ./$(NAME) Ext/map.cub
-
 
 NAME   = cub3d
 MATH   = -O3 -ffast-math
@@ -64,11 +53,10 @@ LIBFT:
 $(NAME): $(OBJ_T) $(HR) 
 	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
-	./$(NAME) Ext/map.cub
 
 
 %.o: %.c $(HR)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) $(MATH) -c $< -o $@ 
 
 clean:
 	@make clean -C LIBFT
