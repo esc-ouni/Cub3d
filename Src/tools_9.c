@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:08:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:36:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	mouse_movement(int x, int y, t_player *plyr)
 			last_pos = x;
 		}
 	}
+	update_scene(plyr);
 	return (0);
 }
 

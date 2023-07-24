@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:55:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:35:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	**get_map(t_player *plyr, char const *argv[], int t)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		exit_with_err(plyr->v->collector, OPEN);
-
 	return (get_map_cont(plyr, fd, t, map));
 }
 
