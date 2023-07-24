@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:14:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:39:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,16 @@ int	point_surronded(t_player *plyr, char **map, int y, int x)
 	y_m = 0;
 	while (map[y_m])
 		y_m++;
-
 	x_m = ft_strlen(map[y]);
 	if ((x - 1) < 0 || (x + 1) > x_m)
 		exit_with_err(plyr->v->collector, PARSE);
-	if (map[y][x-1] == ' ' || map[y][x+1] == ' ')
+	if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
 		exit_with_err(plyr->v->collector, PARSE);
 	if ((y - 1) < 0 || (y + 1) > y_m)
 		exit_with_err(plyr->v->collector, PARSE);
-	if (x >= ft_strlen(map[y-1]) || x >= ft_strlen(map[y+1]))
+	if (x >= ft_strlen(map[y - 1]) || x >= ft_strlen(map[y + 1]))
 		exit_with_err(plyr->v->collector, PARSE);
-	if (map[y-1][x] == ' ' || map[y+1][x] == ' ')
+	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ')
 		exit_with_err(plyr->v->collector, PARSE);
 	return (1);
 }
-

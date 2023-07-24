@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:52:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:43:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,33 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	return (size += 1);
 }
 
+void	init_2(t_player *plyr, int argc, char const *argv[])
+{
+	plyr->angle = 0;
+	plyr->v->map = parse_file(plyr, argc, argv);
+	plyr->color = 0;
+	plyr->v->fix_img = draw_cf(plyr);
+	plyr->v->m_fix_img = draw_2d_map(plyr);
+	plyr->factor = BLOCK / M_B;
+	plyr->m = 0;
+	plyr->f_angle = (60.0 / plyr->width);
+	plyr->mv_sp = (BLOCK / 7);
+	plyr->yf = (BLOCK / 4);
+	plyr->xf = (BLOCK / 4);
+	plyr->p = NULL;
+	plyr->p = h_malloc(plyr->v->collector, 3 * sizeof(void *), plyr->p, NTMP);
+	plyr->p[0] = NULL;
+	plyr->t_img = NULL;
+	plyr->v2 = NULL;
+	plyr->v2 = h_malloc(plyr->v->collector, sizeof(t_vector), plyr->v2, NTMP);
+	plyr->v1 = NULL;
+	plyr->v1 = h_malloc(plyr->v->collector, sizeof(t_vector), plyr->v1, NTMP);
+	plyr->ray = NULL;
+	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * \
+	plyr->width) + 1, plyr->ray, NTMP);
+}
+
+
 t_player	*init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
@@ -78,27 +105,7 @@ t_player	*init(int argc, char const *argv[])
 	vars->ea_c = NULL;
 	vars->c_color = 0;
 	vars->f_color = 0;
-	plyr->angle = 0;
-	vars->map = parse_file(plyr, argc, argv);
-	plyr->color = 0;
-	plyr->v->fix_img = draw_cf(plyr);
-	plyr->v->m_fix_img = draw_2d_map(plyr);
-	plyr->factor = BLOCK / M_B;
-	plyr->m = 0;
-	plyr->f_angle = (60.0 / plyr->width);
-	plyr->mv_sp = (BLOCK / 7);
-	plyr->yf = (BLOCK / 4);
-	plyr->xf = (BLOCK / 4);
-	plyr->p = NULL;
-	plyr->p = h_malloc(&collector, 3 * sizeof(void *), plyr->p, NTMP);
-	plyr->p[0] = NULL;
-	plyr->t_img = NULL;
-	plyr->v2 = NULL;
-	plyr->v2 = h_malloc(&collector, sizeof(t_vector), plyr->v2, NTMP);
-	plyr->v1 = NULL;
-	plyr->v1 = h_malloc(&collector, sizeof(t_vector), plyr->v1, NTMP);
-	plyr->ray = NULL;
-	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * plyr->width) + 1, plyr->ray, NTMP);
+	init_2(plyr, argc, argv);
 	return (plyr);
 }
 
