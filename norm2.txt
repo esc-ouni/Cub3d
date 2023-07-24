@@ -42,21 +42,7 @@ Src/tools_11.c: OK!
 Src/tools_12.c: OK!
 Src/tools_13.c: OK!
 Src/tools_14.c: OK!
-Src/tools_15.c: Error!
-Error: SPACE_BEFORE_FUNC    (line:  66, col:   4):	space before function name
-Error: ASSIGN_IN_CONTROL    (line:  93, col:  15):	Assignment in control structure
-Error: LINE_TOO_LONG        (line:  96, col:  82):	line too long
-Error: SPC_BFR_OPERATOR     (line:  96, col:  82):	missing space before operator
-Error: LINE_TOO_LONG        (line:  98, col:  82):	line too long
-Error: SPC_BFR_OPERATOR     (line:  98, col:  82):	missing space before operator
-Error: LINE_TOO_LONG        (line: 100, col:  82):	line too long
-Error: SPC_BFR_OPERATOR     (line: 100, col:  82):	missing space before operator
-Error: LINE_TOO_LONG        (line: 102, col:  82):	line too long
-Error: SPC_BFR_OPERATOR     (line: 102, col:  82):	missing space before operator
-Error: SPC_BFR_OPERATOR     (line: 104, col:  74):	missing space before operator
-Error: LINE_TOO_LONG        (line: 104, col:  82):	line too long
-Error: SPC_BFR_OPERATOR     (line: 106, col:  74):	missing space before operator
-Error: LINE_TOO_LONG        (line: 106, col:  82):	line too long
+Src/tools_15.c: OK!
 Src/tools_16.c: OK!
 Src/tools_17.c: OK!
 Src/tools_18.c: OK!
