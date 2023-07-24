@@ -1,7 +1,7 @@
 NO ./Ext/no.xpm
-SO ./Ext/no.xpm
-WE ./Ext/no.xpm
-EA ./Ext/no.xpm
+SO ./Ext/so.xpm
+WE ./Ext/we.xpm
+EA ./Ext/ea.xpm
 
 
 C   19,19,52
