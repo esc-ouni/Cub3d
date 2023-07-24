@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:44:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:06:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char **parse_file(t_player *plyr, int argc, char const *argv[])
 	return (NULL);
 }
 
-float	trigo(float  angle, t_flag flag)
+float	trigo(float angle, t_flag flag)
 {
 	if (flag == COS)
 		return (cos(angle));

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:29:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:08:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	draw_wall(t_player *plyr, t_data *mapp, int x, int y)
 		j = 0;
 	}
 }
+
 void	draw_nwall(t_player *plyr, t_data *mapp, int x, int y)
 {
 	int	i;
@@ -64,13 +65,13 @@ int	mouse_movement(int x, int y, t_player *plyr)
 	{
 		if (x > last_pos)
 		{
-			update_degree(plyr, ((x - last_pos) * (360.0/plyr->width)));
+			update_degree(plyr, ((x - last_pos) * (360.0 / plyr->width)));
 			update_params(plyr);
 			last_pos = x;
 		}
 		else if (x < last_pos)
 		{
-			update_degree(plyr, ((x - last_pos) * (360.0/plyr->width)));
+			update_degree(plyr, ((x - last_pos) * (360.0 / plyr->width)));
 			update_params(plyr);
 			last_pos = x;
 		}
@@ -96,7 +97,7 @@ t_data	*draw_cf(t_player *plyr)
 		while (iy < plyr->height)
 		{
 			my_mlx_pixel_put(plyr, ix, iy, color);
-			if (iy == plyr->height/2)
+			if (iy == plyr->height / 2)
 				color = plyr->v->f_color;
 			iy++;
 		}
@@ -132,27 +133,3 @@ t_data	*creat_tmap(t_player *plyr)
 	}
 	return (img);
 }
-
-t_data	*draw_2d_map(t_player *plyr)
-{
-	int		i;
-	int		color;
-	t_data	*img;
-
-	i = 0;
-	img = NULL;
-	color = M_BLACK;
-	plyr->v->m_w = ft_strlen(plyr->v->map[0]);
-	while (plyr->v->map[i])
-	{
-		if (ft_strlen(plyr->v->map[i]) > plyr->v->m_w)
-			plyr->v->m_w = ft_strlen(plyr->v->map[i]);
-		i++;
-	}
-	plyr->v->m_h = i;
-	if ((plyr->v->m_w * M_B >= plyr->width) || \
-	(plyr->v->m_h * M_B >= plyr->height))
-		exit_with_err(plyr->v->collector, MAP);
-	return (creat_tmap(plyr));
-}
-
