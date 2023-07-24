@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:25:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:21:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	return (size += 1);
 }
 
+void	resizer(t_player *player)
+{
+	if ((WIDTH > 2880) || (HEIGHT > 1574))
+	{
+		player->width = 2880;
+		player->height = 1574;
+	}
+	else
+	{
+		player->width = WIDTH;
+		player->height = HEIGHT;
+	}
+}
+
 t_player	*init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
@@ -63,11 +77,12 @@ t_player	*init(int argc, char const *argv[])
 	plyr = NULL;
 	vars = NULL;
 	plyr = h_malloc(&collector, sizeof(t_player), vars, NTMP);
+	resizer(plyr);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
 	vars->collector = &collector;
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Cub3D");
+	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
 	if (!vars->mlx || !vars->win)
 		exit_with_err(&collector, MLX);
 	plyr->v = vars;
@@ -76,15 +91,15 @@ t_player	*init(int argc, char const *argv[])
 	vars->lf_c = NULL;
 	vars->rg_c = NULL;
 	vars->c_color = 0;
-    vars->f_color = 0;
+	vars->f_color = 0;
 	plyr->angle = 0;
-    vars->map = parse_file(plyr, argc, argv);
+	vars->map = parse_file(plyr, argc, argv);
 	plyr->color = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
 	plyr->factor = BLOCK / M_B;
 	plyr->m = 0;
-    plyr->f_angle = 60.0/WIDTH;
+	plyr->f_angle = (60.0 / plyr->width);
 	plyr->mv_sp = (BLOCK / 7);
 	plyr->yf = (BLOCK / 4);
 	plyr->xf = (BLOCK / 4);
@@ -97,7 +112,7 @@ t_player	*init(int argc, char const *argv[])
 	plyr->v1 = NULL;
 	plyr->v1 = h_malloc(&collector, sizeof(t_vector), plyr->v1, NTMP);
 	plyr->ray = NULL;
-	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * WIDTH) + 1, plyr->ray, NTMP);
+	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * plyr->width) + 1, plyr->ray, NTMP);
 	return (plyr);
 }
 

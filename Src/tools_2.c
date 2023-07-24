@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:38:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void updateAndRenderScene(t_player *plyr)
 	char fpsString[20];
 	// printf("")
 	sprintf(fpsString, "FPS: %.2f", 1000.0 / deltaTime);
-	mlx_string_put(plyr->v->mlx, plyr->v->win, WIDTH - 150, 10, GREEN, fpsString);
+	mlx_string_put(plyr->v->mlx, plyr->v->win, plyr->width - 150, 10, GREEN, fpsString);
 	// printf("")
 
 	// Update the last frame time
@@ -123,20 +123,20 @@ void	draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, int x_index)
 	int		start;
 	float	w_heig;
 
-	w_heig = HEIGHT / (ray.length * trigo(ray.angle - plyr->angle, COS)) * \
+	w_heig = plyr->height / (ray.length * trigo(ray.angle - plyr->angle, COS)) * \
 	(BLOCK * 1.7);
-	start = (HEIGHT / 2) - (w_heig / 2);
+	start = (plyr->height / 2) - (w_heig / 2);
 	i = 0;
 	while (i < w_heig)
 	{
-		if (start + i > 0 && start + i < HEIGHT)
+		if (start + i > 0 && start + i < plyr->height)
 		{
 			ray.tex_y = i * (BLOCK / w_heig);
 			plyr->color = get_color_from_tex(plyr, get_texture(plyr, ray), ray);
 			plyr->t_img = p_img;
 			my_mlx_pixel_put(plyr, x_index, start + i, plyr->color);
 		}
-		if (start + i >= HEIGHT)
+		if (start + i >= plyr->height)
 			return ;
 		i++;
 	}

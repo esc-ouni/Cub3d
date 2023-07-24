@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:38:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_3d_map(t_player *plyr, t_data *p_img, t_ray *ray)
 	int	i;
 
 	i = 0;
-	while (i < WIDTH)
+	while (i < plyr->width)
 	{
 		draw_wall_part(plyr, p_img, ray[i], i);
 		i++;

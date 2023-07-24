@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:45:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:23:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define SOUTH 270
 # define WEST  180
 
-# define WIDTH 2000
+# define WIDTH 1800
 # define HEIGHT 1000
 # define BLOCK 1000
 
@@ -75,13 +75,6 @@
 # define K_DN        125
 # define K_R         124
 # define K_L         123
-
-# if (WIDTH > 2560) || (HEIGHT > 1396)
-	# undef	WIDTH
-	# undef	HEIGHT
-	# define	WIDTH	2560
-	# define	HEIGHT	1396
-# endif
 
 typedef enum e_flag
 {
@@ -202,6 +195,8 @@ typedef struct s_player
 	float		f_angle;
 	float		factor;
 	int			color;
+	int			width;
+	int			height;
 	void		**p;
 	t_vector	*v2;
 	t_vector	*v1;
@@ -219,14 +214,17 @@ int			point_surronded(t_player *plyr, char **map, int y, int x);
 t_vector	*h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector);
 t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector);
 void		draw_3d_map(t_player *plyr, t_data *p_img, t_ray *ray);
-void		draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, int x_index);
+void		draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, \
+int x_index);
 int			hokking(t_player *plyr);
 void		update_params(t_player *plyr);
 
 char		**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag);
 char		*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag);
-char		*ft_mstrtrim(t_vars *vars, char const *s1, char const *set, t_flag flag);
-char		*ft_msubstr(t_vars *vars, char const *s, unsigned int start, size_t len);
+char		*ft_mstrtrim(t_vars *vars, char const *s1, char const *set, \
+t_flag flag);
+char		*ft_msubstr(t_vars *vars, char const *s, unsigned int start, \
+size_t len);
 
 int			wall_hit_hup(t_player *plyr, int x, int y);
 int			wall_hit_hdn(t_player *plyr, int x, int y);
@@ -246,17 +244,21 @@ float		rad_to_deg(float angle);
 float		up_degree(float angle, float add_angle);
 float		deg_to_rad(float angle);
 t_player	*init(int argc, char const *argv[]);
-int			count_alloc_size(t_collector **collector, char const *argv[], int fd);
+int			count_alloc_size(t_collector **collector, char const \
+*argv[], int fd);
 int			handlerp(int key, t_player *plyr);
 int			handlerr(int key, t_player *plyr);
 void		update_scene(t_player *plyr);
 t_data		*draw_2d_map(t_player *plyr);
-void		rotate_vector(t_vector *direction, float  angle);
+void		rotate_vector(t_vector *direction, float angle);
 int			mouse_movement(int x, int y, t_player *plyr);
 void		exit_with_err(t_collector **collector, t_flag cause);
-t_data		*ft_transparency(t_player *plyr, t_data *p_img, int width, int height);
-t_vector	*find_horizontal_iterset(t_player *plyr, t_ray *ray, t_vector *vector);
-t_vector	*find_vertical_iterset(t_player *plyr, t_ray *ray, t_vector *vector);
+t_data		*ft_transparency(t_player *plyr, t_data *p_img, int \
+width, int height);
+t_vector	*find_horizontal_iterset(t_player *plyr, \
+t_ray *ray, t_vector *vector);
+t_vector	*find_vertical_iterset(t_player *plyr, t_ray *ray, \
+t_vector *vector);
 void		check_collision(t_player *plyr, float  x, float  y);
 t_ray		*cast_rays(t_player *plyr, t_ray *ray);
 float		draw_ray(t_player *plyr, t_ray *ray);
@@ -280,4 +282,4 @@ void		draw_point(t_player *plyr, int x, int y, int color);
 void		my_mlx_pixel_put(t_player *plyr, int x, int y, int color);
 void		draw_line(t_player *plyr, int color, int x2, int y2);
 
-# endif
+#endif

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:38:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	update_scene(t_player *plyr)
 	t_data	*p_r_img;
 
 	destroy_prev_imges(plyr);
-	p_img = new_image(plyr->v, WIDTH, HEIGHT, TMP);
-	p_r_img = new_image(plyr->v, WIDTH, HEIGHT, TMP);
-	p_img = ft_transparency(plyr, p_img, WIDTH, HEIGHT);
-	p_r_img = ft_transparency(plyr, p_r_img, WIDTH, HEIGHT);
+	p_img = new_image(plyr->v, plyr->width, plyr->height, TMP);
+	p_r_img = new_image(plyr->v, plyr->width, plyr->height, TMP);
+	p_img = ft_transparency(plyr, p_img, plyr->width, plyr->height);
+	p_r_img = ft_transparency(plyr, p_r_img, plyr->width, plyr->height);
 	draw_player(plyr, p_r_img);
 	plyr->ray = cast_rays(plyr, plyr->ray);
 	draw_3d_map(plyr, p_img, plyr->ray);
@@ -76,7 +76,7 @@ t_ray	*cast_rays(t_player *plyr, t_ray *ray)
 
 	i = 0;
 	plyr->t_angle = up_degree(plyr->angle, -30);
-	while (i < WIDTH)
+	while (i < plyr->width)
 	{
 		ray[i].angle = plyr->t_angle;
 		ray[i].t1 = trigo(ray[i].angle, TAN);

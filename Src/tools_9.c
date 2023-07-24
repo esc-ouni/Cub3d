@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:27:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ int	mouse_movement(int x, int y, t_player *plyr)
 	static int	last_pos;
 
 	(void)y;
-	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
+	if (x > 0 && x < plyr->width && y > 0 && y < plyr->height)
 	{
 		if (x > last_pos)
 		{
-			update_degree(plyr, ((x - last_pos) * (360.0/WIDTH)));
+			update_degree(plyr, ((x - last_pos) * (360.0/plyr->width)));
 			updateAndRenderScene(plyr);
 			last_pos = x;
 		}
 		else if (x < last_pos)
 		{
-			update_degree(plyr, ((x - last_pos) * (360.0/WIDTH)));
+			update_degree(plyr, ((x - last_pos) * (360.0/plyr->width)));
 			updateAndRenderScene(plyr);
 			last_pos = x;
 		}
@@ -88,15 +88,15 @@ t_data	*draw_cf(t_player *plyr)
 	color = BLACK;
 	ix = 0;
 	iy = 0;
-	mapp = new_image(plyr->v, WIDTH, HEIGHT, NTMP);
+	mapp = new_image(plyr->v, plyr->width, plyr->height, NTMP);
 	plyr->t_img = mapp;
-	while (ix < WIDTH)
+	while (ix < plyr->width)
 	{
 		color = plyr->v->c_color;
-		while (iy < HEIGHT)
+		while (iy < plyr->height)
 		{
 			my_mlx_pixel_put(plyr, ix, iy, color);
-			if (iy == HEIGHT/2)
+			if (iy == plyr->height/2)
 				color = plyr->v->f_color;
 			iy++;
 		}
@@ -150,8 +150,8 @@ t_data	*draw_2d_map(t_player *plyr)
 		i++;
 	}
 	plyr->v->m_h = i;
-	if ((plyr->v->m_w * M_B >= WIDTH) || \
-	(plyr->v->m_h * M_B >= HEIGHT))
+	if ((plyr->v->m_w * M_B >= plyr->width) || \
+	(plyr->v->m_h * M_B >= plyr->height))
 		exit_with_err(plyr->v->collector, MAP);
 	return (creat_tmap(plyr));
 }
