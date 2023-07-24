@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:27:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:38:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	get_color_from_tex(t_player *plyr, char *s, t_ray ray)
 	return (0);
 }
 
-void	draw_wall_S(t_player *plyr, t_data *p_img, t_ray ray, int x_index)
+void	draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, int x_index)
 {
 	int		i;
 	int		start;

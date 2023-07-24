@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 10:27:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:45:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,16 @@ typedef struct s_player
 	t_data		*t_img;
 }		t_player;
 
+void		check_map(t_player *plyr, char **map);
+char		**get_map(t_player *plyr, char const *argv[], int t);
+void		check_dups(t_player *plyr, char const *argv[]);
+void		check_errs(t_player *plyr, char const *argv[]);
+int			get_map_indx(t_player *plyr, int fd, int i, char *s);
+int			point_surronded(t_player *plyr, char **map, int y, int x);
+t_vector	*h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector);
+t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector);
+void		draw_3d_map(t_player *plyr, t_data *p_img, t_ray *ray);
+void		draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, int x_index);
 int			hokking(t_player *plyr);
 void		update_params(t_player *plyr);
 
