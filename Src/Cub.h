@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 19:26:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 10:27:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct s_varr
 	int		c;
 	int		f;
 	int		k;
-	char	*first_part;
+	char	*fp;
 }	t_varr;
 
 typedef struct s_data
