@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:57:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub.h"
+#include "cub.h"
 
 int	wall_hit_hdn(t_player *plyr, int x, int y)
 {

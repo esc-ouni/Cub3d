@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 17:33:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub.h"
+#include "cub.h"
 
 void	exit_with_err(t_collector **collector, t_flag cause)
 {

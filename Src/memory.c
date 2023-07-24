@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:24:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub.h"
+#include "cub.h"
 
 t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 {

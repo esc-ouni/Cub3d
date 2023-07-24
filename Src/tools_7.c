@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:49:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub.h"
+#include "cub.h"
 
 char	*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
 {

@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:36:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub.h"
+#include "cub.h"
 
 void	draw_wall(t_player *plyr, t_data *mapp, int x, int y)
 {

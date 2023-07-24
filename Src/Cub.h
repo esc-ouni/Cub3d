@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:52:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:44:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
-# include "../Get_next_line/get_next_line.h"
-# include "../LIBF/libft.h"
+# include "../G_N_L/get_next_line.h"
+# include "../LIBFT/libft.h"
 
 # define NORTH 15
 # define SOUTH 16
@@ -271,7 +271,6 @@ void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char		**parse_file(t_player *plyr, int argc, char const *argv[]);
 t_data		*draw_player(t_player *plyr, t_data *p_img);
-
 void		draw_point(t_player *plyr, int x, int y, int color);
 void		my_mlx_pixel_put(t_player *plyr, int x, int y, int color);
 void		draw_line(t_player *plyr, int color, int x2, int y2);
