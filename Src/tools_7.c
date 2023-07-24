@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:21:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:31:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,6 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	if (close(fd) == -1)
 		exit_with_err(collector, OPEN);
 	return (size += 1);
-}
-
-void	resizer(t_player *player)
-{
-	if ((WIDTH > 2880) || (HEIGHT > 1574))
-	{
-		player->width = 2880;
-		player->height = 1574;
-	}
-	else
-	{
-		player->width = WIDTH;
-		player->height = HEIGHT;
-	}
 }
 
 t_player	*init(int argc, char const *argv[])
@@ -116,21 +102,12 @@ t_player	*init(int argc, char const *argv[])
 	return (plyr);
 }
 
-t_data	*draw_player(t_player *plyr, t_data *p_img)
-{
-	plyr->t_img = p_img;
-	draw_point(plyr, plyr->p_x/plyr->factor, plyr->p_y/plyr->factor, BLUE);
-	draw_line(plyr, BLUE, plyr->p_x + ((BLOCK / 0.9) * trigo(plyr->angle, COS)) \
-	, plyr->p_y + ((BLOCK / 0.9) * trigo(plyr->angle, SIN)));
-	return (p_img);
-}
-
 int hokking(t_player *plyr)
 {
 	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
 	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
 	mlx_hook(plyr->v->win, 2, (1L << 0), handlerp, plyr);
 	mlx_hook(plyr->v->win, 3, (1L << 1), handlerr, plyr);
-	updateAndRenderScene(plyr);
+	update_params(plyr);
 	return (0);
 }

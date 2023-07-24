@@ -6,44 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:28:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
-
-// Global variables
-int frameCount = 0;
-int lastFrameTime = 0;
-
-// Function to update and render the scene
-void updateAndRenderScene(t_player *plyr)
-{
-	// Put your scene update and rendering logic here
-	update_params(plyr);
-	// update_scene(plyr);
-	
-	// // Increment frame count
-	frameCount++;
-
-	// Get the current time in milliseconds
-	int currentTime = (int) (clock() * 1000 / CLOCKS_PER_SEC);
-
-	// Calculate time difference from the last frame
-	int deltaTime = currentTime - lastFrameTime;
-
-	// Update the title of the window with the current FPS
-	char fpsString[20];
-	// printf("")
-	sprintf(fpsString, "FPS: %.2f", 1000.0 / deltaTime);
-	mlx_string_put(plyr->v->mlx, plyr->v->win, plyr->width - 150, 10, GREEN, fpsString);
-	// printf("")
-
-	// Update the last frame time
-	lastFrameTime = currentTime;
-}
-
-//######################
 
 void	correct(int *b, int *r, int *g)
 {
@@ -123,8 +90,8 @@ void	draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, int x_index)
 	int		start;
 	float	w_heig;
 
-	w_heig = plyr->height / (ray.length * trigo(ray.angle - plyr->angle, COS)) * \
-	(BLOCK * 1.7);
+	w_heig = plyr->height / (ray.length * trigo(ray.angle - plyr->angle, \
+	COS)) * (BLOCK * 1.7);
 	start = (plyr->height / 2) - (w_heig / 2);
 	i = 0;
 	while (i < w_heig)

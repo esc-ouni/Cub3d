@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:30:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:46:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 	while ((str = get_next_line(fd)))
 	{
 		varr->fp = ft_msplit(plyr->v, str, ' ', TMP)[0];
-		if (varr->fp && !strcmp(varr->fp, "NO"))
+		if (varr->fp && !ft_strcmp(varr->fp, "NO"))
 			(varr->n)++;
-		else if (varr->fp && !strcmp(varr->fp, "SO"))
+		else if (varr->fp && !ft_strcmp(varr->fp, "SO"))
 			(varr->s)++;
-		else if (varr->fp && !strcmp(varr->fp, "WE"))
+		else if (varr->fp && !ft_strcmp(varr->fp, "WE"))
 			(varr->w)++;
-		else if (varr->fp && !strcmp(varr->fp, "EA"))
+		else if (varr->fp && !ft_strcmp(varr->fp, "EA"))
 			(varr->e)++;
-		else if (varr->fp && !strcmp(varr->fp, "F"))
+		else if (varr->fp && !ft_strcmp(varr->fp, "F"))
 			(varr->f)++;
-		else if (varr->fp && !strcmp(varr->fp, "C"))
+		else if (varr->fp && !ft_strcmp(varr->fp, "C"))
 			(varr->c)++;
 		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)) && \
 		!ft_strnstr(str, "0", ft_strlen(str)))
@@ -84,7 +84,7 @@ void    check_dups(t_player *plyr, char const *argv[])
 
 void	check_errs(t_player *plyr, char const *argv[])
 {
-	if (ft_strlen(strstr(argv[1], ".cub")) != 4)
+	if (ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) != 4)
 		exit_with_err(plyr->v->collector, PARSE);
 }
 

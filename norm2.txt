@@ -1,0 +1,190 @@
+Get_next_line/get_next_line.c: OK!
+Get_next_line/get_next_line.h: OK!
+Get_next_line/get_next_line_utils.c: OK!
+LIBF/ft_atoi.c: OK!
+LIBF/ft_bzero.c: OK!
+LIBF/ft_calloc.c: OK!
+LIBF/ft_isalnum.c: OK!
+LIBF/ft_isalpha.c: OK!
+LIBF/ft_isascii.c: OK!
+LIBF/ft_isdigit.c: OK!
+LIBF/ft_isprint.c: OK!
+LIBF/ft_itoa.c: OK!
+LIBF/ft_memchr.c: OK!
+LIBF/ft_memcmp.c: OK!
+LIBF/ft_memcpy.c: OK!
+LIBF/ft_memmove.c: OK!
+LIBF/ft_memset.c: OK!
+LIBF/ft_putchar_fd.c: OK!
+LIBF/ft_putendl_fd.c: OK!
+LIBF/ft_putnbr_fd.c: OK!
+LIBF/ft_putstr_fd.c: OK!
+LIBF/ft_strchr.c: OK!
+LIBF/ft_striteri.c: OK!
+LIBF/ft_strlcat.c: OK!
+LIBF/ft_strlcpy.c: OK!
+LIBF/ft_strlen.c: OK!
+LIBF/ft_strmapi.c: OK!
+LIBF/ft_strncmp.c: OK!
+LIBF/ft_strnstr.c: OK!
+LIBF/ft_strrchr.c: OK!
+LIBF/ft_tolower.c: OK!
+LIBF/ft_toupper.c: OK!
+LIBF/libft.h: OK!
+Src/Cub.c: OK!
+Src/Cub.h: Error!
+Error: CONSECUTIVE_SPC      (line: 237, col:  48):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line: 263, col:  50):	Two or more consecutives spaces
+Src/memory.c: OK!
+Src/tools_0.c: OK!
+Src/tools_1.c: Error!
+Error: TAB_INSTEAD_SPC      (line:  38, col:  22):	Found tab when expecting space
+Src/tools_10.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  90, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  91, col:   5):	Comment is invalid in this scope
+Src/tools_11.c: Error!
+Error: SPC_BFR_OPERATOR     (line:  98, col:  16):	missing space before operator
+Src/tools_12.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  15, col:   4):	space before function name
+Error: SPC_BFR_OPERATOR     (line:  22, col:  16):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  31, col:   4):	space before function name
+Error: SPC_BFR_OPERATOR     (line:  38, col:  16):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  47, col:   4):	space before function name
+Src/tools_13.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  15, col:   9):	space before function name
+Error: SPC_BFR_OPERATOR     (line:  30, col:  32):	missing space before operator
+Src/tools_14.c: Error!
+Error: LINE_TOO_LONG        (line:  68, col:  82):	line too long
+Error: CONSECUTIVE_NEWLINES (line:  84, col:   1):	Consecutive newlines
+Error: EMPTY_LINE_FUNCTION  (line:  92, col:   1):	Empty line in function
+Error: SPC_AFTER_OPERATOR   (line:  97, col:  32):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  97, col:  32):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line: 101, col:  27):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 101, col:  27):	missing space before operator
+Error: LINE_TOO_LONG        (line: 121, col:  82):	line too long
+Src/tools_15.c: Error!
+Error: ASSIGN_IN_CONTROL    (line:  26, col:  15):	Assignment in control structure
+Error: EMPTY_LINE_FUNCTION  (line:  55, col:   1):	Empty line in function
+Error: SPACE_BEFORE_FUNC    (line:  71, col:   4):	space before function name
+Error: ASSIGN_IN_CONTROL    (line:  98, col:  15):	Assignment in control structure
+Error: LINE_TOO_LONG        (line: 101, col:  82):	line too long
+Error: SPC_BFR_OPERATOR     (line: 101, col:  82):	missing space before operator
+Error: LINE_TOO_LONG        (line: 103, col:  82):	line too long
+Error: SPC_BFR_OPERATOR     (line: 103, col:  82):	missing space before operator
+Error: LINE_TOO_LONG        (line: 105, col:  82):	line too long
+Error: SPC_BFR_OPERATOR     (line: 105, col:  82):	missing space before operator
+Error: LINE_TOO_LONG        (line: 107, col:  82):	line too long
+Error: SPC_BFR_OPERATOR     (line: 107, col:  82):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line: 109, col:  74):	missing space before operator
+Error: LINE_TOO_LONG        (line: 109, col:  82):	line too long
+Error: SPC_BFR_OPERATOR     (line: 111, col:  74):	missing space before operator
+Error: LINE_TOO_LONG        (line: 111, col:  82):	line too long
+Src/tools_16.c: Error!
+Error: BRACE_SHOULD_EOL     (line:  64, col:   1):	Expected newline after brace
+Src/tools_17.c: Error!
+Error: ASSIGN_IN_CONTROL    (line:  42, col:  15):	Assignment in control structure
+Error: SPC_BFR_OPERATOR     (line:  46, col:  38):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  76, col:   5):	space before function name
+Error: SPC_BEFORE_NL        (line:  94, col:  30):	Space before newline
+Error: CONSECUTIVE_SPC      (line: 101, col:  20):	Two or more consecutives spaces
+Error: BRACE_SHOULD_EOL     (line: 110, col:   1):	Expected newline after brace
+Src/tools_2.c: Error!
+Error: SPC_AFTER_PAR        (line:  81, col:  62):	Missing space after parenthesis (brace/bracket)
+Error: SPC_BFR_OPERATOR     (line:  81, col:  63):	missing space before operator
+Src/tools_3.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  33, col:   5):	space before function name
+Error: ASSIGN_IN_CONTROL    (line:  35, col:  17):	Assignment in control structure
+Error: CONSECUTIVE_SPC      (line:  59, col:   5):	Two or more consecutives spaces
+Error: SPACE_BEFORE_FUNC    (line:  59, col:   8):	space before function name
+Error: EMPTY_LINE_FUNCTION  (line: 100, col:   1):	Empty line in function
+Error: SPC_BFR_OPERATOR     (line: 104, col:  17):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line: 104, col:  39):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line: 108, col:  29):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line: 108, col:  57):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line: 110, col:  14):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line: 110, col:  36):	missing space before operator
+Error: EMPTY_LINE_EOF       (line: 114, col:   1):	Empty line at end of file
+Src/tools_4.c: OK!
+Src/tools_5.c: OK!
+Src/tools_6.c: Error!
+Error: CONSECUTIVE_SPC      (line:  35, col:  49):	Two or more consecutives spaces
+Error: EMPTY_LINE_FUNCTION  (line:  38, col:   1):	Empty line in function
+Src/tools_7.c: Error!
+Error: ASSIGN_IN_CONTROL    (line:  45, col:  15):	Assignment in control structure
+Error: LINE_TOO_LONG        (line: 101, col:  85):	line too long
+Error: TOO_MANY_LINES       (line: 103, col:   1):	Function has more than 25 lines
+Error: SPACE_BEFORE_FUNC    (line: 105, col:   4):	space before function name
+Src/tools_8.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  21, col:   1):	Empty line in function
+Error: SPACE_AFTER_KW       (line:  22, col:   5):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  22, col:   7):	Missing space before parenthesis (brace/bracket)
+Error: SPC_AFTER_PAR        (line:  22, col:  42):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  22, col:  43):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  22, col:  43):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  22, col:  69):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  22, col:  70):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  22, col:  70):	missing space before operator
+Error: LINE_TOO_LONG        (line:  22, col:  82):	line too long
+Error: SPC_AFTER_OPERATOR   (line:  22, col: 134):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  22, col: 134):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  22, col: 136):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  22, col: 137):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  22, col: 137):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  22, col: 174):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  22, col: 174):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  22, col: 176):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  22, col: 177):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  22, col: 177):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  24, col:  58):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  24, col:  59):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  24, col:  59):	missing space before operator
+Error: LINE_TOO_LONG        (line:  24, col:  82):	line too long
+Error: SPC_AFTER_PAR        (line:  24, col:  96):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  24, col:  97):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  24, col:  97):	missing space before operator
+Error: EMPTY_LINE_FUNCTION  (line:  27, col:   1):	Empty line in function
+Error: SPACE_AFTER_KW       (line:  28, col:   5):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  28, col:   7):	Missing space before parenthesis (brace/bracket)
+Error: SPC_AFTER_PAR        (line:  28, col:  37):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  28, col:  38):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  28, col:  38):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  28, col:  67):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  28, col:  68):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  28, col:  68):	missing space before operator
+Error: LINE_TOO_LONG        (line:  28, col:  83):	line too long
+Error: SPC_AFTER_OPERATOR   (line:  28, col: 127):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  28, col: 127):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  28, col: 129):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  28, col: 130):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  28, col: 130):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  28, col: 170):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  28, col: 170):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  28, col: 172):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  28, col: 173):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  28, col: 173):	missing space before operator
+Error: SPACE_AFTER_KW       (line:  30, col:   9):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  30, col:  11):	Missing space before parenthesis (brace/bracket)
+Error: SPC_AFTER_PAR        (line:  30, col:  52):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  30, col:  53):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  30, col:  53):	missing space before operator
+Error: LINE_TOO_LONG        (line:  30, col:  82):	line too long
+Error: SPC_AFTER_PAR        (line:  30, col:  93):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  30, col:  94):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  30, col:  94):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  37, col:   5):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  39, col:   8):	Found space when expecting tab
+Error: MULT_DECL_LINE       (line:  39, col:  10):	Multiple declarations on a single line
+Error: SPC_BEFORE_NL        (line:  42, col:  12):	Space before newline
+Error: SPACE_BEFORE_FUNC    (line:  59, col:   6):	space before function name
+Error: MIXED_SPACE_TAB      (line:  64, col:   6):	Mixed spaces and tabs
+Error: CONSECUTIVE_SPC      (line:  64, col:  21):	Two or more consecutives spaces
+Src/tools_9.c: Error!
+Error: NEWLINE_PRECEDES_FUNC (line:  36, col:   1):	Functions must be separated by a newline
+Error: SPC_AFTER_OPERATOR   (line:  67, col:  57):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  67, col:  57):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  73, col:  57):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  73, col:  57):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  99, col:  35):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  99, col:  35):	missing space before operator
+Error: TOO_MANY_FUNCS       (line: 136, col:   1):	Too many functions in file
+Error: EMPTY_LINE_EOF       (line: 158, col:   1):	Empty line at end of file

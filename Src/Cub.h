@@ -6,20 +6,17 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:23:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:40:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include <time.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <string.h>
 # include <math.h>
 # include <mlx.h>
-// # include "../../.minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include "../Get_next_line/get_next_line.h"
 # include "../LIBF/libft.h"
@@ -205,6 +202,7 @@ typedef struct s_player
 	t_data		*t_img;
 }		t_player;
 
+void		resizer(t_player *player);
 void		check_map(t_player *plyr, char **map);
 char		**get_map(t_player *plyr, char const *argv[], int t);
 void		check_dups(t_player *plyr, char const *argv[]);
@@ -262,7 +260,7 @@ t_vector *vector);
 void		check_collision(t_player *plyr, float  x, float  y);
 t_ray		*cast_rays(t_player *plyr, t_ray *ray);
 float		draw_ray(t_player *plyr, t_ray *ray);
-void		updateAndRenderScene(t_player *plyr);
+void		update_params(t_player *plyr);
 t_data		*new_image_from_xpm(t_player *plyr, char *file_dstination);
 t_data		*draw_cf(t_player *plyr);
 void		debug(void);

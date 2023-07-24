@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:39:03 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 12:47:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:25:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,31 +105,4 @@ char	**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag)
 		return (p);
 	}
 	return (NULL);
-}
-
-static int	check(t_collector **collector, int nb, int s)
-{
-	if (nb > 255 || s == -1)
-		exit_with_err(collector, PARSE);
-	return (nb);
-}
-
-int	ft_atoi(t_collector **collector, const char *str)
-{
-	int					i;
-	int					r;
-	int					s;
-
-	s = 1;
-	r = 0;
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] < 48 || str[i] > 57))
-			exit_with_err(collector, PARSE);
-		r = r * 10 + (str[i] - 48);
-		r = check(collector, r, s);
-		i++;
-	}
-	return (r * s);
 }
