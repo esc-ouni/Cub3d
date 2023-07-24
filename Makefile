@@ -6,24 +6,28 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/24 18:50:06 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/24 19:06:48 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# NAME = Cub3D
+# FLAGS = -Wall -Wextra -Werror
+# MATH = -O3 -ffast-math
+# MLX = -lmlx -framework OpenGL -framework AppKit
+
+# all:
+# 	clear
+# 	cc $(FLAGS) $(MATH) $(MLX) LIBFT/*.c G_N_L/*.c ./Src/*.c -o $(NAME) -lm
+# 	# ./$(NAME) Ext/map.cub
+
+
 NAME   = cub3d
-
-MATH  = -Oz -ffast-math
-
-MLX   = -lmlx -framework OpenGL -framework AppKit
-
+MATH   = -O3 -ffast-math
+MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
-
 RM     = rm -rf
-
 FLAGS  = -Wall -Wextra -Werror
-
 HR     = Src/cub.h
-
 TLS    = Src/cub.c \
 		Src/memory.c \
 		Src/tools_0.c \
@@ -58,8 +62,10 @@ LIBFT:
 	@make -C LIBFT
 
 $(NAME): $(OBJ_T) $(HR) 
-	@$(CC) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
+	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
+	./$(NAME) Ext/map.cub
+
 
 %.o: %.c $(HR)
 	$(CC) $(FLAGS) -c $< -o $@
@@ -78,4 +84,4 @@ fclean: clean
 re: fclean all
 	@clear && echo "==Compilation_reseted========"
 
-.PHONY: all bonus clean fclean re LIBFT
+.PHONY: all clean fclean re LIBFT

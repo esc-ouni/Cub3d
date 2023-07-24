@@ -6,22 +6,16 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 14:32:47 by idouni            #+#    #+#              #
-#    Updated: 2023/07/24 18:39:05 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/24 18:55:07 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME   = libft.a
-
 CC     = cc
-
 RM     = rm -rf
-
 FLAGS  = -Wall -Wextra -Werror
-
 AR     = ar -rc
-
 HR     = libft.h
-
 PR     = ft_bzero.c \
 		ft_calloc.c \
 		ft_isalnum.c \
