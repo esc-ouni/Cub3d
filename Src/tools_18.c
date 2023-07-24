@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:57:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 17:09:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_point(t_player *plyr, int x, int y, int color)
 	int	j;
 
 	i = -2;
-	j = -2; 
+	j = -2;
 	while (i < 4)
 	{
 		while (i < 2)

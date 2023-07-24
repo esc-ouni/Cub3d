@@ -59,74 +59,13 @@ Error: SPC_BFR_OPERATOR     (line: 106, col:  74):	missing space before operator
 Error: LINE_TOO_LONG        (line: 106, col:  82):	line too long
 Src/tools_16.c: OK!
 Src/tools_17.c: OK!
+Src/tools_18.c: Error!
+Error: SPC_BEFORE_NL        (line:  21, col:  12):	Space before newline
 Src/tools_2.c: OK!
 Src/tools_3.c: OK!
 Src/tools_4.c: OK!
 Src/tools_5.c: OK!
 Src/tools_6.c: OK!
 Src/tools_7.c: OK!
-Src/tools_8.c: Error!
-Error: EMPTY_LINE_FUNCTION  (line:  21, col:   1):	Empty line in function
-Error: SPACE_AFTER_KW       (line:  22, col:   5):	Missing space after keyword
-Error: SPC_BFR_PAR          (line:  22, col:   7):	Missing space before parenthesis (brace/bracket)
-Error: SPC_AFTER_PAR        (line:  22, col:  42):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  22, col:  43):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  22, col:  43):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  22, col:  69):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  22, col:  70):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  22, col:  70):	missing space before operator
-Error: LINE_TOO_LONG        (line:  22, col:  82):	line too long
-Error: SPC_AFTER_OPERATOR   (line:  22, col: 134):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  22, col: 134):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  22, col: 136):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  22, col: 137):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  22, col: 137):	missing space before operator
-Error: SPC_AFTER_OPERATOR   (line:  22, col: 174):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  22, col: 174):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  22, col: 176):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  22, col: 177):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  22, col: 177):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  24, col:  58):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  24, col:  59):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  24, col:  59):	missing space before operator
-Error: LINE_TOO_LONG        (line:  24, col:  82):	line too long
-Error: SPC_AFTER_PAR        (line:  24, col:  96):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  24, col:  97):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  24, col:  97):	missing space before operator
-Error: EMPTY_LINE_FUNCTION  (line:  27, col:   1):	Empty line in function
-Error: SPACE_AFTER_KW       (line:  28, col:   5):	Missing space after keyword
-Error: SPC_BFR_PAR          (line:  28, col:   7):	Missing space before parenthesis (brace/bracket)
-Error: SPC_AFTER_PAR        (line:  28, col:  37):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  28, col:  38):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  28, col:  38):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  28, col:  67):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  28, col:  68):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  28, col:  68):	missing space before operator
-Error: LINE_TOO_LONG        (line:  28, col:  83):	line too long
-Error: SPC_AFTER_OPERATOR   (line:  28, col: 127):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  28, col: 127):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  28, col: 129):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  28, col: 130):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  28, col: 130):	missing space before operator
-Error: SPC_AFTER_OPERATOR   (line:  28, col: 170):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  28, col: 170):	missing space before operator
-Error: SPC_AFTER_PAR        (line:  28, col: 172):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  28, col: 173):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  28, col: 173):	missing space before operator
-Error: SPACE_AFTER_KW       (line:  30, col:   9):	Missing space after keyword
-Error: SPC_BFR_PAR          (line:  30, col:  11):	Missing space before parenthesis (brace/bracket)
-Error: SPC_AFTER_PAR        (line:  30, col:  52):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  30, col:  53):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  30, col:  53):	missing space before operator
-Error: LINE_TOO_LONG        (line:  30, col:  82):	line too long
-Error: SPC_AFTER_PAR        (line:  30, col:  93):	Missing space after parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  30, col:  94):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  30, col:  94):	missing space before operator
-Error: SPACE_BEFORE_FUNC    (line:  37, col:   5):	space before function name
-Error: SPACE_REPLACE_TAB    (line:  39, col:   8):	Found space when expecting tab
-Error: MULT_DECL_LINE       (line:  39, col:  10):	Multiple declarations on a single line
-Error: SPC_BEFORE_NL        (line:  42, col:  12):	Space before newline
-Error: SPACE_BEFORE_FUNC    (line:  59, col:   6):	space before function name
-Error: MIXED_SPACE_TAB      (line:  64, col:   6):	Mixed spaces and tabs
-Error: CONSECUTIVE_SPC      (line:  64, col:  21):	Two or more consecutives spaces
+Src/tools_8.c: OK!
 Src/tools_9.c: OK!
