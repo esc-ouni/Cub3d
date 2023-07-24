@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:30:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:59:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	check_mapb_t(t_player *plyr, char **map, int *chr, int *c)
 	{
 		while (map[y][x])
 		{
-			if (map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'S')
+			if (map[y][x] == 'N' || map[y][x] == 'E' || \
+			map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				plyr->p_x = (float )(x * BLOCK) + (BLOCK / 2);
 				plyr->p_y = (float )(y * BLOCK) + (BLOCK / 2);
@@ -81,7 +82,6 @@ void	check_mapb_t(t_player *plyr, char **map, int *chr, int *c)
 	}
 }
 
-
 void	check_mapb(t_player *plyr, char **map)
 {
 	int	c;
@@ -89,16 +89,15 @@ void	check_mapb(t_player *plyr, char **map)
 
 	chr = 0;
 	c = 0;
-
-	check_mapb_t(plyr, map, &chr, &c);
+	check_mapb_t (plyr, map, &chr, &c);
 	if (c != 1)
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err (plyr->v->collector, PARSE);
 	if (chr == 'N')
-		plyr->angle = 3 * (M_PI/2);
+		plyr->angle = 3 * (M_PI / 2);
 	else if (chr == 'E')
 		plyr->angle = 0;
 	else if (chr == 'S')
-		plyr->angle = M_PI/2;
+		plyr->angle = (M_PI / 2);
 	else if (chr == 'W')
 		plyr->angle = M_PI;
 }
@@ -118,7 +117,8 @@ void	check_map(t_player *plyr, char **map)
 		{
 			if (map[y][x] == '0')
 				point_surronded(plyr, map, y, x);
-			else if ((map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W'))
+			else if ((map[y][x] == 'N' || map[y][x] == 'S' || \
+			map[y][x] == 'E' || map[y][x] == 'W'))
 				point_surronded(plyr, map, y, x);
 			x++;
 		}

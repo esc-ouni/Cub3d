@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:54:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	update_params(t_player *plyr)
 		update_degree(plyr, -R_AN);
 	else if (plyr->rl == -1)
 		update_degree(plyr, R_AN);
-	// else
-	//     return ;
+	else
+		return ;
 	update_scene (plyr);
 }

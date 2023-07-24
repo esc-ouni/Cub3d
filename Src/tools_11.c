@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:06:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:56:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	wall_hit_hup(t_player *plyr, int x, int y)
 
 	m_x = ((x) / BLOCK);
 	m_y = ((y) / BLOCK) - 1;
-	if (m_x < 0|| m_y < 0)
+	if (m_x < 0 || m_y < 0)
 		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
 		return (1);

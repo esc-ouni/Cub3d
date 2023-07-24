@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:27:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:54:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	update_degree(t_player *plyr, float deg_angle)
 
 void	m_map(t_player *plyr)
 {
-	if (plyr->m == 1)	
+	if (plyr->m == 1)
 		plyr->m = 0;
 	else
 		plyr->m = 1;

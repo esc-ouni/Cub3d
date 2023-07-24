@@ -20,6 +20,7 @@ LIBF/ft_putendl_fd.c: OK!
 LIBF/ft_putnbr_fd.c: OK!
 LIBF/ft_putstr_fd.c: OK!
 LIBF/ft_strchr.c: OK!
+LIBF/ft_strcmp.c: OK!
 LIBF/ft_striteri.c: OK!
 LIBF/ft_strlcat.c: OK!
 LIBF/ft_strlcpy.c: OK!
@@ -32,36 +33,15 @@ LIBF/ft_tolower.c: OK!
 LIBF/ft_toupper.c: OK!
 LIBF/libft.h: OK!
 Src/Cub.c: OK!
-Src/Cub.h: Error!
-Error: CONSECUTIVE_SPC      (line: 237, col:  48):	Two or more consecutives spaces
-Error: CONSECUTIVE_SPC      (line: 263, col:  50):	Two or more consecutives spaces
+Src/Cub.h: OK!
 Src/memory.c: OK!
 Src/tools_0.c: OK!
-Src/tools_1.c: Error!
-Error: TAB_INSTEAD_SPC      (line:  38, col:  22):	Found tab when expecting space
-Src/tools_10.c: Error!
-Error: WRONG_SCOPE_COMMENT  (line:  90, col:   5):	Comment is invalid in this scope
-Error: WRONG_SCOPE_COMMENT  (line:  91, col:   5):	Comment is invalid in this scope
-Src/tools_11.c: Error!
-Error: SPC_BFR_OPERATOR     (line:  98, col:  16):	missing space before operator
-Src/tools_12.c: Error!
-Error: SPACE_BEFORE_FUNC    (line:  15, col:   4):	space before function name
-Error: SPC_BFR_OPERATOR     (line:  22, col:  16):	missing space before operator
-Error: SPACE_BEFORE_FUNC    (line:  31, col:   4):	space before function name
-Error: SPC_BFR_OPERATOR     (line:  38, col:  16):	missing space before operator
-Error: SPACE_BEFORE_FUNC    (line:  47, col:   4):	space before function name
-Src/tools_13.c: Error!
-Error: SPACE_BEFORE_FUNC    (line:  15, col:   9):	space before function name
-Error: SPC_BFR_OPERATOR     (line:  30, col:  32):	missing space before operator
-Src/tools_14.c: Error!
-Error: LINE_TOO_LONG        (line:  68, col:  82):	line too long
-Error: CONSECUTIVE_NEWLINES (line:  84, col:   1):	Consecutive newlines
-Error: EMPTY_LINE_FUNCTION  (line:  92, col:   1):	Empty line in function
-Error: SPC_AFTER_OPERATOR   (line:  97, col:  32):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line:  97, col:  32):	missing space before operator
-Error: SPC_AFTER_OPERATOR   (line: 101, col:  27):	missing space after operator
-Error: SPC_BFR_OPERATOR     (line: 101, col:  27):	missing space before operator
-Error: LINE_TOO_LONG        (line: 121, col:  82):	line too long
+Src/tools_1.c: OK!
+Src/tools_10.c: OK!
+Src/tools_11.c: OK!
+Src/tools_12.c: OK!
+Src/tools_13.c: OK!
+Src/tools_14.c: OK!
 Src/tools_15.c: Error!
 Error: ASSIGN_IN_CONTROL    (line:  26, col:  15):	Assignment in control structure
 Error: EMPTY_LINE_FUNCTION  (line:  55, col:   1):	Empty line in function

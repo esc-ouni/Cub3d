@@ -6,13 +6,14 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:29:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:57:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
 
-t_vector *find_horizontal_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
+t_vector	*find_horizontal_iterset(t_player *plyr, \
+t_ray *ray, t_vector *vector)
 {
 	if ((ray->angle > 0 && ray->angle < M_PI))
 		vector = h_up_iterset(plyr, ray, vector);
@@ -27,7 +28,7 @@ t_vector	*h_rg_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dx = BLOCK;
 	ray->dy = ray->dx * ray->t1;
-	vector->x = (ceil(plyr->p_x/ BLOCK) * BLOCK);
+	vector->x = (ceil(plyr->p_x / BLOCK) * BLOCK);
 	vector->y = plyr->p_y + ((vector->x - plyr->p_x) * ray->t1);
 	while (!wall_hit_vrg(plyr, (int)vector->x, (int)vector->y))
 	{

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:30:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:02:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,23 @@
 
 char	**get_map_cont(t_player *plyr, int fd, int t, char **map)
 {
-	int		itsmap;
 	int		i2;
-	int		i;
 	char	*s;
 
-	i = 0;
 	i2 = 0;
 	s = NULL;
-	itsmap = 0;
-	while ((s = get_next_line(fd)))
+	s = get_next_line(fd);
+	while (s)
 	{
-		if (i == t)
-			itsmap = 1;
-		if (itsmap)
+		if (t <= 0)
 		{
 			map[i2] = ft_mstrdup(plyr->v->collector, s, NTMP);
 			i2++;
 		}
 		free(s);
 		s = NULL;
-		i++;
+		s = get_next_line(fd);
+		t--;
 	}
 	map[i2] = NULL;
 	return (map);
