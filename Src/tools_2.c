@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 19:29:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:13:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	darken_color(int color, int amount)
 	int	g;
 	int	b;
 
+	amount /= 1.9;
 	r = 0;
 	g = 0;
 	b = 0;

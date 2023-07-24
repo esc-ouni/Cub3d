@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/23 18:31:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:16:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,7 @@ int	handlerp(int key, t_player *plyr)
 		ft_collectorclear(plyr->v->collector, ALL);
 	}
 	else if (key == 259)
-	{
-		plyr->w = 0;
-		plyr->d = 0;
-		plyr->rl = 0;
 		return (0);
-	}
 	else if (key == 46)
 		m_map(plyr);
 	else if (key == M_UP)
