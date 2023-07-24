@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:48:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:51:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@
 # define SOUTH 270
 # define WEST  180
 
-# define WIDTH 1600
-# define HEIGHT 800
+# define WIDTH 1800
+# define HEIGHT 1000
 # define BLOCK 1000
 
 # define R_AN  3
 
-# define M_B 6
+# define M_B 8
 
 # define TRANS 0xFF000000
 
