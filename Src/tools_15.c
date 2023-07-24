@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:35:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 17:12:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,9 @@ int	get_map_indx(t_player *plyr, int fd, int i, char *s)
 		else if (ft_strnstr(s, "C", 1))
 			plyr->v->c_color = extract_color(plyr, ft_mstrtrim(plyr->v, s+1, " ", TMP));
 		else if (ft_strnstr(s, "1", ft_strlen(s)))
-		{
-			free(s);
-			return (i);
-		}
+			return (free(s), i);
 		free(s);
 		i++;
-		s = NULL;
 	}
 	return (0);
 }
