@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:31:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:52:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ t_player	*init(int argc, char const *argv[])
 	if (!vars->mlx || !vars->win)
 		exit_with_err(&collector, MLX);
 	plyr->v = vars;
-	vars->dn_c = NULL;
-	vars->up_c = NULL;
-	vars->lf_c = NULL;
-	vars->rg_c = NULL;
+	vars->we_c = NULL;
+	vars->no_c = NULL;
+	vars->so_c = NULL;
+	vars->ea_c = NULL;
 	vars->c_color = 0;
 	vars->f_color = 0;
 	plyr->angle = 0;

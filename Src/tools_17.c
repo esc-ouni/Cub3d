@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:12:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:52:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	get_elements(t_player *plyr, char const *argv[])
 
 	i = 0;
 	i = get_elem(plyr, argv);
-	plyr->v->up = new_image_from_xpm(plyr, plyr->v->up_c);
-	check_xpm_size(plyr, plyr->v->up_c);
-	plyr->v->dn = new_image_from_xpm(plyr, plyr->v->dn_c);
-	check_xpm_size(plyr, plyr->v->dn_c);
-	plyr->v->lf = new_image_from_xpm(plyr, plyr->v->lf_c);
-	check_xpm_size(plyr, plyr->v->lf_c);
-	plyr->v->rg = new_image_from_xpm(plyr, plyr->v->rg_c);
-	check_xpm_size(plyr, plyr->v->rg_c);
+	plyr->v->no = new_image_from_xpm(plyr, plyr->v->no_c);
+	check_xpm_size(plyr, plyr->v->no_c);
+	plyr->v->we = new_image_from_xpm(plyr, plyr->v->we_c);
+	check_xpm_size(plyr, plyr->v->we_c);
+	plyr->v->so = new_image_from_xpm(plyr, plyr->v->so_c);
+	check_xpm_size(plyr, plyr->v->so_c);
+	plyr->v->ea = new_image_from_xpm(plyr, plyr->v->ea_c);
+	check_xpm_size(plyr, plyr->v->ea_c);
 	return (i);
 }
 

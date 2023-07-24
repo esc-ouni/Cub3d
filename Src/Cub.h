@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:53:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:52:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,10 @@
 # include "../Get_next_line/get_next_line.h"
 # include "../LIBF/libft.h"
 
-# define HORZ_U 15
-# define HORZ_D 16
-# define VERT_L 17
-# define VERT_R 27
-
-# define NORTH 90
-# define EAST  0
-# define SOUTH 270
-# define WEST  180
+# define NORTH 15
+# define SOUTH 16
+# define WEST 17
+# define EAST 27
 
 # define WIDTH 1800
 # define HEIGHT 1000
@@ -143,14 +138,14 @@ typedef struct s_vars
 	int				m_w;
 	int				c_color;
 	int				f_color;
-	char			*up_c;
-	char			*dn_c;
-	char			*lf_c;
-	char			*rg_c;
-	t_data			*up;
-	t_data			*dn;
-	t_data			*lf;
-	t_data			*rg;
+	char			*no_c;
+	char			*we_c;
+	char			*so_c;
+	char			*ea_c;
+	t_data			*no;
+	t_data			*we;
+	t_data			*so;
+	t_data			*ea;
 	t_data			*fix_img;
 	t_data			*m_fix_img;
 	t_collector		**collector;
@@ -202,6 +197,7 @@ typedef struct s_player
 	t_data		*t_img;
 }		t_player;
 
+t_data		*creat_tmap(t_player *plyr);
 void		resizer(t_player *player);
 void		check_map(t_player *plyr, char **map);
 char		**get_map(t_player *plyr, char const *argv[], int t);

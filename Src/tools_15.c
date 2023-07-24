@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:02:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:55:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ int	get_map_indx(t_player *plyr, int fd, int i, char *s)
 	while ((s = get_next_line(fd)))
 	{
 		if (ft_strnstr(s, "NO", 2))
-			plyr->v->up_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
+			plyr->v->no_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
 		else if (ft_strnstr(s, "SO", 2))
-			plyr->v->dn_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
+			plyr->v->so_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
 		else if (ft_strnstr(s, "WE", 2))
-			plyr->v->rg_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
+			plyr->v->we_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
 		else if (ft_strnstr(s, "EA", 2))
-			plyr->v->lf_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
+			plyr->v->ea_c = ft_mstrdup(plyr->v->collector, ft_mstrtrim(plyr->v, s+2, " ", TMP), TMP);
 		else if (ft_strnstr(s, "F", 1))
 			plyr->v->f_color = extract_color(plyr, ft_mstrtrim(plyr->v, s+1, " ", TMP));
 		else if (ft_strnstr(s, "C", 1))

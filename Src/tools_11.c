@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:56:20 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:47:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ float	draw_ray(t_player *plyr, t_ray *ray)
 	{
 		if ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) \
 		|| (ray->angle >= 0 && ray->angle < M_PI / 2))
-			ray->side = VERT_R;
+			ray->side = EAST;
 		else
-			ray->side = VERT_L;
+			ray->side = WEST;
 		ray->tex_x = (int)plyr->v1->y % BLOCK;
 		ray->length = ray->v_d;
 	}
 	else
 	{
 		if (ray->angle > 0 && ray->angle < M_PI)
-			ray->side = HORZ_D;
+			ray->side = SOUTH;
 		else
-			ray->side = HORZ_U;
+			ray->side = NORTH;
 		ray->tex_x = (int)plyr->v2->x % BLOCK;
 		ray->length = ray->h_d;
 	}

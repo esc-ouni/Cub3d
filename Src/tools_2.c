@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:10:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:52:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ char	*get_texture(t_player *plyr, t_ray ray)
 	char	*s;
 
 	s = NULL;
-	if (ray.side == HORZ_D)
-		s = plyr->v->dn->img_addr;
-	else if (ray.side == HORZ_U)
-		s = plyr->v->up->img_addr;
-	else if (ray.side == VERT_R)
-		s = plyr->v->rg->img_addr;
-	else if (ray.side == VERT_L)
-		s = plyr->v->lf->img_addr;
+	if (ray.side == SOUTH)
+		s = plyr->v->so->img_addr;
+	else if (ray.side == NORTH)
+		s = plyr->v->no->img_addr;
+	else if (ray.side == EAST)
+		s = plyr->v->ea->img_addr;
+	else if (ray.side == WEST)
+		s = plyr->v->we->img_addr;
 	return (s);
 }
 
@@ -73,8 +73,8 @@ int	get_color_from_tex(t_player *plyr, char *s, t_ray ray)
 
 	if (ray.tex_y >= BLOCK || ray.tex_x >= BLOCK)
 		return (0);
-	tmp = (s + (ray.tex_y * plyr->v->lf->size_line) + \
-	(ray.tex_x * plyr->v->lf->byte_pixel));
+	tmp = (s + (ray.tex_y * plyr->v->so->size_line) + \
+	(ray.tex_x * plyr->v->so->byte_pixel));
 	if (tmp)
 	{
 		color = *(int *)tmp;
