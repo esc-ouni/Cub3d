@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/24 19:09:24 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/24 19:11:33 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CC     = cc
 RM     = rm -rf
 FLAGS  = -Wall -Wextra -Werror
 HR     = Src/cub.h
+LHR     = LIBFT/libft.h
 TLS    = Src/cub.c \
 		Src/memory.c \
 		Src/tools_0.c \
@@ -50,7 +51,7 @@ all: LIBFT $(NAME)
 LIBFT:
 	@make -C LIBFT
 
-$(NAME): $(OBJ_T) $(HR) 
+$(NAME): $(OBJ_T) $(HR) $(LHR)
 	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
 
