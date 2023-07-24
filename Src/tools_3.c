@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:39:52 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 17:31:28 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 	str = get_next_line(fd);
 	while (str)
 	{
+		printf("'%s'\n", varr->fp);
 		varr->fp = ft_msplit(plyr->v, str, ' ', TMP)[0];
 		if (varr->fp && !ft_strcmp(varr->fp, "NO"))
 			(varr->n)++;
@@ -48,8 +49,7 @@ void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 			(varr->f)++;
 		else if (varr->fp && !ft_strcmp(varr->fp, "C"))
 			(varr->c)++;
-		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)) && \
-		!ft_strnstr(str, "0", ft_strlen(str)))
+		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)))
 			(varr->k)++;
 		free(str);
 		str = get_next_line(fd);
