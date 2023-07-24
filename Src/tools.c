@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 11:11:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 11:21:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ char	*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
 
 int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 {
-	int size;
-	char *s;
+	int		size;
+	char	*s;
 
 	size = 0;
 	s = NULL;
@@ -92,10 +92,10 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	}
 	if (close(fd) == -1)
 		exit_with_err(collector, OPEN);
-	return (size+=1);
+	return (size += 1);
 }
 
-t_player *init(int argc, char const *argv[])
+t_player	*init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
 	t_vars				*vars;
@@ -127,7 +127,9 @@ t_player *init(int argc, char const *argv[])
 	plyr->factor = BLOCK / M_B;
 	plyr->m = 0;
     plyr->f_angle = 60.0/WIDTH;
-	plyr->mv_sp = (BLOCK/7);
+	plyr->mv_sp = (BLOCK / 7);
+	plyr->yf = (BLOCK / 4);
+	plyr->xf = (BLOCK / 4);
 	plyr->p = NULL;
 	plyr->p = h_malloc(&collector, 3 * sizeof(void *), plyr->p, NTMP);
 	plyr->p[0] = NULL;
@@ -154,33 +156,32 @@ int hokking(t_player *plyr)
 {
 	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
 	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
-	mlx_hook(plyr->v->win, 2, 1L<<0, handlerp, plyr);
-	mlx_hook(plyr->v->win, 3, 1L<<1, handlerr, plyr);
+	mlx_hook(plyr->v->win, 2, (1L << 0), handlerp, plyr);
+	mlx_hook(plyr->v->win, 3, (1L << 1), handlerr, plyr);
 	updateAndRenderScene(plyr);
 	return (0);
 }
 
-void check_collision(t_player *plyr, float x, float y)
+void	check_collision(t_player *plyr, float x, float y)
 {
-    int xo = BLOCK/4;
-    int yo = BLOCK/4;
+	if (y < 0)
+		plyr->yf *= -1;
+	if (x < 0)
+		plyr->xf *= -1;
 
-    if (y < 0)
-        yo = -BLOCK/4;
-    if (x < 0)
-        xo = -BLOCK/4;
-
-    if(plyr->v->map[(int)(((plyr->p_y + y)/BLOCK))][(int)((plyr->p_x)/BLOCK)] != '1' && plyr->v->map[(int)(((plyr->p_y + y + yo/2)/BLOCK))][(int)((plyr->p_x + xo/2)/BLOCK)] != '1')
+    if(plyr->v->map[(int)(((plyr->p_y + y)/BLOCK))][(int)((plyr->p_x)/BLOCK)] != '1' && plyr->v->map[(int)(((plyr->p_y + y + plyr->yf/4)/BLOCK))][(int)((plyr->p_x + plyr->xf/2)/BLOCK)] != '1')
     {
-        if (plyr->v->map[(int)(((plyr->p_y + y + yo)/BLOCK))][(int)((plyr->p_x + xo)/BLOCK)] != '1')
+        if (plyr->v->map[(int)(((plyr->p_y + y + plyr->yf)/BLOCK))][(int)((plyr->p_x + plyr->xf)/BLOCK)] != '1')
             plyr->p_y += y;  
     }
 
-    if(plyr->v->map[(int)((plyr->p_y)/BLOCK)][(int)((plyr->p_x + x)/BLOCK)] != '1' && plyr->v->map[(int)((plyr->p_y + yo/2)/BLOCK)][(int)((plyr->p_x + x + xo/2)/BLOCK)] != '1')
+    if(plyr->v->map[(int)((plyr->p_y)/BLOCK)][(int)((plyr->p_x + x)/BLOCK)] != '1' && plyr->v->map[(int)((plyr->p_y + plyr->yf/4)/BLOCK)][(int)((plyr->p_x + x + plyr->xf/2)/BLOCK)] != '1')
     {
-        if(plyr->v->map[(int)((plyr->p_y + yo)/BLOCK)][(int)((plyr->p_x + x + xo)/BLOCK)] != '1')
+        if(plyr->v->map[(int)((plyr->p_y + plyr->yf)/BLOCK)][(int)((plyr->p_x + x + plyr->xf)/BLOCK)] != '1')
             plyr->p_x += x;
     }
+	plyr->xf = (BLOCK / 4);
+	plyr->yf = (BLOCK / 4);
 }
 
 void draw_point(t_player *plyr, int x, int y, int color)
