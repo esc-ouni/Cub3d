@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:46:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:14:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	exit_with_err(t_collector **collector, t_flag cause)
 	exit (1);
 }
 
-void duppp(t_player *plyr, int fd, t_varr *varr, char *str)
+void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 {
-	while ((str = get_next_line(fd)))
+	str = get_next_line(fd);
+	while (str)
 	{
 		varr->fp = ft_msplit(plyr->v, str, ' ', TMP)[0];
 		if (varr->fp && !ft_strcmp(varr->fp, "NO"))
@@ -51,12 +52,13 @@ void duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 		!ft_strnstr(str, "0", ft_strlen(str)))
 			(varr->k)++;
 		free(str);
+		str = get_next_line(fd);
 	}
 	if (varr->k)
 		exit_with_err(plyr->v->collector, PARSE);
 }
 
-void    check_dups(t_player *plyr, char const *argv[])
+void	check_dups(t_player *plyr, char const *argv[])
 {
 	t_varr	*varr;
 	char	*str;

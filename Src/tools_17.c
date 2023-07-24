@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 15:06:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:12:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	check_xpm_size(t_player *plyr, char *file_dstination)
 	{
 		if (ft_strnstr(s, "\"", 1))
 		{
-			sp = ft_msplit(plyr->v, s+1, ' ', TMP);
+			sp = ft_msplit(plyr->v, s + 1, ' ', TMP);
 			free(s);
 			break ;
 		}
@@ -73,7 +73,7 @@ int	get_elements(t_player *plyr, char const *argv[])
 	return (i);
 }
 
-char **parse_file(t_player *plyr, int argc, char const *argv[])
+char	**parse_file(t_player *plyr, int argc, char const *argv[])
 {
 	char	**map;
 	int		fd;
@@ -91,7 +91,7 @@ char **parse_file(t_player *plyr, int argc, char const *argv[])
 		check_dups(plyr, argv);
 		i = get_elements(plyr, argv);
 		map = get_map(plyr, argv, i);
-		check_map(plyr, map); 
+		check_map(plyr, map);
 		return (map);
 	}
 	exit_with_err(plyr->v->collector, ARGS);

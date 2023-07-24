@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:28:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:10:01 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	get_color_from_tex(t_player *plyr, char *s, t_ray ray)
 	if (tmp)
 	{
 		color = *(int *)tmp;
-		color = darken_color(color, (float )(ray.length * 255)/ (BLOCK * 40));
+		color = darken_color(color, (float )(ray.length * 255) / (BLOCK * 40));
 		return (color);
 	}
 	return (0);

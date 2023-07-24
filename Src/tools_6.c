@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 13:25:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 15:10:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ float	rad_to_deg(float angle)
 	return (angle);
 }
 
-void	rotate_vector(t_vector *direction, float  angle)
+void	rotate_vector(t_vector *direction, float angle)
 {
 	angle = deg_to_rad(angle);
-
 	direction->x = ((direction->x * trigo(angle, COS)) - \
 	(direction->y * trigo(angle, SIN)));
 	direction->y = ((direction->x * trigo(angle, SIN)) + \
