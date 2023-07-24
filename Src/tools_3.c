@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 12:24:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:27:28 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,25 +422,13 @@ char **parse_file(t_player *plyr, int argc, char const *argv[])
 	return (NULL);
 }
 
-float    trigo(float  angle, t_flag flag)
+float	trigo(float  angle, t_flag flag)
 {
-	// static int i;
-
-	// printf("angle : %f, index : %d\n",rad_to_deg(angle) ,i++);
 	if (flag == COS)
-	{
-		// printf("COS\n");
 		return (cos(angle));
-	}
 	else if (flag == SIN)
-	{
-		// printf("SIN\n");
 		return (sin(angle));
-	}
 	else if (flag == TAN)
-	{
-		// printf("TAN\n");
 		return (tan(angle));
-	}
-	return(0);
+	return (0);
 }
