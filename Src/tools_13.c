@@ -6,11 +6,22 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 14:57:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:52:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub.h"
+
+float	trigo(float angle, t_flag flag)
+{
+	if (flag == COS)
+		return (cos(angle));
+	else if (flag == SIN)
+		return (sin(angle));
+	else if (flag == TAN)
+		return (tan(angle));
+	return (0);
+}
 
 t_vector	*find_horizontal_iterset(t_player *plyr, \
 t_ray *ray, t_vector *vector)

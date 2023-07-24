@@ -58,18 +58,13 @@ Error: LINE_TOO_LONG        (line: 104, col:  82):	line too long
 Error: SPC_BFR_OPERATOR     (line: 106, col:  74):	missing space before operator
 Error: LINE_TOO_LONG        (line: 106, col:  82):	line too long
 Src/tools_16.c: OK!
-Src/tools_17.c: Error!
-Error: ASSIGN_IN_CONTROL    (line:  42, col:  15):	Assignment in control structure
+Src/tools_17.c: OK!
 Src/tools_2.c: OK!
 Src/tools_3.c: OK!
 Src/tools_4.c: OK!
 Src/tools_5.c: OK!
 Src/tools_6.c: OK!
-Src/tools_7.c: Error!
-Error: ASSIGN_IN_CONTROL    (line:  45, col:  15):	Assignment in control structure
-Error: LINE_TOO_LONG        (line: 101, col:  85):	line too long
-Error: TOO_MANY_LINES       (line: 103, col:   1):	Function has more than 25 lines
-Error: SPACE_BEFORE_FUNC    (line: 105, col:   4):	space before function name
+Src/tools_7.c: OK!
 Src/tools_8.c: Error!
 Error: EMPTY_LINE_FUNCTION  (line:  21, col:   1):	Empty line in function
 Error: SPACE_AFTER_KW       (line:  22, col:   5):	Missing space after keyword

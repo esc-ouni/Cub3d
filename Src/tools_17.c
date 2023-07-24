@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:35:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:54:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,15 @@ int	get_elem(t_player *plyr, char const *argv[])
 	return (i);
 }
 
-void	check_xpm_size(t_player *plyr, char *file_dstination)
+void	check_xpm_size2(t_player *plyr, int fd)
 {
-	char	**sp;
 	char	*s;
-	int		fd;
+	char	**sp;
 
 	sp = NULL;
 	s = NULL;
-	fd = 0;
-	fd = open(file_dstination, O_RDONLY);
-	if (fd == -1)
-		exit_with_err(plyr->v->collector, OPEN);
-	while ((s = get_next_line(fd)))
+	s = get_next_line(fd);
+	while (s)
 	{
 		if (ft_strnstr(s, "\"", 1))
 		{
@@ -49,11 +45,23 @@ void	check_xpm_size(t_player *plyr, char *file_dstination)
 		}
 		free(s);
 		s = NULL;
+		s = get_next_line(fd);
 	}
 	if (!ft_strcmp(sp[0], "1000") && !ft_strcmp(sp[1], "1000"))
 		return ;
 	else
 		exit_with_err(plyr->v->collector, MAP);
+}
+
+void	check_xpm_size(t_player *plyr, char *file_dstination)
+{
+	int		fd;
+
+	fd = 0;
+	fd = open(file_dstination, O_RDONLY);
+	if (fd == -1)
+		exit_with_err(plyr->v->collector, OPEN);
+	check_xpm_size2(plyr, fd);
 }
 
 int	get_elements(t_player *plyr, char const *argv[])
@@ -96,15 +104,4 @@ char	**parse_file(t_player *plyr, int argc, char const *argv[])
 	}
 	exit_with_err(plyr->v->collector, ARGS);
 	return (NULL);
-}
-
-float	trigo(float angle, t_flag flag)
-{
-	if (flag == COS)
-		return (cos(angle));
-	else if (flag == SIN)
-		return (sin(angle));
-	else if (flag == TAN)
-		return (tan(angle));
-	return (0);
 }

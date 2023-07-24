@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 16:43:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:49:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		exit_with_err(collector, OPEN);
-	while ((s = get_next_line(fd)))
+	s = get_next_line(fd);
+	while (s)
 	{
 		free(s);
 		s = NULL;
+		s = get_next_line(fd);
 		size++;
 	}
 	if (close(fd) == -1)
@@ -79,7 +81,6 @@ void	init_2(t_player *plyr, int argc, char const *argv[])
 	plyr->width) + 1, plyr->ray, NTMP);
 }
 
-
 t_player	*init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
@@ -109,7 +110,7 @@ t_player	*init(int argc, char const *argv[])
 	return (plyr);
 }
 
-int hokking(t_player *plyr)
+int	hokking(t_player *plyr)
 {
 	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
 	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
