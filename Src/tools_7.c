@@ -95,10 +95,6 @@ t_player	*init(int argc, char const *argv[])
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
 	vars->collector = &collector;
-	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
-	if (!vars->mlx || !vars->win)
-		exit_with_err(&collector, MLX);
 	plyr->v = vars;
 	vars->we_c = NULL;
 	vars->no_c = NULL;
@@ -107,6 +103,10 @@ t_player	*init(int argc, char const *argv[])
 	vars->c_color = 0;
 	vars->f_color = 0;
 	init_2(plyr, argc, argv);
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
+	if (!vars->mlx || !vars->win)
+		exit_with_err(&collector, MLX);
 	return (plyr);
 }
 
