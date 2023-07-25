@@ -6,11 +6,11 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/24 19:11:33 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/25 21:11:47 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME   = cub3d
+NAME   = cub3D
 MATH   = -O3 -ffast-math
 MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
