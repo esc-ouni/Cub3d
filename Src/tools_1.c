@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:51:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,47 +48,48 @@ int	handlerp(int key, t_player *plyr)
 	{
 		destroy_prev_imges(plyr);
 		destroy_fix_imges(plyr);
-		ft_collectorclear(plyr->v->collector, ALL);
+		ft_collectorclear(plyr, ALL);
 	}
-	else if (key == 259)
+	if (key == 259)
 		return (0);
-	else if (key == 46)
+	if (key == 46)
 		m_map(plyr);
-	else if (key == M_UP)
+	if (key == M_UP)
 		plyr->w = 1;
-	else if (key == M_DN)
+	if (key == M_DN)
 		plyr->w = -1;
-	else if (key == M_RG)
+	if (key == M_RG)
 		plyr->d = 1;
-	else if (key == M_LF)
+	if (key == M_LF)
 		plyr->d = -1;
-	else if (key == K_L)
+	if (key == K_L)
 		plyr->rl = 1;
-	else if (key == K_R)
+	if (key == K_R)
 		plyr->rl = -1;
 	return (0);
 }
 
 int	handlerr(int key, t_player *plyr)
 {
+	if (key == 53)
+	{
+		destroy_prev_imges(plyr);
+		destroy_fix_imges(plyr);
+		ft_collectorclear(plyr, ALL);
+		exit(0);
+	}
 	if (key == 259)
 	{
 		plyr->w = 0;
 		plyr->d = 0;
 		plyr->rl = 0;
+		return (0);
 	}
-	else if (key == 53)
-	{
-		destroy_prev_imges(plyr);
-		destroy_fix_imges(plyr);
-		ft_collectorclear(plyr->v->collector, ALL);
-		exit(0);
-	}
-	else if (key == M_UP || key == M_DN)
+	if (key == M_UP || key == M_DN)
 		plyr->w = 0;
-	else if (key == M_RG || key == M_LF)
+	if (key == M_RG || key == M_LF)
 		plyr->d = 0;
-	else if (key == K_R || key == K_L)
+	if (key == K_R || key == K_L)
 		plyr->rl = 0;
 	return (0);
 }

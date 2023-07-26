@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_elem(t_player *plyr, char const *argv[])
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		exit_with_err(plyr->v->collector, OPEN);
+		exit_with_err(plyr, OPEN);
 	i = get_map_indx(plyr, fd, i, s);
 	return (i);
 }
@@ -50,7 +50,7 @@ void	check_xpm_size2(t_player *plyr, int fd)
 	if (!ft_strcmp(sp[0], "1000") && !ft_strcmp(sp[1], "1000"))
 		return ;
 	else
-		exit_with_err(plyr->v->collector, MAP);
+		exit_with_err(plyr, MAP);
 }
 
 void	check_xpm_size(t_player *plyr, char *file_dstination)
@@ -60,7 +60,7 @@ void	check_xpm_size(t_player *plyr, char *file_dstination)
 	fd = 0;
 	fd = open(file_dstination, O_RDONLY);
 	if (fd == -1)
-		exit_with_err(plyr->v->collector, OPEN);
+		exit_with_err(plyr, OPEN);
 	check_xpm_size2(plyr, fd);
 }
 
@@ -94,7 +94,7 @@ char	**parse_file(t_player *plyr, int argc, char const *argv[])
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
-			exit_with_err(plyr->v->collector, OPEN);
+			exit_with_err(plyr, OPEN);
 		check_errs(plyr, argv);
 		check_dups(plyr, argv);
 		i = get_elements(plyr, argv);
@@ -102,6 +102,6 @@ char	**parse_file(t_player *plyr, int argc, char const *argv[])
 		check_map(plyr, map);
 		return (map);
 	}
-	exit_with_err(plyr->v->collector, ARGS);
+	exit_with_err(plyr, ARGS);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:54:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	void_check_middle(t_player *plyr, char **map)
 	{
 		if ((map[y][0] != '1' && map[y][0] != ' ') || (map[y][ft_strlen(map[y]) \
 		- 1] != '1' && map[y][ft_strlen(map[y]) - 1] != ' '))
-			exit_with_err(plyr->v->collector, PARSE);
+			exit_with_err(plyr, PARSE);
 		y++;
 	}
 }
@@ -39,7 +39,7 @@ void	check_mapa(t_player *plyr, char **map)
 	while (map[y][x])
 	{
 		if (map[y][x] != '1' && map[y][x] != ' ')
-			exit_with_err(plyr->v->collector, PARSE);
+			exit_with_err(plyr, PARSE);
 		x++;
 	}
 	while (map[y])
@@ -49,7 +49,7 @@ void	check_mapa(t_player *plyr, char **map)
 	while (map[y][x])
 	{
 		if (map[y][x] != '1' && map[y][x] != ' ')
-			exit_with_err(plyr->v->collector, PARSE);
+			exit_with_err(plyr, PARSE);
 		x++;
 	}
 }
@@ -74,7 +74,7 @@ void	check_mapb_t(t_player *plyr, char **map, int *chr, int *c)
 				(*c)++;
 			}
 			else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != ' ')
-				exit_with_err(plyr->v->collector, PARSE);
+				exit_with_err(plyr, PARSE);
 			x++;
 		}
 		y++;
@@ -91,7 +91,7 @@ void	check_mapb(t_player *plyr, char **map)
 	c = 0;
 	check_mapb_t (plyr, map, &chr, &c);
 	if (c != 1)
-		exit_with_err (plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	if (chr == 'N')
 		plyr->angle = 3 * (M_PI / 2);
 	else if (chr == 'E')

@@ -1,0 +1,23 @@
+Process:         cub3D [53215]
+Path:            /Volumes/VOLUME/*/cub3D
+Load Address:    0x105940000
+Identifier:      cub3D
+Version:         ???
+Code Type:       X86-64
+Parent Process:  bash [53214]
+
+Date/Time:       2023-07-26 10:55:44.065 +0100
+Launch Time:     2023-07-26 10:54:41.689 +0100
+OS Version:      Mac OS X 10.15.7 (19H2026)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 12.4 (12D4e)
+
+Physical footprint:         41.4M
+Physical footprint (peak):  100.6M
+----
+
+leaks Report Version: 4.0
+Process 53215: 21506 nodes malloced for 16993 KB
+Process 53215: 0 leaks for 0 total leaked bytes.
+

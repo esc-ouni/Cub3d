@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:30:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:54:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 	p = mlx_xpm_file_to_image(plyr->v->mlx, file_dstination, \
 	&width, &height);
 	if (!p)
-		exit_with_err(plyr->v->collector, MLX);
+		exit_with_err(plyr, MLX);
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
@@ -41,7 +41,7 @@ t_data	*new_image(t_player *plyr, int width, int height, t_flag type)
 	img = h_malloc(plyr->v->collector, sizeof(t_data), img, type);
 	p = mlx_new_image(plyr->v->mlx, width, height);
 	if (!p)
-		exit_with_err(plyr->v->collector, MLX);
+		exit_with_err(plyr, MLX);
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
@@ -57,7 +57,7 @@ void	tmp_alloc(t_collector **collector, size_t s, void **p)
 	tmp_c = malloc(sizeof(t_tmp));
 	(*p) = malloc(s);
 	if (!tmp_c || !(*p) || !(*collector))
-		exit_with_err(collector, MALLOC);
+		exit_with_err(NULL, MALLOC);
 	tmp_c->tmp_addr = (*p);
 	if (!((*collector)->tmp_cltr))
 		((*collector)->tmp_cltr) = tmp_c;
@@ -79,7 +79,7 @@ void	ntmp_alloc(t_collector **collector, size_t s, void **p)
 	ntmp_c = malloc(sizeof(t_ntmp));
 	(*p) = malloc(s);
 	if (!ntmp_c || !(*p) || !(*collector))
-		exit_with_err(collector, MALLOC);
+		exit_with_err(NULL, MALLOC);
 	ntmp_c->ntmp_addr = (*p);
 	if (!((*collector)->ntmp_cltr))
 		((*collector)->ntmp_cltr) = ntmp_c;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:39:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	check_vergs(t_player *plyr, char *s)
 {
 	if (!ft_strchr(s, ','))
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	else if (ft_strchr(ft_strchr(ft_strchr(s, ',') + 1, ',') + 1, ','))
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	else if (ft_strchr(ft_strchr(s, ',') + 1, ','))
 		return ;
 	else
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 }
 
 int	extract_color(t_player *plyr, char *color)
@@ -38,7 +38,7 @@ int	extract_color(t_player *plyr, char *color)
 	while (s[i])
 		i++;
 	if (i != 3)
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	color_c = ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
 	color_c <<= 8;
 	s++;

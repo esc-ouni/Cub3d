@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:37:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:52:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ void		update_scene(t_player *plyr);
 t_data		*draw_2d_map(t_player *plyr);
 void		rotate_vector(t_vector *direction, float angle);
 int			mouse_movement(int x, int y, t_player *plyr);
-void		exit_with_err(t_collector **collector, t_flag cause);
+void		exit_with_err(t_player *plyr, t_flag cause);
 t_data		*ft_transparency(t_player *plyr, t_data *p_img, int \
 width, int height);
 t_vector	*find_horizontal_iterset(t_player *plyr, \
@@ -258,14 +258,13 @@ float		draw_ray(t_player *plyr, t_ray *ray);
 void		update_params(t_player *plyr);
 t_data		*new_image_from_xpm(t_player *plyr, char *file_dstination);
 t_data		*draw_cf(t_player *plyr);
-void		debug(void);
 int			ft_ext(t_player *plyr);
 t_data		*new_image(t_player *plyr, int width, int height, t_flag type);
 void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);
 void		tmp_alloc(t_collector **collector, size_t s, void **p);
-void		ft_collectorclear(t_collector **collector, t_flag flag);
+void		ft_collectorclear(t_player *plyr, t_flag flag);
 void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char		**parse_file(t_player *plyr, int argc, char const *argv[]);

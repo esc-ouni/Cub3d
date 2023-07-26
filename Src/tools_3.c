@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:40:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	exit_with_err(t_collector **collector, t_flag cause)
+void	exit_with_err(t_player *plyr, t_flag cause)
 {
 	if (cause == MALLOC)
 		write (2, "\033[0;32mError\nMALLOC_FAILED\033[0;37m\n", 35);
@@ -26,7 +26,7 @@ void	exit_with_err(t_collector **collector, t_flag cause)
 		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
 	else if (cause == MAP)
 		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
-	ft_collectorclear(collector, ALL);
+	ft_collectorclear(plyr, ALL);
 	exit (1);
 }
 
@@ -51,7 +51,7 @@ void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)))
 			(varr->k)++;
 		if (varr->k)
-			exit_with_err(plyr->v->collector, PARSE);
+			exit_with_err(plyr, PARSE);
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -66,7 +66,7 @@ void	check_dups(t_player *plyr, char const *argv[])
 	str = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		exit_with_err(plyr->v->collector, OPEN);
+		exit_with_err(plyr, OPEN);
 	varr = NULL;
 	varr = h_malloc(plyr->v->collector, sizeof(t_varr), varr, TMP);
 	varr->c = 0;
@@ -80,13 +80,13 @@ void	check_dups(t_player *plyr, char const *argv[])
 	duppp(plyr, fd, varr, str);
 	if (varr->n != 1 || varr->e != 1 || varr->w != 1 \
 	|| varr->s != 1 || varr->f != 1 || varr->c != 1)
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 }
 
 void	check_errs(t_player *plyr, char const *argv[])
 {
 	if (ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) != 4)
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 }
 
 int	point_surronded(t_player *plyr, char **map, int y, int x)
@@ -100,14 +100,14 @@ int	point_surronded(t_player *plyr, char **map, int y, int x)
 		y_m++;
 	x_m = ft_strlen(map[y]);
 	if ((x - 1) < 0 || (x + 1) > x_m)
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	if ((y - 1) < 0 || (y + 1) > y_m)
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	if (x >= ft_strlen(map[y - 1]) || x >= ft_strlen(map[y + 1]))
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ')
-		exit_with_err(plyr->v->collector, PARSE);
+		exit_with_err(plyr, PARSE);
 	return (1);
 }

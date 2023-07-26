@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:34:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:54:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 	s = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		exit_with_err(plyr->v->collector, OPEN);
+		exit_with_err(plyr, OPEN);
 	s = get_next_line(fd);
 	while (s)
 	{
@@ -51,7 +51,7 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 		size++;
 	}
 	if (close(fd) == -1)
-		exit_with_err(plyr->v->collector, OPEN);
+		exit_with_err(plyr, OPEN);
 	return (size += 1);
 }
 
@@ -97,7 +97,7 @@ t_player	*init(int argc, char const *argv[])
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
 	if (!vars->mlx || !vars->win)
-		exit_with_err(&collector, MLX);
+		exit_with_err(NULL, MLX);
 	vars->collector = &collector;
 	plyr->v = vars;
 	vars->we_c = NULL;
