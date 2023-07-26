@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 12:05:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 12:09:28 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	ft_collectorclear(t_player *plyr, t_flag flag)
 {
 	if (!plyr || !plyr->v->collector)
 		return ;
-	// if (flag == TMP)
-	// 	free_tmp(plyr->v->collector);
-	// else if (flag == NTMP)
-	// 	free_ntmp(plyr->v->collector);
+	if (flag == TMP)
+		free_tmp(plyr->v->collector);
+	else if (flag == NTMP)
+		free_ntmp(plyr->v->collector);
 	if (flag == ALL)
 	{
 		if (plyr->v->mlx && plyr->v->win)
