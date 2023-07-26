@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 11:59:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	get_elem(t_player *plyr, char const *argv[])
 	if (fd == -1)
 		exit_with_err(plyr, OPEN);
 	i = get_map_indx(plyr, fd, i, s);
+	close(fd);
 	return (i);
 }
 
@@ -62,14 +63,28 @@ void	check_xpm_size(t_player *plyr, char *file_dstination)
 	if (fd == -1)
 		exit_with_err(plyr, OPEN);
 	check_xpm_size2(plyr, fd);
+	close(fd);
 }
 
-int	get_elements(t_player *plyr, char const *argv[])
+int	get_emap_indx(t_player *plyr, char const *argv[])
 {
 	int	i;
 
 	i = 0;
 	i = get_elem(plyr, argv);
+	// plyr->v->no = new_image_from_xpm(plyr, plyr->v->no_c);
+	// check_xpm_size(plyr, plyr->v->no_c);
+	// plyr->v->we = new_image_from_xpm(plyr, plyr->v->we_c);
+	// check_xpm_size(plyr, plyr->v->we_c);
+	// plyr->v->so = new_image_from_xpm(plyr, plyr->v->so_c);
+	// check_xpm_size(plyr, plyr->v->so_c);
+	// plyr->v->ea = new_image_from_xpm(plyr, plyr->v->ea_c);
+	// check_xpm_size(plyr, plyr->v->ea_c);
+	return (i);
+}
+
+void	get_elements(t_player *plyr, char const *argv[])
+{
 	plyr->v->no = new_image_from_xpm(plyr, plyr->v->no_c);
 	check_xpm_size(plyr, plyr->v->no_c);
 	plyr->v->we = new_image_from_xpm(plyr, plyr->v->we_c);
@@ -78,7 +93,6 @@ int	get_elements(t_player *plyr, char const *argv[])
 	check_xpm_size(plyr, plyr->v->so_c);
 	plyr->v->ea = new_image_from_xpm(plyr, plyr->v->ea_c);
 	check_xpm_size(plyr, plyr->v->ea_c);
-	return (i);
 }
 
 char	**parse_file(t_player *plyr, int argc, char const *argv[])
@@ -95,9 +109,10 @@ char	**parse_file(t_player *plyr, int argc, char const *argv[])
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			exit_with_err(plyr, OPEN);
+		close(fd);
 		check_errs(plyr, argv);
 		check_dups(plyr, argv);
-		i = get_elements(plyr, argv);
+		i = get_emap_indx(plyr, argv);
 		map = get_map(plyr, argv, i);
 		check_map(plyr, map);
 		return (map);

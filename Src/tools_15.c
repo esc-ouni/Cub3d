@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 11:32:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	**get_map_cont(t_player *plyr, int fd, int t, char **map)
 		t--;
 	}
 	map[i2] = NULL;
+	close(fd);
 	return (map);
 }
 

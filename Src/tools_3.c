@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 11:31:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	exit_with_err(t_player *plyr, t_flag cause)
 	else if (cause == MAP)
 		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
 	ft_collectorclear(plyr, ALL);
-	exit (1);
 }
 
 void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
@@ -55,6 +54,7 @@ void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 		free(str);
 		str = get_next_line(fd);
 	}
+	close(fd);
 }
 
 void	check_dups(t_player *plyr, char const *argv[])

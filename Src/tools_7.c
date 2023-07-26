@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:54:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 12:05:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,14 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 		s = get_next_line(fd);
 		size++;
 	}
-	if (close(fd) == -1)
-		exit_with_err(plyr, OPEN);
+	close(fd);
 	return (size += 1);
 }
 
 void	init_2(t_player *plyr, int argc, char const *argv[])
 {
+	get_elements(plyr, argv);
 	plyr->angle = 0;
-	plyr->v->map = parse_file(plyr, argc, argv);
 	plyr->color = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
@@ -94,18 +93,21 @@ t_player	*init(int argc, char const *argv[])
 	resizer(plyr);
 	vars = NULL;
 	vars = h_malloc(&collector, sizeof(t_vars), vars, NTMP);
-	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
-	if (!vars->mlx || !vars->win)
-		exit_with_err(NULL, MLX);
 	vars->collector = &collector;
-	plyr->v = vars;
 	vars->we_c = NULL;
 	vars->no_c = NULL;
 	vars->so_c = NULL;
 	vars->ea_c = NULL;
 	vars->c_color = 0;
 	vars->f_color = 0;
+	plyr->v = vars;
+	vars->mlx = NULL;
+	vars->win = NULL;
+	plyr->v->map = parse_file(plyr, argc, argv);
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
+	if (!vars->mlx || !vars->win)
+		exit_with_err(NULL, MLX);
 	init_2(plyr, argc, argv);
 	return (plyr);
 }

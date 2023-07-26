@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:52:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 12:00:17 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct s_player
 	t_data		*t_img;
 }		t_player;
 
+void		get_elements(t_player *plyr, char const *argv[]);
 t_data		*creat_tmap(t_player *plyr);
 void		resizer(t_player *player);
 void		check_map(t_player *plyr, char **map);
