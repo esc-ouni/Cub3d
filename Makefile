@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/26 10:11:57 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/26 10:21:33 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ clean:
 fclean: clean
 	@make fclean -C LIBFT
 	$(RM) $(NAME)
+	$(RM) .vscode
 	@clear && echo "==All_created_files_deleted=="
 
 re: fclean all
