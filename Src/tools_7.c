@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/25 21:10:52 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:34:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
 	return (s);
 }
 
-int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
+int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 {
 	int		size;
 	char	*s;
@@ -41,7 +41,7 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 	s = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		exit_with_err(collector, OPEN);
+		exit_with_err(plyr->v->collector, OPEN);
 	s = get_next_line(fd);
 	while (s)
 	{
@@ -51,7 +51,7 @@ int	count_alloc_size(t_collector **collector, char const *argv[], int fd)
 		size++;
 	}
 	if (close(fd) == -1)
-		exit_with_err(collector, OPEN);
+		exit_with_err(plyr->v->collector, OPEN);
 	return (size += 1);
 }
 

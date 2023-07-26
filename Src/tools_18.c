@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:39:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	extract_color(t_player *plyr, char *color)
 		i++;
 	if (i != 3)
 		exit_with_err(plyr->v->collector, PARSE);
-	color_c = ft_atoi(plyr->v->collector, ft_mstrtrim(plyr->v, *s, " ", TMP));
+	color_c = ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
 	color_c <<= 8;
 	s++;
-	color_c |= ft_atoi(plyr->v->collector, ft_mstrtrim(plyr->v, *s, " ", TMP));
+	color_c |= ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
 	color_c <<= 8;
 	s++;
-	color_c |= ft_atoi(plyr->v->collector, ft_mstrtrim(plyr->v, *s, " ", TMP));
+	color_c |= ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
 	return (color_c);
 }
 

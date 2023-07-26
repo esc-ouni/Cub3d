@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:38:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ t_data	*draw_player(t_player *plyr, t_data *p_img)
 	return (p_img);
 }
 
-static int	check(t_collector **collector, int nb, int s)
+static int	check(t_player *plyr, int nb, int s)
 {
 	if (nb > 255 || s == -1)
-		exit_with_err(collector, PARSE);
+		exit_with_err(plyr->v->collector, PARSE);
 	return (nb);
 }
 
-int	ft_atoi(t_collector **collector, const char *str)
+int	ft_atoi(t_player *plyr, const char *str)
 {
 	int					i;
 	int					r;
@@ -78,9 +78,9 @@ int	ft_atoi(t_collector **collector, const char *str)
 	while (str[i])
 	{
 		if ((str[i] < 48 || str[i] > 57))
-			exit_with_err(collector, PARSE);
+			exit_with_err(plyr->v->collector, PARSE);
 		r = r * 10 + (str[i] - 48);
-		r = check(collector, r, s);
+		r = check(plyr, r, s);
 		i++;
 	}
 	return (r * s);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:31:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:37:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ int			wall_hit_vrg(t_player *plyr, int x, int y);
 int			wall_hit_vlf(t_player *plyr, int x, int y);
 
 void		update_params(t_player *plyr);
-int			ft_atoi(t_collector **collector, const char *str);
+int			ft_atoi(t_player *plyr, const char *str);
 void		update_degree(t_player *plyr, float deg_angle);
 void		destroy_prev_imges(t_player *plyr);
 void		destroy_fix_imges(t_player *plyr);
@@ -238,8 +238,7 @@ float		rad_to_deg(float angle);
 float		up_degree(float angle, float add_angle);
 float		deg_to_rad(float angle);
 t_player	*init(int argc, char const *argv[]);
-int			count_alloc_size(t_collector **collector, char const \
-*argv[], int fd);
+int			count_alloc_size(t_player *plyr, char const *argv[], int fd);
 int			handlerp(int key, t_player *plyr);
 int			handlerr(int key, t_player *plyr);
 void		update_scene(t_player *plyr);

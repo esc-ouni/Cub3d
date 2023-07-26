@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:18:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:34:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**get_map(t_player *plyr, char const *argv[], int t)
 
 	fd = 0;
 	map = NULL;
-	map = h_malloc(plyr->v->collector, (count_alloc_size(plyr->v->collector, \
+	map = h_malloc(plyr->v->collector, (count_alloc_size(plyr, \
 	argv, fd) * sizeof(char *)), map, NTMP);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)

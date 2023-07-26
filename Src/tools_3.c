@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:40:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 			(varr->c)++;
 		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)))
 			(varr->k)++;
+		if (varr->k)
+			exit_with_err(plyr->v->collector, PARSE);
 		free(str);
 		str = get_next_line(fd);
 	}
-	if (varr->k)
-		exit_with_err(plyr->v->collector, PARSE);
 }
 
 void	check_dups(t_player *plyr, char const *argv[])
