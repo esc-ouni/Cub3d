@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:32:03 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_data	*draw_cf(t_player *plyr)
 	color = BLACK;
 	ix = 0;
 	iy = 0;
-	mapp = new_image(plyr->v, plyr->width, plyr->height, NTMP);
+	mapp = new_image(plyr, plyr->width, plyr->height, NTMP);
 	plyr->t_img = mapp;
 	while (ix < plyr->width)
 	{
@@ -117,7 +117,7 @@ t_data	*creat_tmap(t_player *plyr)
 	ix = 0;
 	iy = 0;
 	img = NULL;
-	img = new_image(plyr->v, plyr->v->m_w * M_B, plyr->v->m_h * M_B, NTMP);
+	img = new_image(plyr, plyr->v->m_w * M_B, plyr->v->m_h * M_B, NTMP);
 	img = ft_transparency(plyr, img, plyr->v->m_w * M_B, plyr->v->m_h * M_B);
 	while (plyr->v->map[iy])
 	{

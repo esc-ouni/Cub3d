@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:31:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 		(*collector) = NULL;
 		exit(0);
 	}
+	// mlx_destroy_window(mlx_ptr, win_ptr);
+    // mlx_destroy_display(mlx_ptr);
 }
 
 void	head_alloc(t_collector **collector)

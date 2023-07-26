@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:30:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 	return (img);
 }
 
-t_data	*new_image(t_vars *vars, int width, int height, t_flag type)
+t_data	*new_image(t_player *plyr, int width, int height, t_flag type)
 {
 	void			*p;
 	t_data			*img;
 
 	img = NULL;
-	img = h_malloc(vars->collector, sizeof(t_data), img, type);
-	p = mlx_new_image(vars->mlx, width, height);
+	img = h_malloc(plyr->v->collector, sizeof(t_data), img, type);
+	p = mlx_new_image(plyr->v->mlx, width, height);
 	if (!p)
-		exit_with_err(vars->collector, MLX);
+		exit_with_err(plyr->v->collector, MLX);
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));

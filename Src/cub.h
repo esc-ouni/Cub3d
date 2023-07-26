@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:18:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:31:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ t_data		*new_image_from_xpm(t_player *plyr, char *file_dstination);
 t_data		*draw_cf(t_player *plyr);
 void		debug(void);
 int			ft_ext(t_player *plyr);
-t_data		*new_image(t_vars *vars, int width, int height, t_flag type);
+t_data		*new_image(t_player *plyr, int width, int height, t_flag type);
 void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);

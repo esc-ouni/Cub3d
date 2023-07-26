@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:31:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	update_scene(t_player *plyr)
 	t_data	*p_r_img;
 
 	destroy_prev_imges(plyr);
-	p_img = new_image(plyr->v, plyr->width, plyr->height, TMP);
-	p_r_img = new_image(plyr->v, plyr->width, plyr->height, TMP);
+	p_img = new_image(plyr, plyr->width, plyr->height, TMP);
+	p_r_img = new_image(plyr, plyr->width, plyr->height, TMP);
 	p_img = ft_transparency(plyr, p_img, plyr->width, plyr->height);
 	p_r_img = ft_transparency(plyr, p_r_img, plyr->width, plyr->height);
 	draw_player(plyr, p_r_img);
