@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:21:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:32:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,14 @@ void	exit_with_err(t_player *plyr, t_flag cause)
 	else if (cause == PARSE)
 		write (2, "\033[0;32mError\nMISCONFIGURATION_OF_.cub_FILE\033[0;37m\n", 51);
 	else if (cause == ARGS)
-	{
 		write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 45);
-		exit (0);
-	}
 	else if (cause == MLX)
 		write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
 	else if (cause == OPEN)
 		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
 	else if (cause == MAP)
 		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
-	if (plyr)
-		ft_collectorclear(NULL, plyr, ALL);
+	ft_collectorclear(NULL, plyr, ALL);
 	exit(0);
 }
 
@@ -91,7 +87,7 @@ void	check_dups(t_player *plyr, char const *argv[])
 void	check_errs(t_player *plyr, char const *argv[])
 {
 	if (ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) != 4)
-		exit_with_err(plyr, PARSE);
+		exit_with_err(NULL, PARSE);
 }
 
 int	point_surronded(t_player *plyr, char **map, int y, int x)
