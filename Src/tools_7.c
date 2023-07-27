@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 12:05:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 09:58:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 
 void	init_2(t_player *plyr, int argc, char const *argv[])
 {
+	(void)argc;
 	get_elements(plyr, argv);
 	plyr->angle = 0;
 	plyr->color = 0;
@@ -105,7 +106,7 @@ t_player	*init(int argc, char const *argv[])
 	vars->win = NULL;
 	plyr->v->map = parse_file(plyr, argc, argv);
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "Cub3D");
+	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "cub3D");
 	if (!vars->mlx || !vars->win)
 		exit_with_err(NULL, MLX);
 	init_2(plyr, argc, argv);

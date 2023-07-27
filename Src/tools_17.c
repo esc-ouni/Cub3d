@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 11:59:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 09:58:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	get_emap_indx(t_player *plyr, char const *argv[])
 
 void	get_elements(t_player *plyr, char const *argv[])
 {
+	(void)argv;
 	plyr->v->no = new_image_from_xpm(plyr, plyr->v->no_c);
 	check_xpm_size(plyr, plyr->v->no_c);
 	plyr->v->we = new_image_from_xpm(plyr, plyr->v->we_c);
