@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 10:01:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 22:13:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,8 @@ typedef struct s_player
 	t_data		*t_img;
 }		t_player;
 
-void		get_elements(t_player *plyr, char const *argv[]);
+void		check_existence(t_player *plyr, char *file_dstination);
+void		get_elements(t_player *plyr);
 t_data		*creat_tmap(t_player *plyr);
 void		resizer(t_player *player);
 void		check_map(t_player *plyr, char **map);
@@ -265,7 +266,7 @@ void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);
 void		tmp_alloc(t_collector **collector, size_t s, void **p);
-void		ft_collectorclear(t_player *plyr, t_flag flag);
+void		ft_collectorclear(t_collector **collector, t_player *plyr, t_flag flag);
 void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 char		**parse_file(t_player *plyr, int argc, char const *argv[]);

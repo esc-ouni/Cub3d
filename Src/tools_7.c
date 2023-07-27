@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 09:58:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 21:58:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,21 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 	return (size += 1);
 }
 
-void	init_2(t_player *plyr, int argc, char const *argv[])
+void	init_2(t_player *plyr, char const *argv[])
 {
-	(void)argc;
-	get_elements(plyr, argv);
+	(void)argv;
+	// get_elements(plyr, argv);
 	plyr->angle = 0;
 	plyr->color = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
+	plyr->p = NULL;
 	plyr->factor = BLOCK / M_B;
 	plyr->m = 0;
 	plyr->f_angle = (60.0 / plyr->width);
 	plyr->mv_sp = (BLOCK / 7);
 	plyr->yf = (BLOCK / 4);
 	plyr->xf = (BLOCK / 4);
-	plyr->p = NULL;
 	plyr->p = h_malloc(plyr->v->collector, 3 * sizeof(void *), plyr->p, NTMP);
 	plyr->p[0] = NULL;
 	plyr->t_img = NULL;
@@ -79,6 +79,14 @@ void	init_2(t_player *plyr, int argc, char const *argv[])
 	plyr->ray = NULL;
 	plyr->ray = h_malloc(plyr->v->collector, (sizeof(t_ray) * \
 	plyr->width) + 1, plyr->ray, NTMP);
+}
+
+void	check_paths(t_player *plyr)
+{
+	check_existence(plyr, plyr->v->no_c);
+	check_existence(plyr, plyr->v->we_c);
+	check_existence(plyr, plyr->v->so_c);
+	check_existence(plyr, plyr->v->ea_c);
 }
 
 t_player	*init(int argc, char const *argv[])
@@ -104,12 +112,17 @@ t_player	*init(int argc, char const *argv[])
 	plyr->v = vars;
 	vars->mlx = NULL;
 	vars->win = NULL;
+	plyr->v->fix_img = NULL;
+	plyr->v->m_fix_img = NULL;
+	plyr->p = NULL;
 	plyr->v->map = parse_file(plyr, argc, argv);
+	check_paths(plyr);
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "cub3D");
+	get_elements(plyr);
 	if (!vars->mlx || !vars->win)
 		exit_with_err(NULL, MLX);
-	init_2(plyr, argc, argv);
+	init_2(plyr, argv);
 	return (plyr);
 }
 

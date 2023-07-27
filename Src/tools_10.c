@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 21:14:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,18 @@ t_data	*ft_transparency(t_player *plyr, t_data *p_img, int width, int height)
 
 void	destroy_fix_imges(t_player *plyr)
 {
-	mlx_destroy_image(plyr->v->mlx, plyr->v->we->img_ptr);
-	mlx_destroy_image(plyr->v->mlx, plyr->v->ea->img_ptr);
-	mlx_destroy_image(plyr->v->mlx, plyr->v->so->img_ptr);
-	mlx_destroy_image(plyr->v->mlx, plyr->v->no->img_ptr);
-	mlx_destroy_image(plyr->v->mlx, plyr->v->fix_img->img_ptr);
-	mlx_destroy_image(plyr->v->mlx, plyr->v->m_fix_img->img_ptr);
+	if (plyr->v->we)
+		mlx_destroy_image(plyr->v->mlx, plyr->v->we->img_ptr);
+	if (plyr->v->ea)
+		mlx_destroy_image(plyr->v->mlx, plyr->v->ea->img_ptr);
+	if (plyr->v->so)
+		mlx_destroy_image(plyr->v->mlx, plyr->v->so->img_ptr);
+	if (plyr->v->no)
+		mlx_destroy_image(plyr->v->mlx, plyr->v->no->img_ptr);
+	if (plyr->v->fix_img)
+		mlx_destroy_image(plyr->v->mlx, plyr->v->fix_img->img_ptr);
+	if (plyr->v->m_fix_img)
+		mlx_destroy_image(plyr->v->mlx, plyr->v->m_fix_img->img_ptr);
 }
 
 void	destroy_prev_imges(t_player *plyr)

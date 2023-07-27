@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:23:22 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 20:56:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,6 @@ static int	ns_start(char const *s1, char const *set)
 	return (l_f);
 }
 
-static int	ns_end(char const *s1, char const *set)
-{
-	size_t		l_e;
-	size_t		l;
-
-	l_e = ft_strlen(s1) - 1;
-	l = l_e;
-	while (l)
-	{
-		if (p_check(s1[l_e], set) == 1)
-			l_e--;
-		else
-			break ;
-		l--;
-	}
-	return (l_e);
-}
-
 char	*ft_mstrtrim(t_vars *vars, char const *s1, \
 char const *set, t_flag flag)
 {
@@ -76,7 +58,7 @@ char const *set, t_flag flag)
 	if (!s1 || !set)
 		return (NULL);
 	l_f = ns_start(s1, set);
-	l_e = ns_end(s1, set);
+	l_e = ft_strlen(s1);
 	if (l_f > l_e)
 		return (ft_mstrdup(vars->collector, "", TMP));
 	l = l_e - l_f + 1;

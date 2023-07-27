@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 12:09:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 22:18:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,26 @@ void	free_ntmp(t_collector **collector)
 	(*collector)->ntmp_cltr = NULL;
 }
 
-void	ft_collectorclear(t_player *plyr, t_flag flag)
+void	free_whats_allocated(t_collector **collector)
 {
+	t_collector *head;
+
+	head = *collector;
+	free_tmp(collector);
+	free_ntmp(collector);
+	if(head)
+	{
+		free(head);
+		head = NULL;
+	}
+	exit(0);
+}
+
+void	ft_collectorclear(t_collector **collector, t_player *plyr, t_flag flag)
+{
+	t_collector *head;
+
+	head = *(plyr->v->collector);
 	if (!plyr || !plyr->v->collector)
 		return ;
 	if (flag == TMP)
@@ -41,10 +59,18 @@ void	ft_collectorclear(t_player *plyr, t_flag flag)
 		free_ntmp(plyr->v->collector);
 	if (flag == ALL)
 	{
+		if (collector)
+			free_whats_allocated(plyr->v->collector);
+		destroy_fix_imges(plyr);
 		if (plyr->v->mlx && plyr->v->win)
 			mlx_destroy_window(plyr->v->mlx, plyr->v->win);
 		free_tmp(plyr->v->collector);
 		free_ntmp(plyr->v->collector);
+		if(head)
+		{
+			free(head);
+			head = NULL;
+		}
 		exit(0);
 	}
 }
