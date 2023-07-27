@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:00:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:06:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void		check_collision(t_player *plyr, float x, float y);
 t_ray		*cast_rays(t_player *plyr, t_ray *ray);
 float		draw_ray(t_player *plyr, t_ray *ray);
 void		update_params(t_player *plyr);
+void		xpm_failed(t_player *plyr);
 t_data		*new_image_from_xpm(t_player *plyr, char *file_dstination);
 t_data		*draw_cf(t_player *plyr);
 int			ft_ext(t_player *plyr);
