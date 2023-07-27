@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:52:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:20:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	**parse_file(t_player *plyr, int argc, char const *argv[])
 	i = 0;
 	map = NULL;
 	fd = 0;
-	if (argc == 2 && argv[1])
+	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
