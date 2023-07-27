@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 11:32:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:47:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	draw_point(t_player *plyr, int x, int y, int color)
 	int	i;
 	int	j;
 
-	i = -(M_B/4);
-	j = -(M_B/4);
-	while (i < (M_B/2))
+	i = - (M_B / 4);
+	j = - (M_B / 4);
+	while (i < (M_B / 2))
 	{
-		while (i < (M_B/4))
+		while (i < (M_B / 4))
 		{
-			while (j < (M_B/4))
+			while (j < (M_B / 4))
 			{
 				my_mlx_pixel_put(plyr, x + i, y + j, color);
 				j++;
 			}
 			i++;
-			j = -(M_B/4);
+			j = - (M_B / 4);
 		}
 		i++;
 	}

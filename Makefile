@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/27 22:56:22 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/27 23:43:59 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ TLS    = Src/cub.c \
 		Src/tools_16.c \
 		Src/tools_17.c \
 		Src/tools_18.c \
+		Src/tools_19.c \
+		Src/tools_20.c \
 		Src/tools_2.c \
 		Src/tools_3.c \
 		Src/tools_4.c \

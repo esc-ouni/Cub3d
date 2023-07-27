@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:16:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:46:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,25 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 	return (size += 1);
 }
 
-void	init_2(t_player *plyr, char const *argv[])
+void	init_1(t_player *plyr, int argc, char const *argv[])
 {
-	(void)argv;
-	// get_elements(plyr, argv);
+	plyr->v->mlx = NULL;
+	plyr->v->win = NULL;
+	plyr->v->fix_img = NULL;
+	plyr->v->m_fix_img = NULL;
+	plyr->p = NULL;
+	plyr->v->map = parse_file(plyr, argc, argv);
+	check_paths(plyr);
+	plyr->v->mlx = mlx_init();
+	plyr->v->win = mlx_new_window(plyr->v->mlx, plyr->width, \
+	plyr->height, "cub3D");
+	get_elements(plyr);
+	if (!plyr->v->mlx || !plyr->v->win)
+		exit_with_err(NULL, MLX);
+}
+
+void	init_2(t_player *plyr)
+{
 	plyr->angle = 0;
 	plyr->color = 0;
 	plyr->v->fix_img = draw_cf(plyr);
@@ -81,14 +96,6 @@ void	init_2(t_player *plyr, char const *argv[])
 	plyr->width) + 1, plyr->ray, NTMP);
 }
 
-void	check_paths(t_player *plyr)
-{
-	check_existence(plyr, plyr->v->no_c);
-	check_existence(plyr, plyr->v->we_c);
-	check_existence(plyr, plyr->v->so_c);
-	check_existence(plyr, plyr->v->ea_c);
-}
-
 t_player	*init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
@@ -110,28 +117,7 @@ t_player	*init(int argc, char const *argv[])
 	vars->c_color = 0;
 	vars->f_color = 0;
 	plyr->v = vars;
-	vars->mlx = NULL;
-	vars->win = NULL;
-	plyr->v->fix_img = NULL;
-	plyr->v->m_fix_img = NULL;
-	plyr->p = NULL;
-	plyr->v->map = parse_file(plyr, argc, argv);
-	check_paths(plyr);
-	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, plyr->width, plyr->height, "cub3D");
-	get_elements(plyr);
-	if (!vars->mlx || !vars->win)
-		exit_with_err(NULL, MLX);
-	init_2(plyr, argv);
+	init_1(plyr, argc, argv);
+	init_2(plyr);
 	return (plyr);
-}
-
-int	hokking(t_player *plyr)
-{
-	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
-	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
-	mlx_hook(plyr->v->win, 2, (1L << 0), handlerp, plyr);
-	mlx_hook(plyr->v->win, 3, (1L << 1), handlerr, plyr);
-	update_params(plyr);
-	return (0);
 }

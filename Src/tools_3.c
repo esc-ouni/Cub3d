@@ -6,17 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:12:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:40:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-void	xpm_failed(t_player *plyr)
-{
-	write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
-	exit(0);
-}
 
 void	exit_with_err(t_player *plyr, t_flag cause)
 {

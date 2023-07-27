@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 12:20:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:42:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_data	*creat_tmap(t_player *plyr)
 			else if (plyr->v->map[iy][ix] != '1' && plyr->v->map[iy][ix] != ' ')
 				draw_nwall(plyr, img, ix, iy);
 			ix++;
-		}	
+		}
 		iy++;
 	}
 	return (img);

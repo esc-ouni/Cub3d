@@ -1,88 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_18.c                                         :+:      :+:    :+:   */
+/*   tools_19.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:42:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	check_vergs(t_player *plyr, char *s)
+void	check_paths(t_player *plyr)
 {
-	if (!ft_strchr(s, ','))
-		exit_with_err(plyr, PARSE);
-	else if (ft_strchr(ft_strchr(ft_strchr(s, ',') + 1, ',') + 1, ','))
-		exit_with_err(plyr, PARSE);
-	else if (ft_strchr(ft_strchr(s, ',') + 1, ','))
-		return ;
-	else
-		exit_with_err(plyr, PARSE);
+	check_existence(plyr, plyr->v->no_c);
+	check_existence(plyr, plyr->v->we_c);
+	check_existence(plyr, plyr->v->so_c);
+	check_existence(plyr, plyr->v->ea_c);
 }
 
-int	extract_color(t_player *plyr, char *color)
+int	hokking(t_player *plyr)
 {
-	int		i;
-	char	**s;
-	int		color_c;
-
-	i = 0;
-	color_c = 0;
-	color = ft_mstrtrim(plyr->v, color, " ", TMP);
-	check_vergs(plyr, color);
-	s = ft_msplit(plyr->v, color, ',', TMP);
-	while (s[i])
-		i++;
-	if (i != 3)
-		exit_with_err(plyr, PARSE);
-	color_c = ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
-	color_c <<= 8;
-	s++;
-	color_c |= ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
-	color_c <<= 8;
-	s++;
-	color_c |= ft_atoi(plyr, ft_mstrtrim(plyr->v, *s, " ", TMP));
-	return (color_c);
-}
-
-char	*get_file_path(t_player *plyr, char *path)
-{
-	char	*str;
-
-	str = NULL;
-	str = ft_mstrdup(plyr->v->collector, \
-	ft_mstrtrim(plyr->v, path, " ", TMP), TMP);
-	return (str);
-}
-
-int	get_map_indx(t_player *plyr, int fd, int i, char *s)
-{
-	s = get_next_line(fd);
-	while (s)
-	{
-		if (ft_strnstr(s, "NO", 2))
-			plyr->v->no_c = get_file_path(plyr, s + 2);
-		else if (ft_strnstr(s, "SO", 2))
-			plyr->v->so_c = get_file_path(plyr, s + 2);
-		else if (ft_strnstr(s, "WE", 2))
-			plyr->v->we_c = get_file_path(plyr, s + 2);
-		else if (ft_strnstr(s, "EA", 2))
-			plyr->v->ea_c = get_file_path(plyr, s + 2);
-		else if (ft_strnstr(s, "F", 1))
-			plyr->v->f_color = extract_color(plyr, \
-			ft_mstrtrim(plyr->v, s + 1, " ", TMP));
-		else if (ft_strnstr(s, "C", 1))
-			plyr->v->c_color = extract_color(plyr, \
-			ft_mstrtrim(plyr->v, s + 1, " ", TMP));
-		else if (ft_strnstr(s, "1", ft_strlen(s)))
-			return (free(s), i);
-		free(s);
-		s = get_next_line(fd);
-		i++;
-	}
+	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
+	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
+	mlx_hook(plyr->v->win, 2, (1L << 0), handlerp, plyr);
+	mlx_hook(plyr->v->win, 3, (1L << 1), handlerr, plyr);
+	update_params(plyr);
 	return (0);
+}
+
+void	draw_line(t_player *plyr, int color, int x2, int y2)
+{
+	float	x;
+	float	y;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
+
+	x = (x2 / plyr->factor) - (plyr->p_x / plyr->factor);
+	y = (y2 / plyr->factor) - (plyr->p_y / plyr->factor);
+	steps = ft_abs(y) - 1;
+	if (ft_abs(x) > ft_abs(y))
+		steps = ft_abs(x) - 1;
+	x_inc = (float)(x / steps);
+	y_inc = (float)(y / steps);
+	x = (plyr->p_x / plyr->factor);
+	y = (plyr->p_y / plyr->factor);
+	while (steps--)
+	{
+		my_mlx_pixel_put(plyr, (int)x, (int)y, color);
+		x += x_inc;
+		y += y_inc;
+	}
+}
+
+void	xpm_failed(t_player *plyr)
+{
+	write (2, "\033[0;32mError\nMLX_XPM_FAILED\033[0;37m\n", 36);
+	exit(0);
 }
