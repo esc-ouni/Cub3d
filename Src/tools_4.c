@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:46:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:09:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	ft_collectorclear(t_collector **collector, t_player *plyr, t_flag flag)
 		if (collector)
 			free_whats_allocated(plyr->v->collector);
 		destroy_fix_imges(plyr);
-		if (plyr->v->mlx && plyr->v->win)
-			mlx_destroy_window(plyr->v->mlx, plyr->v->win);
 		free_tmp(plyr->v->collector);
 		free_ntmp(plyr->v->collector);
 		if (head)
