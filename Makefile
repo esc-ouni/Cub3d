@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/27 20:51:15 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/27 22:56:22 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ MATH   = -O3 -ffast-math
 MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
 RM     = rm -rf
-FLAGS  = -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS  = #-Wall -Wextra -Werror #-fsanitize=address -g
 HR     = Src/cub.h
 LHR    = LIBFT/libft.h
 GHR    = G_N_L/get_next_line.h
