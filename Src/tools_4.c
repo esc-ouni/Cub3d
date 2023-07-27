@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:34:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:53:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,18 @@ void	free_whats_allocated(t_collector **collector)
 	exit(0);
 }
 
-void	ft_collectorclear(t_collector **collector, t_player *plyr, t_flag flag)
+void	ft_collectorclear(t_player *plyr, t_flag flag)
 {
-	t_collector	*head;
-
-	head = NULL;
-	if (!plyr || ! plyr->v->collector)
-		return ;
-	head = *(plyr->v->collector);
 	if (flag == TMP)
 		free_tmp(plyr->v->collector);
 	else if (flag == NTMP)
 		free_ntmp(plyr->v->collector);
-	if (flag == ALL)
+	else if (flag == ALL)
 	{
-		if (collector)
-			free_whats_allocated(plyr->v->collector);
-		destroy_fix_imges(plyr);
+		if (!plyr)
+			exit(0);
 		free_tmp(plyr->v->collector);
 		free_ntmp(plyr->v->collector);
-		if (head)
-		{
-			free(head);
-			head = NULL;
-		}
 		exit(0);
 	}
 }

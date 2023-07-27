@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:44:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:42:04 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,7 @@ void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
 void		head_alloc(t_collector **collector);
 void		tmp_alloc(t_collector **collector, size_t s, void **p);
-void		ft_collectorclear(t_collector **collector, \
-t_player *plyr, t_flag flag);
+void		ft_collectorclear(t_player *plyr, t_flag flag);
 void		check_xpm_size(t_player *plyr, char *file_dstination);
 void		ntmp_alloc(t_collector **collector, size_t s, void **p);
 void		*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);

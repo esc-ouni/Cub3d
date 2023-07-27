@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 22:21:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:54:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	handlerp(int key, t_player *plyr)
 	if (key == 53)
 	{
 		destroy_prev_imges(plyr);
-		ft_collectorclear(NULL, plyr, ALL);
+		destroy_fix_imges(plyr);
+		ft_collectorclear(plyr, ALL);
 	}
 	if (key == 259)
 		return (0);
@@ -73,7 +74,7 @@ int	handlerr(int key, t_player *plyr)
 	if (key == 53)
 	{
 		destroy_prev_imges(plyr);
-		ft_collectorclear(NULL, plyr, ALL);
+		ft_collectorclear(plyr, ALL);
 		exit(0);
 	}
 	if (key == 259)

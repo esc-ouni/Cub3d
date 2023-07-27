@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:46:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:44:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->v->mlx = mlx_init();
 	plyr->v->win = mlx_new_window(plyr->v->mlx, plyr->width, \
 	plyr->height, "cub3D");
-	get_elements(plyr);
 	if (!plyr->v->mlx || !plyr->v->win)
 		exit_with_err(NULL, MLX);
+	get_elements(plyr);
 }
 
 void	init_2(t_player *plyr)
