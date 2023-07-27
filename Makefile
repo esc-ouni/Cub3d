@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/27 10:44:53 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/27 11:05:41 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,17 +47,15 @@ LBFT   = LIBFT/libft.a
 
 OBJ_T  = $(TLS:%.c=%.o)
 
-all: LIBFT $(NAME)
+all: $(NAME)
 
-LIBFT:
+$(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
 	@make -C LIBFT
-
-$(NAME): $(OBJ_T) $(HR) $(LHR) $(GHR)
 	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
 
 
-%.o: %.c $(HR)
+%.o: %.c $(HR) $(GHR) $(LHR)
 	$(CC) $(FLAGS) $(MATH) -c $< -o $@ 
 
 clean:
@@ -76,4 +74,4 @@ fclean: clean
 re: fclean all
 	@clear && echo "==Compilation_reseted========"
 
-.PHONY: all clean fclean re LIBFT
+.PHONY: all clean fclean re
