@@ -14,18 +14,19 @@
 
 void	exit_with_err(t_player *plyr, t_flag cause)
 {
-	if (cause == MALLOC)
-		write (2, "\033[0;32mError\nMALLOC_FAILED\033[0;37m\n", 35);
-	else if (cause == PARSE)
-		write (2, "\033[0;32mError\nMISCONFIGURATION_OF_.cub_FILE\033[0;37m\n", 51);
-	else if (cause == ARGS)
-		write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 45);
-	else if (cause == MLX)
-		write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
-	else if (cause == OPEN)
-		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
-	else if (cause == MAP)
-		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
+	(void)cause;
+	// if (cause == MALLOC)
+	// 	write (2, "\033[0;32mError\nMALLOC_FAILED\033[0;37m\n", 35);
+	// else if (cause == PARSE)
+	// 	write (2, "\033[0;32mError\nMISCONFIGURATION_OF_.cub_FILE\033[0;37m\n", 51);
+	// else if (cause == ARGS)
+	// 	write (2, "\033[0;32mError\nNOT_A_VALID_ARGS_NUMBER\033[0;37m\n", 45);
+	// else if (cause == MLX)
+	// 	write (2, "\033[0;32mError\nMLX_FAILED\033[0;37m\n", 32);
+	// else if (cause == OPEN)
+	// 	write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
+	// else if (cause == MAP)
+	// 	write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
 	ft_collectorclear(plyr, ALL);
 	exit(0);
 }
@@ -86,6 +87,7 @@ void	check_dups(t_player *plyr, char const *argv[])
 
 void	check_errs(t_player *plyr, char const *argv[])
 {
+	(void)plyr;
 	if (ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) != 4)
 		exit_with_err(NULL, PARSE);
 }

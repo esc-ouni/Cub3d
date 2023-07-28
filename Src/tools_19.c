@@ -58,6 +58,6 @@ void	draw_line(t_player *plyr, int color, int x2, int y2)
 void	xpm_failed(t_player *plyr)
 {
 	(void)plyr;
-	write (2, "\033[0;32mError\nMLX_XPM_FAILED\033[0;37m\n", 36);
+	// write (2, "\033[0;32mError\nMLX_XPM_FAILED\033[0;37m\n", 36);
 	exit(0);
 }

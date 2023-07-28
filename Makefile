@@ -12,10 +12,10 @@
 
 NAME   = cub3D
 MATH   = -O3 -ffast-math
-MLX    = -lmlx -framework OpenGL -framework AppKit
+MLX    = -lmlx -lXext -lX11
 CC     = cc
 RM     = rm -rf
-FLAGS  = #-Wall -Wextra -Werror
+FLAGS  = -Wall -Wextra -Werror
 HR     = Src/cub.h
 LHR    = LIBFT/libft.h
 GHR    = G_N_L/get_next_line.h
