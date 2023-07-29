@@ -29,8 +29,12 @@ void	resizer(t_player *player)
 t_data	*draw_2d_map(t_player *plyr)
 {
 	int		i;
+	int		color;
+	t_data	*img;
 
 	i = 0;
+	img = NULL;
+	color = M_BLACK;
 	plyr->v->m_w = ft_strlen(plyr->v->map[0]);
 	while (plyr->v->map[i])
 	{

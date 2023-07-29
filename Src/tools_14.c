@@ -15,8 +15,10 @@
 void	void_check_middle(t_player *plyr, char **map)
 {
 	int	y;
+	int	x;
 
 	y = 0;
+	x = 0;
 	while (map[y])
 	{
 		if ((map[y][0] != '1' && map[y][0] != ' ') || (map[y][ft_strlen(map[y]) \
