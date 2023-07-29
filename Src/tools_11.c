@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:41:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 20:14:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	update_scene(t_player *plyr)
 	plyr->p[0] = p_img->img_ptr;
 	plyr->p[1] = p_r_img->img_ptr;
 	plyr->p[2] = NULL;
-	ft_collectorclear(plyr, TMP);
+	ft_collectorclear(plyr->v->collector, TMP);
 }
 
 float	draw_ray(t_player *plyr, t_ray *ray)

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:53:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 20:24:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,21 @@ void	free_whats_allocated(t_collector **collector)
 	exit(0);
 }
 
-void	ft_collectorclear(t_player *plyr, t_flag flag)
+void	ft_collectorclear(t_collector **collector, t_flag flag)
 {
 	if (flag == TMP)
-		free_tmp(plyr->v->collector);
+		free_tmp(collector);
 	else if (flag == NTMP)
-		free_ntmp(plyr->v->collector);
+		free_ntmp(collector);
 	else if (flag == ALL)
 	{
-		if (!plyr)
-			exit(0);
-		free_tmp(plyr->v->collector);
-		free_ntmp(plyr->v->collector);
+		free_tmp(collector);
+		free_ntmp(collector);
+		if (*(collector))
+		{
+			free(*(collector));
+			*collector = NULL;
+		}
 		exit(0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/26 10:53:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 20:37:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_data	*draw_2d_map(t_player *plyr)
 	plyr->v->m_h = i;
 	if ((plyr->v->m_w * M_B >= plyr->width) || \
 	(plyr->v->m_h * M_B >= plyr->height))
-		exit_with_err(plyr, MAP);
+		exit_with_err(NULL, MAP);
 	return (creat_tmap(plyr));
 }
 
@@ -62,7 +62,7 @@ t_data	*draw_player(t_player *plyr, t_data *p_img)
 static int	check(t_player *plyr, int nb, int s)
 {
 	if (nb > 255 || s == -1)
-		exit_with_err(plyr, PARSE);
+		exit_with_err(NULL, PARSE);
 	return (nb);
 }
 
@@ -78,7 +78,7 @@ int	ft_atoi(t_player *plyr, const char *str)
 	while (str[i])
 	{
 		if ((str[i] < 48 || str[i] > 57))
-			exit_with_err(plyr, PARSE);
+			exit_with_err(NULL, PARSE);
 		r = r * 10 + (str[i] - 48);
 		r = check(plyr, r, s);
 		i++;

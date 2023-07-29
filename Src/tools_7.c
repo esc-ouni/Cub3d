@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:44:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:31:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 	s = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		exit_with_err(plyr, OPEN);
+		exit_with_err(NULL, OPEN);
 	s = get_next_line(fd);
 	while (s)
 	{
@@ -61,6 +61,7 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->v->fix_img = NULL;
 	plyr->v->m_fix_img = NULL;
 	plyr->p = NULL;
+	exit_with_err(plyr, NONE);
 	plyr->v->map = parse_file(plyr, argc, argv);
 	check_paths(plyr);
 	plyr->v->mlx = mlx_init();
@@ -73,11 +74,9 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 
 void	init_2(t_player *plyr)
 {
-	plyr->angle = 0;
 	plyr->color = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
-	plyr->p = NULL;
 	plyr->factor = BLOCK / M_B;
 	plyr->m = 0;
 	plyr->f_angle = (60.0 / plyr->width);

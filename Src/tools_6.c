@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:54:58 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 20:38:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_ext(t_player *plyr)
 {
 	destroy_prev_imges(plyr);
 	destroy_fix_imges(plyr);
-	ft_collectorclear(plyr, ALL);
+	exit_with_err(NULL, MAP);
 	exit(0);
 }
 
@@ -47,7 +47,7 @@ void	my_mlx_pixel_put(t_player *plyr, int x, int y, int color)
 
 	tmp = plyr->t_img->img_addr;
 	if (!tmp)
-		exit_with_err(plyr, MLX);
+		exit_with_err(NULL, MLX);
 	tmp = tmp + (y * plyr->t_img->size_line) + ((plyr->t_img->byte_pixel) * x);
 	if (tmp)
 		*(int *)tmp = color;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:38 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:54:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:31:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,7 @@ void	m_map(t_player *plyr)
 int	handlerp(int key, t_player *plyr)
 {
 	if (key == 53)
-	{
-		destroy_prev_imges(plyr);
-		destroy_fix_imges(plyr);
-		ft_collectorclear(plyr, ALL);
-	}
+		exit_with_err(NULL, NONE);
 	if (key == 259)
 		return (0);
 	if (key == 46)
@@ -74,7 +70,8 @@ int	handlerr(int key, t_player *plyr)
 	if (key == 53)
 	{
 		destroy_prev_imges(plyr);
-		ft_collectorclear(plyr, ALL);
+		destroy_fix_imges(plyr);
+		ft_collectorclear(plyr->v->collector, ALL);
 		exit(0);
 	}
 	if (key == 259)

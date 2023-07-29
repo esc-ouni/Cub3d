@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/28 00:30:04 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/29 20:42:02 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ $(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
 	@make -C LIBFT
 	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
+	./cub3D Ext/map.cub
 
 
 %.o: %.c $(HR) $(GHR) $(LHR)
@@ -74,6 +75,6 @@ fclean: clean
 	@clear && echo "==All_created_files_deleted=="
 
 re: fclean all
-	@clear && echo "==Compilation_reseted========"
+	# @clear && echo "==Compilation_reseted========"
 
 .PHONY: all clean fclean re

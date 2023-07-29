@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:30:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:30:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ void	destroy_fix_imges(t_player *plyr)
 {
 	if (plyr)
 	{
-		if (plyr->v)
+		if (plyr->v && plyr->v->mlx)
 		{
-			if (plyr->v->we)
+			if (plyr->v->we && plyr->v->we->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->we->img_ptr);
-			if (plyr->v->ea)
+			if (plyr->v->ea && plyr->v->ea->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->ea->img_ptr);
-			if (plyr->v->so)
+			if (plyr->v->so && plyr->v->so->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->so->img_ptr);
-			if (plyr->v->no)
+			if (plyr->v->no && plyr->v->no->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->no->img_ptr);
-			if (plyr->v->fix_img)
+			if (plyr->v->fix_img && plyr->v->fix_img->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->fix_img->img_ptr);
-			if (plyr->v->m_fix_img)
+			if (plyr->v->m_fix_img && plyr->v->m_fix_img->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->m_fix_img->img_ptr);
 			if (plyr->v->mlx && plyr->v->win)
 				mlx_destroy_window(plyr->v->mlx, plyr->v->win);
@@ -74,11 +74,14 @@ void	destroy_prev_imges(t_player *plyr)
 	int	i;
 
 	i = 0;
-	while (plyr->p[i])
+	if (plyr->p)
 	{
-		mlx_destroy_image(plyr->v->mlx, plyr->p[i]);
-		plyr->p[i] = NULL;
-		i++;
+		while (plyr->p[i])
+		{
+			mlx_destroy_image(plyr->v->mlx, plyr->p[i]);
+			plyr->p[i] = NULL;
+			i++;
+		}
 	}
 }
 

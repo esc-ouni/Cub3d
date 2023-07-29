@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:07:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/29 20:37:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_data	*new_image(t_player *plyr, int width, int height, t_flag type)
 	img = h_malloc(plyr->v->collector, sizeof(t_data), img, type);
 	p = mlx_new_image(plyr->v->mlx, width, height);
 	if (!p)
-		exit_with_err(plyr, MLX);
+		exit_with_err(NULL, MLX);
 	img->img_ptr = p;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
