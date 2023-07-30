@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:08:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:00:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 void	init_2(t_player *plyr)
 {
 	plyr->color = 0;
+	plyr->last_pos = 0;
+	plyr->b_p = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
 	plyr->factor = BLOCK / M_B;

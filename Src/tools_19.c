@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/28 00:10:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:01:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,32 @@ void	check_paths(t_player *plyr)
 	check_existence(plyr, plyr->v->ea_c);
 }
 
+int	m_hookp(int keycode, int x,int y, t_player *plyr)
+{
+	(void)y;
+	if (keycode == 1)
+	{
+		plyr->b_p = 1;
+		plyr->last_pos = x;
+	}
+	return (0);
+}
+
+int	m_hookr(int keycode, int x,int y, t_player *plyr)
+{
+	(void)x;
+	(void)y;
+	if (keycode == 1)
+		plyr->b_p = 0;		
+	return (0);
+}
+
 int	hokking(t_player *plyr)
 {
 	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
-	mlx_hook(plyr->v->win, 4, (1L << 2), mouse_movement, plyr);
+	mlx_hook(plyr->v->win, 4, (1L << 2), m_hookp, plyr);
+	mlx_hook(plyr->v->win, 5, (1L << 3), m_hookr, plyr);
+	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
 	mlx_hook(plyr->v->win, 2, (1L << 0), handlerp, plyr);
 	mlx_hook(plyr->v->win, 3, (1L << 1), handlerr, plyr);
 	update_params(plyr);

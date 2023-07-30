@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:14:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:00:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,8 @@ typedef struct s_player
 	float		p_x;
 	float		p_y;
 	int			m;
+	int			last_pos;
+	int			b_p;
 	int			mv_sp;
 	float		mx;
 	float		my;

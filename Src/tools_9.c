@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:14:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:14:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,22 @@ void	draw_nwall(t_player *plyr, t_data *mapp, int x, int y)
 
 int	mouse_movement(int x, int y, t_player *plyr)
 {
-	static int	last_pos;
-
-	if (!last_pos)
-		last_pos = x;
 	(void)y;
-	if (x > 0 && x < plyr->width && y > 0 && y < plyr->height)
+	if (plyr->b_p)
 	{
-		if (x > last_pos)
+		if (x > plyr->last_pos)
 		{
-			update_degree(plyr, ((x - last_pos) * (360.0 / plyr->width)));
-			update_params(plyr);
-			last_pos = x;
+			update_degree(plyr, ((x - plyr->last_pos)/5));
+			plyr->last_pos = x;
+			update_scene(plyr);
 		}
-		else if (x < last_pos)
+		else if (x < plyr->last_pos)
 		{
-			update_degree(plyr, ((x - last_pos) * (360.0 / plyr->width)));
-			update_params(plyr);
-			last_pos = x;
+			update_degree(plyr, ((x - plyr->last_pos)/5));
+			update_scene(plyr);
+			plyr->last_pos = x;
 		}
 	}
-	update_scene(plyr);
 	return (0);
 }
 
