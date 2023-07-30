@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 18:14:09 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:15:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int	mouse_movement(int x, int y, t_player *plyr)
 	{
 		if (x > plyr->last_pos)
 		{
-			update_degree(plyr, ((x - plyr->last_pos)/5));
+			update_degree(plyr, ((x - plyr->last_pos) / 5));
 			plyr->last_pos = x;
 			update_scene(plyr);
 		}
 		else if (x < plyr->last_pos)
 		{
-			update_degree(plyr, ((x - plyr->last_pos)/5));
+			update_degree(plyr, ((x - plyr->last_pos) / 5));
 			update_scene(plyr);
 			plyr->last_pos = x;
 		}

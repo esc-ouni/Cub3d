@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 18:01:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:14:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,6 @@ void	check_paths(t_player *plyr)
 	check_existence(plyr, plyr->v->we_c);
 	check_existence(plyr, plyr->v->so_c);
 	check_existence(plyr, plyr->v->ea_c);
-}
-
-int	m_hookp(int keycode, int x,int y, t_player *plyr)
-{
-	(void)y;
-	if (keycode == 1)
-	{
-		plyr->b_p = 1;
-		plyr->last_pos = x;
-	}
-	return (0);
-}
-
-int	m_hookr(int keycode, int x,int y, t_player *plyr)
-{
-	(void)x;
-	(void)y;
-	if (keycode == 1)
-		plyr->b_p = 0;		
-	return (0);
 }
 
 int	hokking(t_player *plyr)

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:13:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:17:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ void	check_existence(t_player *plyr, char *file_dstination)
 	if (fd == -1)
 		exit_with_err(NULL, PARSE);
 	close(fd);
+}
+
+int	m_hookp(int keycode, int x, int y, t_player *plyr)
+{
+	(void)y;
+	if (keycode == 1)
+	{
+		plyr->b_p = 1;
+		plyr->last_pos = x;
+	}
+	return (0);
+}
+
+int	m_hookr(int keycode, int x, int y, t_player *plyr)
+{
+	(void)x;
+	(void)y;
+	if (keycode == 1)
+		plyr->b_p = 0;
+	return (0);
 }
 
 void	get_elements(t_player *plyr)
