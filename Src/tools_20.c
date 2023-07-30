@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 20:37:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:04:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	check_existence(t_player *plyr, char *file_dstination)
 	int	fd;
 
 	fd = 0;
+	(void)plyr;
 	fd = open(file_dstination, O_RDONLY);
 	if (fd == -1)
 		exit_with_err(NULL, PARSE);

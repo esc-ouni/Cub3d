@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 16:57:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:04:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	point_surronded(t_player *plyr, char **map, int y, int x)
 
 	x_m = 0;
 	y_m = 0;
+	(void)plyr;
 	while (map[y_m])
 		y_m++;
 	x_m = ft_strlen(map[y]);

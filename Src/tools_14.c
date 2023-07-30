@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 20:37:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:04:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 void	void_check_middle(t_player *plyr, char **map)
 {
 	int	y;
-	int	x;
 
 	y = 0;
-	x = 0;
+	(void)plyr;
 	while (map[y])
 	{
 		if ((map[y][0] != '1' && map[y][0] != ' ') || (map[y][ft_strlen(map[y]) \
