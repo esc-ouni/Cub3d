@@ -21,7 +21,7 @@ int	main(int argc, char const *argv[])
 {
 	t_player	*plyr;
 
-	atexit(leaks);
+	// atexit(leaks);
 	plyr = init(argc, argv);
 	update_scene(plyr);
 	mlx_loop_hook(plyr->v->mlx, hokking, plyr);

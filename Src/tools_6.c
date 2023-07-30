@@ -14,11 +14,9 @@
 
 int	ft_ext(t_player *plyr)
 {
-	destroy_prev_imges(plyr);
-	destroy_fix_imges(plyr);
 	exit_with_err(NULL, MAP);
-	exit(0);
 }
+
 
 float	deg_to_rad(float angle)
 {

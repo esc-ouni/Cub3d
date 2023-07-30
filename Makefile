@@ -6,75 +6,56 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/29 20:42:02 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/28 00:30:04 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME   = cub3D
-MATH   = -O3 -ffast-math
-MLX    = -lmlx -framework OpenGL -framework AppKit
-CC     = cc
-RM     = rm -rf
-FLAGS  = #-Wall -Wextra -Werror
-HR     = Src/cub.h
-LHR    = LIBFT/libft.h
-GHR    = G_N_L/get_next_line.h
-TLS    = Src/cub.c \
-		Src/memory.c \
-		Src/tools_0.c \
-		Src/tools_1.c \
-		Src/tools_10.c \
-		Src/tools_11.c \
-		Src/tools_12.c \
-		Src/tools_13.c \
-		Src/tools_14.c \
-		Src/tools_15.c \
-		Src/tools_16.c \
-		Src/tools_17.c \
-		Src/tools_18.c \
-		Src/tools_19.c \
-		Src/tools_20.c \
-		Src/tools_2.c \
-		Src/tools_3.c \
-		Src/tools_4.c \
-		Src/tools_5.c \
-		Src/tools_6.c \
-		Src/tools_7.c \
-		Src/tools_8.c \
-		Src/tools_9.c \
-		G_N_L/get_next_line.c \
-		G_N_L/get_next_line_utils.c \
+ifeq ($(WSL_DISTRO_NAME), Ubuntu)
+FLAGS = -Wall -Wextra -Werror
+MATH = -O3 -ffast-math
+MLX = -lmlx -framework OpenGL -framework AppKit
 
-LBFT   = LIBFT/libft.a
+LIBF_DIR := LIBFT
+GNL_DIR := G_N_L
+SRC_DIR := Src
 
-OBJ_T  = $(TLS:%.c=%.o)
+LIBF_SRCS := $(wildcard $(LIBF_DIR)/*.c)
+GNL_SRCS := $(wildcard $(GNL_DIR)/*.c)
+SRC_SRCS := $(wildcard $(SRC_DIR)/*.c)
 
-all: $(NAME)
+all:
+	clear
+	# gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c G_N_L/*.c ./Src/*.c -o Cub -lm
+	cc $(LIBF_SRCS) $(GNL_SRCS) $(SRC_SRCS) -L minilibx-linux/libmlx_Linux.a -L minilibx-linux/libmlx.a -lmlx -lXext -lX11 -o Cub -lm
+	valgrind --leak-check=full ./Cub Ext/map.cub
 
-$(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
-	@make -C LIBFT
-	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
-	@clear && echo "==$(NAME)_compiled==========="
-	./cub3D Ext/map.cub
-
-
-%.o: %.c $(HR) $(GHR) $(LHR)
-	$(CC) $(FLAGS) $(MATH) -c $< -o $@ 
 
 clean:
-	@make clean -C LIBFT
-	$(RM) $(OBJ_M)
-	$(RM) $(OBJ_T)
-	@clear && echo "==Object_files_deleted======="
+	rm -rf $(BUILD_DIR)/*.o $(TARGET)
 
-fclean: clean
-	@make fclean -C LIBFT
-	$(RM) $(NAME)
-	$(RM) .vscode
-	$(RM) *.dSYM
-	@clear && echo "==All_created_files_deleted=="
+fclean:
+	rm -rf *.o *.dSYM .vscode
+	rm -rf Cub
+	clear
 
-re: fclean all
-	# @clear && echo "==Compilation_reseted========"
+re: fclean all 
+else
+NAME = Cub3D
+FLAGS = -Wall -Wextra -Werror #-fsanitize=undefined,address -g
+MATH = -O3 -ffast-math
+MLX = -lmlx -framework OpenGL -framework AppKit
 
-.PHONY: all clean fclean re
+all:
+	clear
+	gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o $(NAME) -lm
+	# clang LIBF/*.c Get_next_line/*.c ./Src/*.c -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm -lbsd
+	./$(NAME) Ext/map.cub
+
+fclean:
+	rm -rf *.o *.dSYM .vscode
+	rm -rf $(NAME)
+	clear
+
+re: fclean all 
+
+endif
