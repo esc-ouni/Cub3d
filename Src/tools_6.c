@@ -14,7 +14,7 @@
 
 int	ft_ext(t_player *plyr)
 {
-	exit_with_err(NULL, MAP);
+	exit_with_err(NULL, NONE);
 }
 
 

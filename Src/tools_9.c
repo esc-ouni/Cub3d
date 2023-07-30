@@ -60,6 +60,9 @@ int	mouse_movement(int x, int y, t_player *plyr)
 {
 	static int	last_pos;
 
+	if (!last_pos)
+		last_pos = x;
+
 	(void)y;
 	if (x > 0 && x < plyr->width && y > 0 && y < plyr->height)
 	{
