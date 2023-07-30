@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 21:30:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 16:50:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	destroy_prev_imges(t_player *plyr)
 	int	i;
 
 	i = 0;
-	if (plyr->p)
+	if (plyr && plyr->p)
 	{
 		while (plyr->p[i])
 		{

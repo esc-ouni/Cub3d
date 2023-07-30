@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 21:31:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:03:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ t_player	*init(int argc, char const *argv[])
 	vars->c_color = 0;
 	vars->f_color = 0;
 	plyr->v = vars;
+	printf("OKK!\n");
 	init_1(plyr, argc, argv);
 	init_2(plyr);
 	return (plyr);

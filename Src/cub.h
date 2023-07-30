@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 21:33:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:00:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include "../../.minilibx-linux/mlx.h"
+# include <mlx.h>
 # include <fcntl.h>
 # include "../G_N_L/get_next_line.h"
 # include "../LIBFT/libft.h"

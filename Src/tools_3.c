@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 21:30:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 16:57:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	exit_with_err(t_player *plyr, t_flag cause)
 		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
 	else if (cause == MAP)
 		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
-	if (!plyr)
+	if (!plyr && r_p)
 	{
-		printf("\ndestruct\n\n");
 		destroy_prev_imges(r_p);
 		destroy_fix_imges(r_p);
 		ft_collectorclear(r_p->v->collector, ALL);
 	}
+	exit(0);
 }
 
 void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
