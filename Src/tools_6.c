@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:51 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 16:50:26 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:14:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_ext(t_player *plyr)
 	exit_with_err(NULL, NONE);
 	return (0);
 }
-
 
 float	deg_to_rad(float angle)
 {

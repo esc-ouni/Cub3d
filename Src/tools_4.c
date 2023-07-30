@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:08:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:14:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	head_alloc(t_collector **collector)
 	}
 }
 
-void	*	h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
+void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
 {
 	if (!(*collector))
 		head_alloc(collector);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:04:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:13:40 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_with_err(t_player *plyr, t_flag cause)
 {
-	static t_player *r_p;
+	static t_player	*r_p;
 
 	if (plyr && !r_p)
 	{
@@ -34,11 +34,7 @@ void	exit_with_err(t_player *plyr, t_flag cause)
 	else if (cause == MAP)
 		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
 	if (!plyr && r_p)
-	{
-		destroy_prev_imges(r_p);
-		destroy_fix_imges(r_p);
-		ft_collectorclear(r_p->v->collector, ALL);
-	}
+		destruct(r_p);
 	exit(0);
 }
 

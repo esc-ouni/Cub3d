@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 23:42:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:14:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	mouse_movement(int x, int y, t_player *plyr)
 
 	if (!last_pos)
 		last_pos = x;
-
 	(void)y;
 	if (x > 0 && x < plyr->width && y > 0 && y < plyr->height)
 	{

@@ -6,11 +6,18 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:04:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:13:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	destruct(t_player *r_p)
+{
+	destroy_prev_imges(r_p);
+	destroy_fix_imges(r_p);
+	ft_collectorclear(r_p->v->collector, ALL);
+}
 
 void	check_existence(t_player *plyr, char *file_dstination)
 {

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:04:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:10:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_vergs(t_player *plyr, char *s)
 		if (ft_strchr(ft_strchr(ft_strchr(s, ',') + 1, ',') + 1, ','))
 			exit_with_err(NULL, PARSE);
 		else if (ft_strchr(ft_strchr(s, ',') + 1, ','))
-			return ;		
+			return ;
 	}
 	else
 		exit_with_err(NULL, PARSE);

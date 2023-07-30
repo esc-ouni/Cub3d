@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:00:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:14:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ typedef struct s_player
 	t_data		*t_img;
 }		t_player;
 
+void		destruct(t_player *r_p);
 void		check_paths(t_player *plyr);
 void		check_existence(t_player *plyr, char *file_dstination);
 void		get_elements(t_player *plyr);
