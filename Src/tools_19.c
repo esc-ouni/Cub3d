@@ -23,7 +23,7 @@ void	check_paths(t_player *plyr)
 int	hokking(t_player *plyr)
 {
 	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
-	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
+	mlx_hook(plyr->v->win, 4, (1L << 2), mouse_movement, plyr);
 	mlx_hook(plyr->v->win, 2, (1L << 0), handlerp, plyr);
 	mlx_hook(plyr->v->win, 3, (1L << 1), handlerr, plyr);
 	update_params(plyr);
