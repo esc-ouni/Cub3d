@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 21:32:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/31 20:14:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	check_xpm_size2(t_player *plyr, int fd)
 		return ;
 	else
 		exit_with_err(plyr, XPM);
-		// xpm_failed(plyr);
 }
 
 void	check_xpm_size(t_player *plyr, char *file_dstination)

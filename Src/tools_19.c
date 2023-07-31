@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 18:14:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/31 20:14:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	check_paths(t_player *plyr)
 int	hokking(t_player *plyr)
 {
 	mlx_hook(plyr->v->win, 17, 0, ft_ext, plyr);
-	// mlx_hook(plyr->v->win, 0, (1L << 2), m_hookp, plyr);
-	// mlx_hook(plyr->v->win, 0, (1L << 3), m_hookr, plyr);
+	mlx_hook(plyr->v->win, 4, 0, m_hookp, plyr);
+	mlx_hook(plyr->v->win, 5, 0, m_hookr, plyr);
 	mlx_hook(plyr->v->win, 6, 0, mouse_movement, plyr);
 	mlx_hook(plyr->v->win, 2, 0, handlerp, plyr);
 	mlx_hook(plyr->v->win, 3, 0, handlerr, plyr);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/29 20:37:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/07/31 20:14:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 	img->img_ptr = p; 
 	if (!p)
 		exit_with_err(plyr, XPM);
-		// xpm_failed(plyr);
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;

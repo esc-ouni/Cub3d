@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/31 20:05:25 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/31 20:15:35 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,6 @@ fclean: clean
 	@clear && echo "==All_created_files_deleted=="
 
 re: fclean all
-	# @clear && echo "==Compilation_reseted========"
+	@clear && echo "==Compilation_reseted========"
 
 .PHONY: all clean fclean re
