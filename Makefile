@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/30 17:03:47 by idouni           ###   ########.fr        #
+#    Updated: 2023/07/31 20:05:25 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,6 @@ $(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
 	@make -C LIBFT
 	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
-	./cub3D Ext/map.cub
 
 
 %.o: %.c $(HR) $(GHR) $(LHR)
