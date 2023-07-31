@@ -51,7 +51,8 @@ void	check_xpm_size2(t_player *plyr, int fd)
 	if (!ft_strcmp(sp[0], "1000") && !ft_strcmp(sp[1], "1000"))
 		return ;
 	else
-		xpm_failed(plyr);
+		exit_with_err(plyr, XPM);
+		// xpm_failed(plyr);
 }
 
 void	check_xpm_size(t_player *plyr, char *file_dstination)

@@ -33,6 +33,8 @@ void	exit_with_err(t_player *plyr, t_flag cause)
 		write (2, "\033[0;32mError\nUNABLE_TO_OPEN_A_FILE\033[0;37m\n", 43);
 	else if (cause == MAP)
 		write (2, "\033[0;32mError\nINCOMPATIBLE_SIZE\033[0;37m\n", 39);
+	else if (cause == XPM)
+		write (2, "\033[0;32mError\nMLX_XPM_FAILED\033[0;37m\n", 36);
 	if (!plyr && r_p)
 		destruct(r_p);
 	exit(0);
