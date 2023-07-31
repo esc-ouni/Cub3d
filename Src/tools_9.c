@@ -65,14 +65,13 @@ int	mouse_movement(int x, int y, t_player *plyr)
 		{
 			update_degree(plyr, ((x - plyr->last_pos) / 5));
 			plyr->last_pos = x;
-			update_scene(plyr);
 		}
 		else if (x < plyr->last_pos)
 		{
 			update_degree(plyr, ((x - plyr->last_pos) / 5));
-			update_scene(plyr);
 			plyr->last_pos = x;
 		}
+		update_params()
 	}
 	return (0);
 }
