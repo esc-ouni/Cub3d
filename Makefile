@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME   = cub3D
-MATH   = -O3 -ffast-math
+MATH   = -Oz -ffast-math
 MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
 RM     = rm -rf
