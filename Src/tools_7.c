@@ -66,10 +66,12 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->v->map = parse_file(plyr, argc, argv);
 	check_paths(plyr);
 	plyr->v->mlx = mlx_init();
+	if (!plyr->v->mlx)
+		exit_with_err(NULL, MLX);
 	get_elements(plyr);
 	plyr->v->win = mlx_new_window(plyr->v->mlx, plyr->width, \
 	plyr->height, "cub3D");
-	if (!plyr->v->mlx || !plyr->v->win)
+	if (!plyr->v->win)
 		exit_with_err(NULL, MLX);
 }
 
