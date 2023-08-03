@@ -16,43 +16,43 @@ MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
 RM     = rm -rf
 FLAGS  = -Wall -Wextra -Werror
-HR     = Src/cub.h
-LHR    = LIBFT/libft.h
-GHR    = G_N_L/get_next_line.h
-TLS    = Src/cub.c \
-		Src/memory.c \
-		Src/tools_0.c \
-		Src/tools_1.c \
-		Src/tools_10.c \
-		Src/tools_11.c \
-		Src/tools_12.c \
-		Src/tools_13.c \
-		Src/tools_14.c \
-		Src/tools_15.c \
-		Src/tools_16.c \
-		Src/tools_17.c \
-		Src/tools_18.c \
-		Src/tools_19.c \
-		Src/tools_20.c \
-		Src/tools_2.c \
-		Src/tools_3.c \
-		Src/tools_4.c \
-		Src/tools_5.c \
-		Src/tools_6.c \
-		Src/tools_7.c \
-		Src/tools_8.c \
-		Src/tools_9.c \
-		G_N_L/get_next_line.c \
-		G_N_L/get_next_line_utils.c \
+HR     = src/cub.h
+LHR    = libft/libft.h
+GHR    = g_n_l/get_next_line.h
+TLS    = src/cub.c \
+		src/memory.c \
+		src/tools_0.c \
+		src/tools_1.c \
+		src/tools_10.c \
+		src/tools_11.c \
+		src/tools_12.c \
+		src/tools_13.c \
+		src/tools_14.c \
+		src/tools_15.c \
+		src/tools_16.c \
+		src/tools_17.c \
+		src/tools_18.c \
+		src/tools_19.c \
+		src/tools_20.c \
+		src/tools_2.c \
+		src/tools_3.c \
+		src/tools_4.c \
+		src/tools_5.c \
+		src/tools_6.c \
+		src/tools_7.c \
+		src/tools_8.c \
+		src/tools_9.c \
+		g_n_l/get_next_line.c \
+		g_n_l/get_next_line_utils.c \
 
-LBFT   = LIBFT/libft.a
+LBFT   = libft/libft.a
 
 OBJ_T  = $(TLS:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
-	@make -C LIBFT
+	@make -C libft
 	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
 	@clear && echo "==$(NAME)_compiled==========="
 
@@ -61,13 +61,13 @@ $(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
 	$(CC) $(FLAGS) $(MATH) -c $< -o $@ 
 
 clean:
-	@make clean -C LIBFT
+	@make clean -C libft
 	$(RM) $(OBJ_M)
 	$(RM) $(OBJ_T)
 	@clear && echo "==Object_files_deleted======="
 
 fclean: clean
-	@make fclean -C LIBFT
+	@make fclean -C libft
 	$(RM) $(NAME)
 	$(RM) .vscode
 	$(RM) *.dSYM

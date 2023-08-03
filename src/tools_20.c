@@ -14,9 +14,12 @@
 
 void	destruct(t_player *r_p)
 {
-	destroy_prev_imges(r_p);
-	destroy_fix_imges(r_p);
-	ft_collectorclear(r_p->v->collector, ALL);
+	if (r_p)
+	{
+		destroy_prev_imges(r_p);
+		destroy_fix_imges(r_p);
+		ft_collectorclear(r_p->v->collector, ALL);
+	}
 }
 
 void	check_existence(t_player *plyr, char *file_dstination)
