@@ -18,8 +18,8 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
-# include "../G_N_L/get_next_line.h"
-# include "../LIBFT/libft.h"
+# include "../g_n_l/get_next_line.h"
+# include "../libft/libft.h"
 
 # define NORTH 15
 # define SOUTH 16
