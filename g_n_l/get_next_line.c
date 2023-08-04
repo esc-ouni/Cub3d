@@ -38,7 +38,7 @@ char	*line_extract(char *buffer)
 		return (NULL);
 	while (buffer[i] != '\n' && buffer[i])
 		i++;
-	new = malloc(sizeof(char) * (i + 2));
+	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
 		return (NULL);
 	i = 0;

@@ -1,5 +1,5 @@
 ifeq ($(WSL_DISTRO_NAME), Ubuntu)
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
 MATH = -Oz -ffast-math
 MLX = -lmlx -LXext -lX11
 
@@ -13,9 +13,8 @@ SRC_SRCS := $(wildcard $(SRC_DIR)/*.c)
 
 all:
 	clear
-	# gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o Cub -lm
 	cc $(LIBF_SRCS) $(GNL_SRCS) $(SRC_SRCS) -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm
-	valgrind --leak-check=full ./Cub ext/map.cub
+	valgrind --track-origins=yes --leak-check=full ./Cub ext/map.cub
 
 
 clean:
