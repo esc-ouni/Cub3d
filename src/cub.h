@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/04 14:58:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/04 20:19:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include "../../.minilibx-linux/mlx.h"
-//# include <mlx.h>
+// # include "../../.minilibx-linux/mlx.h"
+# include <mlx.h>
 # include <fcntl.h>
 # include "../g_n_l/get_next_line.h"
 # include "../libft/libft.h"
@@ -27,10 +27,9 @@
 # define WEST 17
 # define EAST 27
 
-# define mlx_new_window(a, b, c, d) NULL
 
 # define WIDTH 1800
-# define HEIGHT 900
+# define HEIGHT 1000
 # define BLOCK 1000
 
 # define R_AN  3
