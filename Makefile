@@ -14,7 +14,7 @@ SRC_SRCS := $(wildcard $(SRC_DIR)/*.c)
 all:
 	clear
 	cc $(LIBF_SRCS) $(GNL_SRCS) $(SRC_SRCS) -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm
-	valgrind --track-origins=yes --leak-check=full ./Cub ext/map.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./Cub ext/map.cub
 
 
 clean:
