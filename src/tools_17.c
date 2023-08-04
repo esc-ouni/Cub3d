@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/31 20:14:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/04 10:39:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,15 @@ void	check_xpm_size2(t_player *plyr, int fd)
 		{
 			sp = ft_msplit(plyr->v, s + 1, ' ', TMP);
 			free(s);
-			break ;
+			if (!ft_strcmp(sp[0], "1000") && !ft_strcmp(sp[1], "1000"))
+				return ;
+			else
+				exit_with_err(NULL, XPM);
 		}
 		free(s);
 		s = NULL;
 		s = get_next_line(fd);
 	}
-	if (!ft_strcmp(sp[0], "1000") && !ft_strcmp(sp[1], "1000"))
-		return ;
-	else
-		exit_with_err(NULL, XPM);
 }
 
 void	check_xpm_size(t_player *plyr, char *file_dstination)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_18.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 01:14:23 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/07/28 01:15:56 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/08/04 10:40:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	get_map_indx(t_player *plyr, int fd, int i, char *s)
 		else if (ft_strnstr(s, "1", ft_strlen(s)))
 			return (free(s), i);
 		free(s);
+		s = NULL;
 		s = get_next_line(fd);
 		i++;
 	}
