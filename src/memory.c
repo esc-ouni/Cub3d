@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/31 20:14:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/04 14:52:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void	tmp_alloc(t_collector **collector, size_t s, void **p)
 	t_tmp	*tmp_c;
 
 	tmp_c = malloc(sizeof(t_tmp));
-	printf("%p\n", tmp_c);
+	// printf("%p\n", tmp_c);
 	(*p) = malloc(s);
-	printf("%p\n", (*p));
+	// printf("%p\n", (*p));
 	if (!tmp_c || !(*p) || !(*collector))
 		exit_with_err(NULL, MALLOC);
 	tmp_c->tmp_addr = (*p);
 	if (!((*collector)->tmp_cltr))
-		((*collector)->tmp_cltr) = tmp_c;
+		(*collector)->tmp_cltr = tmp_c;
 	else
 	{
 		n_iter = (*collector)->tmp_cltr;
@@ -79,9 +79,9 @@ void	ntmp_alloc(t_collector **collector, size_t s, void **p)
 	t_ntmp	*ntmp_c;
 
 	ntmp_c = malloc(sizeof(t_ntmp));
-	printf("%p\n", ntmp_c);
+	// printf("%p\n", ntmp_c);
 	(*p) = malloc(s);
-	printf("%p\n", (*p));
+	// printf("%p\n", (*p));
 	if (!ntmp_c || !(*p) || !(*collector))
 		exit_with_err(NULL, MALLOC);
 	ntmp_c->ntmp_addr = (*p);
@@ -108,8 +108,8 @@ void	free_tmp(t_collector **collector)
 	while (node)
 	{
 		n_node = node->next;
-		printf("%p\n", node->tmp_addr);
-		printf("%p\n", node);
+		// printf("%p\n", node->tmp_addr);
+		// printf("%p\n", node);
 		free(node->tmp_addr);
 		free(node);
 		node = n_node;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/08/04 10:42:41 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/04 14:55:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	destroy_fix_imges(t_player *plyr)
 			if (plyr->v->m_fix_img && plyr->v->m_fix_img->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->m_fix_img->img_ptr);
 			if (plyr->v->mlx && plyr->v->win)
+			{
 				mlx_destroy_window(plyr->v->mlx, plyr->v->win);
+				free(plyr->v->mlx);	
+			}
 		}
 	}
 }

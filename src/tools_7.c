@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/31 20:47:44 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:50:49 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,9 @@ void	init_2(t_player *plyr)
 t_player	*init(int argc, char const *argv[])
 {
 	static t_collector	*collector;
-	t_vars				*vars;
 	t_player			*plyr;
+	t_vars				*vars;
 
-	collector = NULL;
 	plyr = NULL;
 	vars = NULL;
 	plyr = h_malloc(&collector, sizeof(t_player), vars, NTMP);

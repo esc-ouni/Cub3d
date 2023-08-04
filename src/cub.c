@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:21 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/04 10:43:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/04 14:28:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char const *argv[])
 {
 	t_player	*plyr;
 
-	// atexit(leak);
+	atexit(leak);
 	plyr = init(argc, argv);
 	update_scene(plyr);
 	mlx_loop_hook(plyr->v->mlx, hokking, plyr);
