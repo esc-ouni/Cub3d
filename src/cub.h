@@ -16,7 +16,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include <mlx.h>
+// # include <mlx.h>
+# include "../../.minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include "../g_n_l/get_next_line.h"
 # include "../libft/libft.h"
@@ -26,8 +27,8 @@
 # define WEST 17
 # define EAST 27
 
-# define WIDTH 1
-# define HEIGHT 1
+# define WIDTH 1800
+# define HEIGHT 900
 # define BLOCK 1000
 
 # define R_AN  3

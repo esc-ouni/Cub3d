@@ -1,79 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/07/31 20:15:35 by idouni           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+ifeq ($(WSL_DISTRO_NAME), Ubuntu)
+FLAGS = -Wall -Wextra -Werror -g
+MATH = -Oz -ffast-math
+MLX = -lmlx -lXext -lX11
 
-NAME   = cub3D
-MATH   = -O3 -ffast-math
-MLX    = -lmlx -framework OpenGL -framework AppKit
-CC     = cc
-RM     = rm -rf
-FLAGS  = -Wall -Wextra -Werror
-HR     = src/cub.h
-LHR    = libft/libft.h
-GHR    = g_n_l/get_next_line.h
-TLS    = src/cub.c \
-		src/memory.c \
-		src/tools_0.c \
-		src/tools_1.c \
-		src/tools_10.c \
-		src/tools_11.c \
-		src/tools_12.c \
-		src/tools_13.c \
-		src/tools_14.c \
-		src/tools_15.c \
-		src/tools_16.c \
-		src/tools_17.c \
-		src/tools_18.c \
-		src/tools_19.c \
-		src/tools_20.c \
-		src/tools_2.c \
-		src/tools_3.c \
-		src/tools_4.c \
-		src/tools_5.c \
-		src/tools_6.c \
-		src/tools_7.c \
-		src/tools_8.c \
-		src/tools_9.c \
-		g_n_l/get_next_line.c \
-		g_n_l/get_next_line_utils.c \
+LIBF_DIR := libft
+GNL_DIR := g_n_l
+SRC_DIR := src
 
-LBFT   = libft/libft.a
+LIBF_SRCS := $(wildcard $(LIBF_DIR)/*.c)
+GNL_SRCS := $(wildcard $(GNL_DIR)/*.c)
+SRC_SRCS := $(wildcard $(SRC_DIR)/*.c)
 
-OBJ_T  = $(TLS:%.c=%.o)
-
-all: $(NAME)
-
-$(NAME): $(OBJ_T) $(HR) $(GHR) $(LHR)
-	@make -C libft
-	@$(CC) $(FLAGS) $(MATH) $(MLX) $(LBFT) $(OBJ_T) -o $(NAME) -lm
-	@clear && echo "==$(NAME)_compiled==========="
+all:
+	clear
+	# gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o Cub -lm
+	cc $(LIBF_SRCS) $(GNL_SRCS) $(SRC_SRCS) -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm
+	valgrind --leak-check=full ./Cub ext/map.cub
 
 
-%.o: %.c $(HR) $(GHR) $(LHR)
-	$(CC) $(FLAGS) $(MATH) -c $< -o $@ 
 
 clean:
-	@make clean -C libft
-	$(RM) $(OBJ_M)
-	$(RM) $(OBJ_T)
-	@clear && echo "==Object_files_deleted======="
+	rm -rf $(BUILD_DIR)/*.o $(TARGET)
 
-fclean: clean
-	@make fclean -C libft
-	$(RM) $(NAME)
-	$(RM) .vscode
-	$(RM) *.dSYM
-	@clear && echo "==All_created_files_deleted=="
+fclean:
+	rm -rf *.o *.dSYM .vscode
+	rm -rf Cub
+	clear
 
-re: fclean all
-	@clear && echo "==Compilation_reseted========"
+re: fclean all 
+else
+NAME = Cub3D
+FLAGS = -Wall -Wextra -Werror 
+MATH = -Oz -ffast-math
+MLX = -lmlx -framework OpenGL -framework AppKit
 
-.PHONY: all clean fclean re
+all:
+	clear
+	gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o $(NAME) -lm
+	# clang LIBF/*.c Get_next_line/*.c ./Src/*.c -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm -lbsd
+	./$(NAME) Ext/map.cub
+
+fclean:
+	rm -rf *.o *.dSYM .vscode
+	rm -rf $(NAME)
+	clear
+
+re: fclean all 
+
+endif

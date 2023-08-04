@@ -25,7 +25,7 @@ t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 	&width, &height);
 	img->img_ptr = p; 
 	if (!p)
-		exit_with_err(plyr, XPM);
+		exit_with_err(NULL, XPM);
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;
