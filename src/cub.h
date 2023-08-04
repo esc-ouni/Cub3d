@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/31 20:48:01 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/08/04 08:55:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define WEST 17
 # define EAST 27
 
-# define WIDTH 1800
-# define HEIGHT 1000
+# define WIDTH 1
+# define HEIGHT 1
 # define BLOCK 1000
 
 # define R_AN  3
