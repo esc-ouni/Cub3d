@@ -55,6 +55,24 @@ int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 	return (size += 1);
 }
 
+void	check_size(t_player *plyr)
+{
+	int		i;
+
+	i = 0;
+	plyr->v->m_w = ft_strlen(plyr->v->map[0]);
+	while (plyr->v->map[i])
+	{
+		if (ft_strlen(plyr->v->map[i]) > plyr->v->m_w)
+			plyr->v->m_w = ft_strlen(plyr->v->map[i]);
+		i++;
+	}
+	plyr->v->m_h = i;
+	if ((plyr->v->m_w * M_B >= plyr->width) || \
+	(plyr->v->m_h * M_B >= plyr->height))
+		exit_with_err(NULL, MAP);
+}
+
 void	init_1(t_player *plyr, int argc, char const *argv[])
 {
 	plyr->v->mlx = NULL;
@@ -66,6 +84,7 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->p = NULL;
 	exit_with_err(plyr, NONE);
 	plyr->v->map = parse_file(plyr, argc, argv);
+	check_size(plyr);
 	check_paths(plyr);
 	plyr->v->mlx = mlx_init();
 	if (!plyr->v->mlx)

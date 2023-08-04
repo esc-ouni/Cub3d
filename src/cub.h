@@ -27,6 +27,8 @@
 # define WEST 17
 # define EAST 27
 
+# define mlx_new_window(a, b, c, d) NULL
+
 # define WIDTH 1800
 # define HEIGHT 900
 # define BLOCK 1000

@@ -28,20 +28,20 @@ void	resizer(t_player *player)
 
 t_data	*draw_2d_map(t_player *plyr)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
-	plyr->v->m_w = ft_strlen(plyr->v->map[0]);
-	while (plyr->v->map[i])
-	{
-		if (ft_strlen(plyr->v->map[i]) > plyr->v->m_w)
-			plyr->v->m_w = ft_strlen(plyr->v->map[i]);
-		i++;
-	}
-	plyr->v->m_h = i;
-	if ((plyr->v->m_w * M_B >= plyr->width) || \
-	(plyr->v->m_h * M_B >= plyr->height))
-		exit_with_err(NULL, MAP);
+	// i = 0;
+	// plyr->v->m_w = ft_strlen(plyr->v->map[0]);
+	// while (plyr->v->map[i])
+	// {
+	// 	if (ft_strlen(plyr->v->map[i]) > plyr->v->m_w)
+	// 		plyr->v->m_w = ft_strlen(plyr->v->map[i]);
+	// 	i++;
+	// }
+	// plyr->v->m_h = i;
+	// if ((plyr->v->m_w * M_B >= plyr->width) || \
+	// (plyr->v->m_h * M_B >= plyr->height))
+	// 	exit_with_err(NULL, MAP);
 	return (creat_tmap(plyr));
 }
 
