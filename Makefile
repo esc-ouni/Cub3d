@@ -15,7 +15,7 @@ all:
 	clear
 	# gcc $(FLAGS) $(MATH) $(MLX)  LIBF/*.c Get_next_line/*.c ./Src/*.c -o Cub -lm
 	cc $(LIBF_SRCS) $(GNL_SRCS) $(SRC_SRCS) -L minilibx-linux/libmlx_Linux.a -lmlx -lXext -lX11 -o Cub -lm
-	valgrind ./Cub Ext/map.cub
+	valgrind ./Cub ext/map.cub
 
 
 clean:
