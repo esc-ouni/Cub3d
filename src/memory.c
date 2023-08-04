@@ -55,7 +55,9 @@ void	tmp_alloc(t_collector **collector, size_t s, void **p)
 	t_tmp	*tmp_c;
 
 	tmp_c = malloc(sizeof(t_tmp));
+	printf("%p\n", tmp_c);
 	(*p) = malloc(s);
+	printf("%p\n", (*p));
 	if (!tmp_c || !(*p) || !(*collector))
 		exit_with_err(NULL, MALLOC);
 	tmp_c->tmp_addr = (*p);
@@ -77,7 +79,9 @@ void	ntmp_alloc(t_collector **collector, size_t s, void **p)
 	t_ntmp	*ntmp_c;
 
 	ntmp_c = malloc(sizeof(t_ntmp));
+	printf("%p\n", ntmp_c);
 	(*p) = malloc(s);
+	printf("%p\n", (*p));
 	if (!ntmp_c || !(*p) || !(*collector))
 		exit_with_err(NULL, MALLOC);
 	ntmp_c->ntmp_addr = (*p);
@@ -104,8 +108,9 @@ void	free_tmp(t_collector **collector)
 	while (node)
 	{
 		n_node = node->next;
-		if (node->tmp_addr)
-			free(node->tmp_addr);
+		printf("%p\n", node->tmp_addr);
+		printf("%p\n", node);
+		free(node->tmp_addr);
 		free(node);
 		node = n_node;
 	}

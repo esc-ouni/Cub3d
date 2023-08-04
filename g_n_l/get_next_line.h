@@ -1,30 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 10:33:15 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/27 21:42:11 by idouni           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 # include <unistd.h>
 
+# define BUFFER_SIZE 1
+
 char	*get_next_line(int fd);
-char	*str_alloc(int fd, char	*str);
-char	*r_reset(char *buff);
-int		g_check(char *buff);
-int		ft_gstrlen(char *s);
-char	*ft_strjoin(char *s1, char *s2);
-char	*line_extract(char *str);
+char	*ft_gstrjoin(char const *s1, char const *s2);
+char	*ft_gstrchr(const char *string, int searchedChar );
+
+void	ft_gbzero(void *s, size_t n);
+void	*ft_gcalloc(size_t elementCount, size_t elementSize);
+
+size_t	ft_gstrlen(const char *theString);
 
 #endif
