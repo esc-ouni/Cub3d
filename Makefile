@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 18:36:33 by idouni            #+#    #+#              #
-#    Updated: 2023/08/04 20:17:44 by idouni           ###   ########.fr        #
+#    Updated: 2023/08/05 17:04:09 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,21 @@ MATH   = -O3 -ffast-math
 MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
 RM     = rm -rf
-FLAGS  = #-Wall -Wextra -Werror
+FLAGS  = -Wall -Wextra -Werror
 HR     = src/cub.h
 LHR    = libft/libft.h
 GHR    = g_n_l/get_next_line.h
 TLS    = src/cub.c \
-		src/memory.c \
 		src/tools_0.c \
 		src/tools_1.c \
+		src/tools_2.c \
+		src/tools_3.c \
+		src/tools_4.c \
+		src/tools_5.c \
+		src/tools_6.c \
+		src/tools_7.c \
+		src/tools_8.c \
+		src/tools_9.c \
 		src/tools_10.c \
 		src/tools_11.c \
 		src/tools_12.c \
@@ -34,14 +41,7 @@ TLS    = src/cub.c \
 		src/tools_18.c \
 		src/tools_19.c \
 		src/tools_20.c \
-		src/tools_2.c \
-		src/tools_3.c \
-		src/tools_4.c \
-		src/tools_5.c \
-		src/tools_6.c \
-		src/tools_7.c \
-		src/tools_8.c \
-		src/tools_9.c \
+		src/tools_21.c \
 		g_n_l/get_next_line.c \
 		g_n_l/get_next_line_utils.c \
 

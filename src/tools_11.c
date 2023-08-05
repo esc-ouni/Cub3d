@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:04:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_ray	*cast_rays(t_player *plyr, t_ray *ray)
 	{
 		ray[i].angle = plyr->t_angle;
 		ray[i].t1 = trigo(ray[i].angle, TAN);
-		ray[i].t2 = trigo((2 * M_PI) - ray[i].angle, TAN);
 		draw_ray(plyr, &ray[i]);
 		plyr->t_angle = up_degree(plyr->t_angle, plyr->f_angle);
 		i++;

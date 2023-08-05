@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:05:17 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	wall_hit_vlf(t_player *plyr, int x, int y)
 t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dy = -plyr->block;
-	ray->dx = (plyr->block / ray->t2);
+	ray->dx = (plyr->block / ( -ray->t1));
 	vector->y = floor(plyr->p_y / plyr->block) * plyr->block;
-	vector->x = plyr->p_x + (plyr->p_y - vector->y) / ray->t2;
+	vector->x = plyr->p_x + (plyr->p_y - vector->y) / ( -ray->t1);
 	while (!wall_hit_hup(plyr, (int)vector->x, (int)vector->y))
 	{
 		vector->x += ray->dx;

@@ -5,72 +5,114 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/04 15:00:25 by idouni           ###   ########.fr       */
+/*   Created: 2023/07/03 13:54:17 by idouni            #+#    #+#             */
+/*   Updated: 2023/08/05 17:01:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	free_ntmp(t_collector **collector)
+t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 {
-	t_ntmp	*node1;
-	t_ntmp	*n_node1;
+	void	*p;
+	t_data	*img;
+	int		width;
+	int		height;
 
-	node1 = (*collector)->ntmp_cltr;
-	if (!node1)
+	img = NULL;
+	img = h_malloc(plyr->v->collector, sizeof(t_data), img, NTMP);
+	p = mlx_xpm_file_to_image(plyr->v->mlx, file_dstination, \
+	&width, &height);
+	img->img_ptr = p; 
+	if (!p)
+		exit_with_err(NULL, XPM);
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
+	&(img->size_line), &(img->endian));
+	img->byte_pixel /= 8;
+	return (img);
+}
+
+t_data	*new_image(t_player *plyr, int width, int height, t_flag type)
+{
+	void			*p;
+	t_data			*img;
+
+	img = NULL;
+	img = h_malloc(plyr->v->collector, sizeof(t_data), img, type);
+	p = mlx_new_image(plyr->v->mlx, width, height);
+	if (!p)
+		exit_with_err(NULL, MLX);
+	img->img_ptr = p;
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
+	&(img->size_line), &(img->endian));
+	img->byte_pixel /= 8;
+	return (img);
+}
+
+void	tmp_alloc(t_collector **collector, size_t s, void **p)
+{
+	t_tmp	*n_iter;
+	t_tmp	*tmp_c;
+
+	tmp_c = malloc(sizeof(t_tmp));
+	// printf("%p\n", tmp_c);
+	(*p) = malloc(s);
+	// printf("%p\n", (*p));
+	if (!tmp_c || !(*p) || !(*collector))
+		exit_with_err(NULL, MALLOC);
+	tmp_c->tmp_addr = (*p);
+	if (!((*collector)->tmp_cltr))
+		(*collector)->tmp_cltr = tmp_c;
+	else
+	{
+		n_iter = (*collector)->tmp_cltr;
+		while (n_iter->next)
+			n_iter = n_iter->next;
+		n_iter->next = tmp_c;
+	}
+	tmp_c->next = NULL;
+}
+
+void	ntmp_alloc(t_collector **collector, size_t s, void **p)
+{
+	t_ntmp	*n_iter1;
+	t_ntmp	*ntmp_c;
+
+	ntmp_c = malloc(sizeof(t_ntmp));
+	// printf("%p\n", ntmp_c);
+	(*p) = malloc(s);
+	// printf("%p\n", (*p));
+	if (!ntmp_c || !(*p) || !(*collector))
+		exit_with_err(NULL, MALLOC);
+	ntmp_c->ntmp_addr = (*p);
+	if (!((*collector)->ntmp_cltr))
+		((*collector)->ntmp_cltr) = ntmp_c;
+	else
+	{
+		n_iter1 = (*collector)->ntmp_cltr;
+		while (n_iter1->next)
+			n_iter1 = n_iter1->next;
+		n_iter1->next = ntmp_c;
+	}
+	ntmp_c->next = NULL;
+}
+
+void	free_tmp(t_collector **collector)
+{
+	t_tmp	*node;
+	t_tmp	*n_node;
+
+	node = (*collector)->tmp_cltr;
+	if (!node)
 		return ;
-	while (node1)
+	while (node)
 	{
-		n_node1 = node1->next;
-		// printf("%p\n", node1->ntmp_addr);
-		// printf("%p\n", node1);
-		free(node1->ntmp_addr);
-		free(node1);
-		node1 = n_node1;
+		n_node = node->next;
+		// printf("%p\n", node->tmp_addr);
+		// printf("%p\n", node);
+		free(node->tmp_addr);
+		free(node);
+		node = n_node;
 	}
-	(*collector)->ntmp_cltr = NULL;
-}
-
-void	ft_collectorclear(t_collector **collector, t_flag flag)
-{
-	// printf("\n\ndestroy :\n");
-	if (flag == TMP)
-		free_tmp(collector);
-	else if (flag == NTMP)
-		free_ntmp(collector);
-	else if (flag == ALL)
-	{
-		free_tmp(collector);
-		free_ntmp(collector);
-		if (*(collector))
-		{
-			// printf("the last add: %p\n", (*collector));
-			free(*(collector));
-			*collector = NULL;
-		}
-		exit(0);
-	}
-}
-
-void	head_alloc(t_collector **collector)
-{
-	(*collector) = malloc(sizeof(t_collector));
-	// printf("the first add: %p\n", (*collector));
-	if (*collector)
-	{
-		(*collector)->tmp_cltr = NULL;
-		(*collector)->ntmp_cltr = NULL;
-	}
-}
-
-void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
-{
-	if (!(*collector))
-		head_alloc(collector);
-	if (flag == TMP)
-		tmp_alloc(collector, s, &p);
-	else if (flag == NTMP)
-		ntmp_alloc(collector, s, &p);
-	return (p);
+	(*collector)->tmp_cltr = NULL;
 }
