@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:23:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	resizer(t_player *player)
 {
-	if ((WIDTH > 2880) || (HEIGHT > 1574))
+	if ((WIDTH > 2560) || (HEIGHT > 1390))
 	{
-		player->width = 2880;
-		player->height = 1574;
+		player->width = 2560;
+		player->height = 1390;
 	}
 	else
 	{

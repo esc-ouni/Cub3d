@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 15:14:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:18:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define WEST 17
 # define EAST 27
 
-# define WIDTH 1800
-# define HEIGHT 1000
+# define WIDTH 154512
+# define HEIGHT 156566266
 
 # define R_AN  3
 
