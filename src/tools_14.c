@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:04:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	check_mapb_t(t_player *plyr, char **map, int *chr, int *c)
 			if (map[y][x] == 'N' || map[y][x] == 'E' || \
 			map[y][x] == 'W' || map[y][x] == 'S')
 			{
-				plyr->p_x = (float )(x * BLOCK) + (BLOCK / 2);
-				plyr->p_y = (float )(y * BLOCK) + (BLOCK / 2);
+				plyr->p_x = (float )(x * plyr->block) + (plyr->block / 2);
+				plyr->p_y = (float )(y * plyr->block) + (plyr->block / 2);
 				(*chr) = map[y][x];
 				(*c)++;
 			}

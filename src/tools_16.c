@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/30 17:04:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_data	*draw_player(t_player *plyr, t_data *p_img)
 	plyr->t_img = p_img;
 	draw_point(plyr, (plyr->p_x / plyr->factor), \
 	(plyr->p_y / plyr->factor), BLUE);
-	draw_line(plyr, BLUE, plyr->p_x + ((BLOCK / 0.9) * trigo(plyr->angle, COS)) \
-	, plyr->p_y + ((BLOCK / 0.9) * trigo(plyr->angle, SIN)));
+	draw_line(plyr, BLUE, plyr->p_x + ((plyr->block / 0.9) * trigo(plyr->angle, COS)) \
+	, plyr->p_y + ((plyr->block / 0.9) * trigo(plyr->angle, SIN)));
 	return (p_img);
 }
 

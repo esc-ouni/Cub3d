@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/04 20:27:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:14:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 
 # define WIDTH 1800
 # define HEIGHT 1000
-# define BLOCK 1000
 
 # define R_AN  3
 
@@ -194,6 +193,7 @@ typedef struct s_player
 	int			color;
 	int			width;
 	int			height;
+	int			block;
 	void		**p;
 	t_vector	*v2;
 	t_vector	*v1;

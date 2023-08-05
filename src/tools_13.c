@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ t_ray *ray, t_vector *vector)
 
 t_vector	*h_rg_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
-	ray->dx = BLOCK;
+	ray->dx = plyr->block;
 	ray->dy = ray->dx * ray->t1;
-	vector->x = (ceil(plyr->p_x / BLOCK) * BLOCK);
+	vector->x = (ceil(plyr->p_x / plyr->block) * plyr->block);
 	vector->y = plyr->p_y + ((vector->x - plyr->p_x) * ray->t1);
 	while (!wall_hit_vrg(plyr, (int)vector->x, (int)vector->y))
 	{
@@ -51,9 +51,9 @@ t_vector	*h_rg_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 
 t_vector	*h_lf_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
-	ray->dx = -BLOCK;
-	ray->dy = BLOCK * ray->t2;
-	vector->x = (floor(plyr->p_x / BLOCK) * BLOCK);
+	ray->dx = -plyr->block;
+	ray->dy = plyr->block * ray->t2;
+	vector->x = (floor(plyr->p_x / plyr->block) * plyr->block);
 	vector->y = plyr->p_y - ((vector->x - plyr->p_x) * ray->t2);
 	while (!wall_hit_vlf(plyr, (int)vector->x, (int)vector->y))
 	{

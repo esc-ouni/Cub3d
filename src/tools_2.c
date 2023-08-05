@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:41 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int	get_color_from_tex(t_player *plyr, char *s, t_ray ray)
 	int		color;
 	char	*tmp;
 
-	if (ray.tex_y >= BLOCK || ray.tex_x >= BLOCK)
+	if (ray.tex_y >= plyr->block || ray.tex_x >= plyr->block)
 		return (0);
 	tmp = (s + (ray.tex_y * plyr->v->so->size_line) + \
 	(ray.tex_x * plyr->v->so->byte_pixel));
 	if (tmp)
 	{
 		color = *(int *)tmp;
-		color = darken_color(color, (float )(ray.length * 255) / (BLOCK * 60));
+		color = darken_color(color, (float )(ray.length * 255) / (plyr->block * 60));
 		return (color);
 	}
 	return (0);
@@ -91,14 +91,14 @@ void	draw_wall_part(t_player *plyr, t_data *p_img, t_ray ray, int x_index)
 	float	w_heig;
 
 	w_heig = plyr->height / (ray.length * trigo(ray.angle - plyr->angle, \
-	COS)) * (BLOCK * 1.7);
+	COS)) * (plyr->block * 1.7);
 	start = (plyr->height / 2) - (w_heig / 2);
 	i = 0;
 	while (i < w_heig)
 	{
 		if (start + i > 0 && start + i < plyr->height)
 		{
-			ray.tex_y = i * (BLOCK / w_heig);
+			ray.tex_y = i * (plyr->block / w_heig);
 			plyr->color = get_color_from_tex(plyr, get_texture(plyr, ray), ray);
 			plyr->t_img = p_img;
 			my_mlx_pixel_put(plyr, x_index, start + i, plyr->color);

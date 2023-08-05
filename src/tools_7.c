@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/04 20:19:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:15:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->v->mlx = NULL;
 	plyr->v->win = NULL;
 	plyr->p = NULL;
+	plyr->block = 1000;
 	exit_with_err(plyr, NONE);
 	plyr->v->map = parse_file(plyr, argc, argv);
 	check_size(plyr);
@@ -103,12 +104,12 @@ void	init_2(t_player *plyr)
 	plyr->b_p = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
-	plyr->factor = BLOCK / M_B;
+	plyr->factor = plyr->block / M_B;
 	plyr->m = 0;
 	plyr->f_angle = (60.0 / plyr->width);
-	plyr->mv_sp = (BLOCK / 7);
-	plyr->yf = (BLOCK / 4);
-	plyr->xf = (BLOCK / 4);
+	plyr->mv_sp = (plyr->block / 7);
+	plyr->yf = (plyr->block / 4);
+	plyr->xf = (plyr->block / 4);
 	plyr->p = h_malloc(plyr->v->collector, 3 * sizeof(void *), plyr->p, NTMP);
 	plyr->p[0] = NULL;
 	plyr->t_img = NULL;

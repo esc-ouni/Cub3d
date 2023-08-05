@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	wall_hit_hdn(t_player *plyr, int x, int y)
 	int	m_y;
 	int	m_x;
 
-	m_x = ((x) / BLOCK);
-	m_y = ((y) / BLOCK);
+	m_x = ((x) / plyr->block);
+	m_y = ((y) / plyr->block);
 	if (m_x < 0 || m_y < 0)
 		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
@@ -33,8 +33,8 @@ int	wall_hit_vrg(t_player *plyr, int x, int y)
 	int	m_y;
 	int	m_x;
 
-	m_x = ((x) / BLOCK);
-	m_y = ((y) / BLOCK);
+	m_x = ((x) / plyr->block);
+	m_y = ((y) / plyr->block);
 	if (m_x < 0 || m_y < 0)
 		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
@@ -49,8 +49,8 @@ int	wall_hit_vlf(t_player *plyr, int x, int y)
 	int	m_y;
 	int	m_x;
 
-	m_y = ((y) / BLOCK);
-	m_x = ((x) / BLOCK) - 1;
+	m_y = ((y) / plyr->block);
+	m_x = ((x) / plyr->block) - 1;
 	if (m_x < 0 || m_y < 0)
 		return (1);
 	if (m_y >= plyr->v->m_h || m_x >= ft_strlen(plyr->v->map[m_y]))
@@ -62,9 +62,9 @@ int	wall_hit_vlf(t_player *plyr, int x, int y)
 
 t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
-	ray->dy = -BLOCK;
-	ray->dx = (BLOCK / ray->t2);
-	vector->y = floor(plyr->p_y / BLOCK) * BLOCK;
+	ray->dy = -plyr->block;
+	ray->dx = (plyr->block / ray->t2);
+	vector->y = floor(plyr->p_y / plyr->block) * plyr->block;
 	vector->x = plyr->p_x + (plyr->p_y - vector->y) / ray->t2;
 	while (!wall_hit_hup(plyr, (int)vector->x, (int)vector->y))
 	{
@@ -76,9 +76,9 @@ t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 
 t_vector	*h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
-	ray->dy = BLOCK;
+	ray->dy = plyr->block;
 	ray->dx = (ray->dy / ray->t1);
-	vector->y = (ceil(plyr->p_y / BLOCK) * BLOCK);
+	vector->y = (ceil(plyr->p_y / plyr->block) * plyr->block);
 	vector->x = plyr->p_x + ((vector->y - plyr->p_y) / ray->t1);
 	while (!wall_hit_hdn(plyr, (int)vector->x, (int)vector->y))
 	{
