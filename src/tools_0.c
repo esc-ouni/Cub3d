@@ -6,103 +6,44 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:39:03 by idouni            #+#    #+#             */
-/*   Updated: 2023/07/24 18:43:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:20:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static char	**free_s(char **p, int l)
+void	check_ony(t_player *plyr, float y)
 {
-	while (l)
+	if (plyr->v->map[(int)(((plyr->p_y + y) / plyr->block))][(int)((plyr->p_x) / \
+	plyr->block)] != '1' && plyr->v->map[(int)(((plyr->p_y + y + plyr->yf / 4) / \
+	plyr->block))][(int)((plyr->p_x + plyr->xf / 2) / plyr->block)] != '1')
 	{
-		free(p[l]);
-		l--;
+		if (plyr->v->map[(int)(((plyr->p_y + y + \
+		plyr->yf) / plyr->block))][(int)((plyr->p_x + plyr->xf) / plyr->block)] != '1')
+			plyr->p_y += y;
 	}
-	free(p[0]);
-	free(p);
-	return (NULL);
 }
 
-static size_t	count_str(char const *s, char c)
+void	check_onx(t_player *plyr, float x)
 {
-	size_t	i;
-	size_t	t;
-	size_t	count;
-
-	i = 0;
-	t = 0;
-	count = 0;
-	while (s[i])
+	if (plyr->v->map[(int)((plyr->p_y) / plyr->block)][(int)((plyr->p_x + x) / \
+	plyr->block)] != '1' && plyr->v->map[(int)((plyr->p_y + plyr->yf / 4) / \
+	plyr->block)][(int)((plyr->p_x + x + plyr->xf / 2) / plyr->block)] != '1')
 	{
-		if (s[i] != c && t == 0)
-		{
-			t = 1;
-			count++;
-		}
-		else if (s[i] == c)
-			t = 0;
-		i++;
+		if (plyr->v->map[(int)((plyr->p_y + plyr->yf) / \
+		plyr->block)][(int)((plyr->p_x + x + plyr->xf) / plyr->block)] != '1')
+			plyr->p_x += x;
 	}
-	return (count);
 }
 
-static size_t	lenfinder(char const *s, char c, int start)
+void	check_collision(t_player *plyr, float x, float y)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[start + i] || s[start + i] == '\0')
-	{
-		if (s[start + i] == c || s[start + i] == '\0')
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
-static char	**ft_msplitp2(t_vars *vars, char **p, \
-char const *s, char const c)
-{
-	size_t		i;
-	size_t		l;
-	size_t		l_s;
-	size_t		i2;
-
-	i = 0;
-	i2 = 0;
-	l_s = ft_strlen(s);
-	while (i < l_s)
-	{
-		if (s[i] != c)
-		{
-			l = lenfinder(s, c, i);
-			p[i2] = ft_msubstr(vars, s, i, l);
-			if (p[i2] == NULL)
-				return (free_s (p, i2));
-			i2++;
-			i += l;
-		}
-		i++;
-	}
-	p[i2] = NULL;
-	return (p);
-}
-
-char	**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag)
-{
-	size_t		n;
-	char		**p;
-
-	p = NULL;
-	if (!s)
-		return (NULL);
-	n = count_str(s, c);
-	p = (char **)h_malloc(vars->collector, sizeof (char *) * (n + 1), p, flag);
-	if (p)
-	{
-		p = ft_msplitp2(vars, p, s, c);
-		return (p);
-	}
-	return (NULL);
+	if (y < 0)
+		plyr->yf *= -1;
+	if (x < 0)
+		plyr->xf *= -1;
+	check_onx(plyr, x);
+	check_ony(plyr, y);
+	plyr->xf = (plyr->block / 4);
+	plyr->yf = (plyr->block / 4);
 }

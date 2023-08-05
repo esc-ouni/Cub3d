@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 17:05:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:18:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int	wall_hit_vlf(t_player *plyr, int x, int y)
 	return (1);
 }
 
-t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
+t_vector	*h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dy = -plyr->block;
-	ray->dx = (plyr->block / ( -ray->t1));
+	ray->dx = -(plyr->block / ray->t1);
 	vector->y = floor(plyr->p_y / plyr->block) * plyr->block;
-	vector->x = plyr->p_x + (plyr->p_y - vector->y) / ( -ray->t1);
+	vector->x = plyr->p_x - (ft_abs(plyr->p_y - vector->y) / ray->t1);
 	while (!wall_hit_hup(plyr, (int)vector->x, (int)vector->y))
 	{
 		vector->x += ray->dx;
@@ -74,12 +74,12 @@ t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 	return (vector);
 }
 
-t_vector	*h_up_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
+t_vector	*h_dn_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dy = plyr->block;
 	ray->dx = (ray->dy / ray->t1);
 	vector->y = (ceil(plyr->p_y / plyr->block) * plyr->block);
-	vector->x = plyr->p_x + ((vector->y - plyr->p_y) / ray->t1);
+	vector->x = plyr->p_x + (ft_abs(plyr->p_y - vector->y) / ray->t1);
 	while (!wall_hit_hdn(plyr, (int)vector->x, (int)vector->y))
 	{
 		vector->y += ray->dy;

@@ -6,44 +6,91 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:21:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	check_ony(t_player *plyr, float y)
+static size_t	count_str(char const *s, char c)
 {
-	if (plyr->v->map[(int)(((plyr->p_y + y) / plyr->block))][(int)((plyr->p_x) / \
-	plyr->block)] != '1' && plyr->v->map[(int)(((plyr->p_y + y + plyr->yf / 4) / \
-	plyr->block))][(int)((plyr->p_x + plyr->xf / 2) / plyr->block)] != '1')
+	size_t	i;
+	size_t	t;
+	size_t	count;
+
+	i = 0;
+	t = 0;
+	count = 0;
+	while (s[i])
 	{
-		if (plyr->v->map[(int)(((plyr->p_y + y + \
-		plyr->yf) / plyr->block))][(int)((plyr->p_x + plyr->xf) / plyr->block)] != '1')
-			plyr->p_y += y;
+		if (s[i] != c && t == 0)
+		{
+			t = 1;
+			count++;
+		}
+		else if (s[i] == c)
+			t = 0;
+		i++;
 	}
+	return (count);
 }
 
-void	check_onx(t_player *plyr, float x)
+static size_t	lenfinder(char const *s, char c, int start)
 {
-	if (plyr->v->map[(int)((plyr->p_y) / plyr->block)][(int)((plyr->p_x + x) / \
-	plyr->block)] != '1' && plyr->v->map[(int)((plyr->p_y + plyr->yf / 4) / \
-	plyr->block)][(int)((plyr->p_x + x + plyr->xf / 2) / plyr->block)] != '1')
+	size_t	i;
+
+	i = 0;
+	while (s[start + i] || s[start + i] == '\0')
 	{
-		if (plyr->v->map[(int)((plyr->p_y + plyr->yf) / \
-		plyr->block)][(int)((plyr->p_x + x + plyr->xf) / plyr->block)] != '1')
-			plyr->p_x += x;
+		if (s[start + i] == c || s[start + i] == '\0')
+			return (i);
+		i++;
 	}
+	return (0);
 }
 
-void	check_collision(t_player *plyr, float x, float y)
+static char	**ft_msplitp2(t_vars *vars, char **p, \
+char const *s, char const c)
 {
-	if (y < 0)
-		plyr->yf *= -1;
-	if (x < 0)
-		plyr->xf *= -1;
-	check_onx(plyr, x);
-	check_ony(plyr, y);
-	plyr->xf = (plyr->block / 4);
-	plyr->yf = (plyr->block / 4);
+	size_t		i;
+	size_t		l;
+	size_t		l_s;
+	size_t		i2;
+
+	i = 0;
+	i2 = 0;
+	l_s = ft_strlen(s);
+	while (i < l_s)
+	{
+		if (s[i] != c)
+		{
+			l = lenfinder(s, c, i);
+			p[i2] = ft_msubstr(vars, s, i, l);
+			if (p[i2] == NULL)
+				return (NULL);
+			i2++;
+			i += l;
+		}
+		i++;
+	}
+	p[i2] = NULL;
+	return (p);
+}
+
+char	**ft_msplit(t_vars *vars, char const *s, char const c, t_flag flag)
+{
+	size_t		n;
+	char		**p;
+
+	p = NULL;
+	if (!s)
+		return (NULL);
+	n = count_str(s, c);
+	p = (char **)h_malloc(vars->collector, sizeof (char *) * (n + 1), p, flag);
+	if (p)
+	{
+		p = ft_msplitp2(vars, p, s, c);
+		return (p);
+	}
+	return (NULL);
 }

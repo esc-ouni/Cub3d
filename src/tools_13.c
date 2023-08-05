@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 17:05:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:18:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_vector	*find_horizontal_iterset(t_player *plyr, \
 t_ray *ray, t_vector *vector)
 {
 	if ((ray->angle > 0 && ray->angle < M_PI))
-		vector = h_up_iterset(plyr, ray, vector);
-	else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
 		vector = h_dn_iterset(plyr, ray, vector);
+	else if (ray->angle > M_PI && ray->angle < 2 * M_PI)
+		vector = h_up_iterset(plyr, ray, vector);
 	ray->h_d = sqrt(ft_pow(plyr->v2->x - plyr->p_x) + \
 	ft_pow(plyr->v2->y - plyr->p_y));
 	return (vector);
@@ -40,7 +40,7 @@ t_vector	*h_rg_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 	ray->dx = plyr->block;
 	ray->dy = ray->dx * ray->t1;
 	vector->x = (ceil(plyr->p_x / plyr->block) * plyr->block);
-	vector->y = plyr->p_y + ((vector->x - plyr->p_x) * ray->t1);
+	vector->y = plyr->p_y + (ft_abs(plyr->p_x - vector->x) * ray->t1);
 	while (!wall_hit_vrg(plyr, (int)vector->x, (int)vector->y))
 	{
 		vector->x += ray->dx;
@@ -52,9 +52,9 @@ t_vector	*h_rg_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 t_vector	*h_lf_iterset(t_player *plyr, t_ray *ray, t_vector *vector)
 {
 	ray->dx = -plyr->block;
-	ray->dy = plyr->block * ( -ray->t1);
+	ray->dy = -(plyr->block * ray->t1);
 	vector->x = (floor(plyr->p_x / plyr->block) * plyr->block);
-	vector->y = plyr->p_y - ((vector->x - plyr->p_x) * ( -ray->t1));
+	vector->y = plyr->p_y - (ft_abs(plyr->p_x - vector->x) * ray->t1);
 	while (!wall_hit_vlf(plyr, (int)vector->x, (int)vector->y))
 	{
 		vector->x += ray->dx;
