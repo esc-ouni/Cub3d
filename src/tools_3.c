@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:54:44 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 19:42:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/04 10:36:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	duppp(t_player *plyr, int fd, t_varr *varr, char *str)
 		else if (varr->fp && !ft_strnstr(str, "1", ft_strlen(str)))
 			(varr->k)++;
 		if (varr->k)
-			felina(fd, str);
+		{
+			free(str);
+			close(fd);
+			exit_with_err(NULL, PARSE);
+		}
 		free(str);
 		str = get_next_line(fd);
 	}

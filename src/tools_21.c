@@ -6,18 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 19:42:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:01:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-void	felina(int fd, char *str)
-{
-	free(str);
-	close(fd);
-	exit_with_err(NULL, PARSE);
-}
 
 void	free_ntmp(t_collector **collector)
 {
@@ -30,6 +23,8 @@ void	free_ntmp(t_collector **collector)
 	while (node1)
 	{
 		n_node1 = node1->next;
+		// printf("%p\n", node1->ntmp_addr);
+		// printf("%p\n", node1);
 		free(node1->ntmp_addr);
 		free(node1);
 		node1 = n_node1;
@@ -39,6 +34,7 @@ void	free_ntmp(t_collector **collector)
 
 void	ft_collectorclear(t_collector **collector, t_flag flag)
 {
+	// printf("\n\ndestroy :\n");
 	if (flag == TMP)
 		free_tmp(collector);
 	else if (flag == NTMP)
@@ -48,7 +44,11 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 		free_tmp(collector);
 		free_ntmp(collector);
 		if (*(collector))
+		{
+			// printf("the last add: %p\n", (*collector));
+			free(*(collector));
 			*collector = NULL;
+		}
 		exit(0);
 	}
 }
@@ -56,6 +56,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 void	head_alloc(t_collector **collector)
 {
 	(*collector) = malloc(sizeof(t_collector));
+	// printf("the first add: %p\n", (*collector));
 	if (*collector)
 	{
 		(*collector)->tmp_cltr = NULL;
