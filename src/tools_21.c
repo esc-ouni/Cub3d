@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 17:01:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/06 09:14:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	free_ntmp(t_collector **collector)
 	while (node1)
 	{
 		n_node1 = node1->next;
-		// printf("%p\n", node1->ntmp_addr);
-		// printf("%p\n", node1);
 		free(node1->ntmp_addr);
 		free(node1);
 		node1 = n_node1;
@@ -34,7 +32,6 @@ void	free_ntmp(t_collector **collector)
 
 void	ft_collectorclear(t_collector **collector, t_flag flag)
 {
-	// printf("\n\ndestroy :\n");
 	if (flag == TMP)
 		free_tmp(collector);
 	else if (flag == NTMP)
@@ -45,8 +42,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 		free_ntmp(collector);
 		if (*(collector))
 		{
-			// printf("the last add: %p\n", (*collector));
-			free(*(collector));
+			free(*collector);
 			*collector = NULL;
 		}
 		exit(0);
@@ -56,7 +52,6 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 void	head_alloc(t_collector **collector)
 {
 	(*collector) = malloc(sizeof(t_collector));
-	// printf("the first add: %p\n", (*collector));
 	if (*collector)
 	{
 		(*collector)->tmp_cltr = NULL;
@@ -73,4 +68,24 @@ void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
 	else if (flag == NTMP)
 		ntmp_alloc(collector, s, &p);
 	return (p);
+}
+
+char	*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
+{
+	size_t	i;
+	char	*s;
+
+	i = 0;
+	s = NULL;
+	if (!s1)
+		return (NULL);
+	s = (char *)h_malloc(collector, sizeof(char) * \
+	(ft_strlen(s1) + 1), s, flag);
+	while (s1[i] != '\0')
+	{
+		s[i] = s1[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
 }

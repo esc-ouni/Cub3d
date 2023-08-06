@@ -6,31 +6,11 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/08/05 15:15:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/08/06 09:05:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-char	*ft_mstrdup(t_collector **collector, const char *s1, t_flag flag)
-{
-	size_t	i;
-	char	*s;
-
-	i = 0;
-	s = NULL;
-	if (!s1)
-		return (NULL);
-	s = (char *)h_malloc(collector, sizeof(char) * \
-	(ft_strlen(s1) + 1), s, flag);
-	while (s1[i] != '\0')
-	{
-		s[i] = s1[i];
-		i++;
-	}
-	s[i] = '\0';
-	return (s);
-}
 
 int	count_alloc_size(t_player *plyr, char const *argv[], int fd)
 {
