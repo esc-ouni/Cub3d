@@ -23,9 +23,10 @@ t_data	*new_image_from_xpm(t_player *plyr, char *file_dstination)
 	img = h_malloc(plyr->v->collector, sizeof(t_data), img, NTMP);
 	p = mlx_xpm_file_to_image(plyr->v->mlx, file_dstination, \
 	&width, &height);
-	img->img_ptr = p; 
+	img->img_ptr = NULL;
 	if (!p)
 		exit_with_err(NULL, XPM);
+	img->img_ptr = p; 
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &(img->byte_pixel), \
 	&(img->size_line), &(img->endian));
 	img->byte_pixel /= 8;
@@ -40,6 +41,7 @@ t_data	*new_image(t_player *plyr, int width, int height, t_flag type)
 	img = NULL;
 	img = h_malloc(plyr->v->collector, sizeof(t_data), img, type);
 	p = mlx_new_image(plyr->v->mlx, width, height);
+	img->img_ptr = NULL;
 	if (!p)
 		exit_with_err(NULL, MLX);
 	img->img_ptr = p;
