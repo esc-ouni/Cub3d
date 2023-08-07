@@ -13,7 +13,7 @@
 NAME   = libft.a
 CC     = cc
 RM     = rm -rf
-FLAGS  = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS  = -Wall -Wextra -Werror #-fsanitize=address -g
 AR     = ar -rc
 HR     = libft.h
 PR     = ft_bzero.c \

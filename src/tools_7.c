@@ -119,6 +119,10 @@ t_player	*init(int argc, char const *argv[])
 	vars->no_c = NULL;
 	vars->so_c = NULL;
 	vars->ea_c = NULL;
+	vars->we = NULL;
+	vars->no = NULL;
+	vars->so = NULL;
+	vars->ea = NULL;
 	vars->c_color = 0;
 	vars->f_color = 0;
 	plyr->v = vars;

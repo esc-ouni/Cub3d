@@ -58,7 +58,7 @@ void	destroy_fix_imges(t_player *plyr)
 		{
 			if (plyr->v->we && plyr->v->we->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->we->img_ptr);
-			if ( plyr->v->ea->img_ptr && plyr->v->ea)
+			if (plyr->v->ea && plyr->v->ea->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->ea->img_ptr);
 			if (plyr->v->so && plyr->v->so->img_ptr)
 				mlx_destroy_image(plyr->v->mlx, plyr->v->so->img_ptr);
