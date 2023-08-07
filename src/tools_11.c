@@ -36,6 +36,8 @@ void	update_scene(t_player *plyr)
 	mlx_put_image_to_window(plyr->v->mlx, plyr->v->win, \
 	plyr->v->fix_img->img_ptr, 0, 0);
 	mlx_put_image_to_window(plyr->v->mlx, plyr->v->win, p_img->img_ptr, 0, 0);
+	mlx_put_image_to_window(plyr->v->mlx, plyr->v->win, \
+	plyr->v->p_fix_img->img_ptr, 350, 0);
 	if (plyr->m)
 		show_the_map(plyr, p_r_img);
 	plyr->p[0] = p_img->img_ptr;

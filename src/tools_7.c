@@ -77,6 +77,11 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	get_elements(plyr);
 }
 
+t_data	*d_p(t_player *plyr)
+{
+	return (new_image_from_xpm(plyr, "/Users/idouni/Desktop/op.xpm"));
+}
+
 void	init_2(t_player *plyr)
 {
 	plyr->color = 0;
@@ -84,6 +89,7 @@ void	init_2(t_player *plyr)
 	plyr->b_p = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
+	plyr->v->p_fix_img = d_p(plyr);
 	plyr->factor = plyr->block / M_B;
 	plyr->m = 0;
 	plyr->f_angle = (60.0 / plyr->width);

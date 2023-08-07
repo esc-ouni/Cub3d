@@ -149,6 +149,7 @@ typedef struct s_vars
 	t_data			*ea;
 	t_data			*fix_img;
 	t_data			*m_fix_img;
+	t_data			*p_fix_img;
 	t_collector		**collector;
 }	t_vars;
 
