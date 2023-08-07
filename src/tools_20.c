@@ -36,12 +36,12 @@ void	check_existence(t_player *plyr, char *file_dstination)
 
 int	m_hookp(int keycode, int x, int y, t_player *plyr)
 {
-	(void)y;
-	if (keycode == 1)
-	{
-		plyr->b_p = 1;
-		plyr->last_pos = x;
-	}
+	if ((y < plyr->height && y > 0) && ( x > 0 && x < plyr->width ))
+		if (keycode == 1)
+		{
+			plyr->b_p = 1;
+			plyr->last_pos = x;
+		}
 	return (0);
 }
 
