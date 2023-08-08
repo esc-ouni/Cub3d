@@ -40,11 +40,6 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 	{
 		free_tmp(collector);
 		free_ntmp(collector);
-		if (*(collector))
-		{
-			free(*collector);
-			*collector = NULL;
-		}
 		exit(0);
 	}
 }
