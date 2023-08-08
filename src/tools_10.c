@@ -49,11 +49,6 @@ void	destroy_fix_imges(t_player *plyr)
 {
 	if (plyr)
 	{
-		// printf("%p\n", plyr->v->ea);
-		// printf("%p\n", plyr->v->we);
-		// printf("%p\n", plyr->v->so);
-		// printf("%p\n", plyr->v->no);
-		// printf("%s\n", plyr->v->ea->img_ptr);
 		if (plyr->v && plyr->v->mlx)
 		{
 			if (plyr->v->we && plyr->v->we->img_ptr)
@@ -73,6 +68,7 @@ void	destroy_fix_imges(t_player *plyr)
 			if (plyr->v->mlx && plyr->v->win)
 			{
 				mlx_destroy_window(plyr->v->mlx, plyr->v->win);
+				mlx_destroy_display(plyr->v->mlx);
 				free(plyr->v->mlx);
 			}
 		}

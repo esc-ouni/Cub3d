@@ -1,7 +1,7 @@
 NO ./ext/no.xpm
 SO ./ext/so.xpm
 WE ./ext/we.xpm
-EA ./ext/ea.xpm
+EA ./Makefile
 
 C   19,19,52
 F   46,49,52

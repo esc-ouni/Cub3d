@@ -59,8 +59,6 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->v->win = NULL;
 	plyr->v->fix_img = NULL;
 	plyr->v->m_fix_img = NULL;
-	plyr->v->mlx = NULL;
-	plyr->v->win = NULL;
 	plyr->p = NULL;
 	plyr->block = 1000;
 	exit_with_err(plyr, NONE);
