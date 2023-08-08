@@ -54,29 +54,19 @@ float	draw_ray(t_player *plyr, t_ray *ray)
 	{
 		if ((ray->angle <= 2 * M_PI && ray->angle > 3 * M_PI / 2) \
 		|| (ray->angle >= 0 && ray->angle < M_PI / 2))
-		{
 			ray->side = EAST;
-			ray->tex_x = (int)plyr->v1->y % plyr->block;
-		}
 		else
-		{
 			ray->side = WEST;
-			ray->tex_x = plyr->block - (int)plyr->v1->y % plyr->block;
-		}
+		ray->tex_x = (int)plyr->v1->y % plyr->block;
 		ray->length = ray->v_d;
 	}
 	else
 	{
 		if (ray->angle > 0 && ray->angle < M_PI)
-		{
 			ray->side = SOUTH;
-			ray->tex_x = plyr->block - (int)plyr->v2->x % plyr->block;
-		}
 		else
-		{
 			ray->side = NORTH;
-			ray->tex_x = (int)plyr->v2->x % plyr->block;
-		}
+		ray->tex_x = (int)plyr->v2->x % plyr->block;
 		ray->length = ray->h_d;
 	}
 	return (1);

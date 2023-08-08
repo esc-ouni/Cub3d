@@ -1,33 +1,23 @@
 #include "cub.h"
 
-// void 	leak()
-// {
-// 	system("leaks a.out");
-// }
-
-
-typedef struct varrr
+void 	leak()
 {
-	void *o;
-	int *l;
-}	t_varrr;
+	system("leaks a.out");
+}
 
 int main(int argc, char const *argv[])
 {
-	// void	*mlx;
-	t_varrr *varrr;
-	// void	*xpm;
-	// int		width;
-	// int		height;
+	void	*mlx;
+	void	*xpm;
+	int		width;
+	int		height;
 
-	// atexit(leak);
-	// mlx = mlx_init();
-	// xpm = mlx_xpm_file_to_image(mlx, "", &width, &height);
-	// if (!xpm)
-	// 	write(1, "\n\nholllla\n", 11);
+	atexit(leak);
+	mlx = mlx_init();
+	xpm = mlx_xpm_file_to_image(mlx, "/Users/idouni/Desktop/Cub3d/ext/no.xpm", &width, &height);
+	if (!xpm)
+		write(1, "\n\nholllla\n", 11);
+	// free(xpm);
 	// free(mlx);
-	varrr = malloc(sizeof(t_varr));
-	printf("%p\n", varrr->l);
-	printf("%p\n", varrr->o);
-	return 0;
+	return (0);
 }
