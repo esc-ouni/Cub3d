@@ -68,7 +68,6 @@ void	destroy_fix_imges(t_player *plyr)
 			if (plyr->v->mlx && plyr->v->win)
 			{
 				mlx_destroy_window(plyr->v->mlx, plyr->v->win);
-				mlx_destroy_display(plyr->v->mlx);
 				free(plyr->v->mlx);
 			}
 		}
