@@ -75,11 +75,6 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	get_elements(plyr);
 }
 
-t_data	*d_p(t_player *plyr)
-{
-	return (new_image_from_xpm(plyr, "/Users/idouni/Desktop/op.xpm"));
-}
-
 void	init_2(t_player *plyr)
 {
 	plyr->color = 0;

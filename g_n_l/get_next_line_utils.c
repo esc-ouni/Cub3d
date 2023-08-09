@@ -36,13 +36,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char) * 1);
-		//printf("%p\n", s1);
 		if (!s1)
 			return (NULL);
 		s1[0] = '\0';
 	}
 	new = malloc(sizeof(char) * (ft_gstrlen(s1) + ft_gstrlen(s2) + 1));
-	//printf("%p\n", new);
 	if (!new)
 		return (NULL);
 	while (s1[i])
@@ -77,7 +75,6 @@ char	*str_alloc(int fd, char	*buffer)
 	char	*buff;
 
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	//printf("%p\n", buff);
 	if (!buff)
 		return (NULL);
 	bytes = 1;
@@ -113,8 +110,7 @@ char	*r_reset(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	new = malloc(sizeof(char) * (ft_gstrlen(buffer) + 1));
-	//printf("%p\n", new);
+	new = malloc(sizeof(char) * (ft_gstrlen(buffer) - i + 1));
 	if (!new)
 		return (NULL);
 	i2 = i + 1;

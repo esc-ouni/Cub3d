@@ -91,13 +91,19 @@ void	destroy_prev_imges(t_player *plyr)
 void	update_params(t_player *plyr)
 {
 	if (plyr->w == 1)
-		check_collision(plyr, plyr->mv_sp * trigo(plyr->angle, COS), plyr->mv_sp * trigo(plyr->angle, SIN));
+		check_collision(plyr, plyr->mv_sp * trigo(plyr->angle, \
+		COS), plyr->mv_sp * trigo(plyr->angle, SIN));
 	else if (plyr->w == -1)
-		check_collision(plyr, -(plyr->mv_sp * trigo(plyr->angle, COS)), -(plyr->mv_sp * trigo(plyr->angle, SIN)));
+		check_collision(plyr, -(plyr->mv_sp * trigo(plyr->angle, COS)), \
+		-(plyr->mv_sp * trigo(plyr->angle, SIN)));
 	else if (plyr->d == 1)
-		check_collision(plyr, (plyr->mv_sp / 2) * trigo(up_degree(plyr->angle, 90), COS), (plyr->mv_sp / 2) * trigo(up_degree(plyr->angle, 90), SIN));
+		check_collision(plyr, (plyr->mv_sp / 2) * \
+		trigo(up_degree(plyr->angle, 90), \
+		COS), (plyr->mv_sp / 2) * trigo(up_degree(plyr->angle, 90), SIN));
 	else if (plyr->d == -1)
-		check_collision(plyr, (plyr->mv_sp / 2) * trigo(up_degree(plyr->angle, -90), COS), (plyr->mv_sp / 2) * trigo(up_degree(plyr->angle, -90), SIN));
+		check_collision(plyr, (plyr->mv_sp / 2) * \
+		trigo(up_degree(plyr->angle, -90), \
+		COS), (plyr->mv_sp / 2) * trigo(up_degree(plyr->angle, -90), SIN));
 	else if (plyr->rl == 1)
 		update_degree(plyr, -R_AN);
 	else if (plyr->rl == -1)
