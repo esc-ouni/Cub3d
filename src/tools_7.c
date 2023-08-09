@@ -59,7 +59,6 @@ void	init_1(t_player *plyr, int argc, char const *argv[])
 	plyr->v->win = NULL;
 	plyr->v->fix_img = NULL;
 	plyr->v->m_fix_img = NULL;
-	plyr->v->p_fix_img = NULL;
 	plyr->p = NULL;
 	plyr->block = 1000;
 	exit_with_err(plyr, NONE);
@@ -88,7 +87,6 @@ void	init_2(t_player *plyr)
 	plyr->b_p = 0;
 	plyr->v->fix_img = draw_cf(plyr);
 	plyr->v->m_fix_img = draw_2d_map(plyr);
-	plyr->v->p_fix_img = d_p(plyr);
 	plyr->factor = plyr->block / M_B;
 	plyr->m = 0;
 	plyr->f_angle = (60.0 / plyr->width);

@@ -16,11 +16,9 @@ int main(int argc, char const *argv[])
 
 	atexit(leak);
 	mlx = mlx_init();
-	xpm = mlx_xpm_file_to_image(mlx, "/Users/idouni/Desktop/Cub3d/ext/no.xpm'", &width, &height);
-	if (!xpm)
-		write(1, "\n\nholllla\n", 11);
-	free(xpm);
+	xpm = mlx_xpm_file_to_image(mlx, "/Use.xpm", &width, &height);
 	free(mlx);
-	system("leaks a.out");
-	exit (0);
+	free(xpm);
+	// system("leaks a.out");
+	return (0);
 }

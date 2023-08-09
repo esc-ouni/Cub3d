@@ -47,7 +47,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 void	head_alloc(t_collector **collector)
 {
 	(*collector) = malloc(sizeof(t_collector));
-	printf("%p\n", (*collector));
+	//printf("%p\n", (*collector));
 	if (*collector)
 	{
 		(*collector)->tmp_cltr = NULL;

@@ -72,7 +72,6 @@ int	handlerr(int key, t_player *plyr)
 		destroy_prev_imges(plyr);
 		destroy_fix_imges(plyr);
 		ft_collectorclear(plyr->v->collector, ALL);
-		exit(0);
 	}
 	if (key == 259)
 	{
