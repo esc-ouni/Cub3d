@@ -12,16 +12,10 @@
 
 #include "cub.h"
 
-void 	leak()
-{
-	system("leaks cub3D");
-}
-
 int	main(int argc, char const *argv[])
 {
 	t_player	*plyr;
 
-	atexit(leak);
 	plyr = init(argc, argv);
 	update_scene(plyr);
 	mlx_loop_hook(plyr->v->mlx, hokking, plyr);

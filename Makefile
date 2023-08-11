@@ -15,7 +15,7 @@ MATH   = -O3 -ffast-math
 MLX    = -lmlx -framework OpenGL -framework AppKit
 CC     = cc
 RM     = rm -rf
-FLAGS  = -Wall -Wextra -Werror -fsanitize=address,undefined -g
+FLAGS  = -Wall -Wextra -Werror
 HR     = src/cub.h
 LHR    = libft/libft.h
 GHR    = g_n_l/get_next_line.h
